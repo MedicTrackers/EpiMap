@@ -2,8 +2,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://db-324o86-kr.vpc-pub-cdb.ntruss.com:3306/studydb?serverTimezone=Asia/Seoul
-    username: study
+    url: jdbc:mysql://db-334f3h-kr.vpc-pub-cdb.ntruss.com:3306/EpiMap?serverTimezone=Asia/Seoul
+    username: meditrackers
     password: bitcamp!@#123
 
 # file_size
