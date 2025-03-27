@@ -5,9 +5,87 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EpiMap</title>
 </head>
+
 <body>
 <header th:fragment="headerFragment">
-1111s
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+<style>
+	@font-face {
+	    font-family: 'MarinesBold';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2502-1@1.0/MarinesBold.woff2') format('woff2');
+	    font-weight: 700;
+	    font-style: normal;
+	}
+	
+	.container {
+		position: fixed;
+		width: 412px;
+		height: 119px;
+		top: 0;
+		left: 0;
+		background-color: #0062ff;
+	}
+	
+	/* EpiMap, 페이지 주제 제목 컨테이너 */
+	.titleContainer {
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: flex-end;
+	    height: 111px;
+	    margin-left: 31px;
+	    margin-right: 17px;
+	}
+	
+	/* EpiMap 로고 */
+	.logo img {
+	    height: 16px; 
+	    width: auto;
+	    object-fit: contain; /* 이미지가 잘리지 않도록 조정 */
+	    opacity: 0.8;
+	}
+	
+	
+	/* 페이지 주제 제목 */
+	.title {
+		margin-top: 2px;
+	    display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    width: 100%; 
+	    font-family: 'MarinesBold', sans-serif;
+	}
+	
+	/* 번역 아이콘 색상 변경 */
+	.white { 
+		color: #fff;
+		font-size: 24px;
+	}
+	
+	.title i {
+		cursor: pointer;
+	}
+	
+</style>
+	
+
+<div class="container">
+	<div class="titleContainer">
+		<!-- EpiMap 로고 이미지 -->
+		<div class="logo" style="margin-botton:2px;">
+			<img src="/EpiMapLogo.png" alt="EpiMap">
+		</div>
+		
+		<!-- 각 페이지 주제 제목 -->
+		<div class="title">
+			<span style="color:white; font-size:32px; font-weight: bold;"> 페이지 제목 </span>	
+			<i class="bi bi-translate white"></i> <!-- 번역 아이콘 -->
+		</div>
+		
+	</div>
+
+</div>
+	
 </header>
 </body>
 </html>
