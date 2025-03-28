@@ -7,8 +7,72 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<style type="text/css">
+	.box {
+		weight: 412px;
+		height: auto;
+	}
+	
+	.box .rectangle {
+		margin-top: 125px;
+		position: fixed;
+		width: 412px;
+		height: 45px;
+		top: 0;
+		left: 0;
+		background-color: #d9d9d9;
+		text-align: center;
+		padding: 12px 0;
+		font-weight: bold;
+	}
+	
+	.chartbox {
+		width: 375px;
+		height: 290px;
+		margin-top: 190px;
+		text-align: center;
+		position: relative;
+		border-radius: 10px;
+		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640, 0px 4px 20px
+			#96a7af66;
+		background: linear-gradient(
+			150deg,
+			rgba(1, 57, 254, 0.4) 0%
+			rgba(16, 241, 255, 0.4) 100%
+		), linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
+		margin-left: 18px;
+	}
+	
+	.searchbox {
+		width: 375px;
+		height: 290px;
+		margin-top: 50px;
+		text-align: center;
+		position: relative;
+		border-radius: 10px;
+		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640, 0px 4px 20px
+			#96a7af66;
+		background: linear-gradient(
+			150deg,
+			rgba(1, 57, 254, 0.4) 0%
+			rgba(16, 241, 255, 0.4) 100%
+		), linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
+		margin-left: 18px;
+	}	
+</style>
 </head>
 <body>
-
+<div layout:fragment="content">
+	<div class="box">
+		<div class="rectangle">
+			<i class="bi bi-megaphone-fill"></i>
+			최신 공지사항이 횡 방향으로 넘어갑니다.
+		</div>
+	</div>
+	<div class="chartbox">
+	</div>
+	<div class="searchbox">
+	</div>
+</div>
 </body>
 </html>     
