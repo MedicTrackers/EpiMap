@@ -24,7 +24,7 @@ import groovy.util.logging.Slf4j;
 
 @Slf4j
 @Controller
-public class DashboardController {
+public class DashBoardController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {

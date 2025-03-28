@@ -45,7 +45,7 @@ html, body {
 
 /* 로고 이미지 */
 .logo {
-	margin-top: 183px;
+	margin-top: 175px;
 	text-align: center;
 }
 
@@ -63,7 +63,7 @@ html, body {
 
 /* 디자인 박스 */
 .design {
-	margin-top: 168px;
+	margin-top: 120px;
 	text-align: center;
 }
 
@@ -75,10 +75,18 @@ html, body {
 	transform: translateX(-50%);
 }
 </style>
+
 </head>
 
+<script>
+    // 2초 후에 대시보드 페이지로 이동
+    setTimeout(() => {
+        // window.location.href = "/dashboard";
+    }, 2000);
+</script>
+
 <body>
-<div class="rootContainer">
+<div class="rootContainer fade-in">
 	<!-- 로고 이미지 -->
 	<div class="logo">
 		<img src="EpiMapIcon.png" style="width:26px;">
@@ -89,9 +97,10 @@ html, body {
 		<span style="font-size:22px; color:white; font-weight:bolder"> 한국의 건강, 바로 이곳에서 </span>
 	</div>
 	
-	<!-- EpiMap 제목 -->
+	<!-- EpiMap 제목, 로딩 gif -->
 	<div class="titleImage">
-		<img src="EpiMapText.png" style="height:70px;"> 
+		<img src="EpiMapText.png" style="height:70px;"> <br>
+		<img src="loading.gif" style="width:40px; margin-top:15px;">
 	</div>
 	
 	<!-- 디자인 박스 -->
