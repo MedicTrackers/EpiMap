@@ -20,7 +20,9 @@
             <!-- JSON 배열을 반복하여 출력 -->
             <th:block th:each="news:${newsData}">
                 <li>
-                    <h3>[[${news.title}]]</h3>
+                    <h6>[[${news.title}]]</h6>
+                    <span>[[${news.description}]]</span><br>
+                    <span>[[${news.pubDate}]]</span>
                 </li>
             </th:block>
         </ul>
