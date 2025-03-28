@@ -13,8 +13,10 @@ import lombok.RequiredArgsConstructor;
 public class SymptomsService {
 	final SymptomsMapper stMapper;
 	
+	
 	/**
 	 * 증상 리스트를 가져온다.
+	 * 
 	 * @return : List<SymptomsDto> 형식의 리스트
 	 */
 	public List<SymptomsDto> getCheckList() {
