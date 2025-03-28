@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<title> Welcome EpiMap </title>
+<style>
+@font-face {
+    font-family: 'MarinesBold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2502-1@1.0/MarinesBold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+	
+@font-face {
+    font-family: 'GothicA1-Light';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* 스크롤 방지 */
+    font-family: 'GothicA1-Light', sans-serif;
+}
+
+.rootContainer {
+	position: fixed;
+	width: 412px;
+	height: 917px;
+	top: 0;
+	left: 0;
+	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
+	background: linear-gradient(
+		150deg,
+		rgba(1, 57, 254, 0.4) 0%,
+		rgba(16, 241, 255, 0.4) 100%
+	), linear-gradient(0deg, rgba(0,98,255,1) 0%, rgba(0,98,255,1) 100%);
+}
+
+
+/* 로고 이미지 */
+.logo {
+	margin-top: 175px;
+	text-align: center;
+}
+
+/* 시작 멘트 */
+.introText {
+	margin-top: 13px;
+	text-align: center;
+}
+
+/* EpiMap 제목 */
+.titleImage {
+	margin-top: 35px;
+	text-align: center;
+}
+
+/* 디자인 박스 */
+.design {
+	margin-top: 120px;
+	text-align: center;
+}
+
+/* 팀명 */
+.team {
+	position: absolute;
+    bottom: 65px;
+    left: 50%;
+	transform: translateX(-50%);
+}
+</style>
+
+</head>
+
+<script>
+    // 2초 후에 대시보드 페이지로 이동
+    setTimeout(() => {
+        // window.location.href = "/dashboard";
+    }, 2000);
+</script>
+
+<body>
+<div class="rootContainer fade-in">
+	<!-- 로고 이미지 -->
+	<div class="logo">
+		<img src="EpiMapIcon.png" style="width:26px;">
+	</div>
+	
+	<!-- 시작 멘트 -->
+	<div class="introText">
+		<span style="font-size:22px; color:white; font-weight:bolder"> 한국의 건강, 바로 이곳에서 </span>
+	</div>
+	
+	<!-- EpiMap 제목, 로딩 gif -->
+	<div class="titleImage">
+		<img src="EpiMapText.png" style="height:70px;"> <br>
+		<img src="loading.gif" style="width:40px; margin-top:15px;">
+	</div>
+	
+	<!-- 디자인 박스 -->
+	<div class="design">
+		<img class="mask-group" src="MaskGroup.png">
+	</div>
+	
+	<!-- 팀명 -->
+	<div class="team">
+		<span style="font-family:'MarinesBold',sans-serif; font-size:22px; color:white; font-weight:bold; opacity:0.8;"> MediTrackers </span>
+	</div>
+</div>
+</body>
+</html>
