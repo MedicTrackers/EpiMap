@@ -1,5 +1,10 @@
 package data.controller.dashboard;
 
-public class DashBoardController {
+import org.springframework.web.bind.annotation.RequestMapping;
 
+public class DashBoardController {
+	@RequestMapping("/dashboard")
+	public String hello() {
+		return "page1/dashboard";
+	}
 }

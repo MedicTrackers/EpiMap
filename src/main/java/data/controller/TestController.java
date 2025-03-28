@@ -13,12 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class TestController {
-	//dashboard page
-	@RequestMapping("/")
-	public String hello() {
-		return "page1/dashboard";
-	}
-	
 	@GetMapping("/login")
 	public String login() {
 		return "page5/login";
