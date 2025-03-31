@@ -19,26 +19,26 @@
 }
 
 html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* 스크롤 방지 */
     font-family: 'GothicA1-Light', sans-serif;
 }
 
 .rootContainer {
 	position: fixed;
-	width: 412px;
-	height: 917px;
+	width: 100vw; /* view width, 브라우저 전체 너비 */
+	height: 100vh; /* view height, 브라우저 전체 높이 */
 	top: 0;
 	left: 0;
 	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
-	background: linear-gradient(
+	background: 
+		linear-gradient(
 		150deg,
 		rgba(1, 57, 254, 0.4) 0%,
 		rgba(16, 241, 255, 0.4) 100%
-	), linear-gradient(0deg, rgba(0,98,255,1) 0%, rgba(0,98,255,1) 100%);
+		), 
+		linear-gradient(
+		0deg, rgba(0,98,255,1) 0%,
+		 rgba(0,98,255,1) 100%
+		);
 }
 
 

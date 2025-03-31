@@ -29,7 +29,9 @@ public class DashBoardController {
     @GetMapping("/dashboard")
     public String newsboard(Model model) {
         
-        String query = "코로나|독감|유행|인플루엔자|감염병|감기";
+        String query = "코로나|독감|유행|인플루엔자|감염병|감기|전염";
+        String[] queryKeywords = query.split("\\|");  // "|" 기준으로 split
+        
         ByteBuffer buffer = StandardCharsets.UTF_8.encode(query);
         String encode = StandardCharsets.UTF_8.decode(buffer).toString();
 
@@ -37,7 +39,7 @@ public class DashBoardController {
                 .fromUriString("https://openapi.naver.com")
                 .path("/v1/search/news.json")
                 .queryParam("query", encode)
-                .queryParam("display", 10) // 결과 10개 제한
+                .queryParam("display", 50) // 뉴스 반환 개수 지정
                 .queryParam("start", 1)    // 1번부터 시작
                 .queryParam("sort", "date") // 결과 정렬 방식
                 .encode()
@@ -71,9 +73,10 @@ public class DashBoardController {
              newsMap.put("pubDate", item.getString("pubDate"));
              list.add(newsMap);
         }
-        model.addAttribute("newsData", list);
-
         
+        model.addAttribute("newsData", list);
+        model.addAttribute("queryKeywords", queryKeywords);
+
         return "page1/dashboard";
     }
     

@@ -11,6 +11,16 @@
 
 <body layout:fragment="content">
 <style>
+@font-face {
+    font-family: 'GothicA1-Light';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+body {
+	font-family: 'GothicA1-Light', sans-serif;
+}
 
 /* 횡 방향 한 줄 공지 */
 .rectangle {
@@ -32,6 +42,7 @@
 	padding: 5px 20px 20px 28px;
 	background-color: #FDFDFD;
 	border-radius: 25px 25px 0 0;
+	margin-bottom: 80px;
 }
 
 /* 한 줄 공지 아래 배너 */
@@ -46,23 +57,47 @@
   	justify-content: center;
 }
 
-/* 뉴스 기사 출력 */
-.newsContents {
-	width: 364px;
+/* 카테고리 query 출력 ul ================================*/
+.category {
+	list-style-type: none;
+	padding: 5px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+    white-space: nowrap; /* 항목들이 한 줄로 배치되도록 설정 */
+    overflow-x: auto; /* 가로 스크롤을 허용 */
+    -webkit-overflow-scrolling: touch;
 }
 
-ul {
-    list-style: none;
+/* 횡 스크롤바 숨기기 */
+.category::-webkit-scrollbar {
+    display: none; 
+}
+
+.category li {
+	display: inline-block;
+    height: 32px;
+    padding: 4px;
+    margin-right: 5px;
+    border: 1px solid #E2E0E1;
+    border-radius: 10px;
+}
+/* ================================================== */
+
+
+/* 뉴스 기사 리스트 */
+.newsContents {
+	width: 364px;
+	list-style: none;
     padding: 0; 
     margin: 0;  
     background-color: #FDFDFD;
 }
 
 /* 기사 1줄 당 디자인 */
-li {
+.newsContents li {
 	width: 364px;
 	margin-bottom: 15px; /* 기사 간 간격 */
-	padding: 15px 25px 10px 18px;
+	padding: 15px 18px 10px 18px;
 	border-radius: 10px;
 	background: linear-gradient(
 		150deg,
@@ -77,21 +112,27 @@ li {
 	transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+a {
+    text-decoration: none;
+    color: inherit; /* 부모 요소의 글자색과 동일하게 설정 */
+}
+
+
 /* news.title */
-li span:nth-child(1) {
+.newsContents li a {
 	font-size: 17px;
 	font-weight: bold;
 	color: #324F5E;
 }
 
 /* news.description */
-li span:nth-child(3) {
+.newsContents li span:nth-child(3) {
 	font-size: 13px;
 	color: #728A96;
 }
 
 /* news.pubDate */
-li span:nth-child(5) {
+.newsContents li span:nth-child(5) {
 	font-size: 11px;
 	color: #96A7AF;
 }
@@ -99,28 +140,28 @@ li span:nth-child(5) {
 /* 북마크 아이콘 (기본 색상)*/
 .bi-bookmark-heart-fill {
 	color: #96A7AF;
-	margin-left: 120px;
+	margin-left: 132px;
+	cursor: pointer;
 }
 
 /* 이하 뉴스 기사 마우스 hover 효과================= */
-li:hover {
+.newsContents li:hover {
 	box-shadow: 0 1px 20px #c4d0d566;
 	transform: translateY(-5px);
 }
 
-li span:nth-child(1):hover {
+.newsContents li a:nth-child(1):hover {
 	text-decoration: underline; /* 밑줄 효과 */
 }
 
-.bi-bookmark-heart-fill:hover {
-	cursor: pointer;
+.bi-bookmark-heart-fill.active {
 	color: #0062FF;
 	transition: color 0.3s ease;
 }
 /* ========================================== */
 
 </style>
-<!-- ====================================================================== -->
+	
 	<!-- 횡 방향 한 줄 공지 -->
    	<div class="rectangle">
    		<i class="bi bi-megaphone-fill"></i>
@@ -134,12 +175,21 @@ li span:nth-child(1):hover {
     		<span> 이 부분 내용 추가 예정 </span>
     	</div>
         
+        
+        <!-- 카테고리 (query 리스트 형태로 출력) -->
+   		<ul class="category">
+	        <th:block th:each="keyword : ${queryKeywords}">
+	            <li th:text="${keyword}"></li>
+	        </th:block>
+	    </ul>
+	    
+	    
         <!-- 뉴스 기사 출력 -->
         <ul class="newsContents">
             <!-- JSON 배열을 반복하여 출력 -->
             <th:block th:each="news:${newsData}">
                 <li>
-                	<span th:utext="${news.title}"></span> <br>
+                	<a th:href="${news.originallink}" th:utext="${news.title}" target="_blank"></a> <br>
                     <span th:utext="${news.description}"></span> <br>
                     <span th:utext="${news.pubDate}"></span>
                     
@@ -149,5 +199,15 @@ li span:nth-child(1):hover {
         </ul>
         
     </div>
+    
+    
+    <script>
+	    // 북마크 아이콘 클릭 시 파란색으로 색상 변화, 재클릭 시 원상 복귀
+	    $(document).ready(function() {
+	        $(".bi-bookmark-heart-fill").click(function() {
+	            $(this).toggleClass("active"); // 클릭 시 'active' 클래스 추가/제거
+	        });
+	    });
+	</script>
 </body>
 </html>     
