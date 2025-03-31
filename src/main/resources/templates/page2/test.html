@@ -1,0 +1,454 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert title here</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <!-- map api 각자 발급받은 Client ID 값 넣기 -->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=yg9kt0fwzl"></script>
+</head>
+
+<style>
+    
+   body * {
+       font-family: 'GothicA1-Light', sans-serif;
+    }
+    .medical-box {
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .medical-card-container {
+        width: 356px;
+        height: 161px;
+        border-radius: 10px;
+        box-shadow: 0px 1px 20px #c4d0d5db;
+        position: relative;
+        margin-left: 20px;
+        flex-shrink: 0;
+        margin-bottom: 20px;
+
+    }
+
+    /*.medical-box .medical-box-card {
+        display: flex;
+        width: 356px;
+        height: 161px;
+        top: 0;
+        left: 0;
+    }*/
+
+    .medical-box .overlap-group {
+        position: relative;
+        width: 356px;
+        height: 161px;
+        border-radius: 10px;
+        box-shadow: 0px 1px 20px #c4d0d566;
+    }
+
+
+    .medical-box .select {
+        position: relative;
+        width: 356px;
+        height: 161px;
+        border-radius: 10px;
+        box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640, 0px 4px 20px  #96a7af66;
+        background: linear-gradient(
+                150deg,
+                rgba(1, 57, 254, 0.4) 0%,
+                rgba(16, 241, 255, 0.4) 100%
+        ), linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
+    }
+
+
+    .medical-box .text-wrapper {
+        position: absolute;
+        width: 100%;
+        top: 110px;
+        left: 20px;
+        font-weight: 600;
+        color: #0062ff;
+        font-size: 20px;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+
+    .medical-box .view {
+        position: absolute;
+        width: 31px;
+        height: 156px;
+        top: 5px;
+        left: 82px;
+        background-color: #c91c1c;
+        border-radius: 32.5px;
+        transform: rotate(90.00deg);
+    }
+
+    .medical-box .n {
+        position: absolute;
+        width: 148px;
+        top: 69px;
+        left: 24px;
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 17px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+
+    }
+
+    .medical-box .div {
+        position: absolute;
+        width: 100%;
+        top: 15px;
+        left: 20px;
+        font-weight: 700;
+        color: #0062ff;
+        font-size: 23px;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+
+    .medical-box .selectfont {
+
+        color: #ffffff;
+    }
+
+    .medical-scrap {
+        width: 100%;
+        max-width: 412px;
+        height: 441px;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .medical-scrap h5 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        margin-left: 20px;
+    }
+
+   .medical-scrap .line{
+       width: 411px;
+       height: 1px;
+       background-color: #E2E0E1;
+       top: 0;
+       left: 0;
+       margin-bottom: 24px;
+
+   }
+
+    /*바텀시트 CSS*/
+    .bottom_sheet {
+        z-index: 100;
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 58%;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        background-color: #FDFDFD;
+        overflow-y: auto;
+        flex-direction: column;
+        align-items: center;
+        transition-duration: 1s;
+    }
+
+    .bottom_sheet_handle_wrap {
+        z-index: 1;
+        background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 1) 20%,
+        rgba(255, 255, 255, 0.75) 35%,
+        rgba(255, 255, 255, 0.5) 60%,
+        rgba(255, 255, 255, 0.25) 85%,
+        rgba(255, 255, 255, 0) 100%);
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        width: 80%;
+        height: 40px;
+        margin-bottom: 10px;
+        position: fixed;
+    }
+
+    .bottom_sheet_handle {
+        width: 72px;
+        height: 4px;
+        background-color: #e2e0e1;
+        border-radius: 100px;
+        margin-top: 10px;
+    }
+
+    .up_sensor {
+        z-index: 999;
+        position: fixed;
+        background: transparent;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        height: 10%;
+        transition-duration: 1s;
+    }
+
+
+</style>
+<div layout:fragment="content">
+    <!--map-->
+    <div id="map" style="max-width: 412px; height:375px;  margin: 0 auto;"></div>
+
+    <!--바텀시트 내용-->
+    <div class="up_sensor"></div>
+    <div id="bottomSheet" class="bottom_sheet">
+        <div class="bottom_sheet_handle_wrap">
+            <div class="bottom_sheet_handle"></div>
+        </div>
+        <div style="margin-bottom: 40px;"></div>
+            <!--응급실 리스트-->
+            <div class="medical-scrap">
+                    <h5>응급실 빠른 연결</h5>
+                    <div class="line"></div>
+                <!--응급실 리스트 세로형-->
+                    <div class="medical-box">
+                        <div class="medical-box-card">
+                            <!--API 결과-->
+                            <div id="result"></div>
+
+
+
+                            <div class="medical-card-container">
+                                <div class="text-wrapper">병원 번호22&nbsp;&nbsp;<span style="font-weight: normal">02-1234-5678</span></div>
+                                <div class="view"></div>
+                                <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
+                                <div class="div">한양대학교 응급실</div>
+                            </div>
+
+                            <div class="medical-card-container">
+                                <div class="text-wrapper">병원 번호22&nbsp;&nbsp;<span style="font-weight: normal">02-1234-5678</span></div>
+                                <div class="view"></div>
+                                <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
+                                <div class="div">한양대학교 응급실</div>
+                            </div>
+
+                            <div class="medical-card-container">
+                                <div class="text-wrapper">병원 번호22&nbsp;&nbsp;<span style="font-weight: normal">02-1234-5678</span></div>
+                                <div class="view"></div>
+                                <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
+                                <div class="div">한양대학교 응급실</div>
+                            </div>
+
+                            <div class="medical-card-container">
+                                <div class="text-wrapper">병원 번호22&nbsp;&nbsp;<span style="font-weight: normal">02-1234-5678</span></div>
+                                <div class="view"></div>
+                                <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
+                                <div class="div">한양대학교 응급실</div>
+                            </div>
+
+                            <div class="medical-card-container">
+                                <div class="text-wrapper">병원 번호22&nbsp;&nbsp;<span style="font-weight: normal">02-1234-5678</span></div>
+                                <div class="view"></div>
+                                <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
+                                <div class="div">한양대학교 응급실</div>
+                            </div>
+
+                            <div class="medical-card-container">
+                                <div class="text-wrapper">병원 번호22&nbsp;&nbsp;<span style="font-weight: normal">02-1234-5678</span></div>
+                                <div class="view"></div>
+                                <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
+                                <div class="div">한양대학교 응급실</div>
+                            </div>
+
+
+                        </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+    <!--map 마커 스크립트-->
+    <script>
+
+        let lat;
+        let lon;
+
+        console.log("메인");
+
+        navigator.geolocation.getCurrentPosition((position) => {
+            console.log(">>>>"+"getCurrentPosition");
+            lat = position.coords.latitude;
+            lon = position.coords.longitude;
+
+            console.log("lat : " + lat);
+            console.log("lon : " + lon);
+
+            medical();
+
+
+            const currentLocation = new naver.maps.LatLng(lat, lon);
+
+            const mapOptions = {
+                center: currentLocation,
+                zoom: 15,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: naver.maps.ZoomControlStyle.SMALL,
+                    position: naver.maps.Position.TOP_RIGHT
+                }
+            };
+
+            const map = new naver.maps.Map('map', mapOptions);
+
+            // ✅ 현재 위치에 마커 찍기
+            const marker = new naver.maps.Marker({
+                position: currentLocation,
+                map: map,
+                title: '내 위치'
+            });
+
+            // ✅ 클릭하면 정보창도 뜨게 (선택)
+            const infoWindow = new naver.maps.InfoWindow({
+                content: '<div style="padding:5px;">📍 현재 위치입니다.</div>'
+            });
+
+            naver.maps.Event.addListener(marker, "click", function () {
+                infoWindow.open(map, marker);
+            });
+
+        }, (error) => {
+            alert("위치 정보를 가져올 수 없습니다. 브라우저 위치 권한을 확인해주세요.");
+            console.error(error);
+        });
+
+        /*바텀시트 스크립트*/
+        let bottomSheet = document.querySelector('.bottom_sheet');
+        let startY = 0;
+        let currentY = 0;
+        let isExpanded = false; // ✅ 현재 상태 추적 (false면 50%, true면 85%)
+
+        bottomSheet.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].pageY;
+        });
+
+        bottomSheet.addEventListener('touchmove', (e) => {
+            currentY = e.touches[0].pageY;
+            let deltaY = currentY - startY;
+
+            // UP위로 스와이프 → 확대
+            if (deltaY < -30 && !isExpanded) {
+                bottomSheet.style.height = '90%';
+                isExpanded = true;
+            }
+
+            // Down아래로 스와이프 → 축소
+            if (deltaY > 30 && isExpanded && bottomSheet.scrollTop === 0) {
+                bottomSheet.style.height = '58%';
+                isExpanded = false;
+            }
+        });
+
+
+
+
+
+        function medical() {
+            console.log("medical");
+            console.log("lon"+lon);
+            console.log("lat"+lat);
+
+
+            lon = "126.979357";
+            lat = "37.572950";
+
+
+            $.ajax({
+                url: 'http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEgytLcinfoInqire',
+                type: 'GET',
+                data: {
+                    serviceKey: '17Ds6cxIqo9+znsM81nIgrGHeWGzUlZBHQ9s9GSWEFqc1McvZaH2ovzWYKxVdi8AopGjXaYCZWcLCX6VcqWd/Q==',  // API 키를 여기에 입력하세요.
+                    WGS84_LON: lon,
+                    WGS84_LAT: lat,
+                    pageNo: 1,
+                    numOfRows: 10
+                },
+                dataType: 'xml',  // XML 데이터 형식으로 반환받기
+                success: function(response) {
+                    // XML 데이터를 JSON으로 변환
+                    var jsonResponse = xmlToJson(response);
+                    console.log(jsonResponse);
+
+
+                    var items = jsonResponse.response.body.items.item;
+                    console.log(items);
+
+                    // 화면에 출력
+                    //$('#result').html(JSON.stringify(items, null, 2));
+                    $.each(items, function(idx, info) {
+
+                        console.log("============================================");
+                        console.log(info);
+                        $(".medical-box-card").append(`
+
+                            <div class="medical-card-container select">
+                                <div class="text-wrapper selectfont">병원 번호 :&nbsp;&nbsp;<span style="font-weight: normal">${info.dutyTel3['#text']}</span></div>
+                                <div class="view"></div>
+                                <div class="n selectfont">현 가용 병상&nbsp;&nbsp;${info.hvs04['#text']}개</div>
+                                <div class="div selectfont">${info.dutyName['#text']}</div>
+                            </div>
+
+                        `);
+
+
+
+
+
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("API 호출 오류: " + status + ", " + error);
+                }
+            });
+        }
+
+        //api 호출
+        // XML을 JSON으로 변환하는 함수
+        function xmlToJson(xml) {
+            var obj = {};
+            if (xml.nodeType == 1) { // element
+                if (xml.attributes.length > 0) {
+                    obj["@attributes"] = {};
+                    for (var j = 0; j < xml.attributes.length; j++) {
+                        var attribute = xml.attributes.item(j);
+                        obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+                    }
+                }
+            } else if (xml.nodeType == 3) { // text
+                obj = xml.nodeValue;
+            }
+
+            if (xml.hasChildNodes()) {
+                for (var i = 0; i < xml.childNodes.length; i++) {
+                    var item = xml.childNodes.item(i);
+                    var nodeName = item.nodeName;
+                    if (typeof obj[nodeName] == "undefined") {
+                        obj[nodeName] = xmlToJson(item);
+                    } else {
+                        if (typeof obj[nodeName].push == "undefined") {
+                            var old = obj[nodeName];
+                            obj[nodeName] = [];
+                            obj[nodeName].push(old);
+                        }
+                        obj[nodeName].push(xmlToJson(item));
+                    }
+                }
+            }
+            return obj;
+        }
+    </script>
+</div>

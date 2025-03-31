@@ -1,10 +1,184 @@
 <!DOCTYPE html>
-<html>
+<html layout:decorate="~{layout/mainLayout}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert title here</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <!-- map api 각자 발급받은 Client ID 값 넣기 -->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=yg9kt0fwzl"></script>
 </head>
+<style>
+    .box {
+        width: 412px;
+        height: 917px;
+    }
+
+    .box .group {
+        position: fixed;
+        width: 412px;
+        height: 917px;
+        top: 0;
+        left: 0;
+        background-image: url(https://c.animaapp.com/PzzeW1l1/img/app@2x.png);
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+
+
+    * {
+        -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
+    }
+    html,
+    body {
+        margin: 0px;
+        height: 100%;
+    }
+    /* a blue color as a generic focus style */
+    button:focus-visible {
+        outline: 2px solid #4a90e2 !important;
+        outline: -webkit-focus-ring-color auto 5px !important;
+    }
+    a {
+        text-decoration: none;
+    }
+
+</style>
 <body>
+<div layout:fragment="content">
+
+    <!--map 출력부분-->
+    <div id="map" style="width:100%;height:400px;"></div>
+
+    <!--피그마 호출-->
+    <div class="box"><div class="group"></div></div>
+
+    <!--API 결과-->
+    <div id="result"></div>
+
+    <!--map 마커 스크립트-->
+    <script>
+        /*let stage1="서울특별시";
+        let stage2="강남구";*/
+        let lat;
+        let lon;
+
+        medical();
+
+        navigator.geolocation.getCurrentPosition((position) => {
+            lat = position.coords.latitude;
+            lon = position.coords.longitude;
+
+            const currentLocation = new naver.maps.LatLng(lat, lon);
+
+            const mapOptions = {
+                center: currentLocation,
+                zoom: 15,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: naver.maps.ZoomControlStyle.SMALL,
+                    position: naver.maps.Position.TOP_RIGHT
+                }
+            };
+
+            const map = new naver.maps.Map('map', mapOptions);
+
+            // ✅ 현재 위치에 마커 찍기
+            const marker = new naver.maps.Marker({
+                position: currentLocation,
+                map: map,
+                title: '내 위치'
+            });
+
+            // ✅ 클릭하면 정보창도 뜨게 (선택)
+            const infoWindow = new naver.maps.InfoWindow({
+                content: '<div style="padding:5px;">📍 현재 위치입니다.</div>'
+            });
+
+            naver.maps.Event.addListener(marker, "click", function () {
+                infoWindow.open(map, marker);
+            });
+
+        }, (error) => {
+            alert("위치 정보를 가져올 수 없습니다. 브라우저 위치 권한을 확인해주세요.");
+            console.error(error);
+        });
+
+        function medical() {
+            $.ajax({
+                url: 'http://apis.data.go.kr/B552657/ErmctInfoInqireService/getEmrrmRltmUsefulSckbdInfoInqire',
+                type: 'GET',
+                data: {
+                    serviceKey: '17Ds6cxIqo9+znsM81nIgrGHeWGzUlZBHQ9s9GSWEFqc1McvZaH2ovzWYKxVdi8AopGjXaYCZWcLCX6VcqWd/Q==',  // API 키를 여기에 입력하세요.
+                    WGS84_Lon: lon,
+                    WGS84_LAT: lat,
+                    pageNo: 1,
+                    numOfRows: 10
+                },
+                dataType: 'xml',  // XML 데이터 형식으로 반환받기
+                success: function(response) {
+                    // XML 데이터를 JSON으로 변환
+                    var jsonResponse = xmlToJson(response);
+                    console.log(jsonResponse);
+
+                    var items = jsonResponse.response.body.items.item;
+                    console.log(items);
+
+                    // 화면에 출력
+                    //$('#result').html(JSON.stringify(items, null, 2));
+                    $.each(items, function(idx, info) {
+                        console.log(info);
+                        $("#result").append(`${info.dutyName['#text']}`);
+
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("API 호출 오류: " + status + ", " + error);
+                }
+            });
+        }
+
+
+        // XML을 JSON으로 변환하는 함수
+        function xmlToJson(xml) {
+            var obj = {};
+            if (xml.nodeType == 1) { // element
+                if (xml.attributes.length > 0) {
+                    obj["@attributes"] = {};
+                    for (var j = 0; j < xml.attributes.length; j++) {
+                        var attribute = xml.attributes.item(j);
+                        obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+                    }
+                }
+            } else if (xml.nodeType == 3) { // text
+                obj = xml.nodeValue;
+            }
+
+            if (xml.hasChildNodes()) {
+                for (var i = 0; i < xml.childNodes.length; i++) {
+                    var item = xml.childNodes.item(i);
+                    var nodeName = item.nodeName;
+                    if (typeof obj[nodeName] == "undefined") {
+                        obj[nodeName] = xmlToJson(item);
+                    } else {
+                        if (typeof obj[nodeName].push == "undefined") {
+                            var old = obj[nodeName];
+                            obj[nodeName] = [];
+                            obj[nodeName].push(old);
+                        }
+                        obj[nodeName].push(xmlToJson(item));
+                    }
+                }
+            }
+            return obj;
+        }
+    </script>
+</div>
 
 </body>
 </html>
