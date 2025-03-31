@@ -24,9 +24,12 @@ body {
   	margin-left: 19px;
   	margin-top: 180px;
   	padding: 10px;
-  	background: linear-gradient(to bottom, #0062FF 10%, #4DA8FF 50%, #007BFF 90%);
+  	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
+	background: linear-gradient(150deg, rgba(1, 57, 254, 0.4) 0%,
+      rgba(16, 241, 255, 0.4) 100%),
+      linear-gradient(0deg, rgba(0,98,255,1) 0%,
+      rgba(0,98,255,1) 100%);
   	border-radius: 10px;
-  	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
   	color: white;
   	font-weight: bold;
 }
@@ -71,6 +74,15 @@ body {
 	padding: 15px;
 	line-height: 24px;
 }
+.labels:hover {
+	color: #0062FF;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+.labels.selected {
+	color: #0062FF;
+	font-weight: bold;
+}
 .checks {
 	width: 16px;
 	height: 16px;
@@ -83,21 +95,26 @@ body {
 	margin-bottom: 20px;
 	align-self: center;
 }
-
+.warn {
+	display: none;
+	color: red;
+	font-size: 0.8em;
+	float: right;
+}
 </style>
 </head>
 <body>
 <div layout:fragment="content">
 	<!-- 개요 박스 -->
-	<div class="overview">		
+	<div class="overview">	
       	<span>안내</span>
       	<p>병원 방문 전, 자신의 상태를 자가진단 하는 서비스입니다.<br>
-      	정확한 진단은 의사와 상담하시기 바랍니다.
-      	</p>
+      	정확한 진단은 의사와 상담하시기 바랍니다.</p>
 	</div>
 	<!-- 체크리스트 -->
 	<div class="backbox">
 		<b class="page3_title">체크리스트</b>
+		<span class="warn">증상을 하나는 선택해 주세요</span>
 		<hr>
 		<div class="checkbox">
 			<label class="labels" th:each="dto:${symptoms}">
@@ -105,10 +122,34 @@ body {
 				[[${dto.symptom}]]
 			</label>
 			
-			<butto type="button" class="btn btn-info checkbtn">진단결과 확인</button>
+			<button type="button" class="btn btn-info checkbtn">진단결과 확인</button>
 		</div>
 	</div>
+	<script type="text/javascript">
+		let selectedValues = "";
+		$(".checks").change(function() {
+			selectedValues = $(".checks:checked")
+				.map(function() {
+					return $(this).val();
+				}).get().join(",");
+			
+			console.log("선택 값:", selectedValues);
+			
+			$(".warn").css("display", "none");
+			$(".labels").removeClass("selected");
+			$(".checks:checked").each(function() {
+				$(this).closest(".labels").addClass("selected");
+			});
+		});
+		
+		$(".checkbtn").click(function() {
+			if(selectedValues.trim()=="") {
+				$(".warn").css("display", "block");
+				return;
+			}
+		});
+	</script>
+	
 </div>
-
 </body>
 </html>     

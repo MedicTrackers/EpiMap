@@ -26,4 +26,10 @@ public class ChecklistController {
 		return "page3/checklist";
 	}
 	
+	@GetMapping("/result")
+	public String test() {
+		return "page3/checkresult";
+	}
+	
+	
 }
