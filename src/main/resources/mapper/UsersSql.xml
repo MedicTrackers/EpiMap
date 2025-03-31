@@ -7,4 +7,10 @@
 	<select id="loginUsers" parameterType="UsersDto" resultType="UsersDto">
 		select * from users where user_id = #{user_id} and password = #{password}
 	</select>
+	<select id="checkUserId" parameterType="String" resultType="int">
+		select count(*) from users where user_id = #{userId}
+	</select>
+	<select id="getSelectById" parameterType="int" resultType="UsersDto">
+		select * from users where users_id = #{users_id}
+	</select>
 </mapper>

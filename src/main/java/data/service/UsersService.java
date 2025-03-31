@@ -18,4 +18,11 @@ public class UsersService {
 	public UsersDto loginUsers(UsersDto usersdto) {
 		return usersMapper.loginUsers(usersdto);
 	}
+	public boolean checkUserId(String userId) {
+		return usersMapper.checkUserId(userId) > 0;
+	}
+	
+	public UsersDto getSelectById(int users_id) {
+		return usersMapper.getSelectById(users_id);
+	}
 }

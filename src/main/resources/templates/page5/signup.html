@@ -94,29 +94,93 @@
 	margin-top: 30px;
 	margin-right: 15px;
 }
+#idCheckResult {
+	float: right;
+	margin-top: 20px;
+}
+.chk1 {
+	position: fixed;
+	top: 285px;
+	left: 350px;
+	z-index: 9999;
+	color: red;
+	display: none;
+}
+.chk2 {
+	position: fixed;
+	top: 480px;
+	left: 350px;
+	z-index: 9999;
+	color: red;
+	display: none;
+}
+.success {
+	color: green;
+}
 </style>
-<script type="text/javascript">
-	
-</script>
 </head>
 <body>
 <div layout:fragment="content">
 	<div class="box">	
 		<div class="signup">&nbsp;&nbsp;회원 가입</div>
+		<i class="bi bi-x-circle chk1"></i>
+		<i class="bi bi-x-circle chk2"></i>
 		<hr class="line1">
 				<form th:action="@{/signup}" th:object="${users}" method="post">
-					<input class="id" type="text" th:field="*{user_id}" placeholder="&nbsp;&nbsp;아이디" autofocus="autofocus" required="required">
+					<input class="id" type="text" th:field="*{user_id}" id="userId" placeholder="&nbsp;&nbsp;아이디" required="required">
 					<input class="nickname" type="text" th:field="*{nickname}" placeholder="&nbsp;&nbsp;닉네임" required="required">
 					<input class="password" type="password" th:field="*{password}" placeholder="&nbsp;&nbsp;비밀번호" required="required">
 					<input class="passwordcfm" type="password" placeholder="&nbsp;&nbsp;비밀번호확인" required="required">
-					<button class="signupbtn"type="submit">회원가입</button>
+					<button class="signupbtn" id="signupbtn"type="submit">회원가입</button>
 				</form>
 	</div>
-</div>
 <script type="text/javascript">
-	let chk = false;
+	let chk1 = false;
+	let chk2 = false;
+
+	$("#signupbtn").click(function(e) {
+		if(!chk1 || !chk2) {
+			e.preventDefault();
+		}
+	});
 	
-	/* $(".id").change(function */
+	$("#userId").keyup(function() {
+		let userId = $(this).val().trim();
+		$(".chk1").css("display", "block");
+		$.ajax({
+			type: "get",
+			dataType: "text",
+			url : "/checkId",
+			data : {"userId": userId },
+			success : function(res) {
+				if(res == "fail" || userId == "") {
+					$(".chk1").removeClass("bi-check-circle success");
+					$(".chk1").addClass("bi-x-circle");
+					chk1 = false;
+				} else {
+					$(".chk1").removeClass("bi-x-circle");
+					$(".chk1").addClass("bi-check-circle success");
+					chk1 = true;
+				}
+			}
+		});
+	});
+	
+	$(".passwordcfm").keyup(function() {
+		let passwordcfm = $(this).val().trim();
+		let password = $(".password").val().trim();
+		$(".chk2").css("display", "block");
+		if(passwordcfm == password && password != "") {
+			$(".chk2").removeClass("bi-x-circle");
+			$(".chk2").addClass("bi-check-circle success");
+			chk2 = true;
+		} else {
+			$(".chk2").removeClass("bi-check-circle success");
+			$(".chk2").addClass("bi-x-circle");
+			chk2 = false;
+		}
+	});
 </script>
+</div>
 </body>
 </html>     
