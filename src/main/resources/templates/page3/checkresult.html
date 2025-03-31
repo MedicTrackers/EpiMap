@@ -67,6 +67,8 @@ body {
 	border-radius: 15px;
 	display: flex;
 	flex-direction: column;
+	text-align: center;
+	padding-top: 50px;
 }
 .checkbtn {
 	background-color: #0062FF;
@@ -81,12 +83,28 @@ body {
 	font-size: 0.8em;
 	float: right;
 }
+
+.disease {
+	margin-top: 10px;
+	font-size: 24px;
+}
+.disease p {
+	color: red;
+	font-weight: bold;
+}
+
+.result {
+	font-size: 20px;
+	margin-left: 15px;
+	margin-top: 30px;
+	margin-right: 15px;
+}
 </style>
 </head>
 <body>
 <div layout:fragment="content">
 	<!-- 개요 박스 -->
-	<div class="overview">	
+	<div class="overview">
       	<span>안내</span>
       	<p>병원 방문 전, 자신의 상태를 자가진단 하는 서비스입니다.<br>
       	정확한 진단은 의사와 상담하시기 바랍니다.</p>
@@ -96,11 +114,22 @@ body {
 		<b class="page3_title">자가진단 결과</b>
 		<hr>
 		<div class="resultbox">
+			<div class="disease">
+				<p>[[${dto.disease}]]</p>
+				<span th:if=${dto.triggers!='X'}>(이)가 의심됩니다.</span>
+			</div>
 			
+			
+			<p class="result">[[${dto.result}]]</p>
 			
 			<button type="button" class="btn btn-info checkbtn">계속 검사하기</button>
 		</div>
 	</div>
+<script type="text/javascript">
+$(".checkbtn").click(function() {
+	location.href = "/checklist";
+});
+</script>
 </div>
 </body>
 </html>     

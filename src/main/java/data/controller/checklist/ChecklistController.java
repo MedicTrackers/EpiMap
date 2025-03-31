@@ -6,8 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import data.dto.ResultsDto;
 import data.dto.SymptomsDto;
+import data.service.ResultsService;
 import data.service.SymptomsService;
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class ChecklistController {
 	
 	final SymptomsService stService;
+	final ResultsService resultsService;
 	
 	@GetMapping("")
 	public String checklist(Model model) {
@@ -27,7 +31,12 @@ public class ChecklistController {
 	}
 	
 	@GetMapping("/result")
-	public String test() {
+	public String checkResult(Model model,
+			@RequestParam("symptoms") String symptoms) {
+		ResultsDto dto = resultsService.findDisease(symptoms);
+		
+		model.addAttribute("dto", dto);
+		
 		return "page3/checkresult";
 	}
 	
