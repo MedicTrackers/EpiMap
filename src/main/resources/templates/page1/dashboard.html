@@ -10,21 +10,144 @@
 </head>
 
 <body layout:fragment="content">
-    <h1>뉴스 정보</h1>
+<style>
 
-    <div>
-        <h2>뉴스 목록</h2>
+/* 횡 방향 한 줄 공지 */
+.rectangle {
+	width: 412px;
+	height: 45px;
+	top: 0;
+	left: 0;
+	margin-top: 124px;
+	background-color: #d9d9d9;
+	text-align: center;
+	padding: 12px 0;
+	font-weight: bold;
+}
+
+.newsContainer {
+	width: 412px;
+	height: 100%;
+	margin-top: 5px;
+	padding: 5px 20px 20px 28px;
+	background-color: #FDFDFD;
+	border-radius: 25px 25px 0 0;
+}
+
+/* 한 줄 공지 아래 배너 */
+.newsBanner {
+	width: 100%; /* 부모 width와 같게 */
+	height: 115px;
+	margin: 5px 0 15px 0;
+	border-top: 1px solid #E2E0E1;
+	border-bottom: 1px solid #E2E0E1;
+  	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+}
+
+/* 뉴스 기사 출력 */
+.newsContents {
+	width: 364px;
+}
+
+ul {
+    list-style: none;
+    padding: 0; 
+    margin: 0;  
+    background-color: #FDFDFD;
+}
+
+/* 기사 1줄 당 디자인 */
+li {
+	width: 364px;
+	margin-bottom: 15px; /* 기사 간 간격 */
+	padding: 15px 25px 10px 18px;
+	border-radius: 10px;
+	background: linear-gradient(
+		150deg,
+		rgba(255,255,255,0.4) 0%,
+		rgba(239,244,255,0.4) 100%
+	),
+	linear-gradient(
+		0deg,
+		rgba(255,255,255,1) 0%,
+		rgba(255,255,255,1) 100%
+	);
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* news.title */
+li span:nth-child(1) {
+	font-size: 17px;
+	font-weight: bold;
+	color: #324F5E;
+}
+
+/* news.description */
+li span:nth-child(3) {
+	font-size: 13px;
+	color: #728A96;
+}
+
+/* news.pubDate */
+li span:nth-child(5) {
+	font-size: 11px;
+	color: #96A7AF;
+}
+
+/* 북마크 아이콘 (기본 색상)*/
+.bi-bookmark-heart-fill {
+	color: #96A7AF;
+	margin-left: 120px;
+}
+
+/* 이하 뉴스 기사 마우스 hover 효과================= */
+li:hover {
+	box-shadow: 0 1px 20px #c4d0d566;
+	transform: translateY(-5px);
+}
+
+li span:nth-child(1):hover {
+	text-decoration: underline; /* 밑줄 효과 */
+}
+
+.bi-bookmark-heart-fill:hover {
+	cursor: pointer;
+	color: #0062FF;
+	transition: color 0.3s ease;
+}
+/* ========================================== */
+
+</style>
+<!-- ====================================================================== -->
+	<!-- 횡 방향 한 줄 공지 -->
+   	<div class="rectangle">
+   		<i class="bi bi-megaphone-fill"></i>
+		최신 공지사항이 횡 방향으로 넘어갑니다.
+   	</div>
+   	
+    <div class="newsContainer">
+    	<!-- 한 줄 공지 아래 배너 -->
+    	<div class="newsBanner">
+    		<span style="font-size:24px;"> 오늘의 건강 소식 </span>
+    		<span> 이 부분 내용 추가 예정 </span>
+    	</div>
         
-        <ul>
+        <!-- 뉴스 기사 출력 -->
+        <ul class="newsContents">
             <!-- JSON 배열을 반복하여 출력 -->
             <th:block th:each="news:${newsData}">
                 <li>
-                    <h6>[[${news.title}]]</h6>
-                    <span>[[${news.description}]]</span><br>
-                    <span>[[${news.pubDate}]]</span>
+                	<span th:utext="${news.title}"></span> <br>
+                    <span th:utext="${news.description}"></span> <br>
+                    <span th:utext="${news.pubDate}"></span>
+                    
+                    <i class="bi bi-bookmark-heart-fill"></i>
                 </li>
             </th:block>
         </ul>
+        
     </div>
 </body>
 </html>     

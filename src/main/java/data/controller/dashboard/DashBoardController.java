@@ -27,9 +27,9 @@ import groovy.util.logging.Slf4j;
 public class DashBoardController {
 
     @GetMapping("/dashboard")
-    public String dashboard(Model model) {
+    public String newsboard(Model model) {
         
-        String query = "코로나";
+        String query = "코로나|독감|유행|인플루엔자|감염병|감기";
         ByteBuffer buffer = StandardCharsets.UTF_8.encode(query);
         String encode = StandardCharsets.UTF_8.decode(buffer).toString();
 
