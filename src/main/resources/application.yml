@@ -10,7 +10,7 @@ spring:
   servlet:
     multipart:
       max-file-size: 10MB
-      max-request-size: 30MB
+      max-request-size: 30MB	
 
 #mybatis setting
 mybatis:

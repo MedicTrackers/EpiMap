@@ -9,4 +9,6 @@ public interface UsersMapper {
 	
 	public void insertUsers(UsersDto usersdto);
 	public UsersDto loginUsers(UsersDto usersdto);
+	public int checkUserId(String userId);
+	public UsersDto getSelectById(int users_id);
 }

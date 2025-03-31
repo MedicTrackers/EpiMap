@@ -1,6 +1,7 @@
 package data.controller.mypage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import data.dto.UsersDto;
 import data.service.UsersService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @Controller
 public class MypageController {
@@ -56,4 +60,15 @@ public class MypageController {
 	    model.addAttribute("users", usersdto);
 	    return "page5/mypage";
 	}
+	
+	@GetMapping("/checkId")
+	@ResponseBody
+	public String checkId(@RequestParam("userId") String userId) {
+		boolean checkUserId = usersService.checkUserId(userId);
+		if(checkUserId) {
+			return "fail";
+		} 
+		return "pass";
+	}
+	
 }
