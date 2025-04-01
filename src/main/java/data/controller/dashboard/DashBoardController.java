@@ -85,13 +85,12 @@ public class DashBoardController {
 
         
         // 페이징 처리 =============================================================
-        int perPage = 11;
-        
-        int start = (pageNum - 1) * perPage + 1; // ㄴ페이지에 따른 뉴스 시작
-        
+        int perPage = 10;
+        int start = (pageNum - 1) * perPage; // ㄴ페이지에 따른 뉴스 시작
         int totalCount = list.size(); // 전체 뉴스 개수
         int totalPage = (int) Math.ceil((double) totalCount / perPage); // 전체 페이지 수
         int endPage = totalPage/perPage + 1; // 끝나는 페이지
+        
         if (endPage > totalPage) endPage = totalPage;
         
         model.addAttribute("totalCount", totalCount);
