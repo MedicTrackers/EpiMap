@@ -15,19 +15,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import groovy.util.logging.Slf4j;
+import jakarta.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
 public class DashBoardController {
 
     @GetMapping("/dashboard")
-    public String newsboard(Model model) {
+    public String dashboard(
+    		@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+	    	HttpSession session,
+	    	Model model)
+    {
         
         String query = "코로나|독감|유행|인플루엔자|감염병|감기|전염";
         String[] queryKeywords = query.split("\\|");  // "|" 기준으로 split
@@ -74,9 +80,32 @@ public class DashBoardController {
              list.add(newsMap);
         }
         
-        model.addAttribute("newsData", list);
+        //model.addAttribute("newsData", list)
         model.addAttribute("queryKeywords", queryKeywords);
 
+        
+        // 페이징 처리 =============================================================
+        int perPage = 11;
+        
+        int start = (pageNum - 1) * perPage + 1; // ㄴ페이지에 따른 뉴스 시작
+        
+        int totalCount = list.size(); // 전체 뉴스 개수
+        int totalPage = (int) Math.ceil((double) totalCount / perPage); // 전체 페이지 수
+        int endPage = totalPage/perPage + 1; // 끝나는 페이지
+        if (endPage > totalPage) endPage = totalPage;
+        
+        model.addAttribute("totalCount", totalCount);
+        model.addAttribute("totalPage", totalPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("pageNum", pageNum);
+        
+        List<Map<String, Object>> forward = new ArrayList<>();
+        for(int i=1;i<perPage;i++) {
+        	forward.add(list.get(i + start));
+        }
+        
+        model.addAttribute("newsData", forward);
+        
         return "page1/dashboard";
     }
     
