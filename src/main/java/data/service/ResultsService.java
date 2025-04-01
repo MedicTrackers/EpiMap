@@ -1,7 +1,9 @@
 package data.service;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,7 @@ public class ResultsService {
 				continue;
 			}
 			
+			// 받은 문자열 중에서 얼마나 포함되어있는지 갯수를 세서 적합한 데이터 찾기 
 			List<String> triggerList = Arrays.asList(result.getTriggers().split(","));
 			long matchCount = inputSymptoms.stream().filter(triggerList::contains).count();
 			
@@ -44,7 +47,27 @@ public class ResultsService {
 		return (bestMatch != null && maxMatches > 1) ? bestMatch:results.stream()
 				.filter(r->r.getTriggers().equals("X"))
 				.findFirst().orElse(null);
+	}
+	
+	/**
+	 * 내 자가진단 결과 저장
+	 * @param : int users_id
+	 * @param : int results_id
+	 */
+	public void insertMyResult(int users_id, int results_id) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("users_id", users_id);
+		paramMap.put("results_id", results_id);
 		
+		resultsMapper.insertMyResult(paramMap);
+	}
+	
+	/**
+	 * 내 자가진단 목록 반환
+	 * @param : int users_id
+	 */
+	public List<ResultsDto> getMyAllResult(int users_id) {
+		return resultsMapper.getMyAllResult(users_id);
 	}
 	
 	
