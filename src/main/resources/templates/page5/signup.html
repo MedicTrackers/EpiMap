@@ -10,8 +10,9 @@
 <style>
 .box {
 	margin-top: 149px;
-	width: 412px;
-	height: 700px;
+	width: 100vw;
+	min-width: 412px;
+	height: 100vh;
 	background-color: #ffffff;
 	border-radius: 10px;
 	box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
@@ -127,14 +128,17 @@
 		<i class="bi bi-x-circle chk2"></i>
 		<hr class="line1">
 				<form th:action="@{/signup}" th:object="${users}" method="post">
-					<input class="id" type="text" th:field="*{user_id}" id="userId" placeholder="&nbsp;&nbsp;아이디" required="required">
-					<input class="nickname" type="text" th:field="*{nickname}" placeholder="&nbsp;&nbsp;닉네임" required="required">
-					<input class="password" type="password" th:field="*{password}" placeholder="&nbsp;&nbsp;비밀번호" required="required">
-					<input class="passwordcfm" type="password" placeholder="&nbsp;&nbsp;비밀번호확인" required="required">
+					<input class="id" type="text" th:field="*{user_id}" id="userId" placeholder="&nbsp;&nbsp;아이디" required="required"><br>
+					<input class="nickname" type="text" th:field="*{nickname}" placeholder="&nbsp;&nbsp;닉네임" required="required"><br>
+					<input class="password" type="password" th:field="*{password}" placeholder="&nbsp;&nbsp;비밀번호" required="required"><br>
+					<input class="passwordcfm" type="password" placeholder="&nbsp;&nbsp;비밀번호확인" required="required"><br>
 					<button class="signupbtn" id="signupbtn"type="submit">회원가입</button>
 				</form>
 	</div>
 <script type="text/javascript">
+	document.body.style.position="fixed";
+	document.body.style.width="100%";
+
 	let chk1 = false;
 	let chk2 = false;
 
