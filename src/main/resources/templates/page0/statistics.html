@@ -435,6 +435,21 @@
 		flex-direction: column;
 		align-items: flex-start;
 		position: relative;
+		flex: none;
+		align-self: stretch;
+		border-top-width: 1px;
+		border-top-style: solid;
+		border-left-width: 1px;
+		border-left-style: solid;
+		border-color: transparent;
+		width: 20px; 
+	}
+	
+	.searchbox .cell-title {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		position: relative;
 		flex: 1;
 		align-self: stretch;
 		flex-grow: 1;
@@ -442,13 +457,12 @@
 		border-top-style: solid;
 		border-left-width: 1px;
 		border-left-style: solid;
-		border-color: transparent;  
+		border-color: transparent;
 	}
 	
 	.searchbox .content {
 		display: flex;
 		align-items: flex-start;
-		padding: 10px 12px;
 		position: relative;
 		align-self: stretch;
 		width: 100%;
@@ -464,6 +478,7 @@
 		flex: 1;
 		margin-top: -1.00px;
 		letter-spacing: 0;
+		width: 20px;
 	}
 	
 	.searchbox .text-wrapper {
@@ -534,7 +549,7 @@
 	</div>
 	<div class="chartbox">
 		<div class="title">
-			<span id="weekNumber">인플루엔자 통계</span>
+			<span>인플루엔자 통계</span>
 		</div>
 		<div class="screen">
 			<div class="statistics">
@@ -599,24 +614,6 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		//ISO 계산 함수
-		function getWeekNumber(date) {
-			date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-			date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
-			const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-			
-			return Math.ceil(((date - yearStart) / 86400000 + 1) / 7);
-		}
-		
-		// 현재 날짜 기준 주차 계산
-        const currentWeek = getWeekNumber(new Date());
-
-        // 결과를 HTML에 삽입
-        $("#weekNumber").text(`(현재: ${currentWeek}주차)`);
-	});
-	</script>
 	
 	<div class="searchbox">
 		<div class="view">
@@ -624,40 +621,32 @@
 				<div class="div"></div>
 				<div class="text-wrapper-2">건강 분야 인기 검색어</div>
 				<div class="view-2">
-					<div class="row">
+					<div class="row" th:each="post, iter: ${blogPosts}">
 						<div class="cell">
-							<div class="content"><div class="text">1</div></div>
+							<div class="content">
+								<div class="text" th:text="${iter.count}"></div>
+							</div>
+						</div>
+						<div class="cell-title">
+							<div class="content">
+								<a th:href="${post.link}" style="cursor: pointer;">
+									<div class="text-wrapper" th:text="${post.title}">
+									</div>
+								</a>
+							</div>
 						</div>
 						<div class="cell">
-							<div class="content"><div class="text-wrapper">마스크</div></div>
-						</div>
-						<div class="cell">
-							<div class="content"><div class="text-2">▼</div></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="content-wrapper">
-							<div class="content"><div class="text-3">2</div></div>
-						</div>
-						<div class="content-wrapper">
-							<div class="content"><div class="text-4">백신</div></div>
-						</div>
-						<div class="content-wrapper">
-							<div class="content"><div class="text-5">▲</div></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="content-wrapper">
-							<div class="content"><div class="text-3">3</div></div>
-						</div>
-						<div class="content-wrapper">
-							<div class="content"><div class="text-4">마스크</div></div>
-						</div>
-						<div class="content-wrapper">
-							<div class="content"><div class="text-6">▼</div></div>
+							<div class="content">
+								<div class="text-2">▼</div>
+							</div>
 						</div>
 					</div>
 				</div>
+				<!-- 데이터 없을 때 표시 -->
+    			<div th:if="${blogPosts == null or blogPosts.isEmpty()}" 
+         		style="color: red">
+        			검색 결과가 없습니다.
+    			</div>
 			</div>
 		</div>
 	</div>
