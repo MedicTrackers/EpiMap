@@ -58,11 +58,12 @@
         height: 161px;
         border-radius: 10px;
         box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640, 0px 4px 20px  #96a7af66;
-        background: linear-gradient(
-                150deg,
-                rgba(1, 57, 254, 0.4) 0%,
-                rgba(16, 241, 255, 0.4) 100%
-        ), linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
+
+        /* 기존 배경 제거하고 이미지로 대체 */
+        background-image: url('/images/list_background.png');
+        background-size: auto;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
 
@@ -123,9 +124,18 @@
     .medical-scrap {
         width: 100%;
         max-width: 412px;
-        height: 441px;
+        height: 100%;
         position: relative;
         margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .medical-scroll-box {
+        overflow-y: auto;
+        flex: 1;
+        padding-bottom: 20px;
     }
 
     .medical-scrap h5 {
@@ -265,48 +275,11 @@
             </script>
             <div class="line"></div>
             <!--응급실 리스트 세로형-->
-            <div class="medical-box">
-                <div class="medical-box-card">
-                    <!--API 결과-->
-                    <div id="result"></div>
-
-
-                    <!--<div class="medical-card-container">
-                        <div class="text-wrapper">병원 번호22&nbsp;&nbsp;<span style="font-weight: normal">02-1234-5678</span></div>
-                        <div class="view"></div>
-                        <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
-                        <div class="div">한양대학교 응급실</div>
+            <div class="medical-scroll-box">
+                <div class="medical-box">
+                    <div class="medical-box-card">
+                        <div id="result"></div>
                     </div>
-
-                    <div class="medical-card-container">
-                        <div class="text-wrapper">병원 번호22&nbsp;&nbsp;<span style="font-weight: normal">02-1234-5678</span></div>
-                        <div class="view"></div>
-                        <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
-                        <div class="div">한양대학교 응급실</div>
-                    </div>
-
-                    <div class="medical-card-container">
-                        <div class="text-wrapper">병원 번호22&nbsp;&nbsp;<span style="font-weight: normal">02-1234-5678</span></div>
-                        <div class="view"></div>
-                        <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
-                        <div class="div">한양대학교 응급실</div>
-                    </div>
-
-                    <div class="medical-card-container">
-                        <div class="text-wrapper">병원 번호22&nbsp;&nbsp;<span style="font-weight: normal">02-1234-5678</span></div>
-                        <div class="view"></div>
-                        <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
-                        <div class="div">한양대학교 응급실</div>
-                    </div>
-
-                    <div class="medical-card-container">
-                        <div class="text-wrapper">병원 번호22&nbsp;&nbsp;<span style="font-weight: normal">02-1234-5678</span></div>
-                        <div class="view"></div>
-                        <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
-                        <div class="div">한양대학교 응급실</div>
-                    </div>-->
-
-
                 </div>
             </div>
         </div>
@@ -410,6 +383,7 @@
         }
     });
 
+
     function highlightCard(idx) {
         $(".medical-card-container").removeClass("select");
         $(".medical-card-container .text-wrapper, .medical-card-container .div").removeClass("selectfont");
@@ -423,11 +397,6 @@
 
     function medical() {
 
-        /*console.log("medical");
-        console.log("lon"+lon);
-        console.log("lat"+lat);*/
-
-
         $.ajax({
             url: 'https://apis.data.go.kr/B552657/ErmctInfoInqireService/getEgytBassInfoInqire',
             type: 'GET',
@@ -440,11 +409,8 @@
             success: function(response) {
                 // XML 데이터를 JSON으로 변환
                 let jsonResponse = xmlToJson(response);
-                /*console.log(jsonResponse);*/
 
                 let items = jsonResponse.response.body.items.item;
-                /*console.log(">>>>>>>11111");
-                console.log(items);*/
 
                 if (!Array.isArray(items)) {
                     items = [items];
