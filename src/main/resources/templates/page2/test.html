@@ -213,7 +213,22 @@
         <div style="margin-bottom: 40px;"></div>
         <!--응급실 리스트-->
         <div class="medical-scrap">
-            <h5>응급실 빠른 연결</h5>
+            <h5>응급실 빠른 연결
+                <button id="myLocationBtn" class="btn btn-primary" style="margin-left: 53.4px;">
+                    내 위치로 이동
+                </button>
+            </h5>
+
+            <script>
+                $("#myLocationBtn").on("click", function () {
+                    if (lat && lon) {
+                        const currentPosition = new naver.maps.LatLng(lat, lon);
+                        map.setCenter(currentPosition);
+                    } else {
+                        alert("현재 위치를 불러올 수 없습니다.");
+                    }
+                });
+            </script>
             <div class="line"></div>
             <!--응급실 리스트 세로형-->
             <div class="medical-box">
@@ -450,10 +465,10 @@
                     $(".medical-box-card").append(`
                         <div class="medical-card-container" data-idx="${idx}">
                             <div class="text-wrapper">
-                                병원 번호 : <span style="font-weight: normal">${info.dutyTel1?.['#text'] || "정보 없음"}</span>
+                                병원 번호 : <span style="font-weight: normal">${info.dutyTel3?.['#text'] || "정보 없음"}</span>
                             </div>
                             <div class="view"></div>
-                            <div class="n ">현 가용 병상&nbsp;&nbsp;개</div>
+                            <div class="n ">응급실 가용여부&nbsp;&nbsp;${info.hvec['#text']}</div>
                             <div class="div ">${info.dutyName['#text']}</div>
                         </div>
                     `);
