@@ -233,32 +233,34 @@
                             let currentPosition = new naver.maps.LatLng(lat, lon);
                             map.setCenter(currentPosition);
 
-                            // 기존 마커가 있다면 삭제
-                            if (myLocationMarker) {
-                                myLocationMarker.setMap(null);
+                            // ✅ 마커가 없으면 새로 만들고, 있으면 위치만 업데이트
+                            if (!myLocationMarker) {
+                                myLocationMarker = new naver.maps.Marker({
+                                    position: currentPosition,
+                                    map: map,
+                                    title: "내 위치"
+                                });
+
+                                // 새 마커 및 정보창 생성
+                                myLocationMarker = new naver.maps.Marker({
+                                    position: currentPosition,
+                                    map: map,
+                                    title: "내 위치"
+                                });
+
+                                myInfoWindow = new naver.maps.InfoWindow({
+                                    content: '<div style="padding:5px;">📍 현재 위치입니다.</div>'
+                                });
+
+                                naver.maps.Event.addListener(myLocationMarker, "click", function () {
+                                    myInfoWindow.open(map, myLocationMarker);
+                                });
+                            }else{
+                                myLocationMarker.setPosition(currentPosition);
                             }
-                            if (myInfoWindow) {
-                                myInfoWindow.close();
-                            }
-
-                            // 새 마커 및 정보창 생성
-                            myLocationMarker = new naver.maps.Marker({
-                                position: currentPosition,
-                                map: map,
-                                title: "내 위치"
-                            });
-
-                            myInfoWindow = new naver.maps.InfoWindow({
-                                content: '<div style="padding:5px;">📍 현재 위치입니다.</div>'
-                            });
-
-                            naver.maps.Event.addListener(myLocationMarker, "click", function () {
-                                myInfoWindow.open(map, myLocationMarker);
-                            });
 
                             medical(); // 병원 목록 다시 호출
 
-                            medical(); // 💡 병원 목록 다시 호출
                         },
                         function (error) {
                             alert("현재 위치를 불러올 수 없습니다.");
