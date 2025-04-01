@@ -220,6 +220,10 @@
             </h5>
 
             <script>
+
+                let myLocationMarker = null;
+                let myInfoWindow = null;
+
                 $("#myLocationBtn").on("click", function () {
                     navigator.geolocation.getCurrentPosition(
                         function (position) {
