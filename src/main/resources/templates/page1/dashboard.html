@@ -10,21 +10,257 @@
 </head>
 
 <body layout:fragment="content">
-    <h1>뉴스 정보</h1>
+<style>
+@font-face {
+    font-family: 'GothicA1-Light';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
 
-    <div>
-        <h2>뉴스 목록</h2>
+body {
+	font-family: 'GothicA1-Light', sans-serif;
+}
+
+/* 횡 방향 한 줄 공지 */
+.rectangle {
+	max-width: 100vw;
+	height: 45px;
+	top: 0;
+	left: 0;
+	margin-top: 124px;
+	background-color: #d9d9d9;
+	text-align: center;
+	padding: 12px 0;
+	font-weight: bold;
+}
+
+/* 한 줄 공지 아래 배너 */
+.newsBanner {
+	max-width: 100vw;
+	height: 115px;
+	padding-left: 28px;
+	margin: 5px 0 15px 0;
+	border-top: 1px solid #E2E0E1;
+	border-bottom: 1px solid #E2E0E1;
+  	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+}
+
+.newsContainer {
+	max-width: 100vw;
+	height: 100%;
+	margin-top: 5px;
+	padding: 5px 20px 20px 28px;
+	background-color: #FDFDFD;
+	border-radius: 25px 25px 0 0;
+	margin-bottom: 60px;
+}
+
+/* 카테고리 query 출력 ul ================================*/
+.category {
+	list-style-type: none;
+	padding: 5px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+    white-space: nowrap; /* 항목들이 한 줄로 배치되도록 설정 */
+    overflow-x: auto; /* 가로 스크롤을 허용 */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 횡 스크롤바 숨기기 */
+.category::-webkit-scrollbar {
+    display: none; 
+}
+
+.category li {
+	display: inline-block;
+    height: 32px;
+    padding: 4px;
+    margin-right: 5px;
+    border: 1px solid #E2E0E1;
+    border-radius: 10px;
+}
+/* ================================================== */
+
+
+/* 뉴스 기사 리스트 */
+.newsContents {
+	width: 100%;
+	list-style: none;
+    padding: 0; 
+    margin: 0;  
+    background-color: #FDFDFD;
+}
+
+/* 기사 1줄 당 디자인 */
+.newsContents li {
+	z-index: 10;
+	width: 100%;
+	margin-bottom: 15px; /* 기사 간 간격 */
+	padding: 15px 18px 10px 18px;
+	border-radius: 10px;
+	background: linear-gradient(
+		150deg,
+		rgba(255,255,255,0.4) 0%,
+		rgba(239,244,255,0.4) 100%
+	),
+	linear-gradient(
+		0deg,
+		rgba(255,255,255,1) 0%,
+		rgba(255,255,255,1) 100%
+	);
+	transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+a {
+    text-decoration: none;
+    color: inherit; /* 부모 요소의 글자색과 동일하게 설정 */
+}
+
+/* news.title */
+.newsContents li a {
+	font-size: 17px;
+	font-weight: bold;
+	color: #324F5E;
+}
+
+/* news.description */
+.newsContents li span:nth-child(3) {
+	font-size: 13px;
+	color: #728A96;
+}
+
+/* news.pubDate */
+.newsContents li span:nth-child(5) {
+	font-size: 11px;
+	color: #96A7AF;
+}
+
+/* 북마크 아이콘 (기본 색상)*/
+.bi-bookmark-heart-fill {
+	color: #96A7AF;
+	margin-left: 5px;
+	cursor: pointer;
+}
+
+/* 이하 뉴스 기사 마우스 hover 효과 ================= */
+.newsContents li:hover {
+	box-shadow: 0 1px 20px #c4d0d566;
+	transform: translateY(-5px);
+	z-index: 5;
+}
+
+.newsContents li a:nth-child(1):hover {
+	text-decoration: underline; /* 밑줄 효과 */
+}
+
+.bi-bookmark-heart-fill.active {
+	color: #0062FF;
+	transition: color 0.3s ease;
+}
+
+
+/* 페이징 요소 ================================= */
+.pagingButton {
+	margin-top: 30px;
+}
+
+.page-link {
+    border: none;
+}
+
+/* 페이징 버튼 텍스트 색상 (기본) */
+.pagination .page-item .page-link {
+    color: #0062FF;
+}
+
+/* 페이징 버튼 텍스트 색상 (선택 상태) */
+.pagination .page-item.active .page-link {
+    background-color: #0062FF;
+    color: white;
+    border-radius: 5px;
+}
+/* ========================================== */
+
+</style> 
+	
+	<!-- 횡 방향 한 줄 공지 -->
+   	<div class="rectangle">
+   		<i class="bi bi-megaphone-fill"></i>
+		최신 공지사항이 횡 방향으로 넘어갑니다.
+   	</div>
+   	
+   	<!-- 한 줄 공지 아래 배너 -->
+   	<div class="newsBanner">
+   		<span style="font-size:24px;"> 매일 만나는 건강 뉴스 </span>
+   		<span> 이 부분 내용 추가 예정 </span>
+   	</div>
+   	
+   	
+    <div class="newsContainer">
+    	<p style="margin:0; padding-left:5px;"> 오늘의 키워드 (임시) </p>
+        <!-- 카테고리 (query 리스트 형태로 출력) -->
         
-        <ul>
+   		<ul class="category">
+	        <th:block th:each="keyword : ${queryKeywords}">
+	            <li th:text="${keyword}"></li>
+	        </th:block>
+	    </ul>
+	    
+	    
+        <!-- 뉴스 기사 출력 -->
+        <ul class="newsContents">
             <!-- JSON 배열을 반복하여 출력 -->
             <th:block th:each="news:${newsData}">
                 <li>
-                    <h6>[[${news.title}]]</h6>
-                    <span>[[${news.description}]]</span><br>
-                    <span>[[${news.pubDate}]]</span>
+                	<a th:href="${news.originallink}" th:utext="${news.title}" target="_blank"></a> <br>
+                    <span th:utext="${news.description}"></span> <br>
+                    <span th:utext="${news.pubDate}"></span>
+                    
+                    <i class="bi bi-bookmark-heart-fill"></i>
                 </li>
             </th:block>
         </ul>
+        
+        
+        <!-- 페이징 버튼 ========================================================================================== -->
+        <div class="pagingButton">
+		    <nav aria-label="Page navigation">
+		        <ul class="pagination justify-content-center">
+		            <!-- 이전 페이지 버튼 -->
+		            <li class="page-item" th:classappend="${pageNum == 1} ? 'disabled'"> <!-- 1P일 시 이전 버튼 작동 X -->
+		                <a class="page-link" th:href="@{/dashboard(pageNum=${pageNum - 1})}" aria-label="Previous">
+		                    <span aria-hidden="true">&laquo; 이전</span>
+		                </a>
+		            </li>
+		
+		            <!-- 페이지 번호 버튼 -->
+		            <th:block th:each="i : ${#numbers.sequence(1, totalPage)}">
+		                <li class="page-item" th:classappend="${pageNum == i} ? 'active'">
+		                    <a class="page-link" th:href="@{/dashboard(pageNum=${i})}" th:text="${i}"></a>
+		                </li>
+		            </th:block>
+		
+		            <!-- 다음 페이지 버튼 -->
+		            <li class="page-item" th:classappend="${pageNum == totalPage} ? 'disabled'"> <!-- 5P일 시 다음 버튼 작동 X -->
+		                <a class="page-link" th:href="@{/dashboard(pageNum=${pageNum + 1})}" aria-label="Next">
+		                    <span aria-hidden="true">다음 &raquo;</span>
+		                </a>
+		            </li>
+		        </ul>
+		    </nav>
+		</div>
     </div>
+    
+    <script>
+	    // 북마크 아이콘 클릭 시 파란색으로 색상 변화, 재클릭 시 원상 복귀
+	    $(document).ready(function() {
+	        $(".bi-bookmark-heart-fill").click(function() {
+	            $(this).toggleClass("active"); // 클릭 시 'active' 클래스 추가/제거
+	        });
+	    });
+	</script>
 </body>
 </html>     
