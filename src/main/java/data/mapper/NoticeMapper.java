@@ -15,7 +15,8 @@ public interface NoticeMapper {
 
     public int getTotalCount();
 
-    public List<NoticeDto> getPagingList(int start, int perpage);
+    public List<NoticeDto> getPagingList(int startNum, int perPage);
 
     public NoticeDto getSelectById(int boards_id);
+
 }
