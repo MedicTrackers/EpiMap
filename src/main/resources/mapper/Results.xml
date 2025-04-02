@@ -11,12 +11,11 @@
 	</insert>
 	
 	<select id="getMyAllResult" parameterType="int" resultType="ResultsDto">
-		select r.results_id, r.disease, r.result, m.writeday
+		select r.results_id, r.disease, r.result, m.writeday, m.myresult_id
 		from myresult m
 		join results r 
 		on m.results_id = r.results_id
 		where m.users_id = #{users_id}
 		order by m.writeday DESC
 	</select>
-	
 </mapper>
