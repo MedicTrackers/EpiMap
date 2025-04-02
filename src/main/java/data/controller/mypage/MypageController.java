@@ -29,7 +29,7 @@ public class MypageController {
 	@PostMapping("/login")
 	public String login(@ModelAttribute("users") UsersDto usersdto, HttpSession session, Model model) {
 		UsersDto loginUser = usersService.loginUsers(usersdto);
-		
+
 		if(loginUser != null) {
 			session.setAttribute("loginUser", loginUser);
 			session.setMaxInactiveInterval(3600);

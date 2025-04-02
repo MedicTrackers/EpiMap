@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/mainLayout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert title here</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <!-- map api 각자 발급받은 Client ID 값 넣기 -->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=yg9kt0fwzl"></script>
+</head>
+
+<style>
+    /** {*/
+    /*    -webkit-font-smoothing: antialiased;*/
+    /*    box-sizing: border-box;*/
+    /*}*/
+    /*html,*/
+    /*body {*/
+    /*    margin: 0px;*/
+    /*    height: 100%;*/
+    /*}*/
+    /* a blue color as a generic focus style */
+    button:focus-visible {
+        outline: 2px solid #4a90e2 !important;
+        outline: -webkit-focus-ring-color auto 5px !important;
+    }
+    a {
+        text-decoration: none;
+    }
+
+    .medical-box {
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    .medical-card-container {
+        width: 290px;
+        height: 218px;
+        border-radius: 10px;
+        box-shadow: 0px 1px 20px #c4d0d566;
+        position: relative;
+        margin-left: 20px;
+        flex-shrink: 0;
+    }
+
+    .medical-box .medical-box-card {
+        display: flex;
+        width: 296px;
+        height: 218px;
+        top: 0;
+        left: 0;
+    }
+
+    .medical-box .overlap-group {
+        position: relative;
+        width: 290px;
+        height: 218px;
+        border-radius: 10px;
+        box-shadow: 0px 1px 20px #c4d0d566;
+    }
+
+
+    .medical-box .select {
+        position: relative;
+        width: 290px;
+        height: 218px;
+        border-radius: 10px;
+        box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640, 0px 4px 20px  #96a7af66;
+        background: linear-gradient(
+                150deg,
+                rgba(1, 57, 254, 0.4) 0%,
+                rgba(16, 241, 255, 0.4) 100%
+        ), linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
+    }
+
+
+    .medical-box .text-wrapper {
+        position: absolute;
+        width: 128px;
+        top: 146px;
+        left: 20px;
+        font-family: "Assistant-SemiBold", Helvetica;
+        font-weight: 600;
+        color: #0062ff;
+        font-size: 20px;
+        letter-spacing: 0;
+        line-height: normal;
+        white-space: nowrap;
+    }
+
+    .medical-box .view {
+        position: absolute;
+        width: 31px;
+        height: 156px;
+        top: 13px;
+        left: 82px;
+        background-color: #c91c1c;
+        border-radius: 32.5px;
+        transform: rotate(90.00deg);
+    }
+
+    .medical-box .n {
+        position: absolute;
+        width: 148px;
+        top: 78px;
+        left: 24px;
+        font-family: "Assistant-SemiBold", Helvetica;
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+
+    .medical-box .div {
+        position: absolute;
+        width: 206px;
+        top: 30px;
+        left: 20px;
+        font-family: "Assistant-Bold", Helvetica;
+        font-weight: 700;
+        color: #0062ff;
+        font-size: 26px;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+
+    .medical-box .selectfont {
+
+        color: #ffffff;
+    }
+
+    .medical-scrap {
+        width: 100%;
+        max-width: 412px;
+        height: 441px;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .medical-viewer {
+        width: 100%;
+        height: 100%;
+        background-color: #fcfcfc;
+        border-radius: 25px 25px 0 0;
+        box-shadow: 0px -1px 30px #96a7af40;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .medical-viewer h5 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+</style>
+<body>
+<div layout:fragment="content">
+    <!--map 출력부분-->
+    <div id="map" style="width:100%;height:400px;"></div>
+
+    <!---->
+    <div class="medical-scrap" style="width: 100%;
+        max-width: 412px;
+        height: 441px;
+        position: relative;
+        margin: 0 auto;">
+        <div class="medical-viewer">
+            <h5>응급실 빠른 연결</h5>
+            <div class="medical-box">
+                <div class="medical-box-card">
+                    <div class="medical-card-container select">
+                        <div class="text-wrapper selectfont">병원 번호11<br />02-1234-5678</div>
+                        <div class="view"></div>
+                        <div class="n selectfont">현 가용 병상&nbsp;&nbsp;n개</div>
+                        <div class="div selectfont">한양대학교 응급실</div>
+                    </div>
+
+                    <div class="medical-card-container">
+                        <div class="text-wrapper">병원 번호22<br />02-1234-5678</div>
+                        <div class="view"></div>
+                        <div class="n">현 가용 병상&nbsp;&nbsp;n개</div>
+                        <div class="div">한양대학교 응급실</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--map 마커 스크립트-->
+    <script>
+        navigator.geolocation.getCurrentPosition((position) => {
+            lat = position.coords.latitude;
+            lon = position.coords.longitude;
+
+            const currentLocation = new naver.maps.LatLng(lat, lon);
+
+            const mapOptions = {
+                center: currentLocation,
+                zoom: 15,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: naver.maps.ZoomControlStyle.SMALL,
+                    position: naver.maps.Position.TOP_RIGHT
+                }
+            };
+
+            const map = new naver.maps.Map('map', mapOptions);
+
+            // ✅ 현재 위치에 마커 찍기
+            const marker = new naver.maps.Marker({
+                position: currentLocation,
+                map: map,
+                title: '내 위치'
+            });
+
+            // ✅ 클릭하면 정보창도 뜨게 (선택)
+            const infoWindow = new naver.maps.InfoWindow({
+                content: '<div style="padding:5px;">📍 현재 위치입니다.</div>'
+            });
+
+            naver.maps.Event.addListener(marker, "click", function () {
+                infoWindow.open(map, marker);
+            });
+
+        }, (error) => {
+            alert("위치 정보를 가져올 수 없습니다. 브라우저 위치 권한을 확인해주세요.");
+            console.error(error);
+        });
+    </script>
+</div>
+</body>
+</html>
