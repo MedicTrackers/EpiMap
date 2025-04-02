@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import data.dto.ResultsDto;
@@ -69,6 +70,5 @@ public class ResultsService {
 	public List<ResultsDto> getMyAllResult(int users_id) {
 		return resultsMapper.getMyAllResult(users_id);
 	}
-	
-	
+
 }

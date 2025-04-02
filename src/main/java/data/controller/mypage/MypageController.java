@@ -1,7 +1,9 @@
 package data.controller.mypage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,5 +99,5 @@ public class MypageController {
 	@ResponseBody
 	public void deleteMyResult(@RequestParam("myresult_id") int myresult_id) {
 		usersService.deleteMyResult(myresult_id);
-	}
+	}	
 }

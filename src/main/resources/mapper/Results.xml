@@ -18,5 +18,4 @@
 		where m.users_id = #{users_id}
 		order by m.writeday DESC
 	</select>
-	
 </mapper>
