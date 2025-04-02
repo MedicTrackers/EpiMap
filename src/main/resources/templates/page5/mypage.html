@@ -1,267 +1,267 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout/mainLayout}">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>epimap</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-<style>
-@font-face {
-    font-family: 'GothicA1-Light';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
-    font-weight: 300;
-    font-style: normal;
-}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>epimap</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+	<style>
+		@font-face {
+			font-family: 'GothicA1-Light';
+			src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+			font-weight: 300;
+			font-style: normal;
+		}
 
-.nickname {
-	margin-top: 149px;
-	margin-left: 18px;
-	width: 375px;
-	height: 90px;
-	line-height: 90px;
-	border-radius: 10px;
-	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
-	background: linear-gradient(
-		150deg,
-		rgba(1, 57, 254, 0.4) 0%,
-		rgba(16, 241, 255, 0.4) 100%
-	), linear-gradient(0deg, rgba(0,98,255,1) 0%, rgba(0,98,255,1) 100%);
-	text-align: left;
-	color:white;
-	font-family: 'GothicA1-Light', sans-serif;
-	font-size: 25px;
-	font-weight: 700;
-	border: 1px solid white;
-}
-.logoutbtn {
-	margin-top: 55px;
-	width: 60px;
-	height: 15px;
-	line-height: 15px;
-	border: none;
-	background-color: #0062ff;
-	border-radius: 20px;
-	font-size: 11px;
-	float: left;
-	color: white;
-}
-.box1 {
-	margin-top: 15px;
-	width: 412px;
-	height: 489px;
-	background-color: #ffffff;
-	border-radius: 10px;
-	box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
-	
-}
-.scrabs {
-	margin-top: 20px;
-	width: 412px;
-	line-height: 90px;
-	border-radius: 10px;
-	color: #0062ff;
-	font-size: 25px;
-	font-weight: bold;
-	border: 1px solid white;
-	
-}
-.line1 {
-	margin-top: -10px;
-}
-.scrab-list {
-	height: 350px;
-	overflow-y: auto;
-	
-}
-.diag-list {
-	height: 350px;
-	overflow-y: auto;
-	
-}
-.box2 {
-	margin-top: 15px;
-	width: 412px;
-	height: 500px;
-	background-color: #ffffff;
-	border-radius: 10px;
-	box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
-}
-.self-diag {
-	margin-top: 20px;
-	width: 412px;
-	line-height: 90px;
-	border-radius: 10px;
-	color: #0062ff;
-	font-size: 25px;
-	font-weight: bold;
-	border: 1px solid white;
+		.nickname {
+			margin-top: 149px;
+			margin-left: 18px;
+			width: 375px;
+			height: 90px;
+			line-height: 90px;
+			border-radius: 10px;
+			box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
+			background: linear-gradient(
+					150deg,
+					rgba(1, 57, 254, 0.4) 0%,
+					rgba(16, 241, 255, 0.4) 100%
+			), linear-gradient(0deg, rgba(0,98,255,1) 0%, rgba(0,98,255,1) 100%);
+			text-align: left;
+			color:white;
+			font-family: 'GothicA1-Light', sans-serif;
+			font-size: 25px;
+			font-weight: 700;
+			border: 1px solid white;
+		}
+		.logoutbtn {
+			margin-top: 55px;
+			width: 60px;
+			height: 15px;
+			line-height: 15px;
+			border: none;
+			background-color: #0062ff;
+			border-radius: 20px;
+			font-size: 11px;
+			float: left;
+			color: white;
+		}
+		.box1 {
+			margin-top: 15px;
+			width: 412px;
+			height: 489px;
+			background-color: #ffffff;
+			border-radius: 10px;
+			box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
 
-}
-.line2 {
-	margin-top: -10px;
-}
-.innerbox1 {
-	margin-left: 30px;
-	margin-top: 25px;
-	width: 350px;
-	height: 100px;
-	line-height: 70px;
-	background-color: #ffffff;
-	border-radius: 10px;
-	box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
-	border: 1px solid white;
-	font-size: 20px;
-	font-weight: bold;
-	padding-left: 30px;
-	
-}
+		}
+		.scrabs {
+			margin-top: 20px;
+			width: 412px;
+			line-height: 90px;
+			border-radius: 10px;
+			color: #0062ff;
+			font-size: 25px;
+			font-weight: bold;
+			border: 1px solid white;
 
-.innerbox2 {
-	margin-left: 30px;
-	margin-top: 25px;
-	width: 350px;
-	height: 150px;
-	line-height: 70px;
-	background-color: #ffffff;
-	border-radius: 10px;
-	box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
-	border: 1px solid white;
-	font-size: 20px;
-	font-weight: bold;
-	padding-left: 30px;
-	line-height: 0.9;
-}
-.badge {
-    background: #ffffff;
-    color: gray;
-    border-radius: 12px;
-    font-size: 12px;
-	margin-left: -5px;
-	margin-bottom: 5px;
-}
-.newstitle {
-    font-weight: bold;
-    height: 30px;
-}
-.bookmark {
-    background: none;
-    border: none;
-    color: #0062ff;
-    font-size: 25px;
-   	float: right;
-   	margin-right: 10px;
-   	margin-top: -15px;
-}
-.day {
-	margin-top: 20px;
-	margin-left: -10px;
-	margin-bottom: 20px;
-	color: gray;
-	font-size: 20px;
-	width: 211px;
-}
-.result {
-	margin-left: -10px;
-	font-size: 27px;
-}
-.noresult {
-	padding-top: 65px;
-	font-size: 27px;
-	color: gray;
-}
+		}
+		.line1 {
+			margin-top: -10px;
+		}
+		.scrab-list {
+			height: 350px;
+			overflow-y: auto;
 
-.delete {
-	float: right;
-	margin-top: 30px;
-	background: none;
-    border: none;
-    font-size: 25px;
-    font-weight: bold;
-    cursor: pointer;
-}
-</style>
+		}
+		.diag-list {
+			height: 350px;
+			overflow-y: auto;
+
+		}
+		.box2 {
+			margin-top: 15px;
+			width: 412px;
+			height: 500px;
+			background-color: #ffffff;
+			border-radius: 10px;
+			box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
+		}
+		.self-diag {
+			margin-top: 20px;
+			width: 412px;
+			line-height: 90px;
+			border-radius: 10px;
+			color: #0062ff;
+			font-size: 25px;
+			font-weight: bold;
+			border: 1px solid white;
+
+		}
+		.line2 {
+			margin-top: -10px;
+		}
+		.innerbox1 {
+			margin-left: 30px;
+			margin-top: 25px;
+			width: 350px;
+			height: 100px;
+			line-height: 70px;
+			background-color: #ffffff;
+			border-radius: 10px;
+			box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
+			border: 1px solid white;
+			font-size: 20px;
+			font-weight: bold;
+			padding-left: 30px;
+
+		}
+
+		.innerbox2 {
+			margin-left: 30px;
+			margin-top: 25px;
+			width: 350px;
+			height: 150px;
+			line-height: 70px;
+			background-color: #ffffff;
+			border-radius: 10px;
+			box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
+			border: 1px solid white;
+			font-size: 20px;
+			font-weight: bold;
+			padding-left: 30px;
+			line-height: 0.9;
+		}
+		.badge {
+			background: #ffffff;
+			color: gray;
+			border-radius: 12px;
+			font-size: 12px;
+			margin-left: -5px;
+			margin-bottom: 5px;
+		}
+		.newstitle {
+			font-weight: bold;
+			height: 30px;
+		}
+		.bookmark {
+			background: none;
+			border: none;
+			color: #0062ff;
+			font-size: 25px;
+			float: right;
+			margin-right: 10px;
+			margin-top: -15px;
+		}
+		.day {
+			margin-top: 20px;
+			margin-left: -10px;
+			margin-bottom: 20px;
+			color: gray;
+			font-size: 20px;
+			width: 211px;
+		}
+		.result {
+			margin-left: -10px;
+			font-size: 27px;
+		}
+		.noresult {
+			padding-top: 65px;
+			font-size: 27px;
+			color: gray;
+		}
+
+		.delete {
+			float: right;
+			margin-top: 30px;
+			background: none;
+			border: none;
+			font-size: 25px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
-	<div layout:fragment="content">
-		<div class="nickname">[[${session.loginUser.nickname}]]님
+<div layout:fragment="content">
+	<div class="nickname">[[${session.loginUser.nickname}]]님
 		<button class="logoutbtn" type="submit" value="로그아웃" onclick="location.href='/login'">로그아웃</button>
+	</div>
+	<div class="box1">
+		<div class="scrabs">&nbsp;&nbsp;[[${session.loginUser.nickname}]]님의
+			스크랩</div>
+		<hr class="line1">
+		<div class="scrab-list">
+			<div class="innerbox1">
+				<div class="newstitle">뉴스 제목</div>
+				<div class="badge">의료 분야</div>
+				<button class="bookmark">
+					<i class="bi bi-clipboard2-heart-fill"></i>
+				</button>
+			</div>
 		</div>
-		<div class="box1">
-			<div class="scrabs">&nbsp;&nbsp;[[${session.loginUser.nickname}]]님의
-				스크랩</div>
-			<hr class="line1">
-			<div class="scrab-list">
-				<div class="innerbox1">
-					<div class="newstitle">뉴스 제목</div>
-					<div class="badge">의료 분야</div>
-					<button class="bookmark">
-						<i class="bi bi-clipboard2-heart-fill"></i>
-					</button>
-				</div>
-			</div>
-			<div class="box2">
-				<div class="self-diag">&nbsp;&nbsp;[[${session.loginUser.nickname}]]님의 자가진단 이력</div>
-				<hr class="line2">
-				<div class="diag-list"></div>
-			</div>
-			<script type="text/javascript">
-				diagdata();
-			
-				function diagdata() {
-					$.ajax({
-						type:"post",
-						dataType:"json",
-						url:"/selfdiag",
-						success:function(res) {
-							//console.log(res);
-							let s="";
-							if(res.length == 0) {
-								s += `
+		<div class="box2">
+			<div class="self-diag">&nbsp;&nbsp;[[${session.loginUser.nickname}]]님의 자가진단 이력</div>
+			<hr class="line2">
+			<div class="diag-list"></div>
+		</div>
+		<script type="text/javascript">
+			diagdata();
+
+			function diagdata() {
+				$.ajax({
+					type:"post",
+					dataType:"json",
+					url:"/selfdiag",
+					success:function(res) {
+						//console.log(res);
+						let s="";
+						if(res.length == 0) {
+							s += `
 								<div class="innerbox2">
 									<div class="noresult">자가진단 이력이 없습니다.</div>
 								</div>
 								`;
-								$(".diag-list").html(s);
-								return;
-							}
-							
-							
-							$.each(res, function(idx, d) {
-								s+= `
+							$(".diag-list").html(s);
+							return;
+						}
+
+
+						$.each(res, function(idx, d) {
+							s+= `
 								<div class="innerbox2">
 									<div class="day">진단일자 : ${d.writeday}</div>
 									<div class="result">${d.disease}</div>
 										<i class="bi bi-x delete" myresult="${d.myresult_id}"></i>
 								</div>
 								`;
-							});
-							
-							$(".diag-list").html(s);
-						}
+						});
 
-					});
-				}
-			
-				$(document).on("click", ".delete", function() {
-					let myresult_id = $(this).attr("myresult");
-					console.log(myresult_id);
-					$.ajax({
-						type:"get",
-						dataType:"text",
-						data:{"myresult_id" : myresult_id},
-						url:"/deleteMyResult",
-						success:function() {
-							diagdata();
-						}
-					});
+						$(".diag-list").html(s);
+					}
+
 				});
-				
-				$(".bookmark").click(function() {
-					
+			}
+
+			$(document).on("click", ".delete", function() {
+				let myresult_id = $(this).attr("myresult");
+				console.log(myresult_id);
+				$.ajax({
+					type:"get",
+					dataType:"text",
+					data:{"myresult_id" : myresult_id},
+					url:"/deleteMyResult",
+					success:function() {
+						diagdata();
+					}
 				});
-			</script>
-		</div>
+			});
+
+			$(".bookmark").click(function() {
+
+			});
+		</script>
+	</div>
 </body>
 </html>     
