@@ -10,11 +10,12 @@ import java.sql.Timestamp;
 @Alias("NoticeDto")
 public class NoticeDto {
     private int boards_id;
-    private int user_id;
+    private int users_id;
     private String subject;
     private String content;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private Timestamp writeday;
     private String nphoto;
     private String nfile;
+    private String nickname;
 }

@@ -53,6 +53,8 @@
 			rgba(1, 57, 254, 0.4) 0%
 			rgba(16, 241, 255, 0.4) 100%
 		), linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
+		z-index: 1;
+		overflow: visible !important;
 	}
 	
 	.chartbox .title {
@@ -399,6 +401,20 @@
 		background-image: url("https://c.animaapp.com/szYF1yzN/img/image@2x.png");
 	}
 	
+	.tooltip {
+	  display: block !important;
+	  visiblity: visible !important;
+	  opacity: 1 !important;
+	  position: absolute;
+	  background-color: #333;
+	  color: white;
+	  padding: 5px 10px;
+	  border-radius: 5px;
+	  font-size: 12px;
+	  z-index: 9999;
+	  
+	}
+	
 	.searchbox {
 		width: 376px;
 		height: 201px;
@@ -565,7 +581,7 @@
 		font-weight: bold;
 		margin-bottom: 80px;
 		color: #324f5d;
-	}	
+	}
 </style>
 </head>
 <body layout:fragment="content">
@@ -693,6 +709,82 @@
 		</div>
 	</div>
 	
+	<script type="text/javascript">
+		$(document).ready(function () {
+		    // 툴팁 생성 함수
+		    function createTooltip(element, text) {
+		      // 기존 툴팁 제거
+		      $(".tooltip").remove();
+		
+		      // 새 툴팁 생성
+		      const tooltip = $("<div class='tooltip'></div>").text(text);
+		      $("body").append(tooltip);
+		
+		      // 위치 설정
+		      const offset = element.offset();
+		      
+		      tooltip.css({
+		        position: "absolute",
+		        top: offset.top - tooltip.outerHeight() - 10, // 요소 위쪽에 배치
+		        left: offset.left + element.outerWidth() / 2 - tooltip.outerWidth() / 2,
+		        background: "#333",
+		        color: "#fff",
+		        padding: "5px 10px",
+		        borderRadius: "5px",
+		        fontSize: "12px",
+		        zIndex: 9999,
+		        whiteSpace: "nowrap",
+		        display: "block",
+		        visibility: "visible",
+		      });
+		    }
+		
+		    // 툴팁 제거 함수
+		    function removeTooltip() {
+		      $(".tooltip").remove();
+		    }
+		
+		 // progress-bar-w-2-* 클래스에 이벤트 등록
+		    $("[class^='progress-bar-w-2-']").on({
+		      mouseenter: function () {
+		        const textMap = {
+		          "progress-bar-w-2-1": "2월 1주차: 13.9",
+		          "progress-bar-w-2-2": "2월 2주차: 11.6",
+		          "progress-bar-w-2-3": "2월 3주차: 9.5",
+		          "progress-bar-w-2-4": "2월 4주차: 9.1",
+		          "progress-bar-w-2-5": "3월 1주차: 8.0",
+		          "progress-bar-w-2-6": "3월 2주차: 10.8",
+		          "progress-bar-w-2-7": "3월 3주차: 13.2",
+		          "progress-bar-w-2-8": "3월 4주차: 집계중",
+		        };
+
+		        const className = $(this).attr("class").split(" ")[0]; // 첫 번째 클래스 이름 가져오기
+		        const tooltipText = textMap[className] || "데이터 없음"; // 텍스트 매핑
+
+		        createTooltip($(this), tooltipText);
+		      },
+		      mouseleave: removeTooltip,
+		      click: function () {
+		        const textMap = {
+		          "progress-bar-w-2-1": "2월 1주차: 13.9",
+		          "progress-bar-w-2-2": "2월 2주차: 11.6",
+		          "progress-bar-w-2-3": "2월 3주차: 9.5",
+		          "progress-bar-w-2-4": "2월 4주차: 9.1",
+		          "progress-bar-w-2-5": "3월 1주차: 8.0",
+		          "progress-bar-w-2-6": "3월 2주차: 10.8",
+		          "progress-bar-w-2-7": "3월 3주차: 13.2",
+		          "progress-bar-w-2-8": "3월 4주차: 집계중",
+		        };
+
+		        const className = $(this).attr("class").split(" ")[0]; // 첫 번째 클래스 이름 가져오기
+		        const tooltipText = textMap[className] || "데이터 없음"; // 텍스트 매핑
+
+		        createTooltip($(this), tooltipText);
+		      },
+		    });
+		  });
+	</script>
+	
 	<div class="searchbox">
 		<div class="view">
 			<div class="overlap-group">
@@ -715,7 +807,7 @@
 						</div>
 						<div class="cell">
 							<div class="content">
-								<div class="text-2">▼</div>
+								<div class="text-2">-</div>
 							</div>
 						</div>
 					</div>

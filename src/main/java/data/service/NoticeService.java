@@ -24,10 +24,11 @@ public class NoticeService {
     public int getTotalCount(){
         return noticeMapper.getTotalCount();
     }
-    public List<NoticeDto> getPagingList(int start, int perpage){
-        return noticeMapper.getPagingList(start, perpage);
+    public List<NoticeDto> getPagingList(int startNum, int perPage){
+        return noticeMapper.getPagingList(startNum, perPage);
     }
-    public NoticeDto getSelectById(int boards_id){
+    public NoticeDto getSelectById(int boards_id)
+    {
         return noticeMapper.getSelectById(boards_id);
     }
 }

@@ -32,6 +32,7 @@ public class MypageController {
 		
 		if(loginUser != null) {
 			session.setAttribute("loginUser", loginUser);
+			session.setMaxInactiveInterval(3600);
 			return "redirect:/mypage";
 		} else {
 			model.addAttribute("error", "아이디 또는 비밀번호가 잘못되었습니다");
