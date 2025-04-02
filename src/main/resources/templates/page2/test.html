@@ -271,20 +271,16 @@
 
                             // ✅ 마커가 없으면 새로 만들고, 있으면 위치만 업데이트
                             if (!myLocationMarker) {
+
                                 myLocationMarker = new naver.maps.Marker({
                                     position: currentPosition,
                                     map: map,
                                     icon: {
                                         content: `
-          <div style="
-            width: 20px;
-            height: 20px;
-            border: 6px solid rgb(0,98,255);
-            background-color: #ffffff;
-            border-radius: 50%;
-            box-shadow: 0 0 4px rgba(0,0,0,0.3);
-          "></div>
-        `,
+                                              <div style="width: 20px; height: 20px;border: 6px solid rgb(0,98,255);background-color: #ffffff;
+                                                border-radius: 50%; box-shadow: 0 0 4px rgba(0,0,0,0.3);">
+                                               </div>
+                                         `,
                                         size: new naver.maps.Size(20, 20),
                                         anchor: new naver.maps.Point(10, 10)
                                     },
@@ -296,11 +292,17 @@
                                 });
 
                                 naver.maps.Event.addListener(myLocationMarker, "click", function () {
+                                    if (activeInfoWindow) activeInfoWindow.close();
+                                    activeInfoWindow = myInfoWindow;
                                     myInfoWindow.open(map, myLocationMarker);
                                 });
                             }else{
                                 myLocationMarker.setPosition(currentPosition);
                             }
+                            // ✅ 내 위치 버튼 누를 때도 정보창 열기
+                            if (activeInfoWindow) activeInfoWindow.close();
+                            activeInfoWindow = myInfoWindow;
+                            myInfoWindow.open(map, myLocationMarker);
 
                             medical(); // 병원 목록 다시 호출
 
@@ -332,7 +334,7 @@
     let lat;
     let lon;
     let map; // 전역 변수로 선언
-    console.log("메인");
+    let activeInfoWindow = null;  // 현재 열려있는 정보창 추적
 
     // 거리 계산 함수 (Haversine)
     function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
@@ -371,6 +373,15 @@
         };
 
         map = new naver.maps.Map('map', mapOptions);
+
+        //지도 클릭시 정보창 닫기
+        naver.maps.Event.addListener(map, "click", () => {
+            if (activeInfoWindow) {
+                activeInfoWindow.close();
+                activeInfoWindow = null;
+            }
+        });
+
 
         // 현재 위치에 마커 찍기
         let marker = new naver.maps.Marker({
@@ -539,18 +550,32 @@
 
                     $(document).on("click", ".medical-card-container", function () {
                         const idx = $(this).data("idx");
-
                         const selected = filtered[idx];
                         const hospitalPosition = new naver.maps.LatLng(selected.hospLat, selected.hospLon);
 
                         map.setCenter(hospitalPosition);
                         highlightCard(idx);
 
+                        // 기존 정보창 닫기
+                        if (activeInfoWindow) activeInfoWindow.close();
+
                         const infoWindow = new naver.maps.InfoWindow({
                             content: `<div style="padding:5px; font-size:13px;">🏥 ${selected.dutyName['#text']}</div>`
                         });
 
-                        infoWindow.open(map, new naver.maps.Marker({ position: hospitalPosition, map: map, icon:icon }));
+                        infoWindow.open(map, new naver.maps.Marker({
+                            position: hospitalPosition,
+                            map: map,
+                            icon: {
+                                url: '/images/ico_pin.png',
+                                size: new naver.maps.Size(25, 34),
+                                scaledSize: new naver.maps.Size(25, 34),
+                                origin: new naver.maps.Point(0, 0),
+                                anchor: new naver.maps.Point(12, 34)
+                            }
+                        }));
+                        // ✅ 현재 정보창 저장
+                        activeInfoWindow = infoWindow;
                     });
 
                     let cleanedName = cleanHospitalName(info.dutyName['#text']);
