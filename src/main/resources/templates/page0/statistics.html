@@ -7,6 +7,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <style type="text/css">
 	/* 페이드인 효과 */
 	.fade-in {
@@ -58,9 +60,21 @@
 		height: 90px;
 		font-weight: 700;
 		margin-top: 175px;
-		margin-left: 20px;
-		font-size: 24px; 
-		
+		margin-left: 30px;
+		font-size: 24px; 	
+	}
+	
+	.modal-body {
+		max-height: 80vh;
+		overflow-y: auto; /* 장문일 경우 스크롤 추가 */
+		word-wrap: break-word; /* 긴 단어를 줄 바꿈 */
+		white-space: normal; /* 텍스트 줄 바꿈 허용*/ 
+		font-size: 14px;
+		text-align: left;
+	}
+	
+	.modal-content {
+		max-width: 95vw; 	
 	}
 	
 	.chartbox .screen {
@@ -70,6 +84,7 @@
 		align-items: center;
 		gap: 23px;
 		position: relative;
+		margin-left: 33px;
 	}
 	
 	.chartbox .statistics {
@@ -98,6 +113,7 @@
 		position: relative;
 		flex: 1;
 		flex-grow: 1;
+		margin-left: -5px;
 	}
 	
 	.chartbox .text-wrapper {
@@ -156,6 +172,18 @@
 		font-weight: 600;
 		color: black;
 		font-size: 10px;
+		letter-spacing: 0;
+		line-height: 10.0px;
+	}
+	
+	.chartbox .ylabel {
+		position: relative;
+		width: 70px;
+		height: 13.28px;
+		margin-top: -0.83px;
+		font-weight: 600;
+		color: black;
+		font-size: 6px;
 		letter-spacing: 0;
 		line-height: 10.0px;
 	}
@@ -250,6 +278,7 @@
 		margin-top: -0.83px;
 		font-weight: 700;
 		font-size: 8.3px;
+		color: #66CB9F;
 		letter-spacing: 0;
 		line-height: 13.3px;
 		white-space: nowrap;
@@ -549,8 +578,56 @@
 	</div>
 	<div class="chartbox">
 		<div class="title">
-			<span>인플루엔자 통계</span>
+			<span>
+				인플루엔자 통계&nbsp;&nbsp;
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+          			의사환자분율?
+        		</button>
+				
+				<!-- The Modal -->
+				<div class="modal" id="myModal">
+					<div class="modal-dialog modal-lg">
+				    	<div class="modal-content">
+				
+							<!-- Modal Header -->
+							<div class="modal-header">
+							  <h4 class="modal-title">의사환자분율이란?</h4>
+							  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+							
+							<!-- Modal body -->
+							<div class="modal-body" style="width: 400px; height: 600px;">
+								의사 환자 분율은 외래환자 1,000명당 인플루엔자 의사환자 수를 의미합니다.
+							  	인플루엔자 의사환자는 38.0℃ 이상의 갑작스런 발열과 더불어 기침 또는 인후통이 있는 사람을 말합니다.<br><br>
+							  	의사 환자 분율을 계산하는 방법은 다음과 같습니다. <br>
+								인플루엔자 의사환자 분율<br>
+								= (인플루엔자 의사환자 수/ 총 외래환자 수) x 1,000<br><br>
+								인플루엔자 의사환자분율에서 분모값인 총 외래환자의 수는 해당 주간에 감시 대상 의료기관에서 보고된 외래 진료를 받은 모든 환자의 총합입니다.
+								이 값은 전국의 표본감시 의료기관(약 100여 개)에서 수집된 데이터를 기반으로 산출됩니다<br><br>
+								더 자세한 통계는 아래의 질병관리청에서 운영하는 포털에서 확인해주시기를 바랍니다.<br><br>
+								인플루엔자 유행 여부를 판단하는 기준은 **유행기준(epidemic threshold)**으로 설정된 의사환자분율입니다.
+								이 기준은 과거 3개 절기의 비유행 기간 동안의 주간 평균 의사환자분율에 2배의 표준편차를 더한 값으로 산출됩니다<br><br>
+								예를 들어, 2024-2025절기의 유행기준은 외래환자 1,000명당 8.6명으로 설정되었습니다.
+								따라서, 의사환자분율이 이 값을 초과하면 인플루엔자 유행으로 간주됩니다.
+								<br><br><br>
+								<button type="button" onclick="location.href='https://dportal.kdca.go.kr/pot/is/st/influ.do'"
+								class="btn btn-primary">
+									자세히 보기
+								</button>
+							</div>
+							
+							<!-- Modal footer -->
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+							</div>
+				      
+				        </div>
+					</div>
+				</div>
+				
+			</span>
 		</div>
+		
 		<div class="screen">
 			<div class="statistics">
 				<div class="spacer"></div>
@@ -560,6 +637,7 @@
 					<div class="text-wrapper-3">11.0</div>
 					<div class="text-wrapper-4">9.5</div>
 					<div class="text-wrapper-5">8.0</div>
+					<div class="ylabel">의사환자분율</div>
 				</div>
 			</div>
 			<div class="chart">
