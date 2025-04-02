@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/mainLayout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +13,17 @@
 </head>
 
 <style>
+    @font-face {
+        font-family: 'GothicA1-Light';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+        font-weight: 300;
+        font-style: normal;
+    }
 
     body * {
         font-family: 'GothicA1-Light', sans-serif;
     }
+
     .medical-box {
         display: flex;
         overflow-x: auto;
@@ -236,6 +245,7 @@
 
 
 </style>
+<body>
 <div layout:fragment="content">
     <!--map-->
     <div id="map" style="max-width: 412px; height:375px;  margin: 0 auto;"></div>
@@ -639,3 +649,6 @@
     }
 </script>
 </div>
+</body>
+</html>
+
