@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="data.mapper.ResultsMapper">
+	<select id="getAllResult" resultType="ResultsDto">
+		select * from results
+	</select>
+	
+	<insert id="insertMyResult" parameterType="Map">
+		insert into myresult(users_id, results_id)
+		values(#{users_id}, #{results_id})
+	</insert>
+	
+	<select id="getMyAllResult" parameterType="int" resultType="ResultsDto">
+		select r.results_id, r.disease, r.result, m.writeday
+		from myresult m
+		join results r 
+		on m.results_id = r.results_id
+		where m.users_id = #{users_id}
+		order by m.writeday DESC
+	</select>
+	
+</mapper>
