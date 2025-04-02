@@ -29,7 +29,7 @@
         border-radius: 10px;
         box-shadow: 0px 1px 20px #c4d0d5db;
         position: relative;
-        margin-left: 20px;
+        margin-left: 25px;
         flex-shrink: 0;
         margin-bottom: 20px;
 
@@ -114,6 +114,10 @@
         font-size: 23px;
         letter-spacing: 0;
         line-height: normal;
+        /* 말줄임 처리 */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .medical-box .selectfont {
@@ -207,6 +211,28 @@
         height: 10%;
         transition-duration: 1s;
     }
+    .tel{
+        position: relative;
+        width: 52px;
+        height: 59px;
+        top: 80px;
+        left: 280px;
+        background-color: #ffffff;
+        border-radius: 32.5px;
+        border: 2px solid;
+        border-color: #96A7AF;
+    }
+    .tel .telicon{
+        position: relative;
+        color: #96A7AF;
+        font-size: 25px;
+        left: 12px;
+        top:16px;
+    }
+
+    .medical-card-container.select .telicon {
+        color: #c91c1c !important; /* 선택된 병원의 전화 아이콘은 빨간색 */
+    }
 
 
 </style>
@@ -224,7 +250,7 @@
         <!--응급실 리스트-->
         <div class="medical-scrap">
             <h5>응급실 빠른 연결
-                <button id="myLocationBtn" class="btn btn-primary" style="margin-left: 53.4px;">
+                <button id="myLocationBtn" class="btn btn-primary" style="margin-left: 60px;">
                     내 위치로 이동
                 </button>
             </h5>
@@ -248,6 +274,20 @@
                                 myLocationMarker = new naver.maps.Marker({
                                     position: currentPosition,
                                     map: map,
+                                    icon: {
+                                        content: `
+          <div style="
+            width: 20px;
+            height: 20px;
+            border: 6px solid rgb(0,98,255);
+            background-color: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+          "></div>
+        `,
+                                        size: new naver.maps.Size(20, 20),
+                                        anchor: new naver.maps.Point(10, 10)
+                                    },
                                     title: "내 위치"
                                 });
 
@@ -336,6 +376,20 @@
         let marker = new naver.maps.Marker({
             position: currentLocation,
             map: map,
+            icon: {
+                content: `
+          <div style="
+            width: 20px;
+            height: 20px;
+            border: 6px solid rgb(0,98,255);
+            background-color: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+          "></div>
+        `,
+                size: new naver.maps.Size(20, 20),
+                anchor: new naver.maps.Point(10, 10)
+            },
             title: '내 위치'
         });
 
@@ -393,6 +447,12 @@
         $target.find(".text-wrapper, .div").addClass("selectfont");
 
         $(".medical-box-card").prepend($target);
+
+        // ✅ 스크롤 영역 기준으로 해당 요소로 부드럽게 스크롤
+        $target[0].scrollIntoView({
+            behavior: 'smooth',
+            block: 'start' // 'center', 'end'도 가능
+        });
     }
 
     function medical() {
@@ -435,6 +495,14 @@
                     }
                 });
 
+                //글자 제거
+                function cleanHospitalName(name) {
+                    return name
+                        .replace(/(재단법인|의료법인|사회복지법인|의료재단|복지재단|재단|부속|아산사회|학교법인고려중앙학원|의과대학부속병원)/g, '')
+                        .replace(/[\(\)]/g, '') // 괄호 제거
+                        .trim();
+                }
+
                 // 거리순 정렬
                 filtered.sort((a, b) => a.distance - b.distance);
 
@@ -448,10 +516,15 @@
                     let hospitalMarker = new naver.maps.Marker({
                         position: hospitalPosition,
                         map: map,
+                        icon: {
+                            url: '/images/ico_pin.png',
+                            size: new naver.maps.Size(25, 34),
+                            scaledSize: new naver.maps.Size(25, 34),
+                            origin: new naver.maps.Point(0, 0),
+                            anchor: new naver.maps.Point(12, 34)
+                        },
                         title: info.dutyName['#text']
                     });
-
-
 
                     let infoWindow = new naver.maps.InfoWindow({
                         content: `<div style="padding:5px; font-size:13px;">🏥 ${info.dutyName['#text']}</div>`
@@ -464,16 +537,6 @@
                         highlightCard(idx);
                     });
 
-                    $(".medical-box-card").append(`
-                        <div class="medical-card-container" data-idx="${idx}">
-                            <div class="text-wrapper">
-                                병원 번호 : <span style="font-weight: normal">${info.dutyTel3?.['#text'] || "정보 없음"}</span>
-                            </div>
-                            <div class="view"></div>
-                            <div class="n ">응급실 가용여부&nbsp;&nbsp;${info.hvec['#text']}</div>
-                            <div class="div ">${info.dutyName['#text']}</div>
-                        </div>
-                    `);
                     $(document).on("click", ".medical-card-container", function () {
                         const idx = $(this).data("idx");
 
@@ -487,8 +550,24 @@
                             content: `<div style="padding:5px; font-size:13px;">🏥 ${selected.dutyName['#text']}</div>`
                         });
 
-                        infoWindow.open(map, new naver.maps.Marker({ position: hospitalPosition, map: map }));
+                        infoWindow.open(map, new naver.maps.Marker({ position: hospitalPosition, map: map, icon:icon }));
                     });
+
+                    let cleanedName = cleanHospitalName(info.dutyName['#text']);
+
+                    $(".medical-box-card").append(`
+                        <div class="medical-card-container" data-idx="${idx}">
+                            <div class="text-wrapper">
+                                병원 번호 : <span style="font-weight: normal">${info.dutyTel3?.['#text'] || "정보 없음"}</span>
+                            </div>
+                            <div class="tel">
+                                <a href="tel:${info.dutyTel3?.['#text']}"><i class="bi bi-telephone-fill telicon"></i></a>
+                            </div>
+                            <div class="view"></div>
+                            <div class="n ">응급실 가용여부&nbsp;&nbsp;${info.hvec['#text']}</div>
+                            <div class="div ">${cleanedName}</div>
+                        </div>
+                    `);
 
 
                 });
