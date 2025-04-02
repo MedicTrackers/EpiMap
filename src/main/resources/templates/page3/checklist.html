@@ -21,7 +21,7 @@ body {
   	width: 375px;
   	height: 107px;
   	border: 1px solid gray;
-  	margin-left: 19px;
+  	margin: 0 auto;
   	margin-top: 180px;
   	padding: 10px;
   	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
@@ -46,7 +46,7 @@ body {
 	bottom: 0;
 	margin: 0 auto;
 	width: 99vw;
-	height: 600px;
+	height: 100vh;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 	margin-top: 30px;
@@ -59,8 +59,8 @@ body {
 }
 .checkbox {
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+	margin: 0 auto;
 	margin-top: 40px;
-	margin-left: 15px;
 	width: 350px;
 	height: 404px;
 	/* padding-top: 20px; */
@@ -127,6 +127,7 @@ body {
 	</div>
 	<script type="text/javascript">
 		let selectedValues = "";
+		
 		$(".checks").change(function() {
 			selectedValues = $(".checks:checked")
 				.map(function() {
@@ -150,6 +151,9 @@ body {
 			
 			location.href = "/checklist/result?symptoms="+selectedValues; 
 		});
+		
+		document.body.style.position="fixed";
+		document.body.style.width="100%";
 	</script>
 	
 </div>

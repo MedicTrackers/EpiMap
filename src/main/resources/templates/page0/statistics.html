@@ -7,6 +7,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <style type="text/css">
 	/* 페이드인 효과 */
 	.fade-in {
@@ -25,7 +27,7 @@
 	}
 	
 	.box .rectangle {
-		margin-top: 125px;
+		margin-top: 124px;
 		position: fixed;
 		width: 412px;
 		height: 45px;
@@ -38,8 +40,8 @@
 	}
 	
 	.chartbox {
-		width: 375px;
-		height: 290px;
+		width: 412px;
+		height: 320px;
 		margin-top: 190px;
 		text-align: center;
 		position: relative;
@@ -51,14 +53,356 @@
 			rgba(1, 57, 254, 0.4) 0%
 			rgba(16, 241, 255, 0.4) 100%
 		), linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
-		margin-left: 18px;
+	}
+	
+	.chartbox .title {
+		width: 360px;
+		height: 90px;
+		font-weight: 700;
+		margin-top: 175px;
+		margin-left: 30px;
+		font-size: 24px; 	
+	}
+	
+	.modal-body {
+		max-height: 80vh;
+		overflow-y: auto; /* 장문일 경우 스크롤 추가 */
+		word-wrap: break-word; /* 긴 단어를 줄 바꿈 */
+		white-space: normal; /* 텍스트 줄 바꿈 허용*/ 
+		font-size: 14px;
+		text-align: left;
+	}
+	
+	.modal-content {
+		max-width: 95vw; 	
+	}
+	
+	.chartbox .screen {
+		display: flex;
+		width: 347px;
+		height: 215px;
+		align-items: center;
+		gap: 23px;
+		position: relative;
+		margin-left: 33px;
+	}
+	
+	.chartbox .statistics {
+		display: flex;
+		flex-direction: column;
+		width: 20px;
+		height: 150px;
+		align-items: flex-start;
+		gap: 26.57px;
+		padding: 0px 0px 13.28px;
+		position: relative;
+	} 
+	
+	.chartbox .spacer {
+		position: relative;
+		width: 19.93px;
+		height: 19.93px;
+		border-radius: 5.81px;
+	}
+	
+	.chartbox .div {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		position: relative;
+		flex: 1;
+		flex-grow: 1;
+		margin-left: -5px;
+	}
+	
+	.chartbox .text-wrapper {
+		position: relative;
+		width: 14.12px;
+		height: 13.28px;
+		margin-top: -0.83px;
+		font-weight: 600;
+		color: black;
+		font-size: 10px;
+		letter-spacing: 0;
+		line-height: 10.0px;
+	}
+	
+	.chartbox .text-wrapper-2 {
+		position: relative;
+		width: 14.12px;
+		height: 13.28px;
+		margin-top: -0.83px;
+		font-weight: 600;
+		color: black;
+		font-size: 10px;
+		letter-spacing: 0;
+		line-height: 10.0px;
+	}
+	
+	.chartbox .text-wrapper-3 {
+		position: relative;
+		width: 14.12px;
+		height: 13.28px;
+		margin-top: -0.83px;
+		font-weight: 600;
+		color: black;
+		font-size: 10px;
+		letter-spacing: 0;
+		line-height: 10.0px;
+	}
+	
+	.chartbox .text-wrapper-4 {
+		position: relative;
+		width: 14.12px;
+		height: 13.28px;
+		margin-top: -0.83px;
+		font-weight: 600;
+		color: black;
+		font-size: 10px;
+		letter-spacing: 0;
+		line-height: 10.0px;
+	}
+	
+	.chartbox .text-wrapper-5 {
+		position: relative;
+		width: 14.12px;
+		height: 13.28px;
+		margin-top: -0.83px;
+		font-weight: 600;
+		color: black;
+		font-size: 10px;
+		letter-spacing: 0;
+		line-height: 10.0px;
+	}
+	
+	.chartbox .ylabel {
+		position: relative;
+		width: 70px;
+		height: 13.28px;
+		margin-top: -0.83px;
+		font-weight: 600;
+		color: black;
+		font-size: 6px;
+		letter-spacing: 0;
+		line-height: 10.0px;
+	}
+	
+	.chartbox .chart {
+		width: 136.09px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 26.57px;
+		position: relative;
+		align-self: stretch;
+	}
+	
+	.chartbox .header {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		position: relative;
+		align-self: stretch;
+		width: 100%;
+		flex: 0 0 auto;
+	}
+	
+	.chartbox .header-2 {
+		display: inline-flex;
+		align-items: center;
+		gap: 9.96px;
+		position: relative;
+		flex: 0 0 auto;
+	}
+	
+	.chartbox .x-avatar {
+		display: flex;
+		width: 19.93px;
+		align-items: center;
+		gap: 8.3px;
+		position: relative;
+	}
+	
+	.chartbox .avatar-main {
+		width: 20px;
+		height: 20px;
+		border-radius: 5.81px;
+		background-image: url("https://c.animaapp.com/szYF1yzN/img/image@2x.png");
+		background-size: cover;
+		background-position: 50% 50%; 
+	}
+	
+	.chartbox .headline {
+		position: relative;
+		width: fit-content;
+		font-weight: 600;
+		font-size: 11.6px;
+		letter-spacing: 0;
+		line-height: normal;
+	}
+	
+	.chartbox .x-badge {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: flex-start;
+		flex: 0 0 auto;
+		gap: 8.3px;
+		position: relative;
+	}
+	
+	.chartbox .badge-base {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8.3px;
+		padding: 1.66px 6.4px;
+		position: relative;
+		flex: 0 0 auto;
+		background-color: #cfffe5;
+		border-radius: 4.98px; 
+	}
+	
+	.chartbox .elements {
+		display: inline-flex;
+		align-items: center;
+		gap: 4.98px;
+		padding: 1.66px;
+		position: relative;
+		flex: 0 0 auto;
+	}
+	
+	.chartbox .badge {
+		position: relative;
+		width: fit-content;
+		margin-top: -0.83px;
+		font-weight: 700;
+		font-size: 8.3px;
+		color: #66CB9F;
+		letter-spacing: 0;
+		line-height: 13.3px;
+		white-space: nowrap;
+	}
+	
+	.chartbox .charts {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		position: relative;
+		flex: 1;
+		align-self: stretch;
+		width: 100%;
+		flex-grow: 1;
+	}
+	
+	.chartbox .progress-bar-w-wrapper {
+		display: inline-flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 9.96px;
+		position: relative;
+		align-self: stretch;
+		flex: 0 0 auto;
+	}
+	
+	.chartbox .progress-bar-w {
+		position: relative;
+		margin-left: 30px;
+		display: inline-block;
+		flex: 1;
+		width: 120px;
+		flex-grow: 1;
+		transform: rotate(-90.00deg); 
+	}
+	
+	.chartbox .overlap-group {
+		position: relative;
+		width: 160px;
+		height: 20px;
+		top: -1px;
+		left: -1px;
+		background-color: #e9e9e6;
+		border-radius: 41.52px;
+		margin-bottom: 15px;
+	}
+	
+	.chartbox .progress-bar-w-2-1 {
+		width: 110px;
+		height: 20px;
+		background-color: #c91c1c;
+		border-radius: 41.52px;
+	}
+	
+	.chartbox .progress-bar-w-2-2 {
+		width: 78px;
+		height: 20px;
+		background-color: #c91c1c;
+		border-radius: 41.52px;
+	}
+	
+	.chartbox .progress-bar-w-2-3 {
+		width: 55px;
+		height: 20px;
+		background-color: #c91c1c;
+		border-radius: 41.52px;
+	}
+	
+	.chartbox .progress-bar-w-2-4 {
+		width: 50px;
+		height: 20px;
+		background-color: #c91c1c;
+		border-radius: 41.52px;
+	}
+	
+	.chartbox .progress-bar-w-2-5 {
+		width: 38px;
+		height: 20px;
+		background-color: #c91c1c;
+		border-radius: 41.52px;
+	}
+	
+	.chartbox .progress-bar-w-2-6 {
+		width: 72px;
+		height: 20px;
+		background-color: #c91c1c;
+		border-radius: 41.52px;
+	}
+	
+	.chartbox .progress-bar-w-2-7 {
+		width: 105px;
+		height: 20px;
+		background-color: #c91c1c;
+		border-radius: 41.52px;
+	}
+	
+	.chartbox .progress-bar-w-2-8 {
+		width: 44px;
+		height: 0px;
+		background-color: #c91c1c;
+		border-radius: 41.52px;
+	}
+	
+	.chartbox .chart-2 {
+		width: 137.3px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 26.57px;
+		position: relative;
+		align-self: stretch;
+	}
+	
+	.chartbox .avatar-main-2 {
+		width: 20px;
+		height: 20px;
+		border-radius: 5.81px;
+		background-image: url("https://c.animaapp.com/szYF1yzN/img/image@2x.png");
 	}
 	
 	.searchbox {
-		width: 375px;
-		height: 290px;
-		margin-top: 50px;
-		text-align: center;
+		width: 376px;
+		height: 201px;
+		margin-top: 10px;
 		position: relative;
 		border-radius: 10px;
 		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640, 0px 4px 20px
@@ -71,10 +415,141 @@
 		margin-left: 18px;
 	}
 	
+	.searchbox .text-wrapper-2 {
+		position: absolute;
+		width: 250px;
+		height: 29px;
+		top: 17px;
+		left: 20px;
+		font-weight: 700;
+		color: #324f5d;
+		font-size: 24px;
+		text-align: center;
+		letter-spacing: 0;
+		line-height: normal;
+	}
+	
+	.searchbox .overlap-group {
+		position: relative;
+		width: 376px;
+		height: 201px;
+	}
+	
+	.searchbox .view-2 {
+		display: flex;
+		flex-direction: column;
+		width: 350px;
+		height: 120px;
+		position: absolute;
+		top: 60px;
+		left: 13px;
+		background-color: #ffffff;
+		border-radius: 4px;
+		overflow: hidden;
+	}
+	
+	.searchbox .row {
+		display: flex;
+		align-items: flex-start;
+		position: relative;
+		align-self: stretch;
+		width: 100%;
+		flex: 0 0 auto;
+		background-color: #ffffff00;
+		overflow: hidden; 
+	}
+	
+	.searchbox .cell {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		position: relative;
+		flex: none;
+		align-self: stretch;
+		border-top-width: 1px;
+		border-top-style: solid;
+		border-left-width: 1px;
+		border-left-style: solid;
+		border-color: transparent;
+		width: 20px; 
+	}
+	
+	.searchbox .cell-title {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		position: relative;
+		flex: 1;
+		align-self: stretch;
+		flex-grow: 1;
+		border-top-width: 1px;
+		border-top-style: solid;
+		border-left-width: 1px;
+		border-left-style: solid;
+		border-color: transparent;
+	}
+	
+	.searchbox .content {
+		display: flex;
+		align-items: flex-start;
+		position: relative;
+		align-self: stretch;
+		width: 100%;
+		flex: 0 0 auto;
+	}
+	
+	.searchbox .text {
+		font-weight: 600;
+		color: #000000;
+		font-size: 15px;
+		line-height: 19.5px;
+		position: relative;
+		flex: 1;
+		margin-top: -1.00px;
+		letter-spacing: 0;
+		width: 20px;
+	}
+	
+	.searchbox .text-wrapper {
+		font-weight: 600;
+		color: #000000;
+		font-size: 15px;
+		line-height: 19.5px;
+		position: relative;
+		flex: 1;
+		margin-top: -1.00px;
+		letter-spacing: 0;
+	}
+	
+	.searchbox .text-2 {
+		font-weight: 600;
+		line-height: 15.6px;
+		position: relative;
+		flex: 1;
+		margin-top: -1.00px;
+		letter-spacing: 0; 
+	}
+	
+	.searchbox .content-wrapper {
+		background-color: #ffffff01;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		position: relative;
+		flex: 1;
+		align-self: stretch;
+		flex-grow: 1;
+		border-top-width: 1px;
+		border-top-style: solid;
+		border-left-width: 1px;
+		border-left-style: solid;
+		border-color: transparent; 
+	}
+	
 	.newslink {
 		width: 375px;
-		height: 58px;
-		margin-top: 50px;
+		height: 50px;
+		margin-top: 10px;
 		text-align: center;
 		position: relative;
 		border-radius: 10px;
@@ -89,11 +564,12 @@
 		font-size: 30px;
 		font-weight: bold;
 		margin-bottom: 80px;
+		color: #324f5d;
 	}	
 </style>
 </head>
-<body>
-<div layout:fragment="content">
+<body layout:fragment="content">
+<div>
 	<div class="box">
 		<div class="rectangle">
 			<i class="bi bi-megaphone-fill"></i>
@@ -101,11 +577,159 @@
 		</div>
 	</div>
 	<div class="chartbox">
+		<div class="title">
+			<span>
+				인플루엔자 통계&nbsp;&nbsp;
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+          			의사환자분율?
+        		</button>
+				
+				<!-- The Modal -->
+				<div class="modal" id="myModal">
+					<div class="modal-dialog modal-lg">
+				    	<div class="modal-content">
+				
+							<!-- Modal Header -->
+							<div class="modal-header">
+							  <h4 class="modal-title">의사환자분율이란?</h4>
+							  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+							
+							<!-- Modal body -->
+							<div class="modal-body" style="width: 400px; height: 600px;">
+								의사 환자 분율은 외래환자 1,000명당 인플루엔자 의사환자 수를 의미합니다.
+							  	인플루엔자 의사환자는 38.0℃ 이상의 갑작스런 발열과 더불어 기침 또는 인후통이 있는 사람을 말합니다.<br><br>
+							  	의사 환자 분율을 계산하는 방법은 다음과 같습니다. <br>
+								인플루엔자 의사환자 분율<br>
+								= (인플루엔자 의사환자 수/ 총 외래환자 수) x 1,000<br><br>
+								인플루엔자 의사환자분율에서 분모값인 총 외래환자의 수는 해당 주간에 감시 대상 의료기관에서 보고된 외래 진료를 받은 모든 환자의 총합입니다.
+								이 값은 전국의 표본감시 의료기관(약 100여 개)에서 수집된 데이터를 기반으로 산출됩니다<br><br>
+								더 자세한 통계는 아래의 질병관리청에서 운영하는 포털에서 확인해주시기를 바랍니다.<br><br>
+								인플루엔자 유행 여부를 판단하는 기준은 **유행기준(epidemic threshold)**으로 설정된 의사환자분율입니다.
+								이 기준은 과거 3개 절기의 비유행 기간 동안의 주간 평균 의사환자분율에 2배의 표준편차를 더한 값으로 산출됩니다<br><br>
+								예를 들어, 2024-2025절기의 유행기준은 외래환자 1,000명당 8.6명으로 설정되었습니다.
+								따라서, 의사환자분율이 이 값을 초과하면 인플루엔자 유행으로 간주됩니다.
+								<br><br><br>
+								<button type="button" onclick="location.href='https://dportal.kdca.go.kr/pot/is/st/influ.do'"
+								class="btn btn-primary">
+									자세히 보기
+								</button>
+							</div>
+							
+							<!-- Modal footer -->
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+							</div>
+				      
+				        </div>
+					</div>
+				</div>
+				
+			</span>
+		</div>
+		
+		<div class="screen">
+			<div class="statistics">
+				<div class="spacer"></div>
+				<div class="div">
+					<div class="text-wrapper">14.0</div>
+					<div class="text-wrapper-2">12.5</div>
+					<div class="text-wrapper-3">11.0</div>
+					<div class="text-wrapper-4">9.5</div>
+					<div class="text-wrapper-5">8.0</div>
+					<div class="ylabel">의사환자분율</div>
+				</div>
+			</div>
+			<div class="chart">
+				<div class="header">
+					<div class="header-2">
+						<div class="x-avatar">
+							<div class="avatar-extrasmall"><div class="avatar-main"></div></div>
+						</div>
+						<div class="headline">2025년 2월</div>
+					</div>
+					<div class="x-badge">
+						<div class="badge-base">
+							<div class="elements"><div class="badge">+12%</div></div>
+						</div>
+					</div>
+				</div>
+				<div class="charts">
+					<div class="progress-bar-w-wrapper">
+						<div class="progress-bar-w">
+							<div class="overlap-group"><div class="progress-bar-w-2-1"></div></div>
+							<div class="overlap-group"><div class="progress-bar-w-2-2"></div></div>
+							<div class="overlap-group"><div class="progress-bar-w-2-3"></div></div>
+							<div class="overlap-group"><div class="progress-bar-w-2-4"></div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="chart-2">
+				<div class="header">
+					<div class="header-2">
+						<div class="x-avatar">
+							<div class="avatar-extrasmall"><div class="avatar-main"></div></div>
+						</div>
+						<div class="headline">2025년 3월</div>
+					</div>
+					<div class="x-badge">
+						<div class="badge-base">
+							<div class="elements"><div class="badge">+8%</div></div>
+						</div>
+					</div>
+				</div>
+				<div class="charts">
+					<div class="progress-bar-w-wrapper">
+						<div class="progress-bar-w">
+							<div class="overlap-group"><div class="progress-bar-w-2-5"></div></div>
+							<div class="overlap-group"><div class="progress-bar-w-2-6"></div></div>
+							<div class="overlap-group"><div class="progress-bar-w-2-7"></div></div>
+							<div class="overlap-group"><div class="progress-bar-w-2-8"></div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+	
 	<div class="searchbox">
+		<div class="view">
+			<div class="overlap-group">
+				<div class="div"></div>
+				<div class="text-wrapper-2">건강 분야 인기 검색어</div>
+				<div class="view-2">
+					<div class="row" th:each="post, iter: ${blogPosts}">
+						<div class="cell">
+							<div class="content">
+								<div class="text" th:text="${iter.count}"></div>
+							</div>
+						</div>
+						<div class="cell-title">
+							<div class="content">
+								<a th:href="${post.link}" style="cursor: pointer;">
+									<div class="text-wrapper" th:text="${post.title}">
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="cell">
+							<div class="content">
+								<div class="text-2">▼</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 데이터 없을 때 표시 -->
+    			<div th:if="${blogPosts == null or blogPosts.isEmpty()}" 
+         		style="color: red">
+        			검색 결과가 없습니다.
+    			</div>
+			</div>
+		</div>
 	</div>
 	<div class="newslink">
-		<a href="/dashboard">
+		<a style="text-decoration-line: none; color: inherit;" href="/dashboard">
 			매일 만나는 건강 뉴스
 		</a>
 	</div>

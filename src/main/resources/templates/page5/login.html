@@ -9,12 +9,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style>
 @font-face {
-    font-family: 'MarinesBold';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2502-1@1.0/MarinesBold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-}
-@font-face {
     font-family: 'GothicA1-Light';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
     font-weight: 300;
@@ -34,8 +28,14 @@
 	height: 90px;
 	line-height: 90px;
 	border-radius: 10px;
-	box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640 /* inset 0px 4px 20px #96a7af66 */;
-	background: #0062ff;
+	/* box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
+	background: #0062ff; */
+	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
+	background: linear-gradient(
+		150deg,
+		rgba(1, 57, 254, 0.4) 0%,
+		rgba(16, 241, 255, 0.4) 100%
+	), linear-gradient(0deg, rgba(0,98,255,1) 0%, rgba(0,98,255,1) 100%);
 	text-align: left;
 	color:white;
 	font-size: 32px;
@@ -79,7 +79,7 @@
 	margin-top: 20px;
 	margin-right: 15px;
 }
-.signup {
+.signupbtn {
 	width: 75px;
 	height: 27px;
 	border: 1px solid white;
@@ -121,11 +121,11 @@
 					<br>
 					<span class="chk" th:text="${error}" th:style="${error} ? 'color:red; display:block;' : 'display:none;'"></span>
 					<button class="loginbtn"type="submit">로그인</button>
-					<button class="signup" type="button">회원가입</button>
 				</form>
-				
+		<button class="signupbtn" type="button" onclick="location.href='/signup'">회원가입</button>
 	</div>
 	<div class="pageend">MediTrackers</div>
+	
 </div>
 </body>
 </html>     
