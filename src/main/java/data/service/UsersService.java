@@ -29,4 +29,5 @@ public class UsersService {
 	public void deleteMyResult(int myresult_id) {
 		usersMapper.deleteMyResult(myresult_id);
 	}
+
 }

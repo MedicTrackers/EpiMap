@@ -12,4 +12,5 @@ public interface UsersMapper {
 	public int checkUserId(String userId);
 	public UsersDto getSelectById(int users_id);
 	public void deleteMyResult(int myresult_id);
+
 }

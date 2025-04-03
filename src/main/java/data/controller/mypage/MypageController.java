@@ -100,4 +100,5 @@ public class MypageController {
 	public void deleteMyResult(@RequestParam("myresult_id") int myresult_id) {
 		usersService.deleteMyResult(myresult_id);
 	}	
+
 }
