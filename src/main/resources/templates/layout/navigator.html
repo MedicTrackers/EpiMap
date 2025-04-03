@@ -36,18 +36,57 @@
 	.naviContainer i:hover {
 		color: #0062FF;
 	}
+	
+	i.active-icon {
+		color: #0062FF;
+		font-weight: bold;
+	}
 </style>
 
 
 <div class="naviContainer">
 	<div class="naviIcons">
-		<i class="bi bi-house-door-fill"></i>
-		<i class="bi bi-heart-pulse-fill" style="margin-left:41px;"></i>
-		<i class="bi bi-clipboard2-check-fill" style="margin:0 41px 0 41px;"></i>
-		<i class="bi bi-megaphone-fill" style="margin-right:41px;"></i>
-		<i class="bi bi-person-fill"></i>
+		<i class="bi bi-house-door-fill"
+		 onclick="location.href='/statistics'"></i>
+		<i class="bi bi-heart-pulse-fill" style="margin-left:41px;"
+		 onclick="location.href='/medicalmap'"></i>
+		<i class="bi bi-clipboard2-check-fill" style="margin:0 41px 0 41px;"
+		 onclick="location.href='/checklist'"></i>
+		<i class="bi bi-megaphone-fill" style="margin-right:41px;"
+		 onclick="location.href='/notice'"></i>
+		<i class="bi bi-person-fill"
+		 onclick="location.href='/mypage'"></i>
 	</div>
 </div>
+<script type="text/javascript">
+// 현재 경로 판별
+let currentPath = window.location.href;
+if(currentPath.endsWith("/")) {
+	currentPath = currentPath.slice(0, -1);
+}
+
+let icons = document.querySelectorAll(".naviIcons i");
+
+// 페이지 경로별 아이콘 인덱스 매핑
+let iconMap = {
+    "/statistics": 0,
+    "/dashboard": 0,
+    "/medicalmap": 1,
+    "/checklist": 2,
+    "/notice": 3,
+    "/mypage": 4,
+    "/login": 4,
+    "/signup": 4
+};
+
+Object.keys(iconMap).some(key => {
+	if(currentPath.includes(key)) {
+		icons[iconMap[key]].classList.add("active-icon");
+		return true;
+	}
+	return false;
+});
+</script>
 </div>
 </body>
 </html>
