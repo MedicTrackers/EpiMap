@@ -81,6 +81,24 @@
             color: #0062FF;
         }
 
+        .correct-icon{
+            width: 20px;
+            height: 20px;
+        }
+
+        .delete-icon{
+            width: 20px;
+            height: 20px;
+        }
+        .correct-icon + a, .delete-icon + a {
+            color: black; /* 글자 색상을 검정으로 */
+            text-decoration: none; /* 밑줄 제거 */
+        }
+
+        .correct-icon + a:hover, .delete-icon + a:hover {
+            color: #0062FF; /* 호버 시 색상 */
+        }
+
         .pagination {
             display: flex;
             justify-content: center;
@@ -160,10 +178,14 @@
 
                     <th:block
                             th:if="${session.loginUser != null and session.loginUser.users_id == dto.users_id}">
+                        <img src="/correcticon.png" alt="수정 아이콘" class="correct-icon">
                         <a th:href="@{/notice/updateform(boards_id=${dto.boards_id},pageNum=${pageNum})}">수정</a>
+
+                        <span style="margin: 0 15px;"></span>
+
+                        <img src="/deleteicon.png" alt="삭제 아이콘" class="delete-icon">
                         <a th:href="@{/notice/delete(boards_id=${dto.boards_id})}"
                            onclick="return confirm('정말 삭제하시겠습니까?');">
-
                             삭제</a>
                     </th:block>
                     <th:block th:unless="${session.loginUser != null and session.loginUser.users_id == dto.users_id}">
