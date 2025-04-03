@@ -13,4 +13,10 @@
 	<select id="getSelectById" parameterType="int" resultType="UsersDto">
 		select * from users where users_id = #{users_id}
 	</select>
+	
+	<!--자가진단 결과 삭제 -->
+	<delete id="deleteMyResult" parameterType="int">
+		delete from myresult where myresult_id = #{myresult_id}
+	</delete>
+	
 </mapper>
