@@ -75,11 +75,6 @@
 	overflow-y: auto;
 	
 }
-.diag-list {
-	height: 350px;
-	overflow-y: auto;
-	
-}
 .box2 {
 	margin-top: 15px;
 	width: 412px;
@@ -166,11 +161,6 @@
 	margin-left: -10px;
 	font-size: 27px;
 }
-.noresult {
-	padding-top: 65px;
-	font-size: 27px;
-	color: gray;
-}
 
 .delete {
 	float: right;
@@ -179,7 +169,6 @@
     border: none;
     font-size: 25px;
     font-weight: bold;
-    cursor: pointer;
 }
 </style>
 </head>
@@ -204,58 +193,19 @@
 			<div class="box2">
 				<div class="self-diag">&nbsp;&nbsp;[[${session.loginUser.nickname}]]님의 자가진단 이력</div>
 				<hr class="line2">
-				<div class="diag-list"></div>
+				<div class="scrab-list">
+					<div class="innerbox2">
+						<div class="day">진단일자 : yyyy.MM.dd</div>
+						<div class="result">코로나 바이러스 감염증-19</div>
+						<button class="delete">
+							<i class="bi bi-x"></i>
+						</button>
+					</div>
+				</div>
 			</div>
 			<script type="text/javascript">
-				diagdata();
-			
-				function diagdata() {
-					$.ajax({
-						type:"post",
-						dataType:"json",
-						url:"/selfdiag",
-						success:function(res) {
-							//console.log(res);
-							let s="";
-							if(res.length == 0) {
-								s += `
-								<div class="innerbox2">
-									<div class="noresult">자가진단 이력이 없습니다.</div>
-								</div>
-								`;
-								$(".diag-list").html(s);
-								return;
-							}
-							
-							
-							$.each(res, function(idx, d) {
-								s+= `
-								<div class="innerbox2">
-									<div class="day">진단일자 : ${d.writeday}</div>
-									<div class="result">${d.disease}</div>
-										<i class="bi bi-x delete" myresult="${d.myresult_id}"></i>
-								</div>
-								`;
-							});
-							
-							$(".diag-list").html(s);
-						}
-
-					});
-				}
-			
-				$(document).on("click", ".delete", function() {
-					let myresult_id = $(this).attr("myresult");
-					console.log(myresult_id);
-					$.ajax({
-						type:"get",
-						dataType:"text",
-						data:{"myresult_id" : myresult_id},
-						url:"/deleteMyResult",
-						success:function() {
-							diagdata();
-						}
-					});
+				$(".delete").click(function() {
+					
 				});
 				
 				$(".bookmark").click(function() {
