@@ -31,7 +31,7 @@ public class NoticeController {
     // 1️⃣ **공지사항 리스트 (페이징)**
     @GetMapping("/notice")
     public String noticeList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model) {
-        int perPage = 5; // 한 페이지당 출력할 글 개수
+        int perPage = 2; // 한 페이지당 출력할 글 개수
         int perBlock = 5; // 한 블럭당 출력할 페이지 개수
         int totalCount = noticeService.getTotalCount(); // 전체 글 개수
         int totalPage = (int) Math.ceil((double) totalCount / perPage); // 총 페이지 수
@@ -106,6 +106,7 @@ public class NoticeController {
     {
         NoticeDto noticeDto=noticeService.getSelectById(boards_id);
         model.addAttribute("noticeDto", noticeDto);
+        System.out.println("noticeDto: " + noticeDto);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("imagePath", imagePath);
         model.addAttribute("filePath", filePath);
@@ -113,12 +114,16 @@ public class NoticeController {
         return "page4/updateform";
     }
 
+
+
     @PostMapping("/notice/update")
     public String update(
             @ModelAttribute NoticeDto dto,
             @RequestParam int pageNum,
             @RequestParam("imageUpload") MultipartFile imageUpload,  // 이미지 파일 처리
-            @RequestParam("fileUpload") MultipartFile fileUpload     // 일반 파일 처리
+            @RequestParam("fileUpload") MultipartFile fileUpload,     // 일반 파일 처리
+            @RequestParam(value = "boards_id", required = false, defaultValue = "0") int boards_id
+
     ) {
         // 기존 공지사항 업데이트
         noticeService.updateNotice(dto);
@@ -151,9 +156,6 @@ public class NoticeController {
         // 업데이트 후 공지사항 목록 페이지로 리다이렉트
         return "redirect:/notice?pageNum=" + pageNum;
     }
-
-
-
 
     @GetMapping("notice/delete")
     public String delete(@RequestParam("boards_id") int boards_id)

@@ -13,7 +13,8 @@
         }
 
         .notice-container {
-            width: 375px;
+            width: 100%;
+            max-width: 375px;
             height: 107px;
             border: 1px solid gray;
             padding: 10px;
@@ -25,31 +26,48 @@
             font-weight: bold;
             position: fixed; /* 고정 위치 설정 */
             top: 132px; /* 원하는 위치에 고정 */
-            left: 19px;
+            transform: translateX(-50%);
+            left: 50%;
             z-index: 1;
+            text-align: center;
         }
 
+        .profile-image{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0062FF;
+            object-fit: cover;
+        }
+
+        .notice-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* 이미지와 텍스트 간격 */
+        }
         .notice-list {
-            background-color: #fdfdfd;
-            margin: 0 auto;
+            position: fixed;
+            top: 170px; /* 공지 배너 일부를 덮게 조정 */
+            bottom: 20px;
             width: 99vw;
-            height: 900px;
+            max-height: calc(100vh - 180px);
+            overflow-y: auto;
+            background-color: #fdfdfd;
+            z-index: 3; /* 공지 배너보다 위에 배치 */
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
-            padding: 20px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            position: fixed; /* 고정 위치 설정 */
-            top: 178px; /* notice-container 바로 아래에 오도록 설정 */
-            right: 0;
-            bottom: 0;
-            z-index: 2;
         }
 
+
         .notice-list-inner {
-            height: 100%; /* 부모 div의 높이를 100%로 설정 */
+            margin-left: 10px;
+            margin-top: 10px;
+            height: calc(100vh - 120px); /* 부모 div의 높이를 100%로 설정 */
             overflow-y: auto; /* 내부 스크롤 가능 */
             padding-right: 10px; /* 스크롤바 공간 */
         }
+
         .notice-header {
             display: flex;
             justify-content: space-between; /* 제목과 버튼을 양쪽 정렬 */
@@ -61,6 +79,35 @@
             font-size: 28px;
             font-weight: bold;
             color: #0062FF;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%; /* 전체 너비 확보 */
+
+            bottom: 20px; /* 원래 높이 유지 */
+        }
+        .pagination a {
+            border: none !important;
+            background: none !important;
+            box-shadow: none !important;
+            text-decoration: none;
+            color: black; /* 기본 검은색 */
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .pagination .active {
+            color: black;
+            font-weight: bold;
+        }
+
+        .pagination .active {
+            color: #0062FF !important; /* 현재 페이지 파란색 */
+            font-weight: bold;
         }
 
 
@@ -76,7 +123,8 @@
         <div class="notice-list-inner">
             <div class="notice-header">
                 <b class="page5_title">공지사항</b>
-                <div>
+
+                <div th:if="${session.loginUser != null && session.loginUser.admin == true}">
                     <i class="bi bi-pencil-square"></i>
                     <a class="write-btn" th:href="@{/noticeform}" style="color: black">작성</a>
                 </div>
@@ -85,10 +133,15 @@
 
             <div class="noticelist">
                 <div th:each="dto : ${noticeList}" class="notice-item">
-                    <span><b>작성자:</b> [[${dto.nickname}]]</span><br>
-                    <span class="day">[[${#dates.format(dto.writeday, 'yyyy-MM-dd')}]]</span>
+                    <div class="notice-meta">
+                    <img src="/doctor1.png" alt="관리자 프로필" class="profile-image">
+                        <div>
+                            <span><b>작성자:</b> [[${dto.nickname}]]</span><br>
+                            <span class="day">[[${#dates.format(dto.writeday, 'yyyy년 MM월 dd일 HH:mm:ss')}]]</span>
+                        </div>
+                    </div>
                     <br>
-                    <span class="subject" th:text="${dto.subject}"></span>
+                    <span class="subject"><b th:text="${dto.subject}"></b></span>
                     <br>
 
                     <th:block th:if="${dto.nphoto != null}">
@@ -99,34 +152,37 @@
                     <p class="content" th:text="${dto.content}"></p>
 
                     <th:block th:if="${dto.nfile != null}">
-                        <a th:href="@{|${filePath}${dto.nfile}|}" download>[[${dto.nfile}]]</a>
+                      <span>첨부파일 : <a th:href="@{|${filePath}${dto.nfile}|}" download>[[${dto.nfile}]]</a> </span>
                     </th:block>
                     <hr> <!-- 줄 추가 -->
 
                     <!-- 로그인한 사용자와 작성자가 동일할 때만 버튼 보이기 -->
 
                     <th:block
-                        th:if="${session.loginUser != null and session.loginUser.users_id == dto.users_id}">
+                            th:if="${session.loginUser != null and session.loginUser.users_id == dto.users_id}">
                         <a th:href="@{/notice/updateform(boards_id=${dto.boards_id},pageNum=${pageNum})}">수정</a>
                         <a th:href="@{/notice/delete(boards_id=${dto.boards_id})}"
                            onclick="return confirm('정말 삭제하시겠습니까?');">
-                            <i class="bi bi-x-lg"></i>
+
                             삭제</a>
+                    </th:block>
+                    <th:block th:unless="${session.loginUser != null and session.loginUser.users_id == dto.users_id}">
+                        <div style="visibility: hidden; height: 20px;"></div>
                     </th:block>
                     <hr>
                 </div>
-
+            </div>
                 <!-- 페이징 처리 -->
                 <div class="pagination">
-                    <a th:if="${pageNum > 1}" th:href="@{/notice(pageNum=${pageNum - 1})}">&laquo; 이전</a>
+                    <a th:if="${pageNum > 1}" th:href="@{/notice(pageNum=${pageNum - 1})}" class="page-link">&laquo; 이전</a>
                     <span th:each="page : ${#numbers.sequence(startPage, endPage)}">
-                <a th:href="@{/notice(pageNum=${page})}" th:text="${page}"
-                   th:classappend="${page == pageNum} ? 'active' : ''"></a>
-            </span>
-                    <a th:if="${pageNum < totalPage}" th:href="@{/notice(pageNum=${pageNum + 1})}">다음 &raquo;</a>
+                         <a th:href="@{/notice(pageNum=${page})}" th:text="${page}"
+                            th:classappend="${page == pageNum} ? 'active' : ''" class="page-link"></a>
+                    </span>
+                    <a th:if="${pageNum < totalPage}" th:href="@{/notice(pageNum=${pageNum + 1})}" class="page-link">다음 &raquo;</a>
                 </div>
-            </div>
+
         </div>
     </div>
-    </body>
+</body>
 </html>

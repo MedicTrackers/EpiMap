@@ -26,15 +26,4 @@ public abstract class NoticeFormController {
     public String noticeform(@RequestParam(value = "boards_id", defaultValue = "0") int boards_id, Model model) {
         return "page4/noticeform";
     }
-
-    @PostMapping("/insert")
-    public String insert(
-            @ModelAttribute NoticeDto dto,
-            @RequestParam int pageNum,
-            @RequestParam("upload") List<MultipartFile> upload,
-            HttpSession session) {
-        String users_id = (String) session.getAttribute("loginUser");
-        String writer;
-        return "redirect:/notice";
-    }
 }

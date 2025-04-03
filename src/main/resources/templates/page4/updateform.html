@@ -98,6 +98,8 @@
     <form class="notice-form" action="./update" method="post" enctype="multipart/form-data">
       <!-- 공지사항 제목 입력 -->
       <label for="subject">제목</label>
+      <input type="hidden" name="pageNum" th:value="${pageNum}">
+      <input type="hidden" name="boards_id" th:value="${noticeDto.boards_id}">
       <input type="text" id="subject" name="subject" class="form-control" th:value="${noticeDto.subject}" required>
 
       <!-- 글 내용 입력 -->
@@ -111,7 +113,10 @@
       <!-- 이미지 미리보기 (현재 이미지가 있으면 미리보기 제공) -->
       <div>
         <p>현재 이미지:</p>
-        <img th:src="@{${imagePath}}" alt="현재 이미지" style="max-width: 80px; max-height: 50px;" />
+        <img th:if="${noticeDto.nphoto != null}"
+             th:src="@{|${imagePath}${noticeDto.nphoto}|}"
+             alt="현재 이미지"
+             style="max-width: 80px; max-height: 50px;" />
       </div>
 
       <!-- 기존 파일 (있을 경우) -->
@@ -121,7 +126,12 @@
       <!-- 파일 다운로드 링크 -->
       <div>
         <p>현재 파일:</p>
-        <a th:href="@{${filePath}}" th:text="${filePath != null ? '파일 다운로드' : '파일 없음'}"></a>
+        <a th:if="${noticeDto.nfile != null}"
+           th:href="@{|${filePath}${noticeDto.nfile}|}"
+           download
+           th:text="'현재 파일 (' + ${noticeDto.nfile} + ')'">
+        </a>
+        <span th:if="${noticeDto.nfile == null}">파일 없음</span>
       </div>
 
       <!-- 제출 버튼 -->
