@@ -15,8 +15,9 @@
     font-style: normal;
 }
 .box {
+	margin: 0 auto;
 	margin-top : 149px;
-	margin-left: 32px;
+	/* margin-left: 32px; */
 	width: 350px;
 	height: 346px;
 	background-color: #ffffff;
@@ -98,8 +99,8 @@
 	margin-left: 135px;
 }
 .pageend{
-	margin-left: 150px;
-	width: 107px;
+	margin: 0 auto;
+	width: 100vw;
 	height: 23px;
 	font-family: "Courgette-Regular", Helvetica;
 	font-style: italic;
@@ -118,11 +119,11 @@
 </style>
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" style="width: 100vw;">
 	<div class="box">	
 		<div class="login1">&nbsp;&nbsp;로그인</div>
 				<form th:action="@{/login}" th:object="${users}" method="post">
-					<input class="login2" type="text" th:field="*{user_id}" placeholder="&nbsp;&nbsp;아이디" autofocus="autofocus" required="required">
+					<input class="login2" type="text" th:field="*{user_id}" placeholder="&nbsp;&nbsp;아이디" autofocus="autofocus" required="required"><br>
 					<input class="password" type="password" th:field="*{password}" value="" placeholder="&nbsp;&nbsp;비밀번호" required="required">
 					<br>
 					<span class="chk" th:text="${error}" th:style="${error} ? 'color:red; display:block;' : 'display:none;'"></span>

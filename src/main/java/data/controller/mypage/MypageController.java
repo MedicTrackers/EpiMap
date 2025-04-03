@@ -81,18 +81,37 @@ public class MypageController {
 		return "pass";
 	}
 	//mypage 에 자가진단 결과 표시 기능
+//	@PostMapping("/selfdiag")
+//	@ResponseBody
+//	public List<ResultsDto> selfdiag(HttpSession session) {
+//		List<ResultsDto> list = new ArrayList<>();
+//		
+//		if (session.getAttribute("loginUser") == null){
+//			return list;
+//		}
+//
+//		UsersDto dto = (UsersDto) session.getAttribute("loginUser");
+//		
+//		return resultsService.getMyAllResult(dto.getUsers_id());
+//	}
+	
 	@PostMapping("/selfdiag")
 	@ResponseBody
-	public List<ResultsDto> selfdiag(HttpSession session) {
-		List<ResultsDto> list = new ArrayList<>();
-		
-		if (session.getAttribute("loginUser") == null){
-			return list;
-		}
-
+	public Map<String, Object> selfdiagpage(@RequestParam("page") int page, HttpSession session) {
 		UsersDto dto = (UsersDto) session.getAttribute("loginUser");
+		int users_id = dto.getUsers_id();
 		
-		return resultsService.getMyAllResult(dto.getUsers_id());
+		int size = 3;
+		int offset = (page - 1) * size;
+		
+		List<ResultsDto> list = resultsService.getPagedResult(users_id, offset, size);
+		int totalCount = resultsService.getMyResultCount(users_id);
+		int totalPages = (int) Math.ceil((double) totalCount / size);
+		
+		Map<String, Object> res = new HashMap<>();
+		res.put("list", list);
+		res.put("totalPages", totalPages);
+		return res;
 	}
 	
 	@GetMapping("/deleteMyResult")
