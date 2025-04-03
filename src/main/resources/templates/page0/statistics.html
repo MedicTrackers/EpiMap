@@ -13,7 +13,7 @@
 	/* 페이드인 효과 */
 	.fade-in {
 	    opacity: 0;
-	    animation: fadeIn 1.5s ease-in forwards;
+	    animation: fadeIn 1.1s ease-in forwards;
 	}
 
 	@keyframes fadeIn {
@@ -53,7 +53,7 @@
 			rgba(1, 57, 254, 0.4) 0%
 			rgba(16, 241, 255, 0.4) 100%
 		), linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
-		z-index: 1;
+		z-index: auto;
 		overflow: visible !important;
 	}
 	
@@ -76,6 +76,7 @@
 	}
 	
 	.modal-content {
+		width: auto;
 		max-width: 95vw; 	
 	}
 	
@@ -403,7 +404,7 @@
 	
 	.tooltip {
 	  display: block !important;
-	  visiblity: visible !important;
+	  visibility: visible !important;
 	  opacity: 1 !important;
 	  position: absolute;
 	  background-color: #333;
@@ -411,7 +412,7 @@
 	  padding: 5px 10px;
 	  border-radius: 5px;
 	  font-size: 12px;
-	  z-index: 9999;
+	  z-index: 1055;
 	  
 	}
 	
@@ -584,7 +585,7 @@
 	}
 </style>
 </head>
-<body layout:fragment="content">
+<body layout:fragment="content" class="fade-in">
 <div>
 	<div class="box">
 		<div class="rectangle">
@@ -608,11 +609,11 @@
 							<!-- Modal Header -->
 							<div class="modal-header">
 							  <h4 class="modal-title">의사환자분율이란?</h4>
-							  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							
 							<!-- Modal body -->
-							<div class="modal-body" style="width: 400px; height: 600px;">
+							<div class="modal-body">
 								의사 환자 분율은 외래환자 1,000명당 인플루엔자 의사환자 수를 의미합니다.
 							  	인플루엔자 의사환자는 38.0℃ 이상의 갑작스런 발열과 더불어 기침 또는 인후통이 있는 사람을 말합니다.<br><br>
 							  	의사 환자 분율을 계산하는 방법은 다음과 같습니다. <br>
