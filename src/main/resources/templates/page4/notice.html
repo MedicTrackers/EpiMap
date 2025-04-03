@@ -1,109 +1,132 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout/mainLayout}">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>epimap</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <style>
-        @font-face {
-            font-family: 'GothicA1-Light';
-            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
-            font-weight: 300;
-            font-style: normal;
-        }
-
-        body *{
+        body * {
             font-family: 'GothicA1-Light', sans-serif;
         }
-        .description {
-            position: relative;
+
+        .notice-container {
             width: 375px;
-            height: 58px;
-            left: 19px;
-
+            height: 107px;
+            border: 1px solid gray;
+            padding: 10px;
+            box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4px 20px #96a7af66;
+            background: linear-gradient(150deg, rgba(1, 57, 254, 0.4) 0%, rgba(16, 241, 255, 0.4) 100%),
+            linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
             border-radius: 10px;
-            background: linear-gradient(135deg, #0062FF, #4A90E2); /* 파란색 계열 그라데이션 */
-            box-shadow: 0px 4px 10px rgba(0, 98, 255, 0.3); /* 약간의 그림자 추가 */
+            color: white;
+            font-weight: bold;
+            position: fixed; /* 고정 위치 설정 */
+            top: 132px; /* 원하는 위치에 고정 */
+            left: 19px;
+            z-index: 1;
+        }
 
-            margin-top: 132px;
-            font-size: 18px;
-            font-weight: 700;
-            color: #ffffff;
+        .notice-list {
+            background-color: #fdfdfd;
+            margin: 0 auto;
+            width: 99vw;
+            height: 900px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            position: fixed; /* 고정 위치 설정 */
+            top: 178px; /* notice-container 바로 아래에 오도록 설정 */
+            right: 0;
+            bottom: 0;
+            z-index: 2;
+        }
+
+        .notice-list-inner {
+            height: 100%; /* 부모 div의 높이를 100%로 설정 */
+            overflow-y: auto; /* 내부 스크롤 가능 */
+            padding-right: 10px; /* 스크롤바 공간 */
+        }
+        .notice-header {
             display: flex;
-            align-items: center; /* 수직(위아래) 정렬 */
-            justify-content: center; /* 수평(좌우) 정렬 */
+            justify-content: space-between; /* 제목과 버튼을 양쪽 정렬 */
+            align-items: flex-end; /* 버튼을 아래쪽으로 배치 */
+            margin-bottom: 5px; /* hr과 간격 조정 */
         }
 
-        .noticebox {
-            width: 412px;
-            height: 779px;
-            top: 178px;
-            background-color: #FDFDFD;
-            border-radius: 25px 25px 0px 0px;
-        }
-
-        .nbtitle {
-            position: absolute;
+        .page5_title {
             font-size: 28px;
+            font-weight: bold;
             color: #0062FF;
-            left: 31px;
-            top: 206px;
         }
 
-        .writebtn {
-            float: right;
-            margin-right: 20px;
-            margin-top: 47px;
 
-        }
-
-        .nphoto {
-            width: 100px;  /* 원하는 너비로 설정 */
-            height: 100px; /* 원하는 높이로 설정 */
-            object-fit: cover; /* 이미지 비율을 유지하며 크기 맞추기 */
-        }
     </style>
 </head>
 <body>
-<div layout:fragment="content" style="margin-top: 20px;">
-<div class="description">
-    <span>Epimap에서 빠르게 정부소식을 받아보세요</span>
-</div>
-<div class="noticebox">
-   <span class="nbtitle"><b>새 소식</b></span>
-   <a class="writebtn" href="../page4/noticeform.html"> <!--th:if="${users.admin}-->">
-       <i class="bi bi-pencil-square"></i> 작성
-   </a>
-    <div class="noticelist">
-
-        <span>[[${dto.user_id}]]</span><br>
-        <span class="day">
-        	[[${#calendars.format(dto.writeday,'yyyy-MM-dd')}]]
-        </span>
-        <span class="sunject" th:text="${dto.subject}"></span>
-        <th:block th:if="${dto.nphoto != null}">
-            <img th:src="|${imagePath}${dto.nphoto}|"
-                 class="nphoto">
-        </th:block>
-
-        <span class="content" th:text="${dto.content}"></span>
-
-        <th:block th:if="${dto.nfile != null}">
-            <a th:href="@{${filePath}${dto.nfile}}" download>
-                <span class="nfile" th:text="${dto.nfile}"></span>
-            </a>
-        </th:block>
-
-        <th:block th:if="${dto.nfile == null}">
-            <span class="nfile">첨부파일 없음</span>
-        </th:block>
+<div layout:fragment="content">
+    <div class="notice-container">
+        <p>EpiMap 에서 빠르게 정부 소식을 받아보세요</p>
     </div>
-</div>
+    <!--공지사항-->
+    <div class="notice-list">
+        <div class="notice-list-inner">
+            <div class="notice-header">
+                <b class="page5_title">공지사항</b>
+                <div>
+                    <i class="bi bi-pencil-square"></i>
+                    <a class="write-btn" th:href="@{/noticeform}" style="color: black">작성</a>
+                </div>
+            </div>
+            <hr>
 
+            <div class="noticelist">
+                <div th:each="dto : ${noticeList}" class="notice-item">
+                    <span><b>작성자:</b> [[${dto.nickname}]]</span><br>
+                    <span class="day">[[${#dates.format(dto.writeday, 'yyyy-MM-dd')}]]</span>
+                    <br>
+                    <span class="subject" th:text="${dto.subject}"></span>
+                    <br>
 
-</div>
-</body>
+                    <th:block th:if="${dto.nphoto != null}">
+                        <img th:src="@{|${imagePath}${dto.nphoto}|}" class="img-thumbnail"
+                             style="width:100px;height:100px;">
+                    </th:block>
+
+                    <p class="content" th:text="${dto.content}"></p>
+
+                    <th:block th:if="${dto.nfile != null}">
+                        <a th:href="@{|${filePath}${dto.nfile}|}" download>[[${dto.nfile}]]</a>
+                    </th:block>
+                    <hr> <!-- 줄 추가 -->
+
+                    <!-- 로그인한 사용자와 작성자가 동일할 때만 버튼 보이기 -->
+
+                    <th:block
+                        th:if="${session.loginUser != null and session.loginUser.users_id == dto.users_id}">
+                        <a th:href="@{/notice/updateform(boards_id=${dto.boards_id},pageNum=${pageNum})}">수정</a>
+                        <a th:href="@{/notice/delete(boards_id=${dto.boards_id})}"
+                           onclick="return confirm('정말 삭제하시겠습니까?');">
+                            <i class="bi bi-x-lg"></i>
+                            삭제</a>
+                    </th:block>
+                    <hr>
+                </div>
+
+                <!-- 페이징 처리 -->
+                <div class="pagination">
+                    <a th:if="${pageNum > 1}" th:href="@{/notice(pageNum=${pageNum - 1})}">&laquo; 이전</a>
+                    <span th:each="page : ${#numbers.sequence(startPage, endPage)}">
+                <a th:href="@{/notice(pageNum=${page})}" th:text="${page}"
+                   th:classappend="${page == pageNum} ? 'active' : ''"></a>
+            </span>
+                    <a th:if="${pageNum < totalPage}" th:href="@{/notice(pageNum=${pageNum + 1})}">다음 &raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
 </html>

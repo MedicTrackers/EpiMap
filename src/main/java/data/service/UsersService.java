@@ -25,4 +25,9 @@ public class UsersService {
 	public UsersDto getSelectById(int users_id) {
 		return usersMapper.getSelectById(users_id);
 	}
+	
+	public void deleteMyResult(int myresult_id) {
+		usersMapper.deleteMyResult(myresult_id);
+	}
+
 }
