@@ -16,8 +16,9 @@
 }
 
 .nickname {
+	margin: 0 auto;
 	margin-top: 149px;
-	margin-left: 18px;
+	/* margin-left: 18px; */
 	width: 375px;
 	height: 90px;
 	line-height: 90px;
@@ -44,12 +45,15 @@
 	background-color: #0062ff;
 	border-radius: 20px;
 	font-size: 11px;
+	font-family: 'GothicA1-Light', sans-serif;
 	float: left;
 	color: white;
 }
 .box1 {
+	margin: 0 auto;
 	margin-top: 15px;
-	width: 412px;
+	width: 100%;
+	max-width: 100vw;
 	height: 489px;
 	background-color: #ffffff;
 	border-radius: 10px;
@@ -64,6 +68,7 @@
 	color: #0062ff;
 	font-size: 25px;
 	font-weight: bold;
+	font-family: 'GothicA1-Light', sans-serif;
 	border: 1px solid white;
 	
 }
@@ -75,9 +80,15 @@
 	overflow-y: auto;
 	
 }
+.diag-list {
+	height: 350px;
+	overflow-y: auto;
+}
 .box2 {
+	margin: 0 auto;
 	margin-top: 15px;
-	width: 412px;
+	width: 100%;
+	max-width: 100vw;
 	height: 500px;
 	background-color: #ffffff;
 	border-radius: 10px;
@@ -91,6 +102,7 @@
 	color: #0062ff;
 	font-size: 25px;
 	font-weight: bold;
+	font-family: 'GothicA1-Light', sans-serif;
 	border: 1px solid white;
 
 }
@@ -109,12 +121,14 @@
 	border: 1px solid white;
 	font-size: 20px;
 	font-weight: bold;
+	font-family: 'GothicA1-Light', sans-serif;
 	padding-left: 30px;
 	
 }
 
 .innerbox2 {
-	margin-left: 30px;
+	/* margin-left: 30px; */
+	margin: 0 auto;
 	margin-top: 25px;
 	width: 350px;
 	height: 150px;
@@ -125,6 +139,7 @@
 	border: 1px solid white;
 	font-size: 20px;
 	font-weight: bold;
+	font-family: 'GothicA1-Light', sans-serif;
 	padding-left: 30px;
 	line-height: 0.9;
 }
@@ -133,11 +148,13 @@
     color: gray;
     border-radius: 12px;
     font-size: 12px;
+    font-family: 'GothicA1-Light', sans-serif;
 	margin-left: -5px;
 	margin-bottom: 5px;
 }
 .newstitle {
     font-weight: bold;
+    font-family: 'GothicA1-Light', sans-serif;
     height: 30px;
 }
 .bookmark {
@@ -145,6 +162,7 @@
     border: none;
     color: #0062ff;
     font-size: 25px;
+    font-family: 'GothicA1-Light', sans-serif;
    	float: right;
    	margin-right: 10px;
    	margin-top: -15px;
@@ -155,11 +173,20 @@
 	margin-bottom: 20px;
 	color: gray;
 	font-size: 20px;
+	font-family: 'GothicA1-Light', sans-serif;
 	width: 211px;
 }
 .result {
 	margin-left: -10px;
 	font-size: 27px;
+	font-family: 'GothicA1-Light', sans-serif;
+}
+
+.noresult {
+	padding-top: 65px;
+	font-size: 27px;
+	font-family: 'GothicA1-Light', sans-serif;
+	color: gray;
 }
 
 .delete {
@@ -169,6 +196,29 @@
     border: none;
     font-size: 25px;
     font-weight: bold;
+    font-family: 'GothicA1-Light', sans-serif;
+    cursor: pointer;
+}
+.diagpage {
+	font-size: 20px;
+	font-family: 'GothicA1-Light', sans-serif;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	color: #96A7AF;
+}
+.page-link {
+    text-decoration: none;  /* 기본 밑줄 제거 */
+    color: black;  /* 기본 텍스트 색상 */
+    padding: 5px 10px; /* 내부 여백 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    transition: background-color 0.3s; /* 부드러운 효과 */
+}
+.page-link.active {
+	color: #0062ff;
+	font-weight: bold;
+	font-size: 1.1em;
+	font-family: 'GothicA1-Light', sans-serif;
 }
 </style>
 </head>
@@ -193,25 +243,77 @@
 			<div class="box2">
 				<div class="self-diag">&nbsp;&nbsp;[[${session.loginUser.nickname}]]님의 자가진단 이력</div>
 				<hr class="line2">
-				<div class="scrab-list">
-					<div class="innerbox2">
-						<div class="day">진단일자 : yyyy.MM.dd</div>
-						<div class="result">코로나 바이러스 감염증-19</div>
-						<button class="delete">
-							<i class="bi bi-x"></i>
-						</button>
-					</div>
-				</div>
+				<div class="diag-list"></div>
 			</div>
 			<script type="text/javascript">
-				$(".delete").click(function() {
-					
+				diagdata();
+			
+				function diagdata(page = 1) {
+					$.ajax({
+						type:"post",
+						dataType:"json",
+						data:{page : page},
+						url:"/selfdiag",
+						success:function(res) {
+							let s="";
+							let list = res.list;
+							//console.log(list.length);
+							if(list.length == 0) {
+								s += `
+								<div class="innerbox2">
+									<div class="noresult">자가진단 이력이 없습니다.</div>
+								</div>
+								`;
+								$(".diag-list").html(s);
+								return;
+							}
+							
+							
+							$.each(list, function(idx, d) {
+								s+= `
+								<div class="innerbox2">
+									<div class="day">진단일자 : ${d.writeday}</div>
+									<div class="result">${d.disease}</div>
+										<i class="bi bi-x delete" myresult="${d.myresult_id}"></i>
+								</div>
+								`;
+							});
+								s += `<div class="diagpage"></div><br>`;
+							$(".diag-list").html(s);
+							
+							let p = "";
+							for(let i = 1; i <= res.totalPages; i++) {
+								p += `<a href="" class="page-link ${i === page ? 'active' : ''}" data-page="${i}">${i}</a> `;
+							}
+							$(".diagpage").html(p);
+						}
+
+					});
+				}
+				$(document).on("click", ".page-link", function(e) {
+				    e.preventDefault(); // 🔴 새로고침 막기
+				    const page = $(this).data("page");
+				    diagdata(page);
 				});
 				
+				$(document).on("click", ".delete", function() {
+					let myresult_id = $(this).attr("myresult");
+					console.log(myresult_id);
+					$.ajax({
+						type:"get",
+						dataType:"text",
+						data:{"myresult_id" : myresult_id},
+						url:"/deleteMyResult",
+						success:function() {
+							diagdata();
+						}
+					});
+				});
 				$(".bookmark").click(function() {
 					
 				});
 			</script>
+			</div>
 		</div>
 </body>
 </html>     

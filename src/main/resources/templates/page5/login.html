@@ -15,8 +15,9 @@
     font-style: normal;
 }
 .box {
+	margin: 0 auto;
 	margin-top : 149px;
-	margin-left: 32px;
+	/* margin-left: 32px; */
 	width: 350px;
 	height: 346px;
 	background-color: #ffffff;
@@ -40,6 +41,7 @@
 	color:white;
 	font-size: 32px;
 	font-weight: bold;
+	font-family: 'GothicA1-Light', sans-serif;
 	border: 1px solid white;
 }
 .login2 {
@@ -53,6 +55,7 @@
 	border: 1px solid white;
 	font-size: 20px;
 	font-weight: bold;
+	font-family: 'GothicA1-Light', sans-serif;
 }
 .password {
 	margin-left: 15px;
@@ -65,6 +68,7 @@
 	border: 1px solid white;
 	font-size: 20px;
 	font-weight: bold;
+	font-family: 'GothicA1-Light', sans-serif;
 }
 .loginbtn {	
 	width:78px;
@@ -74,6 +78,7 @@
 	color: white;
 	font-size: 15px;
 	font-weight: bold;
+	font-family: 'GothicA1-Light', sans-serif;
 	border: 1px solid white;
 	float: right;
 	margin-top: 20px;
@@ -86,6 +91,7 @@
 	border-radius: 20px;
 	font-size: 15px;
 	font-weight: bold;
+	font-family: 'GothicA1-Light', sans-serif;
 	background-color: #ffffff;
 	color: #0062ff;
 	float: left;
@@ -93,8 +99,8 @@
 	margin-left: 135px;
 }
 .pageend{
-	margin-left: 150px;
-	width: 107px;
+	margin: 0 auto;
+	width: 100vw;
 	height: 23px;
 	font-family: "Courgette-Regular", Helvetica;
 	font-style: italic;
@@ -108,15 +114,16 @@
  margin-left: 20px;
  margin-bottom: -10px;
  font-size: 10px;
+ font-family: 'GothicA1-Light', sans-serif;
 }
 </style>
 </head>
 <body>
-<div layout:fragment="content">
+<div layout:fragment="content" style="width: 100vw;">
 	<div class="box">	
 		<div class="login1">&nbsp;&nbsp;로그인</div>
 				<form th:action="@{/login}" th:object="${users}" method="post">
-					<input class="login2" type="text" th:field="*{user_id}" placeholder="&nbsp;&nbsp;아이디" autofocus="autofocus" required="required">
+					<input class="login2" type="text" th:field="*{user_id}" placeholder="&nbsp;&nbsp;아이디" autofocus="autofocus" required="required"><br>
 					<input class="password" type="password" th:field="*{password}" value="" placeholder="&nbsp;&nbsp;비밀번호" required="required">
 					<br>
 					<span class="chk" th:text="${error}" th:style="${error} ? 'color:red; display:block;' : 'display:none;'"></span>

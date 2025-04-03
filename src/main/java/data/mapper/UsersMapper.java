@@ -11,4 +11,6 @@ public interface UsersMapper {
 	public UsersDto loginUsers(UsersDto usersdto);
 	public int checkUserId(String userId);
 	public UsersDto getSelectById(int users_id);
+	public void deleteMyResult(int myresult_id);
+
 }
