@@ -51,9 +51,9 @@
    	margin-top: 2px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     width: 100%; 
     font-family: 'MarinesBold', sans-serif;
+    position: relative;
 }
 
 .title span {
@@ -62,17 +62,32 @@
     text-overflow: ellipsis;
 }
 
-/* 번역 아이콘 색상 변경 */
+/* 번역 아이콘 */
 .white { 
 	color: #fff;
 	font-size: 24px;
+	position: absolute;
+	right: 0;
 }
 
 .title i {
 	cursor: pointer;
 }
+
+/* 구글 번역 드롭다운 */
+#google_translate_element {
+	position: absolute;
+	right: 0;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+#google_translate_element select {
+  width: 78px;
+  font-size: 14px;
+  color: #0062FF;
+}
 </style>
-	
 
 <div class="container">
 	<div class="titleContainer">
@@ -84,11 +99,39 @@
 		<!-- 각 페이지 주제 제목 -->
 		<div class="title">
 			<span style="color:white; font-size:32px; font-weight: bold;"> 페이지 제목 </span>	
-			<i class="bi bi-translate white"></i> <!-- 번역 아이콘 -->
+			
+			<!-- 번역 아이콘 -->
+			<i class="bi bi-translate white" onclick="showTranslate()"></i> 
+			
+			<!-- 구글 번역 드롭다운 -->
+			<div id="google_translate_element" style="display:none;"></div> 
+			
+			<script>
+				let translateLoaded = false;
+			
+				function showTranslate() {
+					const elem = document.getElementById("google_translate_element");
+			
+					// 처음 클릭 시에만 번역 기능 초기화
+					if (!translateLoaded) {
+						new google.translate.TranslateElement({pageLanguage: 'ko', autoDisplay: false}, 'google_translate_element');
+						translateLoaded = true;
+					}
+					
+					// 토글 방식으로 숨기거나 보이게 하기
+					elem.style.display = (elem.style.display === 'none') ? 'block' : 'none';
+				}
+			</script>
+			
+			<!-- Google 번역 스크립트 -->
+			<script src="https://translate.google.com/translate_a/element.js?cb=noop"></script>
+			<script>
+				// 콜백 실행 방지용 더미 함수
+				function noop() {}
+			</script>
+			
 		</div>
-		
 	</div>
-
 </div>
 </header>
 </body>
