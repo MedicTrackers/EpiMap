@@ -8,20 +8,29 @@
         insert into boards (users_id,subject,content,nfile,nphoto)
         values (#{users_id},#{subject},#{content},#{nfile},#{nphoto})
         <selectKey keyProperty="boards_id" resultType="int" order="AFTER">
-            SELECT LAST_INSERT_ID()
+        SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
-    <select id="getPagingList" resultType="NoticeDto">
-        SELECT * FROM boards
-        ORDER BY writeday DESC
-        LIMIT #{perpage} OFFSET #{start}
+    <select id="getPagingList" parameterType="Map" resultType="NoticeDto">
+        SELECT b.boards_id,b.subject, u.nickname, b.content, b.writeday, b.nfile, b.nphoto, b.users_id
+        FROM boards b
+        JOIN users u ON b.users_id = u.users_id
+        ORDER BY b.writeday DESC
+        LIMIT #{startNum}, #{perPage};
     </select>
     <delete id="deleteNotice" parameterType="int">
-        DELETE FROM boards WHERE boards_id = #{boards_id}
+        DELETE FROM boards WHERE boards_id = #{boards_id};
     </delete>
     <update id="updateNotice" parameterType="NoticeDto">
         UPDATE boards
         SET subject = #{subject}, content = #{content}, nfile = #{nfile}, nphoto = #{nphoto}
-        WHERE boards_id = #{boards_id}
+        WHERE boards_id = #{boards_id};
     </update>
+    <select id="getSelectById" resultType="NoticeDto"
+            parameterType="int">
+        SELECT b.boards_id,b.subject, u.nickname, b.content, b.writeday, b.nfile, b.nphoto, b.users_id
+        FROM boards b
+        JOIN users u ON b.users_id = u.users_id WHERE b.boards_id = #{boards_id}
+        ORDER BY b.writeday DESC
+    </select>
 </mapper>

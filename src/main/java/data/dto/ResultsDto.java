@@ -17,4 +17,5 @@ public class ResultsDto {
 	private String result;
 	@JsonFormat(pattern = "yyyy.MM.dd", timezone = "Asia/Seoul")
 	private Timestamp writeday;
+	private int myresult_id;
 }

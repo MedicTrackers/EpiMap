@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import data.dto.ResultsDto;
@@ -69,6 +70,19 @@ public class ResultsService {
 	public List<ResultsDto> getMyAllResult(int users_id) {
 		return resultsMapper.getMyAllResult(users_id);
 	}
-	
-	
+	/** 
+	 * @param users_id
+	 * @param offset
+	 * @param size
+	 */
+	public List<ResultsDto> getPagedResult(int users_id, int offset, int size) {
+		return resultsMapper.getPagedResult(users_id, offset, size);
+	}
+	/**
+	 * @param users_id
+	 */
+	public int getMyResultCount(int users_id) {
+		return resultsMapper.getMyResultCount(users_id);
+	}
+
 }
