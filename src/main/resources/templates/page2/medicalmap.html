@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     <!-- map api 각자 발급받은 Client ID 값 넣기 -->
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=yg9kt0fwzl"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=yg9kt0fwzl&language=en"></script>
+
 
 <style>
     body * {
@@ -18,6 +19,8 @@
 
     .medical-box {
         display: flex;
+        flex-direction: column;
+        align-items: center; /* 🎯 카드 가운데 정렬 */
         overflow-x: auto;
         gap: 16px;
         scrollbar-width: none; /* Firefox */
@@ -25,24 +28,14 @@
     }
 
     .medical-card-container {
-        width: 356px;
+        width: 90vw;
         height: 161px;
         border-radius: 10px;
         box-shadow: 0px 1px 20px #c4d0d5db;
         position: relative;
-        margin-left: 25px;
         flex-shrink: 0;
         margin-bottom: 20px;
-
     }
-
-    /*.medical-box .medical-box-card {
-        display: flex;
-        width: 356px;
-        height: 161px;
-        top: 0;
-        left: 0;
-    }*/
 
     .medical-box .overlap-group {
         position: relative;
@@ -52,25 +45,22 @@
         box-shadow: 0px 1px 20px #c4d0d566;
     }
 
-
+    /* 병원 한 개 */
     .medical-box .select {
         position: relative;
-        width: 356px;
+        width: 100%;
         height: 161px;
         border-radius: 10px;
-        box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640, 0px 4px 20px  #96a7af66;
-
-        /* 기존 배경 제거하고 이미지로 대체 */
-        background-image: url('/images/list_background.png');
-        background-size: auto;
-        background-position: center;
-        background-repeat: no-repeat;
+        box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4px 20px #96a7af66;
+        background: linear-gradient(
+                150deg,
+                rgba(1, 57, 254, 0.4) 0%,
+                rgba(16, 241, 255, 0.4) 100%
+        ), linear-gradient(0deg, rgba(0,98,255,1) 0%, rgba(0,98,255,1) 100%);
     }
-
 
     .medical-box .text-wrapper {
         position: absolute;
-        width: 100%;
         top: 110px;
         left: 20px;
         font-weight: 600;
@@ -80,34 +70,32 @@
         line-height: normal;
     }
 
+
     .medical-box .view {
         position: absolute;
-        width: 31px;
-        height: 156px;
-        top: 5px;
-        left: 82px;
+        width: 170px;
+        height: 33px;
+        top: 63px;
+        left: 18px;
         background-color: #c91c1c;
         border-radius: 32.5px;
-        transform: rotate(90.00deg);
+        /* ✅ Flex로 가운데 정렬 */
+        display: flex;
+        align-items: center;   /* 세로 중앙 정렬 */
+        justify-content: center; /* 가로 중앙 정렬 */
     }
 
     .medical-box .n {
-        position: absolute;
-        width: 148px;
-        top: 69px;
-        left: 24px;
         font-weight: 600;
         color: #ffffff;
+        margin-top: -3px;
         font-size: 17px;
         text-align: center;
-        letter-spacing: 0;
         line-height: normal;
-
     }
 
     .medical-box .div {
         position: absolute;
-        width: 100%;
         top: 15px;
         left: 20px;
         font-weight: 700;
@@ -115,6 +103,7 @@
         font-size: 23px;
         letter-spacing: 0;
         line-height: normal;
+
         /* 말줄임 처리 */
         white-space: nowrap;
         overflow: hidden;
@@ -128,7 +117,6 @@
 
     .medical-scrap {
         width: 100%;
-        max-width: 412px;
         height: 100%;
         position: relative;
         margin: 0 auto;
@@ -151,7 +139,7 @@
     }
 
     .medical-scrap .line{
-        width: 411px;
+        width: 100vw;
         height: 1px;
         background-color: #E2E0E1;
         top: 0;
@@ -162,12 +150,12 @@
 
     /*바텀시트 CSS*/
     .bottom_sheet {
-        z-index: 100;
+        z-index: 10;
         display: flex;
         position: fixed;
         bottom: 0;
-        width: 100%;
-        height: 58%;
+        width: 100vw;
+        height: 50%;
         border-top-left-radius: 30px;
         border-top-right-radius: 30px;
         background-color: #FDFDFD;
@@ -178,7 +166,7 @@
     }
 
     .bottom_sheet_handle_wrap {
-        z-index: 1;
+        z-index: 99;
         background: linear-gradient(to bottom,
         rgba(255, 255, 255, 1) 20%,
         rgba(255, 255, 255, 0.75) 35%,
@@ -188,7 +176,7 @@
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        width: 80%;
+        width: 80vw;
         height: 40px;
         margin-bottom: 10px;
         position: fixed;
@@ -203,7 +191,7 @@
     }
 
     .up_sensor {
-        z-index: 999;
+        z-index: 99;
         position: fixed;
         background: transparent;
         width: 100%;
@@ -237,9 +225,9 @@
     </style>
 </head>
 <body>
-<div layout:fragment="content" style="margin-top: 20px;">
+<div layout:fragment="content" >
     <!--map-->
-    <div id="map" style="max-width: 412px; height:375px;  margin: 0 auto;"></div>
+    <div id="map" style="width: 100vw; height:100vh;  margin: -130px auto; z-index: 1; "></div>
 
     <!--바텀시트 내용-->
     <div class="up_sensor"></div>
@@ -262,6 +250,7 @@
                 let myInfoWindow = null;
 
                 $("#myLocationBtn").on("click", function () {
+
                     navigator.geolocation.getCurrentPosition(
                         function (position) {
                             lat = position.coords.latitude;
@@ -330,7 +319,6 @@
 
 <!--map 마커 스크립트-->
 <script>
-
     let lat;
     let lon;
     let map; // 전역 변수로 선언
@@ -368,11 +356,12 @@
             zoomControl: true,
             zoomControlOptions: {
                 style: naver.maps.ZoomControlStyle.SMALL,
-                position: naver.maps.Position.TOP_RIGHT
+                position: naver.maps.Position.RIGHT_CENTER // +,- 지도 위치 변경
             }
         };
 
         map = new naver.maps.Map('map', mapOptions);
+
 
         //지도 클릭시 정보창 닫기
         naver.maps.Event.addListener(map, "click", () => {
@@ -425,30 +414,40 @@
     let bottomSheet = document.querySelector('.bottom_sheet');
     let startY = 0;
     let currentY = 0;
-    let isExpanded = false; // ✅ 현재 상태 추적 (false면 50%, true면 85%)
+    let deltaY = 0;
+    let currentState = 'middle'; // 상태: 'min' | 'middle' | 'max'
+
+    bottomSheet.style.height = '48%'; // 초기 상태는 중간
 
     bottomSheet.addEventListener('touchstart', (e) => {
         startY = e.touches[0].pageY;
     });
 
-    bottomSheet.addEventListener('touchmove', (e) => {
-        currentY = e.touches[0].pageY;
-        let deltaY = currentY - startY;
+    bottomSheet.addEventListener('touchend', (e) => {
+        deltaY = e.changedTouches[0].pageY - startY;
 
-        // UP위로 스와이프 → 확대
-        if (deltaY < -30 && !isExpanded) {
-            bottomSheet.style.height = '90%';
-            isExpanded = true;
-        }
-
-        // Down아래로 스와이프 → 축소
-        if (deltaY > 30 && isExpanded && bottomSheet.scrollTop === 0) {
-            bottomSheet.style.height = '58%';
-            isExpanded = false;
+        if (deltaY < -30) {
+            // 올림
+            if (currentState === 'middle') {
+                bottomSheet.style.height = '85%';
+                currentState = 'max';
+            } else if (currentState === 'min') {
+                bottomSheet.style.height = '48%';
+                currentState = 'middle';
+            }
+        } else if (deltaY > 30 && bottomSheet.scrollTop === 0) {
+            // 내림
+            if (currentState === 'middle') {
+                bottomSheet.style.height = '20%';
+                currentState = 'min';
+            } else if (currentState === 'max') {
+                bottomSheet.style.height = '48%';
+                currentState = 'middle';
+            }
         }
     });
 
-
+    /*병원리스트 클릭시 색상변화 및 스크롤 영역 부드럽게 설정*/
     function highlightCard(idx) {
         $(".medical-card-container").removeClass("select");
         $(".medical-card-container .text-wrapper, .medical-card-container .div").removeClass("selectfont");
@@ -466,6 +465,7 @@
         });
     }
 
+    /*공공데이터 api 호출*/
     function medical() {
 
         $.ajax({
@@ -506,7 +506,7 @@
                     }
                 });
 
-                //글자 제거
+                //병원 글자 길어져서 글자 제거 스크립트 적용
                 function cleanHospitalName(name) {
                     return name
                         .replace(/(재단법인|의료법인|사회복지법인|의료재단|복지재단|재단|부속|아산사회|학교법인고려중앙학원|의과대학부속병원)/g, '')
@@ -588,8 +588,9 @@
                             <div class="tel">
                                 <a href="tel:${info.dutyTel3?.['#text']}"><i class="bi bi-telephone-fill telicon"></i></a>
                             </div>
-                            <div class="view"></div>
-                            <div class="n ">응급실 가용여부&nbsp;&nbsp;${info.hvec['#text']}</div>
+                            <div class="view">
+                                <sapn class="n ">응급실 가용여부&nbsp;:&nbsp;${info.hvec['#text']}</sapn>
+                            </div>
                             <div class="div ">${cleanedName}</div>
                         </div>
                     `);
