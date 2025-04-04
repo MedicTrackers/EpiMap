@@ -15,26 +15,35 @@
       font-style: normal;
     }
 
-    /* 전체 폼 스타일 */
+    .overview {
+      width: 100%;
+      max-width: 375px;
+      height: 107px;
+      border: 1px solid gray;
+      padding: 10px;
+      box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4px 20px #96a7af66;
+      background: linear-gradient(150deg, rgba(1, 57, 254, 0.4) 0%, rgba(16, 241, 255, 0.4) 100%),
+      linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      position: fixed; /* 고정 위치 설정 */
+      top: 132px; /* 원하는 위치에 고정 */
+      transform: translateX(-50%);
+      left: 50%;
+      z-index: 1;
+      text-align: center;
+    }
     .notice-form {
-      max-width: 600px;
-      margin: auto;
+      position: fixed;
+      top: 170px; /* 공지 배너 일부를 덮게 조정 */
+      left: 50%; /* 수평 기준 가운데 위치 */
+      transform: translateX(-50%); /* 자기 너비만큼 왼쪽으로 이동 */
+      width: 99vw;
       padding: 20px;
       background: #f8f9fa;
       border-radius: 12px;
-    }
-
-    /* 제목 스타일 */
-    .description span {
-      display: block;
-      font-size: 18px;
-      font-weight: bold;
-      color: #ffffff;
-      text-align: center;
-      width: 375px;
-      height: 58px;
-      background: linear-gradient(150deg, rgba(1.06, 56.69, 253.94, 0.40) 0%, rgba(15.94, 240.66, 255, 0.40) 100%), #0062FF;
-      border-radius: 10px;
+      z-index: 3;
     }
 
     /* 입력 라벨 */
@@ -90,7 +99,7 @@
 
 <body>
 <div layout:fragment="content" style="margin-top: 20px;">
-  <div class="description">
+  <div class="overview">
     <span>공지사항 수정</span>
   </div>
   <main class="main-content">

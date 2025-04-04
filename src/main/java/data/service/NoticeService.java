@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class NoticeService {
-    NoticeMapper noticeMapper;
+    final NoticeMapper noticeMapper;
 
     public void insertNotice(NoticeDto dto){
         noticeMapper.insertNotice(dto);
@@ -30,5 +30,8 @@ public class NoticeService {
     public NoticeDto getSelectById(int boards_id)
     {
         return noticeMapper.getSelectById(boards_id);
+    }
+    public List<NoticeDto> getLastestNotices(){
+        return noticeMapper.getLastestNotices();
     }
 }

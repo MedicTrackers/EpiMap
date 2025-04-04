@@ -33,4 +33,7 @@
         JOIN users u ON b.users_id = u.users_id WHERE b.boards_id = #{boards_id}
         ORDER BY b.writeday DESC
     </select>
+    <select id="getLastestNotices" resultType="NoticeDto">
+        SELECT subject FROM boards ORDER BY writeday DESC LIMIT 3;
+    </select>
 </mapper>

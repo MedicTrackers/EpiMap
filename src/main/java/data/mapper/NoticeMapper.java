@@ -20,4 +20,5 @@ public interface NoticeMapper {
 
     public NoticeDto getSelectById(int boards_id);
 
+    public List<NoticeDto> getLastestNotices();
 }
