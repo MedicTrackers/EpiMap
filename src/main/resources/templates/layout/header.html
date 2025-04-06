@@ -135,38 +135,27 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
-		let path_name = window.location.href;
-		if(path_name.endsWith("/")) {
-			path_name = path_name.slice(0, -1);
-		}
-		
-		const titleMap = {
-			"/statistics": "감염병 현황",
-			"/dashboard": "건강트렌드",
-			"/medicalmap": "응급실 찾기",
-			"/checklist": "자가진단",
-			"/notice": "공지사항",
-			"/mypage": "마이페이지",
-			"/login": "로그인",
-			"/signup": "회원가입"
-		};
-		
-		function updatePageTitle() {
-			let pageTtitle = "EpiMap";
-			
-			Object.keys(titleMap).some(path => {
-				if(path_name.includes(path)) {
-					pageTitle = titleMap[path];
-					return true;
-				}
-				return false;
-			});
-			
-			document.querySelector(".title span").textContent = pageTitle;
-		}
-		document.addEventListener('DOMContentLoaded', updatePageTitle);
-	</script>
+	<!-- Google 번역 API 로드 -->
+<script type="text/javascript">
+    function googleTranslateInit() {
+        new google.translate.TranslateElement(
+            { pageLanguage: 'ko', autoDisplay: false }, 
+            'google_translate_element'
+        );
+    }
+</script>
+
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateInit"></script>
+
+<script>
+    function showTranslate() {
+        const elem = document.getElementById("google_translate_element");
+        
+        // 토글 방식 적용
+        elem.style.display = (elem.style.display === 'none' || elem.style.display === '') ? 'block' : 'none';
+    }
+</script>
+
 </div>
 </header>
 </body>
