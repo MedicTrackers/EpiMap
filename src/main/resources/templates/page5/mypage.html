@@ -14,6 +14,16 @@
     font-weight: 300;
     font-style: normal;
 }
+@font-face {
+    font-family: 'GothicA1-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+	font-family: 'GothicA1-Light', sans-serif;
+}
 
 .nickname {
 	margin: 0 auto;
@@ -21,7 +31,7 @@
 	/* margin-left: 18px; */
 	width: 375px;
 	height: 90px;
-	line-height: 90px;
+	line-height: 80px;
 	border-radius: 10px;
 	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
 	background: linear-gradient(
@@ -31,23 +41,24 @@
 	), linear-gradient(0deg, rgba(0,98,255,1) 0%, rgba(0,98,255,1) 100%);
 	text-align: left;
 	color:white;
-	font-family: 'GothicA1-Light', sans-serif;
+	font-family: 'GothicA1-bold', sans-serif;
+	font-weight: 900;
 	font-size: 25px;
-	font-weight: 700;
 	border: 1px solid white;
 }
 .logoutbtn {
-	margin-top: 55px;
-	width: 60px;
-	height: 15px;
-	line-height: 15px;
-	border: none;
-	background-color: #0062ff;
-	border-radius: 20px;
-	font-size: 11px;
-	font-family: 'GothicA1-Light', sans-serif;
-	float: left;
-	color: white;
+	margin-right: -82px;
+    margin-top: 55px;
+    width: 90px;
+    height: 30px;
+    line-height: 15px;
+    border: none;
+    background-color: #0062ff;
+    border-radius: 20px;
+    font-size: 18px;
+    font-family: 'GothicA1-bold', sans-serif;
+    float: left;
+    color: white;
 }
 .box1 {
 	margin: 0 auto;
@@ -67,8 +78,8 @@
 	border-radius: 10px;
 	color: #0062ff;
 	font-size: 25px;
-	font-weight: bold;
-	font-family: 'GothicA1-Light', sans-serif;
+	font-family: 'GothicA1-bold', sans-serif;
+	font-weight: 900;
 	border: 1px solid white;
 	
 }
@@ -101,8 +112,8 @@
 	border-radius: 10px;
 	color: #0062ff;
 	font-size: 25px;
-	font-weight: bold;
-	font-family: 'GothicA1-Light', sans-serif;
+	font-family: 'GothicA1-bold', sans-serif;
+	font-weight: 900;
 	border: 1px solid white;
 
 }
@@ -110,7 +121,7 @@
 	margin-top: -10px;
 }
 .innerbox1 {
-	margin-left: 30px;
+	margin: 0 auto;
 	margin-top: 25px;
 	width: 350px;
 	height: 100px;
@@ -121,7 +132,6 @@
 	border: 1px solid white;
 	font-size: 20px;
 	font-weight: bold;
-	font-family: 'GothicA1-Light', sans-serif;
 	padding-left: 30px;
 	
 }
@@ -139,7 +149,6 @@
 	border: 1px solid white;
 	font-size: 20px;
 	font-weight: bold;
-	font-family: 'GothicA1-Light', sans-serif;
 	padding-left: 30px;
 	line-height: 0.9;
 }
@@ -148,21 +157,26 @@
     color: gray;
     border-radius: 12px;
     font-size: 12px;
-    font-family: 'GothicA1-Light', sans-serif;
 	margin-left: -5px;
 	margin-bottom: 5px;
 }
 .newstitle {
     font-weight: bold;
-    font-family: 'GothicA1-Light', sans-serif;
+	font-size: 20px;
     height: 30px;
 }
-.bookmark {
+.newstitle a {
+    display: inline-block;
+    width: 85%;         /* 부모 크기만큼 차지 */
+    white-space: nowrap; /* 줄 바꿈 금지 */
+    overflow: hidden;    /* 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis; /* 말줄임표 표시 */
+}
+.deleteScrab {
     background: none;
     border: none;
     color: #0062ff;
     font-size: 25px;
-    font-family: 'GothicA1-Light', sans-serif;
    	float: right;
    	margin-right: 10px;
    	margin-top: -15px;
@@ -173,19 +187,17 @@
 	margin-bottom: 20px;
 	color: gray;
 	font-size: 20px;
-	font-family: 'GothicA1-Light', sans-serif;
 	width: 211px;
 }
 .result {
 	margin-left: -10px;
 	font-size: 27px;
-	font-family: 'GothicA1-Light', sans-serif;
+	font-weight: bold;
 }
 
 .noresult {
-	padding-top: 65px;
+	padding-bold: 65px;
 	font-size: 27px;
-	font-family: 'GothicA1-Light', sans-serif;
 	color: gray;
 }
 
@@ -196,12 +208,17 @@
     border: none;
     font-size: 25px;
     font-weight: bold;
-    font-family: 'GothicA1-Light', sans-serif;
     cursor: pointer;
 }
 .diagpage {
 	font-size: 20px;
-	font-family: 'GothicA1-Light', sans-serif;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	color: #96A7AF;
+}
+.scrabpage {
+	font-size: 20px;
 	display: flex;
 	justify-content: center;
 	gap: 10px;
@@ -218,8 +235,8 @@
 	color: #0062ff;
 	font-weight: bold;
 	font-size: 1.1em;
-	font-family: 'GothicA1-Light', sans-serif;
 }
+
 </style>
 </head>
 <body>
@@ -232,22 +249,84 @@
 				스크랩</div>
 			<hr class="line1">
 			<div class="scrab-list">
-				<div class="innerbox1">
-					<div class="newstitle">뉴스 제목</div>
-					<div class="badge">의료 분야</div>
-					<button class="bookmark">
-						<i class="bi bi-clipboard2-heart-fill"></i>
-					</button>
-				</div>
+				
 			</div>
+			
 			<div class="box2">
 				<div class="self-diag">&nbsp;&nbsp;[[${session.loginUser.nickname}]]님의 자가진단 이력</div>
 				<hr class="line2">
 				<div class="diag-list"></div>
 			</div>
 			<script type="text/javascript">
+				scrabsdata();
+				//스크랩 데이터 불러오기
+				function scrabsdata(page = 1) {
+					$.ajax({
+						type:"get",
+						dataType:"json",
+						data:{pageNum : page},
+						url:"/scrablist",
+						success:function(res) {
+							if (res.status === "unauthorized") {
+					                alert("로그인이 필요합니다.");
+					                location.href = "/login";
+					                return;
+					        }
+							
+							const list = res.scrabs;
+							let s = "";
+							
+							if(list.length == 0) {
+								s += `<div class="innerbox1" style="color:gray; line-height:100px;font-size:25px;">스크랩된 뉴스가 없습니다.</div>`;
+							} else {
+								$.each(list, function(i,item){
+									s += `
+										<div class="innerbox1">
+										<div class="newstitle">
+											<a href="${item.url}" target="_blank">${item.title}</a>
+										</div>
+										<div class="badge">의료 분야</div>
+											<i class="bi bi-bookmark-heart-fill deleteScrab" data-id="${item.scrabs_id}"></i>
+									</div>`;
+								});
+							}
+								s += `<div class="scrabpage"></div><br>`;
+							$(".scrab-list").html(s);
+							
+							let p = "";
+							for(let i = 1; i <= res.totalPage; i++) {
+								p += `<a href="" class="page-link ${i === page ? 'active' : ''}" data-page="${i}">${i}</a>`;
+							}
+							$(".scrabpage").html(p);
+						}
+					});	
+				}
+				//스크랩 페이지 이동
+				$(document).on("click", ".page-link", function(e) {
+				    e.preventDefault(); // 🔴 새로고침 막기
+				    const page = $(this).data("page");
+				    scrabsdata(page);
+				});
+				//스크랩 데이터 삭제 이벤트
+				$(document).on("click", ".deleteScrab", function() {
+					 const id = $(this).data("id");
+
+					    $.ajax({
+					        url: "/deletescrab",
+					        type: "POST",
+					        data: { scrabs_id: id },
+					        success: function(res) {
+					            if (res.status === "success") {
+					                scrabsdata();
+					            } else {
+					                alert("삭제 실패. 다시 시도해주세요.");
+					            }
+					        }
+					    });
+					});
+				
 				diagdata();
-			
+				//자가진단 데이터 불러오기
 				function diagdata(page = 1) {
 					$.ajax({
 						type:"post",
@@ -255,12 +334,12 @@
 						data:{page : page},
 						url:"/selfdiag",
 						success:function(res) {
-							let s="";
+							let s= "";
 							let list = res.list;
 							//console.log(list.length);
 							if(list.length == 0) {
 								s += `
-								<div class="innerbox2">
+								<div class="innerbox2" style="line-height:150px;">
 									<div class="noresult">자가진단 이력이 없습니다.</div>
 								</div>
 								`;
@@ -283,19 +362,20 @@
 							
 							let p = "";
 							for(let i = 1; i <= res.totalPages; i++) {
-								p += `<a href="" class="page-link ${i === page ? 'active' : ''}" data-page="${i}">${i}</a> `;
+								p += `<a href="" class="page-link ${i === page ? 'active' : ''}" data-page="${i}">${i}</a>`;
 							}
 							$(".diagpage").html(p);
 						}
 
 					});
 				}
+				//자가진단 페이지 이동
 				$(document).on("click", ".page-link", function(e) {
 				    e.preventDefault(); // 🔴 새로고침 막기
 				    const page = $(this).data("page");
 				    diagdata(page);
 				});
-				
+				//자가진단 데이터 삭제 이벤트
 				$(document).on("click", ".delete", function() {
 					let myresult_id = $(this).attr("myresult");
 					console.log(myresult_id);
@@ -308,9 +388,6 @@
 							diagdata();
 						}
 					});
-				});
-				$(".bookmark").click(function() {
-					
 				});
 			</script>
 			</div>

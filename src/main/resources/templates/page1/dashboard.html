@@ -219,7 +219,8 @@ a {
                     <span th:utext="${news.description}"></span> <br>
                     <span th:utext="${news.pubDate}"></span>
                     
-                    <i class="bi bi-bookmark-heart-fill"></i>
+                   <i class="bi bi-bookmark-heart-fill"
+   th:attr="data-url=${news.originallink}, data-title=${news.title}"></i>
                 </li>
             </th:block>
         </ul>
@@ -255,12 +256,35 @@ a {
     </div>
     
     <script>
-	    // 북마크 아이콘 클릭 시 파란색으로 색상 변화, 재클릭 시 원상 복귀
-	    $(document).ready(function() {
-	        $(".bi-bookmark-heart-fill").click(function() {
-	            $(this).toggleClass("active"); // 클릭 시 'active' 클래스 추가/제거
-	        });
-	    });
+    $(document).ready(function() {
+        $(".bi-bookmark-heart-fill").click(function() {
+            let icon = $(this);
+            icon.toggleClass("active");
+
+            let url = icon.attr("data-url");
+            let title = icon.attr("data-title");
+
+            $.ajax({
+                type: "POST",
+                url: "/scrabInsert",
+                data: {
+                    url: url,
+                    title: title
+                },
+                success: function(response) {
+                    if (response === "success") {
+                        alert("스크랩 완료!");
+                    } else {
+                        alert("로그인이 필요합니다.");
+                    }
+                },
+                error: function() {
+                    alert("스크랩 중 오류가 발생했습니다.");
+                    icon.removeClass("active"); // 실패하면 active 해제
+                }
+            });
+        });
+    });
 	</script>
 </body>
 </html>     
