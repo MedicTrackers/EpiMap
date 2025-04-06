@@ -14,12 +14,27 @@
     font-weight: 300;
     font-style: normal;
 }
+@font-face {
+    font-family: 'GothicA1-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 body {
   	font-family: 'GothicA1-Light', sans-serif;
 }
+@media screen and (min-height: 913px) {
+	body {
+		/* overflow: hidden; */
+  		position: fixed;
+  		width: 100%;
+	}
+}
 .overview {
-  	width: 375px;
-  	height: 107px;
+  	width: 90%;
+  	max-width: 500px;
+  	height: auto;
   	border: 1px solid gray;
   	margin: 0 auto;
   	margin-top: 10px;
@@ -44,31 +59,38 @@ body {
 .backbox {
 	background-color: #fdfdfd;
 	bottom: 0;
-	margin: 0 auto;
+	margin: 10px auto 0 auto;
 	width: 99vw;
 	height: 100vh;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
-	margin-top: 10px;
 	padding: 20px;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 	font-weight: bold;
 }
 .page3_title {
-	font-size: 28px;
+	font-size: 33px;
 	color: #0062FF;
-	font-weight: bold;
+	font-family: 'GothicA1-Bold', sans-serif;
+	font-weight: 900;
 }
 .checkbox {
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-	margin: 0 auto;
-	margin-top: 40px;
-	width: 350px;
+	margin: 20px auto 0 auto;
+	width: 90%;
+	max-width: 500px;
 	height: 404px;
-	/* padding-top: 20px; */
 	border-radius: 15px;
 	display: flex;
 	flex-direction: column;
+}
+@media screen and (min-height: 914px) {
+	.checkbox {
+		height: 50vh;
+		padding: 15px 10px 5px;
+		gap: 5px;
+		overflow-y: auto;
+	}
 }
 .labels {
 	width: 150px;
@@ -97,11 +119,14 @@ body {
 	margin-bottom: 20px;
 	align-self: center;
 }
+.listbtn {
+	background-color: #0062FF;
+	float: right;
+}
 .warn {
 	display: none;
 	color: red;
 	font-size: 0.8em;
-	float: right;
 }
 .noticeContainer {
 	background-color: #d9d9d9;
@@ -112,6 +137,9 @@ body {
 #noticeTicker li{
 	margin-left: 20px;
 	list-style: none;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 </style>
 </head>
@@ -131,9 +159,11 @@ body {
 
 	<!-- 체크리스트 -->
 	<div class="backbox">
-		<b class="page3_title">체크리스트</b>
-		<span class="warn">증상을 하나는 선택해 주세요</span>
+		<p class="page3_title">체크리스트
+      		<button type="button" class="btn btn-info btn-sm listbtn">목록</button>
+		</p>
 		<hr>
+		<span class="warn">증상을 하나는 선택해 주세요</span>
 		<div class="checkbox">
 			<label class="labels" th:each="dto:${symptoms}">
 				<input type="checkbox" th:value="|${dto.idx}|" class="checks" />&nbsp;&nbsp;&nbsp;
@@ -170,8 +200,6 @@ body {
 			location.href = "/checklist/result?symptoms="+selectedValues; 
 		});
 		
-		document.body.style.position="fixed";
-		document.body.style.width="100%";
 	</script>
 
 	<script type="text/javascript">
