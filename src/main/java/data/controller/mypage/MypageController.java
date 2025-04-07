@@ -1,6 +1,5 @@
 package data.controller.mypage;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +10,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import data.dto.ResultsDto;
-import data.dto.UsersDto;
-import data.service.ResultsService;
-import data.service.UsersService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import data.dto.ResultsDto;
+import data.dto.ScrabDto;
+import data.dto.UsersDto;
+import data.service.ResultsService;
+import data.service.ScrabService;
+import data.service.UsersService;
+import jakarta.servlet.http.HttpSession;
+
 
 
 @Controller
@@ -28,6 +30,8 @@ public class MypageController {
 	UsersService usersService;
 	@Autowired
 	ResultsService resultsService;
+	@Autowired
+	ScrabService scrabService;
 	
 	@GetMapping("/login")
 	public String loginform(Model model) {
@@ -119,5 +123,62 @@ public class MypageController {
 	public void deleteMyResult(@RequestParam("myresult_id") int myresult_id) {
 		usersService.deleteMyResult(myresult_id);
 	}	
+	
+	@PostMapping("/scrabInsert")
+	@ResponseBody
+	public String scrabInsert(@RequestParam("url") String url,
+	                        @RequestParam("title") String title,
+	                        HttpSession session) {
+
+	    UsersDto udto = (UsersDto) session.getAttribute("loginUser");
+	    if (udto == null) {
+	        System.out.println("로그인 정보 없음!");
+	        return "fail";
+	    }
+
+	    int usersId = udto.getUsers_id(); // NullPointer 방지됨
+
+	    ScrabDto dto = new ScrabDto();
+	    dto.setUsers_id(usersId);
+	    dto.setUrl(url);
+	    dto.setTitle(title);
+
+	    scrabService.insertScrab(dto);
+
+	    return "success";
+	}
+	
+	@GetMapping("/scrablist")
+	@ResponseBody
+	public Map<String, Object> getScrabs(@RequestParam("pageNum") int pageNum,
+            HttpSession session) {
+		UsersDto udto = (UsersDto) session.getAttribute("loginUser");
+		int users_id = udto.getUsers_id();
+		
+		int perPage = 5;
+		int start = (pageNum - 1) * perPage;
+		
+		List<ScrabDto> scrabs =	scrabService.getPagedScrabs(users_id, start, perPage);
+		int totalCount = scrabService.getScrabsCount(users_id);
+		int totalPage = (int) Math.ceil((double) totalCount / perPage);
+		
+		return Map.of(
+		        "status", "ok",
+		        "scrabs", scrabs,
+		        "pageNum", pageNum,
+		        "totalPage", totalPage
+		    );
+	}
+	
+	@PostMapping("/deletescrab")
+	@ResponseBody
+	public Map<String, String> deleteScrab(@RequestParam("scrabs_id") int scrabs_id,
+	                                       HttpSession session) {
+	    UsersDto user = (UsersDto) session.getAttribute("loginUser");
+
+	    usersService.deleteMyScrab(scrabs_id);
+	    return Map.of("status", "success");
+	}	
+	
 
 }

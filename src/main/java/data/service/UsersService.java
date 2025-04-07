@@ -1,5 +1,6 @@
 package data.service;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +30,8 @@ public class UsersService {
 	public void deleteMyResult(int myresult_id) {
 		usersMapper.deleteMyResult(myresult_id);
 	}
-
+	
+	public void deleteMyScrab(int scrabs_id) {
+		usersMapper.deleteMyScrab(scrabs_id);
+	}
 }
