@@ -70,21 +70,27 @@ public class ChatbotService {
 		long timestamp = new Date().getTime();
 		
 		obj.put("version", "v2");
-		obj.put("userId", UUID.randomUUID().toString());
+		/* obj.put("userId", UUID.randomUUID().toString()); */
+		obj.put("userId", "abcd");
 		obj.put("timestamp", timestamp);
 		
-		JSONObject bubbleObj = new JSONObject();
-		bubbleObj.put("type", "text");
-		
-		JSONObject dataObj = new JSONObject();
-		dataObj.put("description", messageContent);
-		bubbleObj.put("data", dataObj);
-		
 		JSONArray bubbles = new JSONArray();
-		bubbles.put(bubbleObj);
-		
-		obj.put("bubbles", bubbles);
-		obj.put("event", "send");
+		/* System.out.println(messageContent); */
+		if(messageContent == null || messageContent.trim().isEmpty()) {
+			obj.put("event", "open");
+		} else {
+			JSONObject bubbleObj = new JSONObject();
+			bubbleObj.put("type", "text");
+			
+			JSONObject dataObj = new JSONObject();
+			dataObj.put("description", messageContent);
+			bubbleObj.put("data", dataObj);
+			
+			bubbles.put(bubbleObj);
+			
+			obj.put("event", "send");
+			obj.put("bubbles", bubbles);
+		}
 		
 		return obj.toString();
 	}

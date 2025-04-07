@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>챗봇 테스트</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    #chat-container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 600px;
+      overflow-y: auto;
+      background: #f9f9f9;
+    }
+    .bubble {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #e0e0e0;
+    }
+    .user-message {
+      text-align: right;
+      background-color: #d1e7dd;
+    }
+    .bot-message {
+      text-align: left;
+    }
+    .image {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    button {
+      margin: 5px 0;
+      padding: 6px 12px;
+      cursor: pointer;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    #input-form {
+      display: flex;
+      margin-top: 10px;
+    }
+    #input-message {
+      flex: 1;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">EpiBot 챗봇</h2>
+  <div id="chat-container"></div>
+
+  <form id="input-form">
+    <input type="text" id="input-message" placeholder="메시지를 입력하세요" />
+    <button type="submit">전송</button>
+  </form>
+
+  <script type="text/javascript">
+    const chatContainer = document.getElementById("chat-container");
+
+    function appendMessage(htmlContent, isUser = false) {
+      const div = document.createElement("div");
+      div.classList.add("bubble", isUser ? "user-message" : "bot-message");
+      div.innerHTML = htmlContent;
+      chatContainer.appendChild(div);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function renderResponse(data) {
+    	  const bubbles = data.bubbles || [];
+
+    	  bubbles.forEach(bubble => {
+    	    if (bubble.type === "template") {
+    	      renderTemplateBubble(bubble);
+    	    } else if (bubble.type === "carousel") {
+    	      const cards = bubble.data.cards || [];
+    	      cards.forEach(card => renderTemplateBubble(card));
+    	    } else if (bubble.type === "text") {
+    	        const message = bubble.data.description || "";
+    	        appendMessage(message);  // 일반 텍스트 메시지 출력
+    	    }
+    	  });
+    	}
+
+    	function renderTemplateBubble(bubble) {
+    	  const cover = bubble.data.cover;
+
+    	  // 이미지 타입이면 이미지와 제목 출력
+    	  if (cover.type === "image") {
+    	    const title = cover.title || "";
+    	    const img = cover.data.imageUrl;
+    	    const desc = cover.data.description || "";
+    	    const html = `<strong>${title}</strong><br/><img src="${img}" class="image" /><p>${desc}</p>`;
+    	    appendMessage(html);
+    	  }
+
+    	  // 텍스트 타입이면 텍스트 출력
+    	  if (cover.type === "text") {
+    	    const desc = cover.data.description || "";
+    	    appendMessage(desc);
+    	  }
+
+    	  // 버튼 처리
+    	  if (bubble.data.contentTable) {
+    	    bubble.data.contentTable.forEach(row => {
+    	      row.forEach(cell => {
+    	        const btnData = cell.data;
+    	        if (btnData.type === "button") {
+    	          const title = btnData.title;
+    	          const actionType = btnData.data?.action?.type;
+
+    	          let button = document.createElement("button");
+    	          button.textContent = title;
+    	          button.classList.add("chat-button");
+
+    	          if (actionType === "link") {
+    	        	  const url = btnData.data.action.data.url;
+    	        	  button.addEventListener("click", function () {
+    	        	    window.open(url, "_blank");
+    	        	  });
+    	        	} else {
+    	        	  const postback = btnData.data?.action?.data?.postbackFull || btnData.data?.action?.data?.postback || title;
+    	        	  button.dataset.postback = postback;
+
+    	        	  button.addEventListener("click", function () {
+    	        	    const value = this.dataset.postback;
+    	        	    const title = this.innerText;
+
+    	        	    appendMessage(title, true); // ✅ 사용자에게는 title만 보임
+    	        	    sendMessage(value);         // ✅ 서버에는 postback 값 전달
+    	        	  });
+    	        	}
+
+
+    	          const div = document.createElement("div");
+    	          div.classList.add("bot-message");
+    	          div.appendChild(button);
+    	          chatContainer.appendChild(div);
+    	          chatContainer.scrollTop = chatContainer.scrollHeight;
+    	        }
+    	      });
+    	    });
+    	  }
+    	}
+
+
+    function sendMessage(message) {
+      /* appendMessage(message, true); */
+
+      $.ajax({
+        type: "POST",
+        url: "/clova/chat",
+        contentType: "application/json",
+        data: JSON.stringify({ message: message }),
+        success: function (response) {
+        	let data = typeof response === "string" ? JSON.parse(response) : response;
+        	console.log(response);
+        	console.log("응답 확인:", data);
+        	renderResponse(data);
+        },
+        error: function () {
+          appendMessage("에러가 발생했습니다.");
+        }
+      });
+    }
+
+    $("#input-form").submit(function (e) {
+      e.preventDefault();
+      const message = $("#input-message").val().trim();
+      if (message) {
+        sendMessage(message);
+        $("#input-message").val("");
+      }
+    });
+
+    // 최초 인사 메시지 자동 전송
+    $(document).ready(function () {
+      sendMessage("");  // 최초 인사 메시지
+    });
+  </script>
+</body>
+</html>
