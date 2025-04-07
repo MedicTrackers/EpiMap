@@ -540,7 +540,7 @@
             data: {
                 serviceKey: '17Ds6cxIqo9+znsM81nIgrGHeWGzUlZBHQ9s9GSWEFqc1McvZaH2ovzWYKxVdi8AopGjXaYCZWcLCX6VcqWd/Q==',  // API 키를 여기에 입력하세요.
                 pageNo: 1,
-                numOfRows: 50
+                numOfRows: 100
             },
             dataType: 'xml',  // XML 데이터 형식으로 반환받기
             success: function(response) {
@@ -563,7 +563,7 @@
 
                     let distance = getDistanceFromLatLonInKm(lat, lon, hospLat, hospLon);
 
-                    if (distance <= 5) { // 반경 10km 이내만
+                    if (distance <= 5) { // 반경 5km 이내만
                         info.distance = distance;
                         info.hospLat = hospLat;
                         info.hospLon = hospLon;
@@ -587,6 +587,10 @@
 
                 // 마커 및 카드 출력
                 $.each(filtered, function(idx, info) {
+
+                    console.log("1번==========>",idx);
+                    console.log("2번==========>",info);
+
                     let hospitalPosition = new naver.maps.LatLng(info.hospLat, info.hospLon);
 
                     let hospitalMarker = new naver.maps.Marker({
@@ -656,7 +660,7 @@
                                 <a href="tel:${info.dutyTel3?.['#text']}"><i class="bi bi-telephone-fill telicon"></i></a>
                             </div>
                             <div class="view">
-                                <sapn class="n ">응급실 가용여부&nbsp;:&nbsp;${info.hvec['#text']}</sapn>
+                                <span class="n">응급실 가용여부&nbsp;:&nbsp;${info.hvec?.['#text'] || "-"}</span>
                             </div>
                             <div class="div ">${cleanedName}</div>
                         </div>
