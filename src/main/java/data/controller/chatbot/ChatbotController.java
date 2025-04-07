@@ -30,5 +30,5 @@ public class ChatbotController {
 		String response = chatbotService.sendMessageToClova(requestDto.getMessage());
 		return ResponseEntity.ok(response);
 	}
-	
+	// 사용자가 /clova/chat에 POST 요청을 보내면 chatbotService를 통해 clova에 메시지를 보내고, 응답을 클라이언트에게 돌려줌.
 }
