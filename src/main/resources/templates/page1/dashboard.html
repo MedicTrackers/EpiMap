@@ -67,6 +67,12 @@ body {
 	color: white;
 }
 
+.slide img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
 .slide3 { background-color: #D6D6D6; }
 /* ======================================= */
 
@@ -222,19 +228,19 @@ a {
    			<!-- 슬라이드 1 (결핵 예방수칙) -->
 	   		<div class="slide slide1">
 				<a href="https://www.kdca.go.kr/gallery.es?mid=a20503010000&bid=0002&b_list=9&act=view&list_no=146902&nPage=1&vlist_no_npage=1&keyField=&keyWord=&orderby=" target="_blank" style="display: block; width: 100%; height: 100%;">
-			        <img src="/banner1.png" alt="배너1" style="width:100%; object-fit:cover;">
+			        <img src="/banner1.png" alt="배너1" />
 			    </a>
 			</div>
 			<!-- 슬라이드 2 (여행 중 예방수칙) -->
 			<div class="slide slide2">
 				<a href="https://www.kdca.go.kr/gallery.es?mid=a20503020000&bid=0003&b_list=9&act=view&list_no=146864" target="_blank" style="display: block; width: 100%; height: 100%;">
-			        <img src="/banner2.png" alt="배너1" style="width:100%; object-fit:cover;">
+			        <img src="/banner2.png" alt="배너1" />
 			    </a>
 			</div>
 			<!-- 슬라이드 3 -->
 			<div class="slide slide3">
 				<a href="https://www.kdca.go.kr/gallery.es?mid=a20503020000&bid=0003&b_list=9&act=view&list_no=144807" target="_blank" style="display: block; width: 100%; height: 100%;">
-			        <img src="/banner3.png" alt="배너1" style="width:100%; object-fit:cover;">
+			        <img src="/banner3.png" alt="배너1" />
 			    </a>
 			</div>
    		</div>
@@ -316,7 +322,6 @@ a {
     $(document).ready(function() {
         $(".bi-bookmark-heart-fill").click(function() {
             let icon = $(this);
-            icon.toggleClass("active");
 
             let url = icon.attr("data-url");
             let title = icon.attr("data-title");
@@ -331,6 +336,7 @@ a {
                 success: function(response) {
                     if (response === "success") {
                         alert("스크랩 완료!");
+                        icon.toggleClass("active");
                     } else {
                         alert("로그인이 필요합니다.");
                     }
