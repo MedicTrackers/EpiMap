@@ -35,18 +35,40 @@ body {
 }
 
 
-/* 한 줄 공지 아래 배너 */
+/* 한 줄 공지 아래 배너 ======================= */
 .newsBanner {
 	max-width: 100vw;
-	height: 115px;
-	padding-left: 28px;
+	height: 110px;
 	margin: 5px 0 15px 0;
 	border-top: 1px solid #E2E0E1;
 	border-bottom: 1px solid #E2E0E1;
   	display: flex;
   	flex-direction: column;
   	justify-content: center;
+  	background-color: white;
+	overflow: hidden;
 }
+
+/* 슬라이드 배너 */
+.slider {
+	display: flex;
+	transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+	width: 100vw;
+	height: 105px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 20px;
+	color: white;
+}
+
+.slide3 { background-color: #D6D6D6; }
+/* ======================================= */
 
 .newsContainer {
 	max-width: 100vw;
@@ -58,7 +80,7 @@ body {
 	margin-bottom: 60px;
 }
 
-/* 카테고리 query 출력 ul ================================*/
+/* 카테고리 query 출력 ul */
 .category {
 	list-style-type: none;
 	padding: 5px;
@@ -82,8 +104,6 @@ body {
     border: 1px solid #E2E0E1;
     border-radius: 10px;
 }
-/* ================================================== */
-
 
 /* 뉴스 기사 리스트 */
 .newsContents {
@@ -196,15 +216,48 @@ a {
 		<div id="noticeTicker"></div>
 	</div>
    	
-   	<!-- 한 줄 공지 아래 배너 -->
+   	<!-- 한 줄 공지 아래 슬라이드 배너 -->
    	<div class="newsBanner">
-   		<span style="font-size:24px;"> 매일 만나는 건강 뉴스 </span>
-   		<span> 이 부분 내용 추가 예정 </span>
+   		<div class="slider">
+   			<!-- 슬라이드 1 (결핵 예방수칙) -->
+	   		<div class="slide slide1">
+				<a href="https://www.kdca.go.kr/gallery.es?mid=a20503010000&bid=0002&b_list=9&act=view&list_no=146902&nPage=1&vlist_no_npage=1&keyField=&keyWord=&orderby=" target="_blank" style="display: block; width: 100%; height: 100%;">
+			        <img src="/banner1.png" alt="배너1" style="width:100%; object-fit:cover;">
+			    </a>
+			</div>
+			<!-- 슬라이드 2 (여행 중 예방수칙) -->
+			<div class="slide slide2">
+				<a href="https://www.kdca.go.kr/gallery.es?mid=a20503020000&bid=0003&b_list=9&act=view&list_no=146864" target="_blank" style="display: block; width: 100%; height: 100%;">
+			        <img src="/banner2.png" alt="배너1" style="width:100%; object-fit:cover;">
+			    </a>
+			</div>
+			<!-- 슬라이드 3 -->
+			<div class="slide slide3">
+				<a href="https://www.kdca.go.kr/gallery.es?mid=a20503020000&bid=0003&b_list=9&act=view&list_no=144807" target="_blank" style="display: block; width: 100%; height: 100%;">
+			        <img src="/banner3.png" alt="배너1" style="width:100%; object-fit:cover;">
+			    </a>
+			</div>
+   		</div>
+   		
+   		<script>
+			$(document).ready(function() {
+			  const $slider = $('.slider');
+			  const totalSlides = $('.slide').length;
+			  let currentIndex = 0;
+				
+			  function slideNext() {
+			    currentIndex = (currentIndex + 1) % totalSlides;
+			    $slider.css('transform', 'translateX(-' + (100 * currentIndex) + 'vw)');
+			  }
+			
+			  setInterval(slideNext, 4000); // 슬라이드 전환 시간
+			});
+		</script>
    	</div>
    	
    	<!-- 뉴스 기사 리스트 -->
     <div class="newsContainer">
-    	<p style="margin:0; padding-left:5px;"> 오늘의 키워드 (임시) </p>
+    	<p style="margin:0; padding-left:5px;"> 오늘의 건강 키워드 </p>
         <!-- 카테고리 (query 리스트 형태로 출력) -->
         
    		<ul class="category">
