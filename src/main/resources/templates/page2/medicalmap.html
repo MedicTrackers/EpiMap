@@ -13,6 +13,20 @@
 
 
 <style>
+    @font-face {
+        font-family: 'GothicA1-Light';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+        font-weight: 300;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'GothicA1-Bold';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+    }
+
     body * {
         font-family: 'GothicA1-Light', sans-serif;
     }
@@ -88,7 +102,6 @@
     .medical-box .n {
         font-weight: 600;
         color: #ffffff;
-        margin-top: -3px;
         font-size: 17px;
         text-align: center;
         line-height: normal;
@@ -165,6 +178,7 @@
         transition-duration: 0.5s;
     }
 
+    /*바텀시트 (bar)바 부분*/
     .bottom_sheet_handle_wrap {
         z-index: 99;
         background: linear-gradient(to bottom,
@@ -187,7 +201,7 @@
         height: 4px;
         background-color: #e2e0e1;
         border-radius: 100px;
-        margin-top: 10px;
+        margin-top: 15px;
     }
 
     .up_sensor {
@@ -222,13 +236,45 @@
     .medical-card-container.select .telicon {
         color: #c91c1c !important; /* 선택된 병원의 전화 아이콘은 빨간색 */
     }
+
+    /*gps 아이콘 css*/
+    .catch_icon {
+        background-color: #ffffff;
+        border: 0px solid transparent;
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        z-index: 8;
+        right: 13px;
+        top: 230px;
+    }
+    #myLocationBtn {
+        width: 24px;
+        height: 24px;
+    }
     </style>
 </head>
 <body>
 <div layout:fragment="content" >
     <!--map-->
     <div id="map" style="width: 100vw; height:100vh;  margin: -130px auto; z-index: 1; "></div>
-
+    <div class="catch_icon">
+        <img src="/images/catch_icon.png" id="myLocationBtn">
+    </div>
+    <!-- 지도 위에 고정될 버튼 -->
+    <button id="searchByMapCenterBtn" style="
+    position: absolute;
+    top: 180px;
+    left: 15px;
+    z-index: 100;
+    background-color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    color: #0062ff;
+    border: none;
+">이 위치에서 검색</button>
     <!--바텀시트 내용-->
     <div class="up_sensor"></div>
     <div id="bottomSheet" class="bottom_sheet">
@@ -238,11 +284,12 @@
         <div style="margin-bottom: 40px;"></div>
         <!--응급실 리스트-->
         <div class="medical-scrap">
-            <h5>응급실 빠른 연결
-                <button id="myLocationBtn" class="btn btn-primary" style="margin-left: 60px;">
-                    내 위치로 이동
-                </button>
-            </h5>
+            <div style="margin-top: 10px; margin-left: 25px; margin-bottom: 10px;">
+                <span style="font-family: 'GothicA1-Bold', sans-serif; font-size: 24px; left: 20px;">
+                    응급실 빠른 연결
+                </span>
+            </div>
+
 
             <script>
 
@@ -323,6 +370,7 @@
     let lon;
     let map; // 전역 변수로 선언
     let activeInfoWindow = null;  // 현재 열려있는 정보창 추적
+
 
     // 거리 계산 함수 (Haversine)
     function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
