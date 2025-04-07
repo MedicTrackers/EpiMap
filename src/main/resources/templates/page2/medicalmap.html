@@ -266,7 +266,7 @@
     position: absolute;
     top: 180px;
     left: 15px;
-    z-index: 100;
+    z-index: 2;
     background-color: #ffffff;
     padding: 6px 12px;
     border-radius: 8px;
@@ -305,6 +305,8 @@
 
                             let currentPosition = new naver.maps.LatLng(lat, lon);
                             map.setCenter(currentPosition);
+
+                            medical(); // 다시 내 위치 기준 병원 검색
 
                             // ✅ 마커가 없으면 새로 만들고, 있으면 위치만 업데이트
                             if (!myLocationMarker) {
@@ -370,7 +372,20 @@
     let lon;
     let map; // 전역 변수로 선언
     let activeInfoWindow = null;  // 현재 열려있는 정보창 추적
+    let hospitalMarkers = [];
 
+    function clearHospitalMarkers() {
+        hospitalMarkers.forEach(marker => marker.setMap(null));
+        hospitalMarkers = [];
+    }
+
+    $("#searchByMapCenterBtn").on("click", function () {
+        const center = map.getCenter(); // 현재 지도 중심
+        lat = center.lat();
+        lon = center.lng();
+        console.log(" 현재 지도 중심 기준 검색:", lat, lon);
+        medical(); // 이 위치 기준으로 병원 다시 검색
+    });
 
     // 거리 계산 함수 (Haversine)
     function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
@@ -516,13 +531,16 @@
     /*공공데이터 api 호출*/
     function medical() {
 
+        clearHospitalMarkers();              // 🔹 기존 마커 제거
+        $(".medical-box-card").empty();      // 🔹 기존 리스트 제거
+
         $.ajax({
             url: 'https://apis.data.go.kr/B552657/ErmctInfoInqireService/getEgytBassInfoInqire',
             type: 'GET',
             data: {
                 serviceKey: '17Ds6cxIqo9+znsM81nIgrGHeWGzUlZBHQ9s9GSWEFqc1McvZaH2ovzWYKxVdi8AopGjXaYCZWcLCX6VcqWd/Q==',  // API 키를 여기에 입력하세요.
                 pageNo: 1,
-                numOfRows: 10
+                numOfRows: 50
             },
             dataType: 'xml',  // XML 데이터 형식으로 반환받기
             success: function(response) {
@@ -541,12 +559,11 @@
                 $.each(items, function(idx, info) {
                     let hospLat = parseFloat(info.wgs84Lat?.['#text']);
                     let hospLon = parseFloat(info.wgs84Lon?.['#text']);
-
                     if (isNaN(hospLat) || isNaN(hospLon)) return;
 
                     let distance = getDistanceFromLatLonInKm(lat, lon, hospLat, hospLon);
 
-                    if (distance <= 10) { // 반경 10km 이내만
+                    if (distance <= 5) { // 반경 10km 이내만
                         info.distance = distance;
                         info.hospLat = hospLat;
                         info.hospLon = hospLon;
@@ -584,6 +601,8 @@
                         },
                         title: info.dutyName['#text']
                     });
+
+                    hospitalMarkers.push(hospitalMarker);  // ✅ 저장
 
                     let infoWindow = new naver.maps.InfoWindow({
                         content: `<div style="padding:5px; font-size:13px;">🏥 ${info.dutyName['#text']}</div>`
