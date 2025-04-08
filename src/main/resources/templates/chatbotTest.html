@@ -196,7 +196,9 @@ button, input {
 	border: none;
 	border-radius: 30px;
 	box-shadow: 0 1px 20px #c4d0d566;
-	font-size: 20px;
+	font-size: 22px;
+	font-weight: bold;
+	color: #0062FF; 
 	outline: none;
 	background-color: white;
 	transition: border-color 0.3s;
@@ -205,6 +207,11 @@ button, input {
 /* 사용자 질문 입력창 (선택) */
 #input-message:focus {
 	border: 1px solid #0062FF;
+}
+
+#input-message::placeholder {
+  font-weight: 300;
+  color: #96A7AF;
 }
 
 /* 캐러셀 카드 */
@@ -247,7 +254,7 @@ button, input {
 
 		<form id="input-form">
 			<input type="text" id="input-message"
-				placeholder="EpiBot에게 보낼 메세지를 입력하세요." />
+				placeholder="EpiBot에게 보낼 메세지를 입력하세요."/>
 			<img src="/ChatbotSend.png" alt="EpiMapSend Button" id="send-img" style="cursor: pointer; width:45px;">
 		</form>
 	</div>
