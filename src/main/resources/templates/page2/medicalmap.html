@@ -31,6 +31,7 @@
         font-family: 'GothicA1-Light', sans-serif;
     }
 
+
     .medical-box {
         display: flex;
         flex-direction: column;
@@ -59,7 +60,7 @@
         box-shadow: 0px 1px 20px #c4d0d566;
     }
 
-    /* 병원 한 개 */
+    /* 병원리스트 선택시 변경 css */
     .medical-box .select {
         position: relative;
         width: 100%;
@@ -275,13 +276,19 @@
     color: #0062ff;
     border: none;
 ">이 위치에서 검색</button>
+
     <!--바텀시트 내용-->
+
+    <!-- 바텀시트 트리거 센서 (터치 감지용) -->
     <div class="up_sensor"></div>
+
+    <!-- 바텀시트 본체 -->
     <div id="bottomSheet" class="bottom_sheet">
+        <!-- 바텀시트 핸들 -->
         <div class="bottom_sheet_handle_wrap">
             <div class="bottom_sheet_handle"></div>
         </div>
-        <div style="margin-bottom: 40px;"></div>
+
         <!--응급실 리스트-->
         <div class="medical-scrap">
             <div style="margin-top: 10px; margin-left: 25px; margin-bottom: 10px;">
@@ -292,7 +299,6 @@
 
 
             <script>
-
                 let myLocationMarker = null;
                 let myInfoWindow = null;
 
@@ -587,9 +593,7 @@
 
                 // 마커 및 카드 출력
                 $.each(filtered, function(idx, info) {
-
-                    console.log("1번==========>",idx);
-                    console.log("2번==========>",info);
+                    if (!info.hvec?.['#text']) return; //응급실 가용여부 없으면 마커 생성안함
 
                     let hospitalPosition = new naver.maps.LatLng(info.hospLat, info.hospLon);
 
@@ -651,13 +655,16 @@
 
                     let cleanedName = cleanHospitalName(info.dutyName['#text']);
 
+                    if (!info.hvec?.['#text']) return; // 값 없으면 skip
+
                     $(".medical-box-card").append(`
+
                         <div class="medical-card-container" data-idx="${idx}">
                             <div class="text-wrapper">
-                                병원 번호 : <span style="font-weight: normal">${info.dutyTel3?.['#text'] || "정보 없음"}</span>
+                                병원 번호 : <span style="font-weight: normal">${info.dutyTel1?.['#text'] || "정보 없음"}</span>
                             </div>
                             <div class="tel">
-                                <a href="tel:${info.dutyTel3?.['#text']}"><i class="bi bi-telephone-fill telicon"></i></a>
+                                <a href="tel:${info.dutyTel1?.['#text']}"><i class="bi bi-telephone-fill telicon"></i></a>
                             </div>
                             <div class="view">
                                 <span class="n">응급실 가용여부&nbsp;:&nbsp;${info.hvec?.['#text'] || "-"}</span>
