@@ -32,18 +32,73 @@ body {
 	top: 160px;
 	margin-left: 5%;
 }
-.feedbackBox {
+.feedbacks_box {
+	font-family: 'GothicA1-Light', sans-serif;
+	width: 90%;
+	height: auto;
 	margin: 0 auto;
+	padding-top: 3%;
+	background-color: #ececec;
 }
-
+/* feedback 항목 */
+.feedback {
+	background-color: #ffffff;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+	width: 95%;
+	margin: 0 auto;
+	padding: 2%;
+	border-radius: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.contents {
+	font-size: 24px;
+	font-weight: bold;
+}
+.write_day {
+	font-size: 0.9em;
+	color: #cecece;
+}
+/* paging */
+.paging {
+	font-size: 20px;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	color: #96A7AF;
+	margin-top: 10px;
+}
+.page-link {
+	text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.page-link.active {
+	color: #0062ff;
+	font-weight: bold;
+	font-size: 1.1em;
+}
 </style>
 </head>
-<body>
-<div layout:fragment="content">
+<body layout:fragment="content">
 	<span class="page6_title">Feedback 목록</span>
-	<hr style="max-width: 95vw; margin: 3% auto 0;">
-	<div class="feedbackBox">111
-	</div>
- </div>
+	<hr style="max-width: 95vw; margin: 3% auto;">
+	<div class="feedbacks_box">
+		<div class="feedback">
+			<span class="contents">피드백 내용 aaaaaa</span>
+			<p class="write_day">YYYY.MM.dd HH:mm</p>
+		</div>
+		
+		
+		<div class="paging">
+			<a href="" class="page-link active">1</a>
+			<a href="" class="page-link">2</a>
+			<a href="" class="page-link">3</a>
+		</div>
+	</div> 
 </body>
 </html>
