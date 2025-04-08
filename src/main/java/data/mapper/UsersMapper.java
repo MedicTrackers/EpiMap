@@ -14,4 +14,8 @@ public interface UsersMapper {
 	public UsersDto getSelectById(int users_id);
 	public void deleteMyResult(int myresult_id);
 	public int deleteMyScrab(@Param("scrabs_id") int scrabs_id);
+	public void connectKakao(@Param("users_id") int users_id,
+	                      	 @Param("kakao_id") String kakao_id,
+	                      	 @Param("kakao_nickname") String kakao_nickname);
+	public UsersDto findById(@Param("users_id") int users_id);
 }

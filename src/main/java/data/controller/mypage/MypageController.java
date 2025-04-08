@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,8 @@ import data.service.ResultsService;
 import data.service.ScrabService;
 import data.service.UsersService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -53,6 +56,13 @@ public class MypageController {
 		}
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+	    session.invalidate(); // ✅ 세션 무효화
+	    return "redirect:/login"; // ✅ 로그인 페이지로 이동
+	}
+	
+	// signup 페이지 불러오기
 	@GetMapping("/signup")
 	public String singupform(Model model) {
 		model.addAttribute("users", new UsersDto());
@@ -98,7 +108,7 @@ public class MypageController {
 //		
 //		return resultsService.getMyAllResult(dto.getUsers_id());
 //	}
-	
+	//자가진단 데이터 불러오기
 	@PostMapping("/selfdiag")
 	@ResponseBody
 	public Map<String, Object> selfdiagpage(@RequestParam("page") int page, HttpSession session) {
@@ -117,13 +127,13 @@ public class MypageController {
 		res.put("totalPages", totalPages);
 		return res;
 	}
-	
+	//자가진단 데이터 삭제
 	@GetMapping("/deleteMyResult")
 	@ResponseBody
 	public void deleteMyResult(@RequestParam("myresult_id") int myresult_id) {
 		usersService.deleteMyResult(myresult_id);
 	}	
-	
+	//뉴스페이지에서 뉴스 스크랩 기능
 	@PostMapping("/scrabInsert")
 	@ResponseBody
 	public String scrabInsert(@RequestParam("url") String url,
@@ -147,7 +157,7 @@ public class MypageController {
 
 	    return "success";
 	}
-	
+	//스크랩 데이터 불러오기
 	@GetMapping("/scrablist")
 	@ResponseBody
 	public Map<String, Object> getScrabs(@RequestParam("pageNum") int pageNum,
@@ -169,7 +179,7 @@ public class MypageController {
 		        "totalPage", totalPage
 		    );
 	}
-	
+	//스크랩 데이터 삭제
 	@PostMapping("/deletescrab")
 	@ResponseBody
 	public Map<String, String> deleteScrab(@RequestParam("scrabs_id") int scrabs_id,
@@ -179,6 +189,25 @@ public class MypageController {
 	    usersService.deleteMyScrab(scrabs_id);
 	    return Map.of("status", "success");
 	}	
+	//카카오 로그인 기능
+	@PostMapping("/connectKakao")
+	@ResponseBody
+	public String connectKakao(@RequestParam("kakao_id") String kakao_id,
+			@RequestParam("kakao_nickname") String kakao_nickname,
+			HttpSession session) {
+		UsersDto udto = (UsersDto) session.getAttribute("loginUser");
+		if(udto == null) return "fail";
+		
+		usersService.connectKakao(udto.getUsers_id(), kakao_id, kakao_nickname);
+		UsersDto updateUser = usersService.findById(udto.getUsers_id());
+		session.setAttribute("loginUser", updateUser);
+		return "ok";
+	}
 	
-
+	@PostMapping("/isKakaoConnected")
+	@ResponseBody
+	public boolean isKakaoConnected(HttpSession session) {
+	    UsersDto loginUser = (UsersDto) session.getAttribute("loginUser");
+	    return loginUser != null && loginUser.getKakao_id() != null;
+	}
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/notice")
-public abstract class NoticeFormController {
+public class NoticeFormController {
     final NoticeService noticeService;
     /*final UsersService usersService;*/
     final NcpObjectStorageService storageService;
