@@ -11,13 +11,17 @@
         SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
-    <select id="getPagingList" parameterType="Map" resultType="NoticeDto">
-        SELECT b.boards_id,b.subject, u.nickname, b.content, b.writeday, b.nfile, b.nphoto, b.users_id
+    <select id="getPagingList" parameterType="map" resultType="NoticeDto">
+        SELECT b.boards_id, b.subject, u.nickname, b.content, b.writeday, b.nfile, b.nphoto, b.users_id,
+        CASE WHEN br.read_id IS NULL THEN false
+        ELSE true END AS isRead
         FROM boards b
         JOIN users u ON b.users_id = u.users_id
+        LEFT JOIN board_read br ON b.boards_id = br.boards_id AND br.users_id = #{users_id}
         ORDER BY b.writeday DESC
-        LIMIT #{startNum}, #{perPage};
+        LIMIT #{startNum}, #{perPage}
     </select>
+
     <delete id="deleteNotice" parameterType="int">
         DELETE FROM boards WHERE boards_id = #{boards_id};
     </delete>
@@ -28,7 +32,7 @@
     </update>
     <select id="getSelectById" resultType="NoticeDto"
             parameterType="int">
-        SELECT b.boards_id,b.subject, u.nickname, b.content, b.writeday, b.nfile, b.nphoto, b.users_id
+        SELECT b.boards_id,b.subject, u.nickname, b.content, b.writeday, b.nfile, b.nphoto, b.users_id, b.writeday
         FROM boards b
         JOIN users u ON b.users_id = u.users_id WHERE b.boards_id = #{boards_id}
         ORDER BY b.writeday DESC
@@ -36,4 +40,12 @@
     <select id="getLastestNotices" resultType="NoticeDto">
         SELECT subject FROM boards ORDER BY writeday DESC LIMIT 3;
     </select>
+    <select id="isBoardRead" resultType="int" parameterType="map">
+        SELECT COUNT(*) FROM board_read
+        WHERE users_id = #{users_id} AND boards_id = #{boards_id}
+    </select>
+    <insert id="insertBoardRead" parameterType="map">
+        INSERT INTO board_read (users_id, boards_id)
+        VALUES (#{users_id}, #{boards_id})
+    </insert>
 </mapper>

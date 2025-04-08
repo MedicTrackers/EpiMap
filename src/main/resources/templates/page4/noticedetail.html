@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/mainLayout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <style>
+        body * {
+            font-family: 'GothicA1-Light', sans-serif;
+        }
+
+        .overview {
+            width: 100%;
+            max-width: 375px;
+            height: 107px;
+            border: 1px solid gray;
+            padding: 10px;
+            box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4px 20px #96a7af66;
+            background: linear-gradient(150deg, rgba(1, 57, 254, 0.4) 0%, rgba(16, 241, 255, 0.4) 100%),
+            linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            position: fixed; /* 고정 위치 설정 */
+            top: 132px; /* 원하는 위치에 고정 */
+            transform: translateX(-50%);
+            left: 50%;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .profile-image{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #0062FF;
+            object-fit: cover;
+        }
+
+        .notice-detail {
+            position: fixed;
+            top: 170px; /* 공지 배너 일부를 덮게 조정 */
+            bottom: 20px;
+            width: 99vw;
+            max-height: calc(100vh - 180px);
+            overflow-y: auto;
+            background-color: #fdfdfd;
+            z-index: 3; /* 공지 배너보다 위에 배치 */
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+
+        .notice-list-inner {
+            margin-left: 10px;
+            margin-top: 10px;
+            height: calc(100vh - 120px); /* 부모 div의 높이를 100%로 설정 */
+            overflow-y: auto; /* 내부 스크롤 가능 */
+            padding-right: 10px; /* 스크롤바 공간 */
+        }
+
+        .notice-header {
+            display: flex;
+            justify-content: space-between; /* 제목과 버튼을 양쪽 정렬 */
+            align-items: flex-end; /* 버튼을 아래쪽으로 배치 */
+            margin-bottom: 5px; /* hr과 간격 조정 */
+        }
+
+        .page5_title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0062FF;
+        }
+
+        .correct-icon{
+            width: 20px;
+            height: 20px;
+        }
+
+        .delete-icon{
+            width: 20px;
+            height: 20px;
+        }
+        .correct-icon + a, .delete-icon + a {
+            color: black; /* 글자 색상을 검정으로 */
+            text-decoration: none; /* 밑줄 제거 */
+        }
+
+        .correct-icon + a:hover, .delete-icon + a:hover {
+            color: #0062FF; /* 호버 시 색상 */
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%; /* 전체 너비 확보 */
+
+            bottom: 20px; /* 원래 높이 유지 */
+        }
+        .pagination a {
+            border: none !important;
+            background: none !important;
+            box-shadow: none !important;
+            text-decoration: none;
+            color: black; /* 기본 검은색 */
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .pagination .active {
+            color: black;
+            font-weight: bold;
+        }
+
+        .pagination .active {
+            color: #0062FF !important; /* 현재 페이지 파란색 */
+            font-weight: bold;
+        }
+
+
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="overview">
+        <p>EpiMap 에서 빠르게 정부 소식을 받아보세요</p>
+    </div>
+    <div class="notice-detail">
+        <div class="notice-list-inner">
+            <div class="notice-header">
+                <b class="page5_title">공지사항</b>
+                <h1 class="subject"><b th:text="${dto.subject}"></b></h1>
+                <!-- 작성자 정보 -->
+                <div class="profile-image">
+                    <img src="/doctor1.png" class="profile-image" alt="작성자">
+                    <div>
+                        <div class="profile-info-name" th:text="${dto.nickname}">작성자</div>
+                        <div class="profile-info-date" th:text="${#dates.format(dto.writeday, 'yyyy-MM-dd HH:mm')}">날짜</div>
+                    </div>
+                </div>
+
+                <
+
+                <!-- 이미지 -->
+                <th:block th:if="${dto.nphoto != null}">
+                    <img th:src="@{|${imagePath}${dto.nphoto}|}" class="img-thumbnail"
+                    >
+                </th:block>
+
+                <!-- 내용 -->
+                <p class="content" th:text="${dto.content}"></p>
+
+                <!-- 첨부파일 -->
+                <th:block th:if="${dto.nfile != null}">
+                    <span>첨부파일 : <a th:href="@{|${filePath}${dto.nfile}|}" download>[[${dto.nfile}]]</a> </span>
+                </th:block>
+
+                <!-- 버튼 영역 -->
+                <div class="button-group mt-4">
+                    <a href="/notice" class="btn btn-secondary">← 목록으로</a>
+
+                    <!-- 작성자 본인만 수정/삭제 가능 -->
+                    <span th:if="${session.loginUser != null and session.loginUser.users_id == dto.users_id}">
+                        <a th:href="@{/notice/updateform(boards_id=${dto.boards_id})}" class="btn btn-primary">수정</a>
+                        <a th:href="@{/notice/delete(boards_id=${dto.boards_id})}" onclick="return confirm('삭제하시겠습니까?')" class="btn btn-danger">삭제</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
