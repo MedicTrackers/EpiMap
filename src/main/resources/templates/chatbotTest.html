@@ -33,14 +33,16 @@ button, input {
 /* Chatbot Header ==================== */
 .chatbotHeader {
 	height: 110px;
-	padding: 20px;	
+	padding: 20px;
+	margin-top: 40px;
 	border-bottom: 2px solid #ECECEC;
-	display: flex;        
+	display: flex;
 	align-items: center;
 	gap: 15px;
+	position: relative;
 }
 
-/* ← */
+/* ← 뒤로가기 */
 .bi-arrow-left {
 	color: #96A7AF;
 	font-size: 40px;
@@ -60,18 +62,61 @@ button, input {
 	font-weight: 700;
 	font-size: 40px;
 	color: #0062FF;
+	margin-top: 3px;
 	margin-left: 20px;
 }
-/* =================================== */
+
+/* ↻ 새로고침 */
+.bi-arrow-clockwise {
+	font-size: 33px;
+	color: #96A7AF;
+	margin-top: 6px;
+	cursor: pointer;
+	transition: transform 0.5s ease-in-out; /* 회전 애니 설정 */
+}
+
+.bi-arrow-clockwise.rotating {
+  transform: rotate(360deg);
+}
+
+/* 번역 아이콘 */
+.bi-translate {
+	position: absolute;
+	font-size: 35px;
+	color: #0062FF;
+	right: 0;
+	margin-right: 45px;
+	cursor: pointer;
+}
+
+/* 번역 드롭다운 */
+#google_translate_element {
+	position: absolute;
+	right: 0;
+	margin-right: 15px;
+	margin-top: 30px;
+}
+
+#google_translate_element select {
+	width: 100px;
+	font-size: 19px;
+	color: #0062FF;
+}
+
+/* ================================= */
 
 #chat-container {
 	width: 100%;
 	max-width: 800px;
 	margin: auto;
-	border: 1px solid #ccc;
 	padding: 10px;
 	height: 900px;
 	overflow-y: auto;
+}
+
+/* 스크롤바 없애기 */
+#chat-container::-webkit-scrollbar {
+  display: none;
 }
 
 /* 모든 버블 디폴트 설정 */
@@ -103,7 +148,6 @@ button, input {
 	text-align: left;
 	border-radius: 25px 25px 25px 0;
 	max-width: 60%;
-	font-weight: bold;
 }
 
 .image {
@@ -131,7 +175,7 @@ button, input {
   color: white;
 }
 
-/* 질문 입력창 Container ========================== */ 
+/* 질문 입력창 Container ========================== */
 #input-form {
   display: flex;
   justify-content: center;
@@ -152,7 +196,7 @@ button, input {
 	border: none;
 	border-radius: 30px;
 	box-shadow: 0 1px 20px #c4d0d566;
-	font-size: 18px;
+	font-size: 20px;
 	outline: none;
 	background-color: white;
 	transition: border-color 0.3s;
@@ -163,22 +207,44 @@ button, input {
 	border: 1px solid #0062FF;
 }
 
+/* 캐러셀 카드 */
+.carousel-wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: 270px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+  scroll-snap-align: start;
+}
+
 </style>
 </head>
+
 <body>
 	<div class="allContainer">
-		<!-- 챗봇 Header -->
 		<div class="chatbotHeader">
-			<i class="bi bi-arrow-left"></i> <!-- ← 아이콘 -->
-			<img src="/ChatbotStand.png" alt="ChatbotImage">
+			<i class="bi bi-arrow-left" id="back-button"></i> <img src="/ChatbotStand.png" alt="ChatbotImage"> <!-- ← 뒤로가기 -->
 			<span> Welcome EpiBot </span>
+			<i class="bi bi-arrow-clockwise" id="refresh-button"></i> <!-- ↻ 새로고침 -->
+			
+			<!-- 구글 번역 드롭다운-->
+			<i class="bi bi-translate white" onclick="showTranslate()"></i> 
+			<div id="google_translate_element" style="display:none;"></div> 
 		</div>
-		
-		<!-- 대화 칸 -->
+
+
 		<div id="chat-container"></div>
-	
-	
-		<!-- 질문 입력 칸 -->
+
 		<form id="input-form">
 			<input type="text" id="input-message"
 				placeholder="EpiBot에게 보낼 메세지를 입력하세요." />
@@ -186,13 +252,28 @@ button, input {
 		</form>
 	</div>
 
-<!-- ====================================================================== -->
 
-	<script type="text/javascript">
+<script type="text/javascript">
     const chatContainer = document.getElementById("chat-container");
+    const backButton = document.getElementById("back-button"); // ← 아이콘 가져오기
+    const refreshButton = document.getElementById("refresh-button"); // ↻ 아이콘 가져오기
 
+	// [← 뒤로가기 버튼 클릭 이벤트]
+	backButton.addEventListener("click", function() {
+	  window.history.back(); // 이전 페이지로 이동
+	});
+   
+	// [↻ 새로고침 버튼 클릭 이벤트]
+	refreshButton.addEventListener("click", function() {
+		refreshButton.classList.add("rotating"); // 회전 클래스
+		setTimeout(function() {
+			location.reload(); // 0.4초 후 페이지 새로고침
+		}, 400);
+	});
+
+    // [사용자 말풍선 출력]
     function appendMessage(htmlContent, isUser = false) {
-    	  // 사용자 말풍선 <br><br> 생성
+    	  // 여백 조정을 위한 <br><br> 생성
     	  const br1 = document.createElement("br");
 
     	  const div = document.createElement("div");
@@ -204,13 +285,14 @@ button, input {
     	    chatContainer.appendChild(br1.cloneNode()); // 사용자 말풍선 하단 여백
     	    chatContainer.appendChild(br1.cloneNode());
     	    chatContainer.appendChild(br1.cloneNode());
-    	    
+
     	  } else {
     	    chatContainer.appendChild(div);
     	  }
 
     	  chatContainer.scrollTop = chatContainer.scrollHeight;
     	}
+
 
     function renderResponse(data) {
     	  const bubbles = data.bubbles || [];
@@ -220,7 +302,7 @@ button, input {
     	      renderTemplateBubble(bubble);
     	    } else if (bubble.type === "carousel") {
     	      const cards = bubble.data.cards || [];
-    	      cards.forEach(card => renderTemplateBubble(card));
+    	      renderCarousel(cards); // 캐러셀 카드 형식 (함수 만들어 놓고 여기서 호출을 안 했었음.)
     	    } else if (bubble.type === "text") {
     	        const message = bubble.data.description || "";
     	        appendMessage(message);  // 일반 텍스트 메시지 출력
@@ -228,6 +310,8 @@ button, input {
     	  });
     	}
 
+
+    	// [버블 출력 설정]
     	function renderTemplateBubble(bubble) {
     	  const cover = bubble.data.cover;
 
@@ -289,6 +373,66 @@ button, input {
     	}
 
 
+	// [캐러셀 카드 출력 설정]
+	function renderCarousel(cards) {
+	  const carouselWrapper = document.createElement("div");
+	  carouselWrapper.classList.add("carousel-wrapper");
+
+	  cards.forEach(card => {
+	    const item = document.createElement("div");
+	    item.classList.add("carousel-item");
+
+	    const cover = card.data.cover;
+	    const title = cover.title || "";
+	    const img = cover.data.imageUrl;
+	    const desc = cover.data.description || "";
+
+	    item.innerHTML = `
+	      <strong>${title}</strong><br/>
+	      <img src="${img}" class="image" style="width:100%; border-radius:12px;" /><p>${desc}</p>
+	    `;
+
+	    if (card.data.contentTable) {
+	      card.data.contentTable.forEach(row => {
+	        row.forEach(cell => {
+	          const btnData = cell.data;
+	          if (btnData.type === "button") {
+	            const title = btnData.title;
+	            const actionType = btnData.data?.action?.type;
+	            let button = document.createElement("button");
+	            button.textContent = title;
+	            button.classList.add("chat-button");
+
+	            if (actionType === "link") {
+	              const url = btnData.data.action.data.url;
+	              button.addEventListener("click", function () {
+	                window.open(url, "_blank");
+	              });
+	            } else {
+	              const postback = btnData.data?.action?.data?.postbackFull || btnData.data?.action?.data?.postback || title;
+	              button.addEventListener("click", function () {
+	                appendMessage(title, true);
+	                sendMessage(postback);
+	              });
+	            }
+
+	            item.appendChild(button);
+	          }
+	        });
+	      });
+	    }
+
+	    carouselWrapper.appendChild(item);
+	  });
+
+	  const container = document.createElement("div");
+	  container.classList.add("bot-message");
+	  container.appendChild(carouselWrapper);
+	  chatContainer.appendChild(container);
+	  chatContainer.scrollTop = chatContainer.scrollHeight;
+	}
+
+
     function sendMessage(message) {
       /* appendMessage(message, true); */
 
@@ -309,6 +453,7 @@ button, input {
       });
     }
 
+
  	// 이미지 클릭으로 메시지 전송
     $("#send-img").click(function () {
     	const message = $("#input-message").val().trim();
@@ -319,11 +464,38 @@ button, input {
     	}
     });
 
+ 	// 엔터 누를 시 새로고침 현상 방지 (form의 기본 동작 막기)
+ 	$("#input-form").submit(function (e) {
+    	e.preventDefault();
+    });
+
 
     // 최초 인사 메시지 자동 전송
     $(document).ready(function () {
       sendMessage("");  // 최초 인사 메시지
     });
+    
+    
+    
+	// 번역 드롭다운 토글 함수 ==============================================================================
+	function showTranslate() {
+		const elem = document.getElementById("google_translate_element");
+		elem.style.display = (elem.style.display === 'none') ? 'block' : 'none';
+	}
+	
+	// 구글 번역 콜백 함수
+	function initGoogleTranslate() {
+		new google.translate.TranslateElement(
+			{ pageLanguage: 'ko', autoDisplay: false },
+			'google_translate_element'
+		);
+	}
+	</script>
+	
+	<!-- Google 번역 스크립트 (콜백 연결됨) -->
+	<script src="https://translate.google.com/translate_a/element.js?cb=initGoogleTranslate"></script>
+	
+	
   </script>
 </body>
 </html>
