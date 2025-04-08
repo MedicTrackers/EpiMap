@@ -28,4 +28,5 @@ public interface NoticeMapper {
     public int isBoardRead(Map<String, Object> map);
 
     public void insertBoardRead(Map<String, Object> map);
+
 }

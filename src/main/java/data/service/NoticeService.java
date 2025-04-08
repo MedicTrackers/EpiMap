@@ -30,8 +30,15 @@ public class NoticeService {
         return noticeMapper.getTotalCount();
     }
 
-    public List<NoticeDto> getPagingList(Map<String, Object> map) {
-        return noticeMapper.getPagingList(map);
+    public List<NoticeDto> getPagingList(Map<String, Object> map)
+    {
+        List<NoticeDto> noticeList = noticeMapper.getPagingList(map);
+        for (NoticeDto dto : noticeList) {
+            if (dto.getNphoto() != null) {
+                dto.setThumbnail(dto.getNphoto().split(",")[0]);
+            }
+        }
+        return noticeList;
     }
 
     public NoticeDto getSelectById(int boards_id) {
@@ -49,4 +56,5 @@ public class NoticeService {
     public void insertBoardRead(Map<String, Object> map) {
         noticeMapper.insertBoardRead(map);
     }
+
 }

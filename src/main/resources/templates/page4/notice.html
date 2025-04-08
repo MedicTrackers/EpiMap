@@ -151,10 +151,10 @@
                                 <!-- 왼쪽: 썸네일 이미지 -->
                                 <div>
                                     <img th:if="${dto.nphoto != null}"
-                                         th:src="@{${imagePath} + ${dto.nphoto}}"
+                                         th:src="@{${imagePath} + ${dto.thumbnail}}"
                                          alt="공지 이미지"
                                          style="width: 100px; height: 70px; object-fit: contain; border-radius: 8px;" />
-                                    <!-- 기본 이미지 대체 (선택 사항) -->
+
                                     <img th:if="${dto.nphoto == null}"
                                          src="/default_image.png"
                                          alt="기본 이미지"

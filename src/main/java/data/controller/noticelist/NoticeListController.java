@@ -55,6 +55,7 @@ public class NoticeListController {
 
         List<NoticeDto> noticeList = noticeService.getPagingList(map);
 
+
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("totalCount", totalCount);
         model.addAttribute("pageNum", pageNum);

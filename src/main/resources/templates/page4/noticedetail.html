@@ -60,6 +60,7 @@
             margin-top: 10px;
             height: calc(100vh - 120px); /* 부모 div의 높이를 100%로 설정 */
             overflow-y: auto; /* 내부 스크롤 가능 */
+            padding: 20px;
             padding-right: 10px; /* 스크롤바 공간 */
         }
 
@@ -135,25 +136,30 @@
         <div class="notice-list-inner">
             <div class="notice-header">
                 <b class="page5_title">공지사항</b>
-                <h1 class="subject"><b th:text="${dto.subject}"></b></h1>
-                <!-- 작성자 정보 -->
-                <div class="profile-image">
+                <div class="d-flex align-items-center gap-3">
                     <img src="/doctor1.png" class="profile-image" alt="작성자">
                     <div>
                         <div class="profile-info-name" th:text="${dto.nickname}">작성자</div>
                         <div class="profile-info-date" th:text="${#dates.format(dto.writeday, 'yyyy-MM-dd HH:mm')}">날짜</div>
                     </div>
                 </div>
+            </div>
+            <h1 class="subject mt-3"><b th:text="${dto.subject}"></b></h1>
 
-                <
 
-                <!-- 이미지 -->
-                <th:block th:if="${dto.nphoto != null}">
-                    <img th:src="@{|${imagePath}${dto.nphoto}|}" class="img-thumbnail"
-                    >
-                </th:block>
 
-                <!-- 내용 -->
+
+            <!-- 여러 이미지 출력 -->
+            <th:block th:if="${dto.nphotoList != null}">
+                <div class="row">
+                    <div class="col-12 mb-3" th:each="photo : ${dto.nphotoList}">
+                        <img th:src="@{|${imagePath}${photo}|}" class="img-thumbnail" style="max-width: 100%;">
+                    </div>
+                </div>
+            </th:block>
+
+
+            <!-- 내용 -->
                 <p class="content" th:text="${dto.content}"></p>
 
                 <!-- 첨부파일 -->
