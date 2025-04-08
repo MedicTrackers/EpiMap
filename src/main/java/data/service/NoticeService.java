@@ -5,33 +5,48 @@ import data.mapper.NoticeMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
 public class NoticeService {
     final NoticeMapper noticeMapper;
 
-    public void insertNotice(NoticeDto dto){
+    public void insertNotice(NoticeDto dto) {
         noticeMapper.insertNotice(dto);
     }
-    public void deleteNotice(int boards_id){
+
+    public void deleteNotice(int boards_id) {
         noticeMapper.deleteNotice(boards_id);
     }
-    public  void updateNotice(NoticeDto dto){
+
+    public void updateNotice(NoticeDto dto) {
         noticeMapper.updateNotice(dto);
     }
-    public int getTotalCount(){
+
+    public int getTotalCount() {
         return noticeMapper.getTotalCount();
     }
-    public List<NoticeDto> getPagingList(int startNum, int perPage){
-        return noticeMapper.getPagingList(startNum, perPage);
+
+    public List<NoticeDto> getPagingList(Map<String, Object> map) {
+        return noticeMapper.getPagingList(map);
     }
-    public NoticeDto getSelectById(int boards_id)
-    {
+
+    public NoticeDto getSelectById(int boards_id) {
         return noticeMapper.getSelectById(boards_id);
     }
-    public List<NoticeDto> getLastestNotices(){
+
+    public List<NoticeDto> getLastestNotices() {
         return noticeMapper.getLastestNotices();
+    }
+
+    public int isBoardRead(Map<String, Object> map) {
+        return noticeMapper.isBoardRead(map);
+    }
+
+    public void insertBoardRead(Map<String, Object> map) {
+        noticeMapper.insertBoardRead(map);
     }
 }

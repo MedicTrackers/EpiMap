@@ -18,5 +18,8 @@
 	<delete id="deleteMyResult" parameterType="int">
 		delete from myresult where myresult_id = #{myresult_id}
 	</delete>
-	
+	<!-- 스크랩 목록 삭제 -->
+	<delete id="deleteMyScrab" parameterType="int">
+		delete from scrabs where scrabs_id = #{scrabs_id}
+	</delete>
 </mapper>

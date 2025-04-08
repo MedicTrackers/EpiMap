@@ -92,9 +92,9 @@
 		display: flex;
 		flex-direction: column;
 		width: 20px;
-		height: 150px;
+		height: 240px;
 		align-items: flex-start;
-		gap: 26.57px;
+		gap: 40px;
 		padding: 0px 0px 13.28px;
 		position: relative;
 	} 
@@ -180,13 +180,12 @@
 	.chartbox .ylabel {
 		position: relative;
 		width: 70px;
-		height: 13.28px;
+		height: 20px;
 		margin-top: -0.83px;
 		font-weight: 600;
 		color: black;
-		font-size: 6px;
+		font-size: 10px;
 		letter-spacing: 0;
-		line-height: 10.0px;
 	}
 	
 	.chartbox .chart {
@@ -327,58 +326,17 @@
 		margin-bottom: 15px;
 	}
 	
-	.chartbox .progress-bar-w-2-1 {
-		width: 110px;
-		height: 20px;
-		background-color: #c91c1c;
-		border-radius: 41.52px;
-	}
-	
-	.chartbox .progress-bar-w-2-2 {
-		width: 78px;
-		height: 20px;
-		background-color: #c91c1c;
-		border-radius: 41.52px;
-	}
-	
-	.chartbox .progress-bar-w-2-3 {
-		width: 55px;
-		height: 20px;
-		background-color: #c91c1c;
-		border-radius: 41.52px;
-	}
-	
-	.chartbox .progress-bar-w-2-4 {
-		width: 50px;
-		height: 20px;
-		background-color: #c91c1c;
-		border-radius: 41.52px;
-	}
-	
-	.chartbox .progress-bar-w-2-5 {
-		width: 38px;
-		height: 20px;
-		background-color: #c91c1c;
-		border-radius: 41.52px;
-	}
-	
-	.chartbox .progress-bar-w-2-6 {
-		width: 72px;
-		height: 20px;
-		background-color: #c91c1c;
-		border-radius: 41.52px;
-	}
-	
-	.chartbox .progress-bar-w-2-7 {
-		width: 105px;
-		height: 20px;
-		background-color: #c91c1c;
-		border-radius: 41.52px;
-	}
-	
+	.chartbox .progress-bar-w-2-1,
+	.chartbox .progress-bar-w-2-2, 
+	.chartbox .progress-bar-w-2-3, 
+	.chartbox .progress-bar-w-2-4, 
+	.chartbox .progress-bar-w-2-5, 
+	.chartbox .progress-bar-w-2-6, 
+	.chartbox .progress-bar-w-2-7, 
 	.chartbox .progress-bar-w-2-8 {
-		width: 44px;
-		height: 0px;
+		width: 0;
+		height: 20px;
+		transition: width 1.5s ease-in-out; /* 애니메이션 효과 */
 		background-color: #c91c1c;
 		border-radius: 41.52px;
 	}
@@ -474,6 +432,7 @@
 		flex: 0 0 auto;
 		background-color: #ffffff00;
 		overflow: hidden; 
+		flex-wrap: no	wrap;
 	}
 	
 	.searchbox .cell {
@@ -535,7 +494,12 @@
 		position: relative;
 		flex: 1;
 		margin-top: -1.00px;
+		width: 100%;
 		letter-spacing: 0;
+		display: flex;
+		white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    	overflow: hidden;    /* 넘치는 텍스트 숨기기 */
+    	text-overflow: ellipsis; /* 넘치는 부분에 '...' 표시 */
 	}
 	
 	.searchbox .text-2 {
@@ -623,7 +587,7 @@
 								인플루엔자 의사환자분율에서 분모값인 총 외래환자의 수는 해당 주간에 감시 대상 의료기관에서 보고된 외래 진료를 받은 모든 환자의 총합입니다.
 								이 값은 전국의 표본감시 의료기관(약 100여 개)에서 수집된 데이터를 기반으로 산출됩니다<br><br>
 								더 자세한 통계는 아래의 질병관리청에서 운영하는 포털에서 확인해주시기를 바랍니다.<br><br>
-								인플루엔자 유행 여부를 판단하는 기준은 **유행기준(epidemic threshold)**으로 설정된 의사환자분율입니다.
+								인플루엔자 유행 여부를 판단하는 기준은 유행기준(epidemic threshold)으로 설정된 의사환자분율입니다.
 								이 기준은 과거 3개 절기의 비유행 기간 동안의 주간 평균 의사환자분율에 2배의 표준편차를 더한 값으로 산출됩니다<br><br>
 								예를 들어, 2024-2025절기의 유행기준은 외래환자 1,000명당 8.6명으로 설정되었습니다.
 								따라서, 의사환자분율이 이 값을 초과하면 인플루엔자 유행으로 간주됩니다.
@@ -650,10 +614,10 @@
 			<div class="statistics">
 				<div class="spacer"></div>
 				<div class="div">
-					<div class="text-wrapper">14.0</div>
-					<div class="text-wrapper-2">12.5</div>
-					<div class="text-wrapper-3">11.0</div>
-					<div class="text-wrapper-4">9.5</div>
+					<div class="text-wrapper">16.3</div>
+					<div class="text-wrapper-2">14.2</div>
+					<div class="text-wrapper-3">12.2</div>
+					<div class="text-wrapper-4">10.1</div>
 					<div class="text-wrapper-5">8.0</div>
 					<div class="ylabel">의사환자분율</div>
 				</div>
@@ -757,7 +721,7 @@
 		          "progress-bar-w-2-5": "3월 1주차: 8.0",
 		          "progress-bar-w-2-6": "3월 2주차: 10.8",
 		          "progress-bar-w-2-7": "3월 3주차: 13.2",
-		          "progress-bar-w-2-8": "3월 4주차: 집계중",
+		          "progress-bar-w-2-8": "3월 4주차: 16.3",
 		        };
 
 		        const className = $(this).attr("class").split(" ")[0]; // 첫 번째 클래스 이름 가져오기
@@ -775,7 +739,7 @@
 		          "progress-bar-w-2-5": "3월 1주차: 8.0",
 		          "progress-bar-w-2-6": "3월 2주차: 10.8",
 		          "progress-bar-w-2-7": "3월 3주차: 13.2",
-		          "progress-bar-w-2-8": "3월 4주차: 집계중",
+		          "progress-bar-w-2-8": "3월 4주차: 16.3",
 		        };
 
 		        const className = $(this).attr("class").split(" ")[0]; // 첫 번째 클래스 이름 가져오기
@@ -784,6 +748,23 @@
 		        createTooltip($(this), tooltipText);
 		      },
 		    });
+		 
+		 	// 각 progress bar의 원래 width를 저장하고 애니메이션 시작
+		    const progressBars = [
+		      { selector: '.progress-bar-w-2-1', width: '110px' },
+		      { selector: '.progress-bar-w-2-2', width: '72px' },
+		      { selector: '.progress-bar-w-2-3', width: '40px' },
+		      { selector: '.progress-bar-w-2-4', width: '35px' },
+		      { selector: '.progress-bar-w-2-5', width: '27px' },
+		      { selector: '.progress-bar-w-2-6', width: '68px' },
+		      { selector: '.progress-bar-w-2-7', width: '105px' },
+		      { selector: '.progress-bar-w-2-8', width: '147px' }
+		    ];
+		 	
+		    progressBars.forEach(bar => {
+		        $(bar.selector).css('width', bar.width); // 원래 크기로 애니메이션
+		    });
+		    
 		  });
 	</script>
 	
@@ -791,7 +772,7 @@
 		<div class="view">
 			<div class="overlap-group">
 				<div class="div"></div>
-				<div class="text-wrapper-2">건강 분야 인기 검색어</div>
+				<div class="text-wrapper-2">독감 분야 최신 블로그</div>
 				<div class="view-2">
 					<div class="row" th:each="post, iter: ${blogPosts}">
 						<div class="cell">
@@ -807,11 +788,7 @@
 								</a>
 							</div>
 						</div>
-						<div class="cell">
-							<div class="content">
-								<div class="text-2">-</div>
-							</div>
-						</div>
+
 					</div>
 				</div>
 				<!-- 데이터 없을 때 표시 -->

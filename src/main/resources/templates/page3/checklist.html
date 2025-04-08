@@ -7,35 +7,60 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <style type="text/css">
 @font-face {
-    font-family: 'GothicA1-Light';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
-    font-weight: 300;
-    font-style: normal;
+	font-family: 'GothicA1-Light';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2')
+		format('woff2');
+	font-weight: 300;
+	font-style: normal;
 }
+
+@font-face {
+	font-family: 'GothicA1-Bold';
+	src:
+		url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
 body {
-  	font-family: 'GothicA1-Light', sans-serif;
+	font-family: 'GothicA1-Light', sans-serif;
 }
+
+@media screen and (min-height: 913px) {
+	body {
+		/* overflow: hidden; */
+		position: fixed;
+		width: 100%;
+	}
+}
+
 .overview {
-  	width: 375px;
-  	height: 107px;
-  	border: 1px solid gray;
-  	margin: 0 auto;
-  	margin-top: 10px;
-  	padding: 10px;
-  	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
+	width: 90%;
+	max-width: 500px;
+	height: auto;
+	border: 1px solid gray;
+	margin: 0 auto;
+	margin-top: 10px;
+	padding: 10px;
+	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px
+		#96a7af66;
 	background: linear-gradient(150deg, rgba(1, 57, 254, 0.4) 0%,
-      rgba(16, 241, 255, 0.4) 100%),
-      linear-gradient(0deg, rgba(0,98,255,1) 0%,
-      rgba(0,98,255,1) 100%);
-  	border-radius: 10px;
-  	color: white;
-  	font-weight: bold;
+		rgba(16, 241, 255, 0.4) 100%),
+		linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
+	border-radius: 10px;
+	color: white;
+	font-weight: bold;
 }
+
 .overview span {
 	font-size: 20px;
 }
+
 .overview p {
 	font-size: 13px;
 	margin-top: 10px;
@@ -44,52 +69,67 @@ body {
 .backbox {
 	background-color: #fdfdfd;
 	bottom: 0;
-	margin: 0 auto;
+	margin: 10px auto 0 auto;
 	width: 99vw;
 	height: 100vh;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
-	margin-top: 10px;
 	padding: 20px;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 	font-weight: bold;
 }
+
 .page3_title {
-	font-size: 28px;
+	font-size: 33px;
 	color: #0062FF;
-	font-weight: bold;
+	font-family: 'GothicA1-Bold', sans-serif;
+	font-weight: 900;
 }
+
 .checkbox {
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-	margin: 0 auto;
-	margin-top: 40px;
-	width: 350px;
+	margin: 20px auto 0 auto;
+	width: 90%;
+	max-width: 500px;
 	height: 404px;
-	/* padding-top: 20px; */
 	border-radius: 15px;
 	display: flex;
 	flex-direction: column;
 }
+
+@media screen and (min-height: 914px) {
+	.checkbox {
+		height: 50vh;
+		padding: 15px 10px 5px;
+		gap: 5px;
+		overflow-y: auto;
+	}
+}
+
 .labels {
 	width: 150px;
 	height: 24px;
 	padding: 15px;
 	line-height: 24px;
 }
+
 .labels:hover {
 	color: #0062FF;
 	font-size: 1.1em;
 	font-weight: bold;
 }
+
 .labels.selected {
 	color: #0062FF;
 	font-weight: bold;
 }
+
 .checks {
 	width: 16px;
 	height: 16px;
 	border-radius: 15px;
 }
+
 .checkbtn {
 	background-color: #0062FF;
 	color: #ffffff;
@@ -97,21 +137,59 @@ body {
 	margin-bottom: 20px;
 	align-self: center;
 }
+
+.listbtn {
+	background-color: #0062FF;
+	color: #ffffff;
+	float: right;
+}
+
 .warn {
 	display: none;
 	color: red;
 	font-size: 0.8em;
-	float: right;
 }
+
 .noticeContainer {
 	background-color: #d9d9d9;
 	font-size: 20px;
 	margin-top: 125px;
 	padding: 15px;
 }
-#noticeTicker li{
+
+#noticeTicker li {
 	margin-left: 20px;
 	list-style: none;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+#listModal {
+	align-content: center;
+	max-width: 90vw;
+	margin: 0 5vw 0;
+}
+.modal-title {
+	font-size: 28px;
+	color: #0062FF;
+	font-family: 'GothicA1-Bold', sans-serif;
+	font-weight: 900;
+	margin-left: 10px;
+}
+.modal-body {
+	margin-top: 8px;
+}
+#listModal ul {
+	font-family: 'GothicA1-Light', sans-serif;
+	font-weight: bold;
+}
+#listModal ul li {
+	list-style-position: inside;
+	margin-bottom: 12px;
+	white-space: nowrap; 
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 </style>
 </head>
@@ -131,9 +209,12 @@ body {
 
 	<!-- 체크리스트 -->
 	<div class="backbox">
-		<b class="page3_title">체크리스트</b>
-		<span class="warn">증상을 하나는 선택해 주세요</span>
+		<p class="page3_title">체크리스트
+      		<button type="button" class="btn btn-info listbtn"
+      		 data-bs-toggle="modal" data-bs-target="#listModal">목록</button>
+		</p>
 		<hr>
+		<span class="warn">증상을 하나는 선택해 주세요</span>
 		<div class="checkbox">
 			<label class="labels" th:each="dto:${symptoms}">
 				<input type="checkbox" th:value="|${dto.idx}|" class="checks" />&nbsp;&nbsp;&nbsp;
@@ -141,6 +222,34 @@ body {
 			</label>
 			
 			<button type="button" class="btn btn-info checkbtn">진단결과 확인</button>
+		</div>
+	</div>
+
+	<!-- The Modal -->
+	<div class="modal" id="listModal">
+		<div class="modal-dialog">
+		   	<div class="modal-content">
+				
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">자가진단 목록</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+							
+				<!-- Modal body -->
+				<div class="modal-body"><ul>
+					<li>코로나 바이러스 감염증-19</li>
+					<li>독감</li>
+					<li>감기</li>
+					<li>장염</li>
+					<li>결핵</li>
+					<li>홍역</li>
+					<li>수두</li>
+					<li>A형 간염</li>
+					<li>세균성 인플루엔자</li></ul>
+				</div>
+			      
+	        </div>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -170,8 +279,6 @@ body {
 			location.href = "/checklist/result?symptoms="+selectedValues; 
 		});
 		
-		document.body.style.position="fixed";
-		document.body.style.width="100%";
 	</script>
 
 	<script type="text/javascript">

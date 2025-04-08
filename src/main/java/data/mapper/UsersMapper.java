@@ -1,6 +1,7 @@
 package data.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import data.dto.UsersDto;
 
@@ -12,5 +13,5 @@ public interface UsersMapper {
 	public int checkUserId(String userId);
 	public UsersDto getSelectById(int users_id);
 	public void deleteMyResult(int myresult_id);
-
+	public int deleteMyScrab(@Param("scrabs_id") int scrabs_id);
 }
