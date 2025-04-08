@@ -13,7 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Vector;
 
 @Controller
 public class NoticeController {
@@ -28,38 +31,7 @@ public class NoticeController {
     @Autowired
     private UsersService usersService;
 
-    // 1️⃣ **공지사항 리스트 (페이징)**
-    @GetMapping("/notice")
-    public String noticeList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, Model model) {
-        int perPage = 2; // 한 페이지당 출력할 글 개수
-        int perBlock = 5; // 한 블럭당 출력할 페이지 개수
-        int totalCount = noticeService.getTotalCount(); // 전체 글 개수
-        int totalPage = (int) Math.ceil((double) totalCount / perPage); // 총 페이지 수
-        int startNum = (pageNum - 1) * perPage; // 각 페이지에서 가져올 시작번호
-
-        int startPage = ((pageNum - 1) / perBlock) * perBlock + 1;
-        int endPage = Math.min(startPage + perBlock - 1, totalPage);
-
-        List<NoticeDto> noticeList = noticeService.getPagingList(startNum, perPage);
-
-        model.addAttribute("noticeList", noticeList);
-        model.addAttribute("totalCount", totalCount);
-        model.addAttribute("pageNum", pageNum);
-        model.addAttribute("totalPage", totalPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-        model.addAttribute("imagePath", imagePath);
-        model.addAttribute("filePath", filePath);
-
-        return "page4/notice"; // HTML 파일 경로
-    }
-
-    @GetMapping("/noticeform")
-    public String noticeform(){
-        return "page4/noticeform";
-    }
-
-    @PostMapping("/insert")
+    @PostMapping("/notice/insert")
     public String insertNotice(
             @ModelAttribute NoticeDto noticeDto,
             @RequestParam("imageUpload") MultipartFile imageUpload,  // 이미지 파일 처리
@@ -168,5 +140,34 @@ public class NoticeController {
         noticeService.deleteNotice(boards_id);
 
         return "redirect:/notice";
+    }
+
+    @GetMapping("/notice/detail")
+    public String detail(@RequestParam ("boards_id") int boards_id,
+                         @RequestParam (defaultValue = "1") int pageNum, Model model,
+                         HttpSession session)
+    {
+        UsersDto loginUser=(UsersDto) session.getAttribute("loginUser");
+        if (loginUser != null)
+        {
+            int users_id = loginUser.getUsers_id();
+
+            // 읽은 기록 있는지 확인
+            Map<String, Object> map = new HashMap<>();
+            map.put("users_id", users_id);
+            map.put("boards_id", boards_id);
+
+            if (noticeService.isBoardRead(map) == 0) {
+                noticeService.insertBoardRead(map);
+            }
+        }
+
+    NoticeDto dto= noticeService.getSelectById(boards_id);
+
+        model.addAttribute("dto", dto);
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("imagePath", imagePath);
+        model.addAttribute("filePath", filePath);
+        return"page4/noticedetail";
     }
 }

@@ -4,7 +4,10 @@ import data.dto.NoticeDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+
 import java.util.List;
+import java.util.Map;
+
 
 @Mapper
 public interface NoticeMapper {
@@ -16,9 +19,13 @@ public interface NoticeMapper {
 
     public int getTotalCount();
 
-    public List<NoticeDto> getPagingList(@Param("startNum")int startNum, @Param("perPage") int perPage);
+    List<NoticeDto> getPagingList(Map<String, Object> map);
 
     public NoticeDto getSelectById(int boards_id);
 
     public List<NoticeDto> getLastestNotices();
+
+    public int isBoardRead(Map<String, Object> map);
+
+    public void insertBoardRead(Map<String, Object> map);
 }
