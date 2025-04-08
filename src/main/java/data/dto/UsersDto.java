@@ -11,8 +11,10 @@ import lombok.Data;
 public class UsersDto {
 	private int users_id;
 	private String user_id;
+	private String kakao_id;
 	private String password;
 	private String nickname;
 	private boolean admin;
 	private Timestamp createdday;
+	private String kakao_nickname; 
 }
