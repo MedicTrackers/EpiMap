@@ -54,9 +54,11 @@
     /*내위치에서 검색 버튼 css*/
     .gpsbtb {
         position: absolute;
-        top: 180px;
-        left: 15px;
-        z-index: 2;
+        top: 142px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+
         background-color: #ffffff;
         padding: 6px 12px;
         border-radius: 8px;
@@ -64,7 +66,14 @@
         box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         color: #0062ff;
         border: none;
+
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        /*버튼 줄바꿈 방지*/
+        white-space: nowrap;
     }
+
 
     /*바텀시티 트리거 터치감지용 css*/
     .up_sensor {
@@ -293,7 +302,9 @@
         <img src="/images/catch_icon.png" width="24" height="24" alt="내위치아이콘">
     </button>
     <!-- 내 위치에서 검색버튼 -->
-    <button id="searchByMapCenterBtn"  class="gpsbtb">이 위치에서 검색</button>
+    <button id="searchByMapCenterBtn"  class="gpsbtb">
+        <i class="bi bi-arrow-clockwise" style="font-size: 20px;"></i> 이 위치에서 검색
+    </button>
 
     <!-- 바텀시트 트리거 센서 (터치 감지용) -->
     <div class="up_sensor"></div>
@@ -320,9 +331,15 @@
 
 <script>
 
+    let lat;
+    let lon;
+    let map; // 전역 변수로 선언
+    let activeInfoWindow = null;  // 현재 열려있는 정보창 추적
+    let hospitalMarkers = [];
     let myLocationMarker = null;
     let myInfoWindow = null;
 
+    /*내위치 아이콘 클릭시 스크립트*/
     $("#myLocationBtn").on("click", function () {
 
         navigator.geolocation.getCurrentPosition(
@@ -380,18 +397,12 @@
         );
     });
 
-
-    let lat;
-    let lon;
-    let map; // 전역 변수로 선언
-    let activeInfoWindow = null;  // 현재 열려있는 정보창 추적
-    let hospitalMarkers = [];
-
     function clearHospitalMarkers() {
         hospitalMarkers.forEach(marker => marker.setMap(null));
         hospitalMarkers = [];
     }
 
+    // 내위치 검색 버튼 스크립트
     $("#searchByMapCenterBtn").on("click", function () {
         const center = map.getCenter(); // 현재 지도 중심
         lat = center.lat();
@@ -416,13 +427,11 @@
         return R * c;
     }
 
+    /*지도 초기화*/
     navigator.geolocation.getCurrentPosition((position) => {
         console.log(">>>>"+"getCurrentPosition");
         lat = position.coords.latitude;
         lon = position.coords.longitude;
-
-        console.log("lat : " + lat);
-        console.log("lon : " + lon);
 
         let currentLocation = new naver.maps.LatLng(lat, lon);
 
@@ -469,7 +478,7 @@
             title: '내 위치'
         });
 
-        // 클릭하면 정보창도 뜨게 일단 구현
+        // 내위치 클릭하면 정보창 구현
         let infoWindow = new naver.maps.InfoWindow({
             content: '<div style="padding:5px;">📍 현재 위치입니다.</div>'
         });
@@ -493,17 +502,20 @@
     let deltaY = 0;
     let currentState = 'middle'; // 상태: 'min' | 'middle' | 'max'
 
-    bottomSheet.style.height = '48%'; // 초기 상태는 중간
+    // 초기 높이 설정
+    bottomSheet.style.height = '48%';
 
+    // 터치 시작
     bottomSheet.addEventListener('touchstart', (e) => {
         startY = e.touches[0].pageY;
     });
 
+    // 터치 종료 시 방향 판별
     bottomSheet.addEventListener('touchend', (e) => {
         deltaY = e.changedTouches[0].pageY - startY;
 
         if (deltaY < -30) {
-            // 올림
+            // 위로 스와이프 (올림)
             if (currentState === 'middle') {
                 bottomSheet.style.height = '85%';
                 currentState = 'max';
@@ -512,7 +524,7 @@
                 currentState = 'middle';
             }
         } else if (deltaY > 30 && bottomSheet.scrollTop === 0) {
-            // 내림
+            // 아래로 스와이프 (내림)
             if (currentState === 'middle') {
                 bottomSheet.style.height = '20%';
                 currentState = 'min';
@@ -541,7 +553,7 @@
         });
     }
 
-    /*공공데이터 api 호출*/
+    /*병원 공공데이터 api 호출*/
     function medical() {
 
         clearHospitalMarkers();              // 🔹 기존 마커 제거
@@ -662,7 +674,7 @@
 
                     let cleanedName = cleanHospitalName(info.dutyName['#text']);
 
-                    if (!info.hvec?.['#text']) return; // 값 없으면 skip
+                    if (!info.hvec?.['#text']) return; // 응급실 가용여부 값 없으면 skip
 
                     $("#medical-list").append(`
 
@@ -694,8 +706,7 @@
         });
     }
 
-    //api 호출
-    // XML을 JSON으로 변환하는 함수
+    //공공데이터 api XML을 JSON으로 변환하는 함수
     function xmlToJson(xml) {
         var obj = {};
         if (xml.nodeType == 1) { // element
