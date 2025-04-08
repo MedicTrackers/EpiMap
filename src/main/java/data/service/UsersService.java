@@ -34,4 +34,12 @@ public class UsersService {
 	public void deleteMyScrab(int scrabs_id) {
 		usersMapper.deleteMyScrab(scrabs_id);
 	}
+	
+	public void connectKakao(int users_id, String kakao_id, String kakao_nickname) {
+		usersMapper.connectKakao(users_id, kakao_id, kakao_nickname);
+	}
+	
+	public UsersDto findById(@Param("users_id") int users_id) {
+		return usersMapper.findById(users_id);
+	}
 }

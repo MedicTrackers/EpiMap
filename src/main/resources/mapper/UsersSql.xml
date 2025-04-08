@@ -22,4 +22,16 @@
 	<delete id="deleteMyScrab" parameterType="int">
 		delete from scrabs where scrabs_id = #{scrabs_id}
 	</delete>
+	
+	<update id="connectKakao">
+	    UPDATE users
+	    SET kakao_id = #{kakao_id}, kakao_nickname = #{kakao_nickname}
+	    WHERE users_id = #{users_id}
+	</update>
+	
+	<select id="findById" resultType="UsersDTO">
+		  SELECT users_id, user_id, kakao_id, kakao_nickname, nickname
+		  FROM users
+		  WHERE users_id = #{users_id}
+	</select>
 </mapper>
