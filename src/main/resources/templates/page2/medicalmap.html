@@ -11,7 +11,6 @@
     <!-- map api 각자 발급받은 Client ID 값 넣기 -->
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=yg9kt0fwzl&language=en"></script>
 
-
 <style>
     @font-face {
         font-family: 'GothicA1-Light';
@@ -48,8 +47,8 @@
         width: 30px;
         height: 30px;
         z-index: 8;
-        right: 13px;
-        top: 230px;
+        right: 9px;
+        top: 240px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -307,7 +306,7 @@
     </button>
     <!-- 내 위치에서 검색버튼 -->
     <button id="searchByMapCenterBtn"  class="gpsbtb">
-        <i class="bi bi-arrow-clockwise" style="font-size: 20px;"></i>이 위치에서 검색
+        <i class="bi bi-arrow-clockwise" style="font-size: 20px;"></i>현 위치에서 검색
     </button>
 
     <!-- 바텀시트 트리거 센서 (터치 감지용) -->
@@ -641,6 +640,7 @@
 
                 // 마커 및 카드 출력
                 $.each(filtered, function(idx, info) {
+
                     if (!info.hvec?.['#text']) return; //응급실 가용여부 없으면 마커 생성안함
 
                     let hospitalPosition = new naver.maps.LatLng(info.hospLat, info.hospLon);
