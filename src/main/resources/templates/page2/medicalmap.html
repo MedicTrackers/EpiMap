@@ -35,7 +35,7 @@
     .map-container {
         width: 100vw;
         height:100vh;
-        margin: -130px auto;
+        margin: 0 auto;
         z-index: 1;
     }
 
@@ -44,11 +44,15 @@
         background-color: #ffffff;
         border: 0px solid transparent;
         position: absolute;
+        border-radius: 50%;
         width: 30px;
         height: 30px;
         z-index: 8;
         right: 13px;
         top: 230px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     /*내위치에서 검색 버튼 css*/
@@ -171,7 +175,7 @@
     .medical-box {
         display: flex;
         flex-direction: column;
-        align-items: center; /* 🎯 카드 가운데 정렬 */
+        align-items: center; /*카드 가운데 정렬 */
         overflow-x: auto;
         gap: 16px;
         scrollbar-width: none; /* Firefox */
@@ -303,7 +307,7 @@
     </button>
     <!-- 내 위치에서 검색버튼 -->
     <button id="searchByMapCenterBtn"  class="gpsbtb">
-        <i class="bi bi-arrow-clockwise" style="font-size: 20px;"></i> 이 위치에서 검색
+        <i class="bi bi-arrow-clockwise" style="font-size: 20px;"></i>이 위치에서 검색
     </button>
 
     <!-- 바텀시트 트리거 센서 (터치 감지용) -->
@@ -331,13 +335,132 @@
 
 <script>
 
-    let lat;
-    let lon;
-    let map; // 전역 변수로 선언
+    let lat,lon,map;
     let activeInfoWindow = null;  // 현재 열려있는 정보창 추적
     let hospitalMarkers = [];
     let myLocationMarker = null;
     let myInfoWindow = null;
+
+    // 내위치 검색 버튼 제어 함수
+    function hideSearchBtn() {
+        $("#searchByMapCenterBtn").fadeOut(200); // 부드럽게 숨김
+    }
+
+    function showSearchBtn() {
+        $("#searchByMapCenterBtn").fadeIn(200); // 부드럽게 보임
+    }
+
+    function clearHospitalMarkers() {
+        hospitalMarkers.forEach(marker => marker.setMap(null));
+        hospitalMarkers = [];
+    }
+
+    // 거리 계산 함수 (Haversine)
+    function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+        function deg2rad(deg) {
+            return deg * (Math.PI / 180);
+        }
+        const R = 6371; // 지구 반지름 (km)
+        const dLat = deg2rad(lat2 - lat1);
+        const dLon = deg2rad(lon2 - lon1);
+        const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+    }
+
+    /*병원리스트 클릭시 색상변화 및 스크롤 영역 부드럽게 설정*/
+    function highlightCard(idx) {
+        $(".medical-list-container").removeClass("select");
+        $(".medical-list-container .medical-phone, .medical-list-container .medical-name").removeClass("selectfont");
+
+        let $target = $(`.medical-list-container[data-idx="${idx}"]`);
+        $target.addClass("select");
+        $target.find(".medical-phone, .medical-name").addClass("selectfont");
+
+        $("#medical-list").prepend($target);
+
+        // ✅ 스크롤 영역 기준으로 해당 요소로 부드럽게 스크롤
+        $target[0].scrollIntoView({
+            behavior: 'smooth',
+            block: 'start' // 'center', 'end'도 가능
+        });
+    }
+
+    /*지도 초기화*/
+    navigator.geolocation.getCurrentPosition((position) => {
+        console.log(">>>>"+"getCurrentPosition");
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+
+        let currentLocation = new naver.maps.LatLng(lat, lon);
+
+        let mapOptions = {
+            center: currentLocation,
+            zoom: 15,
+            zoomControl: true,
+            zoomControlOptions: {
+                style: naver.maps.ZoomControlStyle.SMALL,
+                position: naver.maps.Position.RIGHT_CENTER // +,- 지도 위치 변경
+            }
+        };
+
+        map = new naver.maps.Map('map', mapOptions);
+
+
+        //지도 클릭시 정보창 닫기
+        naver.maps.Event.addListener(map, "click", () => {
+            if (activeInfoWindow) {
+                activeInfoWindow.close();
+                activeInfoWindow = null;
+            }
+        });
+
+        // ✅ 지도 이동 시 버튼 다시 보이기
+        naver.maps.Event.addListener(map, "dragend", function () {
+            showSearchBtn();
+        });
+
+
+        // 현재 위치에 마커 찍기
+        let marker = new naver.maps.Marker({
+            position: currentLocation,
+            map: map,
+            icon: {
+                content: `
+          <div style="
+            width: 20px;
+            height: 20px;
+            border: 6px solid rgb(0,98,255);
+            background-color: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+          "></div>
+        `,
+                size: new naver.maps.Size(20, 20),
+                anchor: new naver.maps.Point(10, 10)
+            },
+            title: '내 위치'
+        });
+
+        // 내위치 클릭하면 정보창 구현
+        let infoWindow = new naver.maps.InfoWindow({
+            content: '<div style="padding:5px;">📍 현재 위치입니다.</div>'
+        });
+
+        naver.maps.Event.addListener(marker, "click", function () {
+            infoWindow.open(map, marker);
+        });
+
+        //병원데이터 호출
+        medical();
+
+    }, (error) => {
+        alert("위치 정보를 가져올 수 없습니다. 브라우저 위치 권한을 확인해주세요.");
+        console.error(error);
+    });
 
     /*내위치 아이콘 클릭시 스크립트*/
     $("#myLocationBtn").on("click", function () {
@@ -404,95 +527,17 @@
 
     // 내위치 검색 버튼 스크립트
     $("#searchByMapCenterBtn").on("click", function () {
+        if (!map) {
+            console.warn("지도가 아직 초기화되지 않았습니다.");
+            return;
+        }
+
         const center = map.getCenter(); // 현재 지도 중심
         lat = center.lat();
         lon = center.lng();
         console.log(" 현재 지도 중심 기준 검색:", lat, lon);
+        hideSearchBtn();
         medical(); // 이 위치 기준으로 병원 다시 검색
-    });
-
-    // 거리 계산 함수 (Haversine)
-    function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-        function deg2rad(deg) {
-            return deg * (Math.PI / 180);
-        }
-        const R = 6371; // 지구 반지름 (km)
-        const dLat = deg2rad(lat2 - lat1);
-        const dLon = deg2rad(lon2 - lon1);
-        const a =
-            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c;
-    }
-
-    /*지도 초기화*/
-    navigator.geolocation.getCurrentPosition((position) => {
-        console.log(">>>>"+"getCurrentPosition");
-        lat = position.coords.latitude;
-        lon = position.coords.longitude;
-
-        let currentLocation = new naver.maps.LatLng(lat, lon);
-
-        let mapOptions = {
-            center: currentLocation,
-            zoom: 15,
-            zoomControl: true,
-            zoomControlOptions: {
-                style: naver.maps.ZoomControlStyle.SMALL,
-                position: naver.maps.Position.RIGHT_CENTER // +,- 지도 위치 변경
-            }
-        };
-
-        map = new naver.maps.Map('map', mapOptions);
-
-
-        //지도 클릭시 정보창 닫기
-        naver.maps.Event.addListener(map, "click", () => {
-            if (activeInfoWindow) {
-                activeInfoWindow.close();
-                activeInfoWindow = null;
-            }
-        });
-
-
-        // 현재 위치에 마커 찍기
-        let marker = new naver.maps.Marker({
-            position: currentLocation,
-            map: map,
-            icon: {
-                content: `
-          <div style="
-            width: 20px;
-            height: 20px;
-            border: 6px solid rgb(0,98,255);
-            background-color: #ffffff;
-            border-radius: 50%;
-            box-shadow: 0 0 4px rgba(0,0,0,0.3);
-          "></div>
-        `,
-                size: new naver.maps.Size(20, 20),
-                anchor: new naver.maps.Point(10, 10)
-            },
-            title: '내 위치'
-        });
-
-        // 내위치 클릭하면 정보창 구현
-        let infoWindow = new naver.maps.InfoWindow({
-            content: '<div style="padding:5px;">📍 현재 위치입니다.</div>'
-        });
-
-        naver.maps.Event.addListener(marker, "click", function () {
-            infoWindow.open(map, marker);
-        });
-
-        //병원데이터 호출
-        medical();
-
-    }, (error) => {
-        alert("위치 정보를 가져올 수 없습니다. 브라우저 위치 권한을 확인해주세요.");
-        console.error(error);
     });
 
     /*바텀시트 스크립트*/
@@ -535,23 +580,7 @@
         }
     });
 
-    /*병원리스트 클릭시 색상변화 및 스크롤 영역 부드럽게 설정*/
-    function highlightCard(idx) {
-        $(".medical-list-container").removeClass("select");
-        $(".medical-list-container .medical-phone, .medical-list-container .medical-name").removeClass("selectfont");
 
-        let $target = $(`.medical-list-container[data-idx="${idx}"]`);
-        $target.addClass("select");
-        $target.find(".medical-phone, .medical-name").addClass("selectfont");
-
-        $("#medical-list").prepend($target);
-
-        // ✅ 스크롤 영역 기준으로 해당 요소로 부드럽게 스크롤
-        $target[0].scrollIntoView({
-            behavior: 'smooth',
-            block: 'start' // 'center', 'end'도 가능
-        });
-    }
 
     /*병원 공공데이터 api 호출*/
     function medical() {
