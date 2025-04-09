@@ -46,7 +46,7 @@ body {
 	background-color: #ffffff;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 	width: 95%;
-	margin: 0 auto;
+	margin: 0 auto 10px;
 	padding: 2%;
 	border-radius: 10px;
 	overflow: hidden;
@@ -87,6 +87,7 @@ body {
 	margin-left: 10px;
 }
 .modal-body {
+	font-size: 18px;
 	margin-top: 8px;
 	font-family: 'GothicA1-Light', sans-serif;
 }
@@ -120,16 +121,26 @@ body {
 	<span class="page6_title">Feedback 목록</span>
 	<hr style="max-width: 95vw; margin: 3% auto;">
 	<div class="feedbacks_box">
-		<div class="feedback" data-bs-toggle="modal" data-bs-target="#feedbackModal">
-			<span class="contents">피드백 내용 aaaaaa</span>
-			<p class="write_day">YYYY.MM.dd HH:mm</p>
+		<div th:each="dto:${feedbacks}">
+			<div class="feedback" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+				<span class="contents">[[${dto.content}]]</span>
+				<p class="write_day">[[${dto.writeday}]]</p>
+			</div>
 		</div>
 		
 		
 		<div class="paging">
-			<a href="" class="page-link active">1</a>
-			<a href="" class="page-link">2</a>
-			<a href="" class="page-link">3</a>
+			<a class="page-link" th:if="${pageNum > 1}"
+			 th:href="@{/feedbacks(pageNum=${pageNum - 1})}">&laquo; 이전</a>
+			
+			<span th:each="page : ${#numbers.sequence(startPage, endPage)}">
+				<a class="page-link" th:text="${page}"
+				 th:href="@{/feedbacks(pageNum=${page})}"
+				 th:classappend="${page == pageNum} ? 'active' : ''"></a>
+            </span>
+            
+			<a class="page-link" th:if="${pageNum < totalPage}"
+			 th:href="@{/feedbacks(pageNum=${pageNum + 1})}">다음 &raquo;</a>
 		</div>
 	</div>
 	
@@ -155,6 +166,17 @@ body {
 				</div>
         	</div>
 		</div>
-	</div> 
+	</div>
+	
+	<script type="text/javascript">
+	$(".feedback").click(function() {
+		let contents = "<p>" + $(this).children(".contents").text() + "</p>";
+		let writeday = $(this).children(".write_day").text();
+		
+		$(".modal-day").text(writeday);
+		$(".modal-body").html(contents);
+		
+	});
+	</script>
 </body>
 </html>
