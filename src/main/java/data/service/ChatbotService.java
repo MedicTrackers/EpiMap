@@ -49,7 +49,14 @@ public class ChatbotService {
          }
          br.close();
          
-         return response.toString();
+         // DB 문항을 위해 테스트 중 ================================================================
+           
+         
+         
+         
+         // ===================================================================================
+         
+         return response.toString(); // JSON 응답 받기
          
       } catch (Exception e) {
          e.printStackTrace();
@@ -79,6 +86,7 @@ public class ChatbotService {
       if(messageContent == null || messageContent.trim().isEmpty()) {
          obj.put("event", "open");
       } else {
+    	  
          JSONObject bubbleObj = new JSONObject();
          bubbleObj.put("type", "text");
          
