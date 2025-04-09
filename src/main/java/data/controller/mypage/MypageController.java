@@ -21,9 +21,6 @@ import data.service.ScrabService;
 import data.service.UsersService;
 import jakarta.servlet.http.HttpSession;
 
-
-
-
 @Controller
 public class MypageController {
 	
@@ -53,13 +50,12 @@ public class MypageController {
 			return "page5/login";
 		}
 	}
-	
+	//로그아웃 기능
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 	    session.invalidate(); // ✅ 세션 무효화
 	    return "redirect:/login"; // ✅ 로그인 페이지로 이동
 	}
-	
 	// signup 페이지 불러오기
 	@GetMapping("/signup")
 	public String singupform(Model model) {
