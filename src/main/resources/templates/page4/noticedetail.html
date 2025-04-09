@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공지사항</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <style>
@@ -41,8 +42,8 @@
         }
 
         .notice-detail {
-            position: fixed;
-            top: 170px; /* 공지 배너 일부를 덮게 조정 */
+            position: relative;
+            margin-top: 195px; /* overview의 하단을 살짝 덮도록 음수 margin */
             bottom: 20px;
             width: 99vw;
             max-height: calc(100vh - 180px);
@@ -51,13 +52,15 @@
             z-index: 3; /* 공지 배너보다 위에 배치 */
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
 
-
+        .carousel-item img {
+            height: 400px;           /* 원하는 높이로 고정 */
+            width: 100%;             /* 캐러셀 너비에 맞춤 */
+            object-fit: cover;       /* 비율 유지하면서 자르기 */
+        }
         .notice-list-inner {
-            margin-left: 10px;
-            margin-top: 10px;
+            margin-left: -10px;
             height: calc(100vh - 120px); /* 부모 div의 높이를 100%로 설정 */
             overflow-y: auto; /* 내부 스크롤 가능 */
             padding: 20px;
@@ -68,7 +71,6 @@
             display: flex;
             justify-content: space-between; /* 제목과 버튼을 양쪽 정렬 */
             align-items: flex-end; /* 버튼을 아래쪽으로 배치 */
-            margin-bottom: 5px; /* hr과 간격 조정 */
         }
 
         .page5_title {
@@ -76,52 +78,47 @@
             font-weight: bold;
             color: #0062FF;
         }
-
-        .correct-icon{
-            width: 20px;
-            height: 20px;
-        }
-
-        .delete-icon{
-            width: 20px;
-            height: 20px;
-        }
-        .correct-icon + a, .delete-icon + a {
-            color: black; /* 글자 색상을 검정으로 */
-            text-decoration: none; /* 밑줄 제거 */
-        }
-
-        .correct-icon + a:hover, .delete-icon + a:hover {
-            color: #0062FF; /* 호버 시 색상 */
-        }
-
-        .pagination {
+        .fixed-nav-buttons {
+            left: 50%;
+            bottom: 20px;
+            z-index: 10;
+            background: white;
+            padding:  10px;
             display: flex;
-            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-wrapper {
+            display: flex;
+            margin-top: 10px; /* 필요시 간격 조정 */
+        }
+
+        .btn-edit-delete-group {
+            display: inline-flex;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .btn-edit-delete-group a {
+            display: flex;
             align-items: center;
-            width: 100%; /* 전체 너비 확보 */
-
-            bottom: 20px; /* 원래 높이 유지 */
-        }
-        .pagination a {
-            border: none !important;
-            background: none !important;
-            box-shadow: none !important;
+            padding: 8px 14px;
             text-decoration: none;
-            color: black; /* 기본 검은색 */
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 5px;
+            color: #333;
+            font-size: 14px;
         }
 
-        .pagination .active {
-            color: black;
-            font-weight: bold;
+        .btn-edit-delete-group a i {
+            color: #b388ff; /* 보라색 아이콘 */
+            margin-right: 6px;
         }
 
-        .pagination .active {
-            color: #0062FF !important; /* 현재 페이지 파란색 */
-            font-weight: bold;
+        /* 가운데 경계선 */
+        .btn-edit-delete-group a + a {
+            border-left: 1px solid #ccc;
         }
 
 
@@ -134,48 +131,110 @@
     </div>
     <div class="notice-detail">
         <div class="notice-list-inner">
-            <div class="notice-header">
+            <!-- 상단부 -->
+            <div class="notice-header mb-2">
                 <b class="page5_title">공지사항</b>
-                <div class="d-flex align-items-center gap-3">
-                    <img src="/doctor1.png" class="profile-image" alt="작성자">
-                    <div>
-                        <div class="profile-info-name" th:text="${dto.nickname}">작성자</div>
-                        <div class="profile-info-date" th:text="${#dates.format(dto.writeday, 'yyyy-MM-dd HH:mm')}">날짜</div>
-                    </div>
+            </div>
+            <hr>
+
+            <!-- 제목 + 작성일자 -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- 제목 -->
+                <h4 class="subject mb-0"
+                    th:text="${dto.subject}">제목입니다
+                </h4>
+                <!-- 작성일자 -->
+                <div class="text-muted small" th:text="${#dates.format(dto.writeday, 'yyyy-MM-dd HH:mm')}">2025-04-07 15:00</div>
+            </div>
+
+
+            <!-- 작성자 프로필 -->
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <img src="/doctor1.png" class="profile-image" alt="작성자" style="width: 40px; height: 40px; border-radius: 50%;">
+                <div>
+                    <div class="profile-info-name fw-bold" th:text="${dto.nickname}">작성자</div>
                 </div>
             </div>
-            <h1 class="subject mt-3"><b th:text="${dto.subject}"></b></h1>
 
 
+            <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                <!-- Indicators -->
+                <div class="carousel-indicators">
+                    <th:block th:each="photo, stat : ${dto.nphotoList}">
+                        <button type="button"
+                                th:data-bs-target="'#imageCarousel'"
+                                th:data-bs-slide-to="${stat.index}"
+                                th:classappend="${stat.index == 0} ? 'active' : ''"
+                                aria-current="true"
+                                th:aria-label="'Slide ' + ${stat.index + 1}">
+                        </button>
+                    </th:block>
+                </div>
+
+                <!-- Carousel Inner -->
+                <div class="carousel-inner">
+                    <th:block th:each="photo, stat : ${dto.nphotoList}">
+                        <div class="carousel-item" th:classappend="${stat.index == 0} ? 'active' : ''">
+                            <img th:src="@{|${imagePath}${photo}|}" class="d-block w-100" alt="Image Slide">
+                        </div>
+                    </th:block>
+                </div>
+
+                <!-- Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+                <!-- 내용 -->
+                <p class="content" th:text="${dto.content}"></p>
+                <hr>
+            </div>
 
 
-            <!-- 여러 이미지 출력 -->
-            <th:block th:if="${dto.nphotoList != null}">
-                <div class="row">
-                    <div class="col-12 mb-3" th:each="photo : ${dto.nphotoList}">
-                        <img th:src="@{|${imagePath}${photo}|}" class="img-thumbnail" style="max-width: 100%;">
-                    </div>
+            <!-- 이전/목록/다음 버튼 (고정) -->
+            <div class="fixed-nav-buttons">
+                <th:block th:if="${prev != null}">
+                    <a th:href="@{/notice/detail(boards_id=${prev.boards_id})}" class="btn btn-outline-secondary text-nowrap">
+                        ← 이전글
+                    </a>
+                </th:block>
+
+                <a href="/notice" class="btn btn-outline-secondary text-nowrap">📄 목록</a>
+
+                <th:block th:if="${next != null}">
+                    <a th:href="@{/notice/detail(boards_id=${next.boards_id})}" class="btn btn-outline-secondary text-nowrap">
+                        다음글 →
+                    </a>
+                </th:block>
+            </div>
+
+            <!-- 구분선 -->
+            <hr class="mt-3 mb-2">
+
+            <!-- 첨부파일 -->
+            <th:block th:if="${dto.nfile != null}">
+                <div class="file-section">
+        <span>첨부파일 :
+            <a th:href="@{|${filePath}${dto.nfile}|}" download>[[${dto.nfile}]]</a>
+        </span>
                 </div>
             </th:block>
 
-
-            <!-- 내용 -->
-                <p class="content" th:text="${dto.content}"></p>
-
-                <!-- 첨부파일 -->
-                <th:block th:if="${dto.nfile != null}">
-                    <span>첨부파일 : <a th:href="@{|${filePath}${dto.nfile}|}" download>[[${dto.nfile}]]</a> </span>
-                </th:block>
-
-                <!-- 버튼 영역 -->
-                <div class="button-group mt-4">
-                    <a href="/notice" class="btn btn-secondary">← 목록으로</a>
-
-                    <!-- 작성자 본인만 수정/삭제 가능 -->
-                    <span th:if="${session.loginUser != null and session.loginUser.users_id == dto.users_id}">
-                        <a th:href="@{/notice/updateform(boards_id=${dto.boards_id})}" class="btn btn-primary">수정</a>
-                        <a th:href="@{/notice/delete(boards_id=${dto.boards_id})}" onclick="return confirm('삭제하시겠습니까?')" class="btn btn-danger">삭제</a>
-                    </span>
+            <!-- 수정 / 삭제 버튼 (우측 하단 정렬) -->
+            <div class="btn-wrapper">
+                <div class="btn-edit-delete-group">
+                    <a th:href="@{/notice/updateform(boards_id=${dto.boards_id})}">
+                        <i class="bi bi-pencil-fill"></i> 수정
+                    </a>
+                    <a th:href="@{/notice/delete(boards_id=${dto.boards_id})}"
+                       onclick="return confirm('삭제하시겠습니까?')">
+                        <i class="bi bi-trash-fill"></i> 삭제
+                    </a>
                 </div>
             </div>
         </div>

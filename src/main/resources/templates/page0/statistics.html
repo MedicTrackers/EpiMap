@@ -10,6 +10,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <style type="text/css">
+	/* 종 방향 한 줄 공지 */
+	.noticeContainer {
+		background-color: #d9d9d9;
+		font-size: 20px;
+		margin-top: 125px;
+		padding: 15px;
+	}
+	#noticeTicker li{
+		margin-left: 20px;
+		list-style: none;
+	}
+
 	/* 페이드인 효과 */
 	.fade-in {
 	    opacity: 0;
@@ -552,11 +564,9 @@
 </head>
 <body layout:fragment="content" class="fade-in">
 <div>
-	<div class="box">
-		<div class="rectangle">
-			<i class="bi bi-megaphone-fill"></i>
-			최신 공지사항이 횡 방향으로 넘어갑니다.
-		</div>
+	<!--최신 공지사항-->
+	<div class="noticeContainer">
+		<div id="noticeTicker"></div>
 	</div>
 	<div class="chartbox">
 		<div class="title">
@@ -805,5 +815,49 @@
 		</a>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		let notices = [];  // 공지사항 저장 배열
+		let currentIndex = 0;  // 현재 보여줄 공지사항 인덱스
+
+		function loadNotices() {
+			$.ajax({
+				type: "GET",
+				dataType: "json",
+				url: "/noticelist",
+				success: function(data) {
+					if (data.length > 0) {
+						notices = data; // 공지사항 배열 저장
+						currentIndex = 0; // 처음부터 시작
+						showNotice(); // 첫 번째 공지 표시
+					}
+				},
+				error: function() {
+					console.error("공지사항을 불러오는 데 실패했습니다.");
+				}
+			});
+		}
+
+		function showNotice() {
+			if (notices.length === 0) return;
+
+			let noticeTicker = $("#noticeTicker");
+			noticeTicker.fadeOut(500, function() {
+				noticeTicker.html(
+						"<li>📢<b><a href='/notice/detail?boards_id=" + notices[currentIndex].boards_id + "'>" +
+						notices[currentIndex].subject +
+						"</a></b></li>"
+				);
+				noticeTicker.fadeIn(500);
+			});
+
+			// 다음 공지사항으로 이동 (마지막이면 다시 처음으로)
+			currentIndex = (currentIndex + 1) % notices.length;
+		}
+
+		loadNotices(); // 페이지 로드 시 공지사항 불러오기
+		setInterval(showNotice, 4000); // 5초마다 변경
+	});
+</script>
 </body>
 </html> 

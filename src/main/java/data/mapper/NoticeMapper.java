@@ -29,4 +29,7 @@ public interface NoticeMapper {
 
     public void insertBoardRead(Map<String, Object> map);
 
+    public NoticeDto getPrevPost(int boards_id);
+
+    public NoticeDto getNextPost(int boards_id);
 }

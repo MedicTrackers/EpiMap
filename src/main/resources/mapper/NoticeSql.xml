@@ -38,7 +38,7 @@
         ORDER BY b.writeday DESC
     </select>
     <select id="getLastestNotices" resultType="NoticeDto">
-        SELECT subject FROM boards ORDER BY writeday DESC LIMIT 3;
+        SELECT boards_id, subject FROM boards ORDER BY writeday DESC LIMIT 3;
     </select>
     <select id="isBoardRead" resultType="int" parameterType="map">
         SELECT COUNT(*) FROM board_read
@@ -48,4 +48,18 @@
         INSERT INTO board_read (users_id, boards_id)
         VALUES (#{users_id}, #{boards_id})
     </insert>
+    <!-- 이전글 -->
+    <select id="getPrevPost" resultType="NoticeDto">
+        SELECT * FROM boards
+        WHERE boards_id &lt; #{boards_id}
+        ORDER BY boards_id DESC
+        LIMIT 1
+    </select>
+    <!-- 다음글 -->
+    <select id="getNextPost" resultType="NoticeDto">
+        SELECT * FROM boards
+        WHERE boards_id &gt; #{boards_id}
+        ORDER BY boards_id ASC
+        LIMIT 1
+    </select>
 </mapper>

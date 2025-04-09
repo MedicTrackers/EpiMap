@@ -57,4 +57,11 @@ public class NoticeService {
         noticeMapper.insertBoardRead(map);
     }
 
+    public NoticeDto getPrevPost(int boards_id) {
+        return noticeMapper.getPrevPost(boards_id);
+    }
+
+    public NoticeDto getNextPost(int boards_id) {
+       return noticeMapper.getNextPost(boards_id);
+    }
 }

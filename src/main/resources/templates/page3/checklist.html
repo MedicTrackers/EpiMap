@@ -309,7 +309,11 @@ body {
 
 				let noticeTicker = $("#noticeTicker");
 				noticeTicker.fadeOut(500, function() {
-					noticeTicker.html("<li>📢<b> " + notices[currentIndex].subject + "</b></li>");
+					noticeTicker.html(
+							"<li>📢<b><a href='/notice/detail?boards_id=" + notices[currentIndex].boards_id + "'>" +
+							notices[currentIndex].subject +
+							"</a></b></li>"
+					);
 					noticeTicker.fadeIn(500);
 				});
 
