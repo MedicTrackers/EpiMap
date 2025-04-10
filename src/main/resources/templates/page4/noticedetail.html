@@ -157,9 +157,12 @@
             </div>
 
 
-            <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
-                <!-- Indicators -->
-                <div class="carousel-indicators">
+            <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel"
+                 th:if="${dto.nphotoList != null and #lists.size(dto.nphotoList) > 0}">
+
+                <!-- Indicators: 사진이 2장이상일 때만 보이게 -->
+                <div class="carousel-indicators"
+                     th:if="${#lists.size(dto.nphotoList) > 1}">
                     <th:block th:each="photo, stat : ${dto.nphotoList}">
                         <button type="button"
                                 th:data-bs-target="'#imageCarousel'"
@@ -180,13 +183,15 @@
                     </th:block>
                 </div>
 
-                <!-- Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <!-- Controls: 사진이 2장이상일 때만 보이게 -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev"
+                        th:if="${#lists.size(dto.nphotoList) > 1}">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next"
+                        th:if="${#lists.size(dto.nphotoList) > 1}">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
 
