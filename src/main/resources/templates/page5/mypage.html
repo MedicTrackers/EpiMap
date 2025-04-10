@@ -276,6 +276,11 @@
 		<button class="kakaobtn" style="margin-left: 80px;border: none; background: none;" onclick="connectKakao()">
 			  <img src="./kakao_login_small.png" alt="카카오 연결" style="width: 60px;" />
 		</button>
+		<span th:if="${session.loginUser.admin}"
+		 style="float: right; margin-right: 10px;">
+			<button class="feedbacksbtn btn btn-secondary"
+			 onclick="location.href='/feedbacks'">Feedback 목록</button>
+		</span>
 		</div>
 		<div class="box1">
 			<div class="scrabs">
