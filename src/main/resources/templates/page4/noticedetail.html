@@ -47,7 +47,6 @@
             bottom: 20px;
             width: 99vw;
             max-height: calc(100vh - 180px);
-            overflow-y: auto;
             background-color: #fdfdfd;
             z-index: 3; /* 공지 배너보다 위에 배치 */
             border-top-left-radius: 15px;
@@ -62,9 +61,8 @@
         .notice-list-inner {
             margin-left: -10px;
             height: calc(100vh - 120px); /* 부모 div의 높이를 100%로 설정 */
-            overflow-y: auto; /* 내부 스크롤 가능 */
             padding: 20px;
-            padding-right: 10px; /* 스크롤바 공간 */
+            padding-right: 10px;
         }
 
         .notice-header {
@@ -77,6 +75,10 @@
             font-size: 28px;
             font-weight: bold;
             color: #0062FF;
+        }
+
+        .carousel-slide {
+
         }
         .fixed-nav-buttons {
             left: 50%;
@@ -156,6 +158,10 @@
                 </div>
             </div>
 
+            <div th:if="${dto.nphotoList == null or #lists.isEmpty(dto.nphotoList)}"
+                 style="height: 400px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                <p class="text-muted">이미지가 없습니다.</p>
+            </div>
 
             <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel"
                  th:if="${dto.nphotoList != null and #lists.size(dto.nphotoList) > 0}">
@@ -204,15 +210,16 @@
             <!-- 이전/목록/다음 버튼 (고정) -->
             <div class="fixed-nav-buttons">
                 <th:block th:if="${prev != null}">
-                    <a th:href="@{/notice/detail(boards_id=${prev.boards_id})}" class="btn btn-outline-secondary text-nowrap">
+                    <a th:href="@{/notice/detail(boards_id=${prev.boards_id}, pageNum=${pageNum})}" class="btn btn-outline-secondary text-nowrap">
                         ← 이전글
                     </a>
                 </th:block>
 
-                <a href="/notice" class="btn btn-outline-secondary text-nowrap">📄 목록</a>
+                <a th:href="@{/notice(pageNum=${pageNum})}" class="btn btn-outline-secondary text-nowrap">📄 목록</a>
+
 
                 <th:block th:if="${next != null}">
-                    <a th:href="@{/notice/detail(boards_id=${next.boards_id})}" class="btn btn-outline-secondary text-nowrap">
+                    <a th:href="@{/notice/detail(boards_id=${next.boards_id}, pageNum=${pageNum})}" class="btn btn-outline-secondary text-nowrap">
                         다음글 →
                     </a>
                 </th:block>
@@ -224,22 +231,24 @@
             <!-- 첨부파일 -->
             <th:block th:if="${dto.nfile != null}">
                 <div class="file-section">
-        <span>첨부파일 :
-            <a th:href="@{|${filePath}${dto.nfile}|}" download>[[${dto.nfile}]]</a>
-        </span>
+                    <span>첨부파일 :
+                        <a th:href="@{|${filePath}${dto.nfile}|}" download>[[${dto.nfile}]]</a>
+                    </span>
                 </div>
             </th:block>
 
             <!-- 수정 / 삭제 버튼 (우측 하단 정렬) -->
             <div class="btn-wrapper">
                 <div class="btn-edit-delete-group">
-                    <a th:href="@{/notice/updateform(boards_id=${dto.boards_id})}">
-                        <i class="bi bi-pencil-fill"></i> 수정
-                    </a>
-                    <a th:href="@{/notice/delete(boards_id=${dto.boards_id})}"
-                       onclick="return confirm('삭제하시겠습니까?')">
-                        <i class="bi bi-trash-fill"></i> 삭제
-                    </a>
+                    <th:block th:if="${session.loginUser != null and session.loginUser.users_id == dto.users_id}">
+                        <a th:href="@{/notice/updateform(boards_id=${dto.boards_id}, pageNum=${pageNum})}">
+                            <i class="bi bi-pencil-fill"></i> 수정
+                        </a>
+                        <a th:href="@{/notice/delete(boards_id=${dto.boards_id})}"
+                           onclick="return confirm('삭제하시겠습니까?')">
+                            <i class="bi bi-trash-fill"></i> 삭제
+                        </a>
+                    </th:block>
                 </div>
             </div>
         </div>
