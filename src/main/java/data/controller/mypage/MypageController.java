@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +20,6 @@ import data.service.ResultsService;
 import data.service.ScrabService;
 import data.service.UsersService;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
-
 
 @Controller
 public class MypageController {
@@ -55,13 +50,12 @@ public class MypageController {
 			return "page5/login";
 		}
 	}
-	
+	//로그아웃 기능
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 	    session.invalidate(); // ✅ 세션 무효화
 	    return "redirect:/login"; // ✅ 로그인 페이지로 이동
 	}
-	
 	// signup 페이지 불러오기
 	@GetMapping("/signup")
 	public String singupform(Model model) {
@@ -189,25 +183,57 @@ public class MypageController {
 	    usersService.deleteMyScrab(scrabs_id);
 	    return Map.of("status", "success");
 	}	
-	//카카오 로그인 기능
+	//마이페이지 카카오계정 연동 기능
 	@PostMapping("/connectKakao")
 	@ResponseBody
 	public String connectKakao(@RequestParam("kakao_id") String kakao_id,
-			@RequestParam("kakao_nickname") String kakao_nickname,
-			HttpSession session) {
-		UsersDto udto = (UsersDto) session.getAttribute("loginUser");
-		if(udto == null) return "fail";
-		
-		usersService.connectKakao(udto.getUsers_id(), kakao_id, kakao_nickname);
-		UsersDto updateUser = usersService.findById(udto.getUsers_id());
-		session.setAttribute("loginUser", updateUser);
-		return "ok";
+	                           @RequestParam("kakao_nickname") String kakao_nickname,
+	                           HttpSession session) {
+
+	    UsersDto loginUser = (UsersDto) session.getAttribute("loginUser");
+	    if (loginUser == null) return "fail";
+
+	    UsersDto existing = usersService.findByKakaoId(kakao_id);
+
+	    if (existing != null && existing.getUsers_id() != loginUser.getUsers_id()) {
+	        return "already_connected";
+	    }
+
+	    loginUser.setKakao_id(kakao_id);
+	    loginUser.setKakao_nickname(kakao_nickname);
+	    usersService.connectKakao(loginUser);
+	    session.setAttribute("loginUser", loginUser);
+	    return "ok";
 	}
-	
+	//마이페이지 카카오 계정 연동 시 중복확인
 	@PostMapping("/isKakaoConnected")
 	@ResponseBody
 	public boolean isKakaoConnected(HttpSession session) {
 	    UsersDto loginUser = (UsersDto) session.getAttribute("loginUser");
 	    return loginUser != null && loginUser.getKakao_id() != null;
+	}
+	//로그인 페이지 카카오로그인 기능
+	@PostMapping("/kakaoLogin")
+	@ResponseBody
+	public String kakaoLogin(@RequestParam("kakao_id") String kakao_id,
+	                         @RequestParam("kakao_nickname") String kakao_nickname,
+	                         HttpSession session) {
+
+	    UsersDto existingUser = usersService.findByKakaoId(kakao_id);
+
+	    if (existingUser != null) {
+	        session.setAttribute("loginUser", existingUser);
+	        return "login";
+	    }
+
+	    // 신규 회원가입 처리
+	    UsersDto dto = new UsersDto();
+	    dto.setUser_id("kakao_" + kakao_id); // 내부용 ID
+	    dto.setKakao_id(kakao_id);
+	    dto.setKakao_nickname(kakao_nickname);
+	    usersService.insertKakaoUser(dto);
+
+	    session.setAttribute("loginUser", dto);
+	    return "signup";
 	}
 }
