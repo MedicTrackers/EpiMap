@@ -264,6 +264,10 @@ button, input {
     const chatContainer = document.getElementById("chat-container");
     const backButton = document.getElementById("back-button"); // ← 아이콘 가져오기
     const refreshButton = document.getElementById("refresh-button"); // ↻ 아이콘 가져오기
+    const sendButton = document.getElementById("send-img"); // 추가
+    const inputMessage = document.getElementById("input-message"); // 추가 
+    let isFeedbackMode = false; // 추가
+
 
 	// [← 뒤로가기 버튼 클릭 이벤트]
 	backButton.addEventListener("click", function() {
@@ -286,18 +290,24 @@ button, input {
     	  const div = document.createElement("div");
     	  div.classList.add("bubble", isUser ? "user-message" : "bot-message");
     	  div.innerHTML = htmlContent;
+    	  chatContainer.appendChild(div); // 사용자 말풍선
 
     	  if (isUser) {
-    	    chatContainer.appendChild(div); // 사용자 말풍선
     	    chatContainer.appendChild(br1.cloneNode()); // 사용자 말풍선 하단 여백
     	    chatContainer.appendChild(br1.cloneNode());
     	    chatContainer.appendChild(br1.cloneNode());
-
     	  } else {
     	    chatContainer.appendChild(div);
     	  }
 
     	  chatContainer.scrollTop = chatContainer.scrollHeight;
+    	  
+    	  // 추가 ====================================================
+    	  if (!isUser && htmlContent.includes("피드백을 작성해주세요")) {
+    			isFeedbackMode = true;
+    			inputMessage.placeholder = "피드백을 입력해주세요."; // 피드백 모드 시 placeholder 변경
+    		}
+    	  // ========================================================= (477라인)
     	}
 
 
@@ -452,6 +462,15 @@ button, input {
         	let data = typeof response === "string" ? JSON.parse(response) : response;
         	console.log(response);
         	console.log("응답 확인:", data);
+        	if(message == 1) {
+        		appendMessage("피드백이 성공적으로 저장되었습니다.");
+        		return;
+        	}
+        	if(message == 2) {
+        		appendMessage("피드백 저장에 실패했습니다.");
+        		return;
+        	}
+        	
         	renderResponse(data);
         },
         error: function () {
@@ -461,13 +480,39 @@ button, input {
     }
 
 
- 	// 이미지 클릭으로 메시지 전송
+ 	// 이미지 클릭으로 메시지 전송 (피드백 로직 추가)
     $("#send-img").click(function () {
     	const message = $("#input-message").val().trim();
     	if (message) {
-    		sendMessage(message);
-    		appendMessage(message, true); // 사용자 메시지 표시
-    		$("#input-message").val(""); // 입력창 비우기
+    		appendMessage(message, true);
+    		$("#input-message").val("");
+
+    		if (isFeedbackMode) {
+    			$.ajax({
+    				url: "/clova/feedback",
+    				type: "POST",
+    				datatType: "json",
+    				data:{"message":message},
+    				success: function (response) {
+    					console.log("피드백 저장 성공:", response);
+    					if (response && response == "저장 완료") {
+    						sendMessage(1);
+    					} else {
+    						sendMessage(2);
+    					}
+    					isFeedbackMode = false;
+    					inputMessage.placeholder = "EpiBot에게 보낼 메세지를 입력하세요.";
+    				},
+    				error: function (xhr, status, error) {
+    					console.error("피드백 저장 실패:", xhr, status, error);
+    					sendMessage(2);
+    					isFeedbackMode = false;
+    					inputMessage.placeholder = "EpiBot에게 보낼 메세지를 입력하세요.";
+    				}
+    			});
+    		} else {
+    			sendMessage(message);
+    		}
     	}
     });
 
