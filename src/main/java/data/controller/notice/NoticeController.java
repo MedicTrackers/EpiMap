@@ -176,6 +176,8 @@ public class NoticeController {
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("imagePath", imagePath);
         model.addAttribute("filePath", filePath);
+        model.addAttribute("prev",noticeService.getPrevPost(boards_id));
+        model.addAttribute("next", noticeService.getNextPost(boards_id));
         return"page4/noticedetail";
     }
 }

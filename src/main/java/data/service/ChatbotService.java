@@ -14,12 +14,29 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import data.dto.ChatbotDto;
+import data.mapper.ChatbotMapper;
+import data.mapper.NoticeMapper;
+import lombok.AllArgsConstructor;
+
 @Service
+//@AllArgsConstructor
 public class ChatbotService {
    private static final String API_URL = "https://263s6itmj4.apigw.ntruss.com/custom/v1/17219/c2e207b6d0b7e18cc72ed99276200bd5eb54d7bf7636de92a3852788c609bdc9";
    private static final String SECRET_KEY = "TW1LTElFb1NLYWhiWktQVmVsQWtGeHB4WG9OY0JXTlY=";
+   
+   // 피드백 저장 ===================================
+   @Autowired
+   private ChatbotMapper chatbotMapper;
+   
+   public void saveFeedback(String message) {
+	    chatbotMapper.insertChat(message);
+	}
+   // ============================================
+   
    
    public String sendMessageToClova(String messageContent) {
       try {
@@ -49,7 +66,7 @@ public class ChatbotService {
          }
          br.close();
          
-         return response.toString();
+         return response.toString(); // JSON 응답 받기
          
       } catch (Exception e) {
          e.printStackTrace();
@@ -79,6 +96,7 @@ public class ChatbotService {
       if(messageContent == null || messageContent.trim().isEmpty()) {
          obj.put("event", "open");
       } else {
+    	  
          JSONObject bubbleObj = new JSONObject();
          bubbleObj.put("type", "text");
          

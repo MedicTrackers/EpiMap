@@ -16,6 +16,21 @@
     bottom: 75px;
     left: 88%;
     transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.chatbotContainer img {
+    transition: transform 0.3s ease;
+}
+
+.chatbotContainer img:hover {
+    animation: floatUpDown 0.8s ease-in-out infinite;
+}
+
+@keyframes floatUpDown {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
 }
 
 /* 네비게이션 */
@@ -57,7 +72,7 @@ i.active-icon {
 
 <!-- 챗봇 배치 =============================================================== -->
 <div class="chatbotContainer">
-	<img src="/ChatbotIcon.png" alt="Chatbot" style="width:99%;">
+	<img src="/ChatbotIcon.png" alt="Chatbot" style="width:99%;" onclick="location.href='/clova/chatbot'">
 </div>
 
 <!-- 네비게이션 바============================================================== -->

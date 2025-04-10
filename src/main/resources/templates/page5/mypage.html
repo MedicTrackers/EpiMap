@@ -9,279 +9,304 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <style>
-@font-face {
-    font-family: 'GothicA1-Light';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
-    font-weight: 300;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'GothicA1-Bold';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-}
-
-body {
-	font-family: 'GothicA1-Light', sans-serif;
-}
-
-.nickname {
-	margin: 0 auto;
-	margin-top: 149px;
-	/* margin-left: 18px; */
-	width: 375px;
-	height: 90px;
-	line-height: 80px;
-	border-radius: 10px;
-	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
-	background: linear-gradient(
-		150deg,
-		rgba(1, 57, 254, 0.4) 0%,
-		rgba(16, 241, 255, 0.4) 100%
-	), linear-gradient(0deg, rgba(0,98,255,1) 0%, rgba(0,98,255,1) 100%);
-	text-align: left;
-	color:white;
-	font-family: 'GothicA1-bold', sans-serif;
-	font-weight: 900;
-	font-size: 25px;
-	border: 1px solid white;
-}
-.logoutbtn {
-	margin-right: -82px;
-    margin-top: 55px;
-    width: 90px;
-    height: 30px;
-    line-height: 15px;
-    border: none;
-    background-color: #0062ff;
-    border-radius: 20px;
-    font-size: 18px;
-    font-family: 'GothicA1-bold', sans-serif;
-    float: left;
-    color: white;
-}
-.kakaobtn {
-	margin-right:-172px;
-    margin-top: 55px;
-    width: 90px;
-    height: 30px;
-    line-height: 15px;
-    border: none;
-    background-color: #0062ff;
-    border-radius: 20px;
-    font-size: 15px;
-    font-family: 'GothicA1-bold', sans-serif;
-    float: left;
-    color: white;
-}
-.box1 {
-	margin: 0 auto;
-	margin-top: 15px;
-	width: 100%;
-	max-width: 100vw;
-	height: 489px;
-	background-color: #ffffff;
-	border-radius: 10px;
-	box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
+	@font-face {
+	    font-family: 'GothicA1-Light';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+	    font-weight: 300;
+	    font-style: normal;
+	}
+	@font-face {
+	    font-family: 'GothicA1-Bold';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Bold.woff2') format('woff2');
+	    font-weight: 700;
+	    font-style: normal;
+	}
 	
-}
-.scrabs {
-	margin-top: 20px;
-	width: 412px;
-	line-height: 90px;
-	border-radius: 10px;
-	color: #0062ff;
-	font-size: 25px;
-	font-family: 'GothicA1-bold', sans-serif;
-	font-weight: 900;
-	border: 1px solid white;
+	body {
+		font-family: 'GothicA1-Light', sans-serif;
+	}
 	
-}
-.line1 {
-	margin-top: -10px;
-}
-.scrab-list {
-	height: 350px;
-	overflow-y: auto;
+	.nickname {
+		margin: 0 auto;
+		margin-top: 149px;
+		/* margin-left: 18px; */
+		width: 100vw;
+		height: 90px;
+		line-height: 80px;
+		border-radius: 10px;
+		box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
+		background: linear-gradient(
+			150deg,
+			rgba(1, 57, 254, 0.4) 0%,
+			rgba(16, 241, 255, 0.4) 100%
+		), linear-gradient(0deg, rgba(0,98,255,1) 0%, rgba(0,98,255,1) 100%);
+		text-align: left;
+		color:white;
+		font-family: 'GothicA1-bold', sans-serif;
+		font-weight: 900;
+		font-size: 25px;
+		border: 1px solid white;
+	}
+	.logoutbtn {
+		margin-right: -82px;
+	    margin-top: 55px;
+	    width: 90px;
+	    height: 30px;
+	    line-height: 15px;
+	    border: none;
+	    background-color: #0062ff;
+	    border-radius: 20px;
+	    font-size: 18px;
+	    font-family: 'GothicA1-bold', sans-serif;
+	    float: left;
+	    color: white;
+	}
+	.kakaobtn {
+		margin-right:-172px;
+	    margin-top: 55px;
+	    width: 90px;
+	    height: 30px;
+	    line-height: 15px;
+	    border: none;
+	    background-color: #0062ff;
+	    border-radius: 20px;
+	    font-size: 15px;
+	    font-family: 'GothicA1-bold', sans-serif;
+	    float: left;
+	    color: white;
+	}
+	.box1 {
+		margin: 0 auto;
+		margin-top: 15px;
+		width: 100%;
+		max-width: 100vw;
+		height: 489px;
+		background-color: #ffffff;
+		border-radius: 10px;
+		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
+		
+	}
+	.scrabs {
+		margin-top: 20px;
+		width: 412px;
+		line-height: 90px;
+		border-radius: 10px;
+		color: #0062ff;
+		font-size: 25px;
+		font-family: 'GothicA1-bold', sans-serif;
+		font-weight: 900;
+		border: 1px solid white;
+		
+	}
+	.line1 {
+		margin-top: -10px;
+	}
+	.scrab-list {
+		height: 350px;
+		overflow-y: auto;
+		
+	}
+	.diag-list {
+		height: 350px;
+		overflow-y: auto;
+	}
+	.box2 {
+		margin: 0 auto;
+		margin-top: 15px;
+		width: 100%;
+		max-width: 100vw;
+		height: 500px;
+		background-color: #ffffff;
+		border-radius: 10px;
+		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
+	}
+	.self-diag {
+		margin-top: 20px;
+		width: 412px;
+		line-height: 90px;
+		border-radius: 10px;
+		color: #0062ff;
+		font-size: 25px;
+		font-family: 'GothicA1-bold', sans-serif;
+		font-weight: 900;
+		border: 1px solid white;
 	
-}
-.diag-list {
-	height: 350px;
-	overflow-y: auto;
-}
-.box2 {
-	margin: 0 auto;
-	margin-top: 15px;
-	width: 100%;
-	max-width: 100vw;
-	height: 500px;
-	background-color: #ffffff;
-	border-radius: 10px;
-	box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
-}
-.self-diag {
-	margin-top: 20px;
-	width: 412px;
-	line-height: 90px;
-	border-radius: 10px;
-	color: #0062ff;
-	font-size: 25px;
-	font-family: 'GothicA1-bold', sans-serif;
-	font-weight: 900;
-	border: 1px solid white;
-
-}
-.line2 {
-	margin-top: -10px;
-}
-.innerbox1 {
-	margin: 0 auto;
-	margin-top: 25px;
-	width: 350px;
-	height: 100px;
-	line-height: 70px;
-	background-color: #ffffff;
-	border-radius: 10px;
-	box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
-	border: 1px solid white;
-	font-size: 20px;
-	font-weight: bold;
-	padding-left: 30px;
+	}
+	.line2 {
+		margin-top: -10px;
+	}
+	.innerbox1 {
+		margin: 0 auto;
+		margin-top: 25px;
+		width: 100vw;
+		height: 100px;
+		line-height: 70px;
+		background-color: #ffffff;
+		border-radius: 10px;
+		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
+		border: 1px solid white;
+		font-size: 20px;
+		font-weight: bold;
+		padding-left: 30px;
+		
+	}
 	
-}
-
-.innerbox2 {
-	/* margin-left: 30px; */
-	margin: 0 auto;
-	margin-top: 25px;
-	width: 350px;
-	height: 150px;
-	line-height: 70px;
-	background-color: #ffffff;
-	border-radius: 10px;
-	box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
-	border: 1px solid white;
-	font-size: 20px;
-	font-weight: bold;
-	padding-left: 30px;
-	line-height: 0.9;
-}
-.badge {
-    background: #ffffff;
-    color: gray;
-    border-radius: 12px;
-    font-size: 12px;
-	margin-left: -5px;
-	margin-bottom: 5px;
-}
-.newstitle {
-    font-weight: bold;
-	font-size: 20px;
-    height: 30px;
-}
-.newstitle a {
-    display: inline-block;
-    width: 85%;         /* 부모 크기만큼 차지 */
-    white-space: nowrap; /* 줄 바꿈 금지 */
-    overflow: hidden;    /* 넘치는 텍스트 숨김 */
-    text-overflow: ellipsis; /* 말줄임표 표시 */
-}
-.deleteScrab {
-    background: none;
-    border: none;
-    color: #0062ff;
-    font-size: 25px;
-   	float: right;
-   	margin-right: 10px;
-   	margin-top: -15px;
-   	cursor: pointer;
-}
-.day {
-	margin-top: 20px;
-	margin-left: -10px;
-	margin-bottom: 20px;
-	color: gray;
-	font-size: 20px;
-	width: 211px;
-}
-.result {
-	margin-left: -10px;
-	font-size: 27px;
-	font-weight: bold;
-}
-
-.noresult {
-	padding-bold: 65px;
-	font-size: 27px;
-	color: gray;
-}
-
-.delete {
-	float: right;
-	margin-top: 30px;
-	background: none;
-    border: none;
-    font-size: 25px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.diagpage {
-	font-size: 20px;
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-	color: #96A7AF;
-}
-.scrabpage {
-	font-size: 20px;
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-	color: #96A7AF;
-}
-.page-link1 {
-    text-decoration: none;  /* 기본 밑줄 제거 */
-    color: black;  /* 기본 텍스트 색상 */
-    padding: 5px 10px; /* 내부 여백 */
-    border-radius: 5px; /* 모서리 둥글게 */
-    transition: background-color 0.3s; /* 부드러운 효과 */
-}
-.page-link2 {
-    text-decoration: none;  /* 기본 밑줄 제거 */
-    color: black;  /* 기본 텍스트 색상 */
-    padding: 5px 10px; /* 내부 여백 */
-    border-radius: 5px; /* 모서리 둥글게 */
-    transition: background-color 0.3s; /* 부드러운 효과 */
-}
-.active {
-	color: #0062ff;
-	font-weight: bold;
-	font-size: 1.1em;
-}
-
+	.innerbox2 {
+		/* margin-left: 30px; */
+		margin: 0 auto;
+		margin-top: 25px;
+		width: 100vw;
+		height: 150px;
+		line-height: 70px;
+		background-color: #ffffff;
+		border-radius: 10px;
+		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
+		border: 1px solid white;
+		font-size: 20px;
+		font-weight: bold;
+		padding-left: 30px;
+		line-height: 0.9;
+	}
+	.badge {
+	    background: #ffffff;
+	    color: gray;
+	    border-radius: 12px;
+	    font-size: 12px;
+		margin-left: -5px;
+		margin-bottom: 5px;
+	}
+	.newstitle {
+	    font-weight: bold;
+		font-size: 20px;
+	    height: 30px;
+	}
+	.newstitle a {
+	    display: inline-block;
+	    width: 85%;         /* 부모 크기만큼 차지 */
+	    white-space: nowrap; /* 줄 바꿈 금지 */
+	    overflow: hidden;    /* 넘치는 텍스트 숨김 */
+	    text-overflow: ellipsis; /* 말줄임표 표시 */
+	}
+	.deleteScrab {
+	    background: none;
+	    border: none;
+	    color: #0062ff;
+	    font-size: 25px;
+	   	float: right;
+	   	margin-right: 10px;
+	   	margin-top: -15px;
+	   	cursor: pointer;
+	}
+	.day {
+		margin-top: 20px;
+		margin-left: -10px;
+		margin-bottom: 20px;
+		color: gray;
+		font-size: 20px;
+		width: 211px;
+	}
+	.result {
+		margin-left: -10px;
+		font-size: 27px;
+		font-weight: bold;
+	}
+	
+	.noresult {
+		padding-bold: 65px;
+		font-size: 27px;
+		color: gray;
+	}
+	
+	.delete {
+		float: right;
+		margin-top: 30px;
+		background: none;
+	    border: none;
+	    font-size: 25px;
+	    font-weight: bold;
+	    cursor: pointer;
+	}
+	.diagpage {
+		font-size: 20px;
+		display: flex;
+		justify-content: center;
+		gap: 10px;
+		color: #96A7AF;
+	}
+	.scrabpage {
+		font-size: 20px;
+		display: flex;
+		justify-content: center;
+		gap: 10px;
+		color: #96A7AF;
+	}
+	.page-link1 {
+	    text-decoration: none;  /* 기본 밑줄 제거 */
+	    color: black;  /* 기본 텍스트 색상 */
+	    padding: 5px 10px; /* 내부 여백 */
+	    border-radius: 5px; /* 모서리 둥글게 */
+	    transition: background-color 0.3s; /* 부드러운 효과 */
+	}
+	.page-link2 {
+	    text-decoration: none;  /* 기본 밑줄 제거 */
+	    color: black;  /* 기본 텍스트 색상 */
+	    padding: 5px 10px; /* 내부 여백 */
+	    border-radius: 5px; /* 모서리 둥글게 */
+	    transition: background-color 0.3s; /* 부드러운 효과 */
+	}
+	.active {
+		color: #0062ff;
+		font-weight: bold;
+		font-size: 1.1em;
+	}
 </style>
 </head>
 <body>
 	<div layout:fragment="content">
-		<div class="nickname">[[${session.loginUser.nickname}]]님
-		<span style="font-size:20px;" th:if="${session.loginUser.kakao_nickname != null}">
-  		([[${session.loginUser.kakao_nickname}]])</span>
+		<div class="nickname">
+		<!-- 카카오 로그인 유저 -->
+	    <span th:if="${session.loginUser.kakao_nickname != null}">
+	        [[${session.loginUser.kakao_nickname}]]님
+	    </span>
+
+	    <!--  일반 로그인 유저 -->
+	    <span th:if="${session.loginUser.kakao_nickname == null}">
+	        [[${session.loginUser.nickname}]]님
+	    </span>
 		<button class="logoutbtn" type="button" value="로그아웃" onclick="logoutAll()">로그아웃</button>
 		<button class="kakaobtn" style="margin-left: 80px;border: none; background: none;" onclick="connectKakao()">
 			  <img src="./kakao_login_small.png" alt="카카오 연결" style="width: 60px;" />
 		</button>
 		</div>
 		<div class="box1">
-			<div class="scrabs">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[${session.loginUser.nickname}]]님의
-				스크랩</div>
+			<div class="scrabs">
+				<!-- 카카오 로그인 유저 -->
+				<span th:if="${session.loginUser.kakao_nickname != null}" style="margin-left: 40px;">
+		        [[${session.loginUser.kakao_nickname}]]님의 스크랩
+		   		 </span>
+	
+			    <!--  일반 로그인 유저 -->
+			    <span th:if="${session.loginUser.kakao_nickname == null}" style="margin-left: 40px;">
+			        [[${session.loginUser.nickname}]]님의 스크랩
+			    </span>
+		    </div>
 			<hr class="line1">
 			<div class="scrab-list">
 				
 			</div>
 			
 			<div class="box2">
-				<div class="self-diag">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[${session.loginUser.nickname}]]님의 자가진단 이력</div>
+				<div class="self-diag">
+					<!-- 카카오 로그인 유저 -->
+					<span th:if="${session.loginUser.kakao_nickname != null}" style="margin-left: 40px;">
+					[[${session.loginUser.kakao_nickname}]]님의 자가진단 결과
+			   		 </span>
+		
+				    <!--  일반 로그인 유저 -->
+				    <span th:if="${session.loginUser.kakao_nickname == null}" style="margin-left: 40px;">
+				        [[${session.loginUser.nickname}]]님의 자가진단 결과
+				    </span>
+				</div>
 				<hr class="line2">
 				<div class="diag-list"></div>
 			</div>
@@ -422,45 +447,45 @@ body {
 				Kakao.init('55844f9373522ab837bcc9a12eaff759');
 				
 				function connectKakao() {
-				  $.post("/isKakaoConnected", function(isConnected) {
-				    if (isConnected) {
-				      alert("이미 연결된 카카오 계정입니다.");
-				      return;
-				    }
-				
-				    // ✅ 연결 안 되어 있을 때만 실행
-				    Kakao.Auth.login({
-				      scope: 'profile_nickname',
-				      success: function(authObj) {
-				        Kakao.API.request({
-				          url: '/v2/user/me',
-				          success: function(res) {
-				            const kakao_id = res.id;
-				            const kakao_nickname = res.properties.nickname;
-				
-				            $.post("/connectKakao", {
-				              kakao_id: kakao_id,
-				              kakao_nickname: kakao_nickname
-				            }, function(result) {
-				              if (result === "ok") {
-				                alert("카카오 계정이 성공적으로 연결되었습니다.");
-				                location.href = "/mypage";
-				              } else {
-				                alert("연결 실패: " + result);
-				              }
-				            });
-				          }
-				        });
-				      }
-				    });
-				  });
-				}
-				//로그아웃
+					  $.post("/isKakaoConnected", function(isConnected) {
+					    if (isConnected) {
+					      alert("이미 연결된 계정입니다.");
+					      return;
+					    }
+
+					    Kakao.Auth.login({
+					      scope: 'profile_nickname',
+					      success: function() {
+					        Kakao.API.request({
+					          url: '/v2/user/me',
+					          success: function(res) {
+					            const kakao_id = res.id;
+					            const kakao_nickname = res.properties.nickname;
+
+					            $.post("/connectKakao", {
+					              kakao_id,
+					              kakao_nickname
+					            }, function(result) {
+					              if (result === "ok") {
+					                alert("카카오 계정 연결 완료!");
+					                location.href = "/mypage";
+					              } else if (result === "already_connected") {
+					                alert("다른 계정에 이미 연결된 카카오입니다.");
+					              } else {
+					                alert("연결 실패");
+					              }
+					            });
+					          }
+					        });
+					      }
+					    });
+					  });
+					}
 				function logoutAll() {
-				  Kakao.Auth.logout(function() {
-				    location.href = "/logout";
-				  });
-				}
+					  Kakao.Auth.logout(() => {
+					    location.href = "/logout"; // 서버 로그아웃
+					  });
+					}
 			</script>
 			</div>
 		</div>
