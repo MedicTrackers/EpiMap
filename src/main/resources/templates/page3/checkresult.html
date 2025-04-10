@@ -22,13 +22,9 @@
 }
 body {
   	font-family: 'GothicA1-Light', sans-serif;
-}
-@media screen and (min-height: 913px) {
-	body {
-		/* overflow: hidden; */
-  		position: fixed;
-  		width: 100%;
-	}
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
 }
 .overview {
   	width: 90%;
@@ -56,10 +52,11 @@ body {
 
 .backbox {
 	background-color: #fdfdfd;
+	position: fixed;
 	bottom: 0;
 	margin: 0 auto;
 	width: 99vw;
-	height: 100vh;
+	top: 300px;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 	margin-top: 10px;
@@ -78,21 +75,26 @@ body {
 	margin: 40px auto 0 auto;
 	width: 90%;
 	max-width: 500px;
-	height: 404px;
 	border-radius: 15px;
 	display: flex;
 	flex-direction: column;
 	text-align: center;
 	padding-top: 50px;
+	overflow-y: scroll; 
 }
-@media screen and (min-height: 914px) {
+@media screen and (max-height: 800px) {
 	.resultbox {
-		height: 50vh;
-		padding: 5% 10px 5px;
-		gap: 5px;
-		overflow-y: auto;
+		height: 10vh;
 	}
 }
+@media (min-height: 801px) and (max-height: 950px) {
+	.resultbox {
+		height: 40vh;
+		gap: 0;
+		padding: 10px;
+	}
+}
+
 .checkbtn {
 	background-color: #0062FF;
 	color: #ffffff;
@@ -100,12 +102,19 @@ body {
 	margin-bottom: 20px;
 	align-self: center;
 }
-.warn {
-	display: none;
-	color: red;
-	font-size: 0.8em;
-	float: right;
+
+@media screen and (min-height: 950px) {
+	.checkbtn {
+		margin-top: 30%;
+	}
+	.resultkbox {
+		margin-top: 30px;
+		height: 60vh;
+		padding: 5% 10px 5px;
+		gap: 5px;
+	}
 }
+
 
 .disease {
 	margin-top: 10px;
