@@ -9,10 +9,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data
-@Alias("ChatbotDto")
-public class ChatbotDto2 {
+@Alias("FeedbackDto")
+public class FeedbackDto {
 	private int chat_id;
-	private String content;
+	private String message;
 	@JsonFormat(pattern = "yyyy.MM.dd HH:mm", timezone = "Asia/Seoul")
 	private Timestamp writeday;
 }

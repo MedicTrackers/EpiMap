@@ -135,7 +135,7 @@ body {
 	<div class="feedbacks_box">
 		<div th:each="dto:${feedbacks}">
 			<div class="feedback" data-bs-toggle="modal" data-bs-target="#feedbackModal">
-				<span class="contents">[[${dto.content}]]</span>
+				<span class="contents">[[${dto.message}]]</span>
 				<p class="write_day">[[${dto.writeday}]]</p>
 			</div>
 		</div>

@@ -5,10 +5,10 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import data.dto.ChatbotDto2;
+import data.dto.FeedbackDto;
 
 @Mapper
-public interface ChatbotMapper2 {
+public interface FeedbackMapper {
 	public int getAllFeedbacks();
-	public List<ChatbotDto2> getPagingFeedbacks(Map<String, Object> map);
+	public List<FeedbackDto> getPagingFeedbacks(Map<String, Object> map);
 }

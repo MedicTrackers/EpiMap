@@ -5,21 +5,21 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import data.dto.ChatbotDto2;
-import data.mapper.ChatbotMapper2;
+import data.dto.FeedbackDto;
+import data.mapper.FeedbackMapper;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class FeedbacksService {
-	final ChatbotMapper2 chatbotMapper;
+	final FeedbackMapper feedbackMapper;
 	
 	public int getAllFeedbacks() {
-		return chatbotMapper.getAllFeedbacks();
+		return feedbackMapper.getAllFeedbacks();
 	}
 	
-	public List<ChatbotDto2> getPagingFeedbacks(Map<String, Object> map) {
-		return chatbotMapper.getPagingFeedbacks(map);
+	public List<FeedbackDto> getPagingFeedbacks(Map<String, Object> map) {
+		return feedbackMapper.getPagingFeedbacks(map);
 	}
 	
 }

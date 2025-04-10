@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="data.mapper.ChatbotMapper">
+<mapper namespace="data.mapper.FeedbackMapper">
 	<select id="getAllFeedbacks" resultType="int">
 		select count(*) from chatbot
 	</select>
 
-	<select id="getPagingFeedbacks" parameterType="Map" resultType="ChatbotDto">
+	<select id="getPagingFeedbacks" parameterType="Map" resultType="FeedbackDto">
 		select * from chatbot
         order by writeday DESC
         limit #{startNum}, #{perPage}
