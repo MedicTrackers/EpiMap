@@ -23,7 +23,7 @@ public class ChatbotController {
 	
 	@GetMapping("/chatbot")
 	public String chatbotPage() {
-		return "chatbotTest";
+		return "layout/chatbot";
 	}
 	
 	@PostMapping("/chat")
