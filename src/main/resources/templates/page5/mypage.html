@@ -30,7 +30,7 @@
 		margin: 0 auto;
 		margin-top: 149px;
 		/* margin-left: 18px; */
-		width: 375px;
+		width: 100vw;
 		height: 90px;
 		line-height: 80px;
 		border-radius: 10px;
@@ -138,7 +138,7 @@
 	.innerbox1 {
 		margin: 0 auto;
 		margin-top: 25px;
-		width: 350px;
+		width: 100vw;
 		height: 100px;
 		line-height: 70px;
 		background-color: #ffffff;
@@ -155,7 +155,7 @@
 		/* margin-left: 30px; */
 		margin: 0 auto;
 		margin-top: 25px;
-		width: 350px;
+		width: 100vw;
 		height: 150px;
 		line-height: 70px;
 		background-color: #ffffff;
@@ -279,15 +279,34 @@
 		</button>
 		</div>
 		<div class="box1">
-			<div class="scrabs">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[${session.loginUser.nickname}]]님의
-				스크랩</div>
+			<div class="scrabs">
+				<!-- 카카오 로그인 유저 -->
+				<span th:if="${session.loginUser.kakao_nickname != null}" style="margin-left: 40px;">
+		        [[${session.loginUser.kakao_nickname}]]님의 스크랩
+		   		 </span>
+	
+			    <!--  일반 로그인 유저 -->
+			    <span th:if="${session.loginUser.kakao_nickname == null}" style="margin-left: 40px;">
+			        [[${session.loginUser.nickname}]]님의 스크랩
+			    </span>
+		    </div>
 			<hr class="line1">
 			<div class="scrab-list">
 				
 			</div>
 			
 			<div class="box2">
-				<div class="self-diag">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[${session.loginUser.nickname}]]님의 자가진단 이력</div>
+				<div class="self-diag">
+					<!-- 카카오 로그인 유저 -->
+					<span th:if="${session.loginUser.kakao_nickname != null}" style="margin-left: 40px;">
+					[[${session.loginUser.kakao_nickname}]]님의 자가진단 결과
+			   		 </span>
+		
+				    <!--  일반 로그인 유저 -->
+				    <span th:if="${session.loginUser.kakao_nickname == null}" style="margin-left: 40px;">
+				        [[${session.loginUser.nickname}]]님의 자가진단 결과
+				    </span>
+				</div>
 				<hr class="line2">
 				<div class="diag-list"></div>
 			</div>

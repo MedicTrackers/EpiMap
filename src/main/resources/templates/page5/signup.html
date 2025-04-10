@@ -8,6 +8,14 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style>
+
+	html, body {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		overflow-x: hidden;
+	}
+	
 	@font-face {
 	    font-family: 'GothicA1-Light';
 	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
@@ -26,12 +34,13 @@
 		margin-top: 149px;
 		width: 100vw;
 		min-width: 412px;
-		height: 100vh;
+		height: 500px;
 		background-color: #ffffff;
 		border-radius: 10px;
 		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
 	}
 	.signup {
+		margin-left: 30px;
 		margin-top: 20px;
 		width: 412px;
 		height: 90px;
@@ -158,7 +167,7 @@
 <body>
 <div layout:fragment="content">
 	<div class="box">	
-		<div class="signup">&nbsp;&nbsp;회원 가입</div>
+		<div class="signup">회원 가입</div>
 		<i class="bi bi-x-circle chk1"></i>
 		<i class="bi bi-x-circle chk2"></i>
 		<hr class="line1">
