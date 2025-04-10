@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import data.dto.ChatbotDto;
+import data.dto.ChatbotDto2;
 import data.dto.UsersDto;
 import data.service.FeedbacksService;
 import jakarta.servlet.http.HttpSession;
@@ -46,7 +46,7 @@ public class FeedbacksController {
         map.put("startNum", startNum);
         map.put("perPage", perPage);
         
-        List<ChatbotDto> feedlist = feedService.getPagingFeedbacks(map);
+        List<ChatbotDto2> feedlist = feedService.getPagingFeedbacks(map);
         
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("totalPage", totalPage);
