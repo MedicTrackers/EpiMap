@@ -142,6 +142,9 @@
         flex-direction: column;
         overflow: hidden;
     }
+    .medical-list-container:first-child {
+        margin-top: 12px; /* ✅ 직접 여유를 줘서 위쪽 그림자가 보이게 */
+    }
 
     /*병원리스트 타이틀*/
     .medical-title {
@@ -160,14 +163,15 @@
         background-color: #E2E0E1;
         top: 0;
         left: 0;
-        margin-bottom: 24px;
+        margin-bottom: 10px;
     }
 
     /*병원리스트 스크롤영역 css*/
     .medical-scroll-box {
         overflow-y: auto;
         flex: 1;
-        padding-bottom: 20px;
+        padding-top: 10px;
+        padding-bottom: 40px;
     }
 
     /*병원리스트 박스영역 css*/
@@ -176,7 +180,6 @@
         flex-direction: column;
         align-items: center; /*카드 가운데 정렬 */
         overflow-x: auto;
-        gap: 16px;
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none; /* IE and Edge */
     }
@@ -625,7 +628,7 @@
                 //병원 글자 길어져서 글자 제거 스크립트 적용
                 function cleanHospitalName(name) {
                     return name
-                        .replace(/(재단법인|의료법인|사회복지법인|의료재단|복지재단|재단|부속|아산사회|학교법인고려중앙학원|의과대학부속병원)/g, '')
+                        .replace(/(재단법인|의료법인|사회복지법인|의료재단|복지재단|재단|부속|아산사회|학교법인고려중앙학원|의과대학부속병원|학교법인가톨릭학원가톨릭대학교|연세대학교의과대학)/g, '')
                         .replace(/[\(\)]/g, '') // 괄호 제거
                         .trim();
                 }
