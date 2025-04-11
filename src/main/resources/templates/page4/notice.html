@@ -54,10 +54,9 @@
         }
 
         .notice-list-inner {
-            margin-left: 10px;
-            margin-top: 10px;
-            height: calc(100vh - 120px); /* 부모 div의 높이를 100%로 설정 */
-            padding-right: 10px; /* 스크롤바 공간 */
+            height: calc(100vh - 240px); /* 공지 배너 및 여백 고려한 높이 */
+            overflow-y: auto;  /* 스크롤 적용 */
+            padding-right: 10px;
         }
 
         .notice-header {

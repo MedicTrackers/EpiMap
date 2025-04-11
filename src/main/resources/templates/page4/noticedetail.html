@@ -56,7 +56,7 @@
         .carousel-item img {
             height: 400px;           /* 원하는 높이로 고정 */
             width: 100%;             /* 캐러셀 너비에 맞춤 */
-            object-fit: cover;       /* 비율 유지하면서 자르기 */
+            object-fit: contain;       /* 비율 유지하면서 자르기 */
         }
         .notice-list-inner {
             margin-left: -10px;
@@ -159,8 +159,7 @@
             </div>
 
             <div th:if="${dto.nphotoList == null or #lists.isEmpty(dto.nphotoList)}"
-                 style="height: 400px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
-                <p class="text-muted">이미지가 없습니다.</p>
+                 style="height: 200px; background-color: white; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
             </div>
 
             <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel"
