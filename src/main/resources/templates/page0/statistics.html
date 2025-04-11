@@ -97,7 +97,10 @@
 		font-family: "Assistant-Bold", Helvetica;
 		margin: 0 auto;
 		font-size: 24px;
-		color: white; 	
+	}
+	
+	.chartbox .title-wrapper {
+		color: white;
 	}
 	
 	.modal-body {
@@ -590,7 +593,7 @@
 	<div class="chartbox">
 		<div class="title">
 			<span>
-				인플루엔자 통계&nbsp;&nbsp;
+				<span class="title-wrapper">인플루엔자 통계&nbsp;&nbsp;</span>
 				<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
           			의사환자분율?
         		</button>
@@ -621,7 +624,7 @@
 								예를 들어, 2024-2025절기의 유행기준은 외래환자 1,000명당 8.6명으로 설정되었습니다.
 								따라서, 의사환자분율이 이 값을 초과하면 인플루엔자 유행으로 간주됩니다.
 								<br><br><br>
-								<button type="button" onclick="location.href='https://dportal.kdca.go.kr/pot/is/st/influ.do'"
+								<button type="button" onclick="window.open('https://dportal.kdca.go.kr/pot/is/st/influ.do')"
 								class="btn btn-primary">
 									자세히 보기
 								</button>
