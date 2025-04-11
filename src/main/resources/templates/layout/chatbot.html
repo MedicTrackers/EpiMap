@@ -21,7 +21,7 @@
 }
 
 body {
-	font-family: 'GothicA1-Light';
+	font-family: 'GothicA1-Light', sans-serif;
 	font-size: 25px;
 }
 
@@ -32,15 +32,16 @@ body::-webkit-scrollbar {
 
 button, input {
 	font-family: 'GothicA1-Light';
-	font-size: 20px;
+	font-size: 25px;
 }
 
 /* Chatbot Header ==================== */
 .chatbotHeader {
 	height: 110px;
-	padding: 20px;
-	margin-top: 40px;
+	padding-bottom: 40px;
+	margin-top: 100px;
 	border-bottom: 2px solid #ECECEC;
+	margin-bottom: 50px;
 	display: flex;
 	align-items: center;
 	gap: 15px;
@@ -58,22 +59,22 @@ button, input {
 /* ChatbotStand.png */
 .chatbotHeader img {
 	width: 40px;
-	margin-left: 50px;
+	margin-left: 35px;
 }
 
 /* Welcome EpiBot */
 .chatbotHeader span {
 	font-family: 'GothicA1-Bold', sans-serif;
 	font-weight: 700;
-	font-size: 40px;
+	font-size: 45px;
 	color: #0062FF;
 	margin-top: 3px;
-	margin-left: 20px;
+	margin-left: 15px;
 }
 
 /* ↻ 새로고침 */
 .bi-arrow-clockwise {
-	font-size: 33px;
+	font-size: 40px;
 	color: #96A7AF;
 	margin-top: 6px;
 	cursor: pointer;
@@ -87,10 +88,10 @@ button, input {
 /* 번역 아이콘 */
 .bi-translate {
 	position: absolute;
-	font-size: 37px;
+	font-size: 45px;
 	color: #0062FF;
 	right: 0;
-	margin-right: 45px;
+	margin-right: 10px;
 	cursor: pointer;
 }
 
@@ -120,9 +121,10 @@ button, input {
 
 /* 채팅 메시지 영역 */
 #chat-container {
-    width: 100%;
-    padding: 10px;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column; /* 말풍선 세로 쌓기 */
+    padding: 15px;
+    overflow: auto;
     flex-grow: 1;
 }
 
@@ -151,7 +153,8 @@ button, input {
 
 /* 사용자 질문 말풍선 */
 .user-message {
-	display: inline-block;
+	display: block;
+	justify-content: flex-end;
 	padding: 13px 26px;
 	margin-left: auto;
 	margin-right: 0;
@@ -167,9 +170,13 @@ button, input {
 
 /* 챗봇 대답 말풍선 ============================== */
 .bot-message {
+	font-family: 'GothicA1-Light', sans-serif;
+	display: block;
 	text-align: left;
+	font-size: 25px;
 	border-radius: 25px 25px 25px 0;
 	max-width: 60%;
+	align-self: flex-start;
 }
 
 .bot-message.carousel-message {
@@ -184,7 +191,6 @@ button, input {
 /* 챗봇 대화 선택 버튼 */
 .chat-button {
 	font-family: 'GothicA1-Light', sans-serif;
-	font-size: 21px;
 	font-weight: bold;
 	background-color: white;
 	color: #0062FF;
@@ -218,11 +224,10 @@ button, input {
 	flex: 1;
 	height: 45px;
 	padding: 12px 20px;
-	margin-bottom: 15px;
+	margin-bottom: 100px;
 	border: none;
 	border-radius: 30px;
 	box-shadow: 0 1px 20px #c4d0d566;
-	font-size: 22px;
 	font-weight: bold;
 	color: #0062FF; 
 	outline: none;
@@ -281,7 +286,7 @@ button, input {
 		<form id="input-form">
 			<input type="text" id="input-message"
 				placeholder="EpiBot에게 보낼 메세지를 입력하세요."/>
-			<img src="/ChatbotSend.png" alt="EpiMapSend Button" id="send-img" style="cursor: pointer; width:45px;">
+			<img src="/ChatbotSend.png" alt="EpiMapSend Button" id="send-img" style="cursor: pointer; width:45px; margin-bottom:100px;">
 		</form>
 	</div>
 
@@ -320,8 +325,6 @@ button, input {
 
     	  if (isUser) {
     	    chatContainer.appendChild(br1.cloneNode()); // 사용자 말풍선 하단 여백
-    	    chatContainer.appendChild(br1.cloneNode());
-    	    chatContainer.appendChild(br1.cloneNode());
     	  } else {
     	    chatContainer.appendChild(div);
     	  }
@@ -333,7 +336,7 @@ button, input {
     			isFeedbackMode = true;
     			inputMessage.placeholder = "피드백을 입력해주세요."; // 피드백 모드 시 placeholder 변경
     		}
-    	  // ========================================================= (477라인)
+    	  // =========================================================
     	}
 
 
