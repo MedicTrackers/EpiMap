@@ -30,8 +30,11 @@
 body {
 	font-family: 'GothicA1-Light', sans-serif;
 	overflow: hidden;
-	position: fixed;
-	width: 100%;
+}
+@media (max-height: 700px) {
+  body {
+  	overflow: auto;
+  }
 }
 
 .overview {
@@ -50,24 +53,30 @@ body {
 	border-radius: 10px;
 	color: white;
 	font-weight: bold;
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* 수직 가운데 정렬 */
 }
 
 .overview span {
-	font-size: 20px;
+	font-size: 22px;
+	margin-top: 5px;
 }
 
 .overview p {
-	font-size: 13px;
+	font-size: 16px;
 	margin-top: 10px;
+	margin-bottom: 5px;
 }
 
 .backbox {
 	background-color: #fdfdfd;
-	position: fixed;
+	position: relative;
 	bottom: 0;
 	margin: 0 auto;
 	width: 99vw;
-	top: 330px;
+	height: 100vh;
+	margin-top: 10px;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 	padding: 20px;
@@ -84,41 +93,25 @@ body {
 
 .checkbox {
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-	margin: 20px auto 64px auto;
-	width: 90%;
-	max-width: 500px;
-	height: 404px;
+	margin: 20px auto;
+	padding: 20px;
+	width: 90vw;
 	border-radius: 15px;
-	display: flex;
-	flex-direction: column;
-	overflow-y: scroll;
-}
-@media screen and (max-height: 800px) {
-	.checkbox {
-		height: 10vh;
-	}
-}
-@media (min-height: 801px) and (max-height: 999px) {
-	.checkbox {
-		height: 40vh;
-		gap: 0;
-		padding: 20px;
-	}
-}
-
-@media screen and (min-height: 1000px) {
-	.checkbox {
-		height: 45vh;
-		padding: 15px 10px 5px;
-		gap: 5px;
-	}
+	
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* 2열 */
+	gap: 5px;
+	box-sizing: border-box;
 }
 
 .labels {
-	width: 150px;
-	height: 24px;
-	padding: 15px;
-	line-height: 24px;
+	display: flex;
+	align-items: center;
+	height: 48px;
+	padding: 10px;
+	box-sizing: border-box;
+	border-radius: 8px;
+	white-space: nowrap;
 }
 
 .labels:hover {
@@ -138,12 +131,18 @@ body {
 	border-radius: 15px;
 }
 
+.btncss {
+	grid-column: 1/-1;
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+}
 .checkbtn {
 	background-color: #0062FF;
 	color: #ffffff;
-	margin-top: auto;
-	margin-bottom: 20px;
-	align-self: center;
+	white-space: nowrap;
+	padding: 8px 20px;
+	font-size: 1rem;
 }
 
 .listbtn {
@@ -199,6 +198,7 @@ body {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
 </style>
 </head>
 <body>
@@ -229,7 +229,9 @@ body {
 				[[${dto.symptom}]]
 			</label>
 			
-			<button type="button" class="btn btn-info checkbtn">진단결과 확인</button>
+			<div class="btncss">
+				<button type="button" class="btn btn-info checkbtn">진단결과 확인</button>
+			</div>
 		</div>
 	</div>
 
