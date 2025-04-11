@@ -47,30 +47,31 @@
             bottom: 20px;
             width: 99vw;
             max-height: calc(100vh - 180px);
-            overflow-y: auto;
             background-color: #fdfdfd;
             z-index: 3; /* 공지 배너보다 위에 배치 */
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
         }
 
+        hr {
+            margin-left: -20px;
+        }
+
         .carousel-item img {
             height: 400px;           /* 원하는 높이로 고정 */
             width: 100%;             /* 캐러셀 너비에 맞춤 */
-            object-fit: cover;       /* 비율 유지하면서 자르기 */
+            object-fit: contain;       /* 비율 유지하면서 자르기 */
         }
         .notice-list-inner {
-            margin-left: -10px;
             height: calc(100vh - 120px); /* 부모 div의 높이를 100%로 설정 */
-            overflow-y: auto; /* 내부 스크롤 가능 */
-            padding: 20px;
-            padding-right: 10px; /* 스크롤바 공간 */
         }
 
         .notice-header {
             display: flex;
             justify-content: space-between; /* 제목과 버튼을 양쪽 정렬 */
             align-items: flex-end; /* 버튼을 아래쪽으로 배치 */
+            padding: 10px;
+            margin-left: 10px;
         }
 
         .page5_title {
@@ -78,6 +79,13 @@
             font-weight: bold;
             color: #0062FF;
         }
+
+        .subject,
+        .content,
+        .profile-image {
+            margin-left: 10px; /* 원하는 값(px, rem 등으로 조절 가능) */
+        }
+
         .fixed-nav-buttons {
             left: 50%;
             bottom: 20px;
@@ -132,7 +140,7 @@
     <div class="notice-detail">
         <div class="notice-list-inner">
             <!-- 상단부 -->
-            <div class="notice-header mb-2">
+            <div class="notice-header ">
                 <b class="page5_title">공지사항</b>
             </div>
             <hr>
@@ -144,7 +152,7 @@
                     th:text="${dto.subject}">제목입니다
                 </h4>
                 <!-- 작성일자 -->
-                <div class="text-muted small" th:text="${#dates.format(dto.writeday, 'yyyy-MM-dd HH:mm')}">2025-04-07 15:00</div>
+                <div class="text-muted small" th:text="${#dates.format(dto.writeday, 'yyyy-MM-dd HH:mm')}" style="margin-right: 10px ">2025-04-07 15:00</div>
             </div>
 
 
@@ -156,6 +164,9 @@
                 </div>
             </div>
 
+            <div th:if="${dto.nphotoList == null or #lists.isEmpty(dto.nphotoList)}"
+                 style="height: 200px; background-color: white; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+            </div>
 
             <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel"
                  th:if="${dto.nphotoList != null and #lists.size(dto.nphotoList) > 0}">
@@ -204,15 +215,16 @@
             <!-- 이전/목록/다음 버튼 (고정) -->
             <div class="fixed-nav-buttons">
                 <th:block th:if="${prev != null}">
-                    <a th:href="@{/notice/detail(boards_id=${prev.boards_id})}" class="btn btn-outline-secondary text-nowrap">
+                    <a th:href="@{/notice/detail(boards_id=${prev.boards_id}, pageNum=${pageNum})}" class="btn btn-outline-secondary text-nowrap">
                         ← 이전글
                     </a>
                 </th:block>
 
-                <a href="/notice" class="btn btn-outline-secondary text-nowrap">📄 목록</a>
+                <a th:href="@{/notice(pageNum=${pageNum})}" class="btn btn-outline-secondary text-nowrap">📄 목록</a>
+
 
                 <th:block th:if="${next != null}">
-                    <a th:href="@{/notice/detail(boards_id=${next.boards_id})}" class="btn btn-outline-secondary text-nowrap">
+                    <a th:href="@{/notice/detail(boards_id=${next.boards_id}, pageNum=${pageNum})}" class="btn btn-outline-secondary text-nowrap">
                         다음글 →
                     </a>
                 </th:block>
@@ -224,22 +236,24 @@
             <!-- 첨부파일 -->
             <th:block th:if="${dto.nfile != null}">
                 <div class="file-section">
-        <span>첨부파일 :
-            <a th:href="@{|${filePath}${dto.nfile}|}" download>[[${dto.nfile}]]</a>
-        </span>
+                    <span>첨부파일 :
+                        <a th:href="@{|${filePath}${dto.nfile}|}" download>[[${dto.nfile}]]</a>
+                    </span>
                 </div>
             </th:block>
 
             <!-- 수정 / 삭제 버튼 (우측 하단 정렬) -->
             <div class="btn-wrapper">
                 <div class="btn-edit-delete-group">
-                    <a th:href="@{/notice/updateform(boards_id=${dto.boards_id})}">
-                        <i class="bi bi-pencil-fill"></i> 수정
-                    </a>
-                    <a th:href="@{/notice/delete(boards_id=${dto.boards_id})}"
-                       onclick="return confirm('삭제하시겠습니까?')">
-                        <i class="bi bi-trash-fill"></i> 삭제
-                    </a>
+                    <th:block th:if="${session.loginUser != null and session.loginUser.users_id == dto.users_id}">
+                        <a th:href="@{/notice/updateform(boards_id=${dto.boards_id}, pageNum=${pageNum})}">
+                            <i class="bi bi-pencil-fill"></i> 수정
+                        </a>
+                        <a th:href="@{/notice/delete(boards_id=${dto.boards_id})}"
+                           onclick="return confirm('삭제하시겠습니까?')">
+                            <i class="bi bi-trash-fill"></i> 삭제
+                        </a>
+                    </th:block>
                 </div>
             </div>
         </div>

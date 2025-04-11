@@ -35,8 +35,8 @@
 	</select>
 
 	<insert id="insertKakaoUser" parameterType="UsersDto">
-		INSERT INTO users (user_id, kakao_id, kakao_nickname)
-		VALUES (#{user_id}, #{kakao_id}, #{kakao_nickname})
+		INSERT INTO users (user_id, kakao_id, kakao_nickname, nickname)
+		VALUES (#{user_id}, #{kakao_id}, #{kakao_nickname}, #{nickname})
 	</insert>
 
 	<update id="connectKakao" parameterType="UsersDto">

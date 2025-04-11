@@ -24,8 +24,12 @@
 body {
 	margin-top: 125px;
 	padding-top: 5%;
-	overflow-y: hidden; 
+	overflow: hidden; 
 }
+body::-webkit-scrollbar {
+    display: none; /* 스크롤바 숨기기 */
+}
+
 .page6_title {
 	font-family: 'GothicA1-Bold', sans-serif;
 	color: #0062FF;
@@ -36,19 +40,37 @@ body {
 .feedbacks_box {
 	font-family: 'GothicA1-Light', sans-serif;
 	width: 90%;
-	height: 50vh;
+	height: 60vh;
 	margin: 0 auto;
 	padding: 5%;
-	background-color: #ececec;
+	background-color: #ffffff;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
-	overflow-y: scroll; 
+	justify-content: space-between;
+	overflow-y: scroll;
 }
-@media screen and (min-height: 1000px) {
+@media (max-height: 900px) {
+  	body {
+  		margin-top: 125px;
+  	}
 	.feedbacks_box {
-		padding: 2%;
+		margin-top: 10px;
+		height: 50vh;
 	}
+}
+
+@media (min-height: 1100px) {
+	body {
+		overflow: auto;
+	}
+	.feedbacks_box {
+		height: 70vh;
+		margin-bottom: 0;
+	}
+}
+/* 스크롤바 숨기기 */
+.feedbacks_box::-webkit-scrollbar {
+    display: none; /* 스크롤바 숨기기 */
 }
 
 /* feedback 항목 */
@@ -64,7 +86,11 @@ body {
 	text-overflow: ellipsis;
 	cursor: pointer;
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	display: flex;
+    flex-direction: column;
+    justify-content: center; /* 세로 가운데 정렬 */
 }
+
 .feedback:hover {
 	transform: translate(5px, -5px);
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
@@ -74,6 +100,7 @@ body {
 	font-size: 24px;
 	font-weight: bold;
 }
+
 .write_day {
 	font-size: 0.9em;
 	color: #cecece;

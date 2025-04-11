@@ -45,29 +45,24 @@
             position: fixed;
             top: 170px; /* 공지 배너 일부를 덮게 조정 */
             bottom: 20px;
-            width: 99vw;
+            width: 100vw;
             max-height: calc(100vh - 180px);
-            overflow-y: auto;
             background-color: #fdfdfd;
             z-index: 3; /* 공지 배너보다 위에 배치 */
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
 
         .notice-list-inner {
-            margin-left: 10px;
-            margin-top: 10px;
-            height: calc(100vh - 120px); /* 부모 div의 높이를 100%로 설정 */
-            overflow-y: auto; /* 내부 스크롤 가능 */
-            padding-right: 10px; /* 스크롤바 공간 */
+            height: calc(100vh - 240px); /* 공지 배너 및 여백 고려한 높이 */
+            overflow-y: auto;  /* 스크롤 적용 */
         }
 
         .notice-header {
             display: flex;
             justify-content: space-between; /* 제목과 버튼을 양쪽 정렬 */
             align-items: flex-end; /* 버튼을 아래쪽으로 배치 */
-            margin-bottom: 5px; /* hr과 간격 조정 */
+            padding: 5px;
         }
 
         .page5_title {
@@ -164,7 +159,7 @@
                                 <!-- 오른쪽: 텍스트 -->
                                 <div>
                                     <div style="font-size: 1.2rem; font-weight: bold;">
-                                        <a th:href="@{'/notice/detail'(boards_id=${dto.boards_id})}"
+                                        <a th:href="@{'/notice/detail'(boards_id=${dto.boards_id}, pageNum=${pageNum})}"
                                            style="text-decoration: none;">
                                             <span th:text="${dto.subject}"
                                                   th:style="${dto.isRead} ? 'color: gray; font-weight: normal;' : 'color: black; font-weight: bold;'">
@@ -194,5 +189,28 @@
             </div>
         </div>
     </div>
+    <script>
+        function changeView(viewType) {
+            const noticeList = document.querySelector('.noticelist');
+            const rows = noticeList.querySelectorAll('tr');
+
+            rows.forEach(row => {
+                const container = row.querySelector('td > div');
+
+                if (viewType === 'list') {
+                    // 리스트형 보기
+                    container.style.flexDirection = 'row';
+                    container.querySelector('img').style.width = '100px';
+                    container.querySelector('img').style.height = '70px';
+                } else if (viewType === 'sidebar') {
+                    // 사이드형 보기 (세로형 박스)
+                    container.style.flexDirection = 'column';
+                    container.querySelector('img').style.width = '100%';
+                    container.querySelector('img').style.height = '150px';
+                }
+            });
+        }
+    </script>
+</div>
 </body>
 </html>
