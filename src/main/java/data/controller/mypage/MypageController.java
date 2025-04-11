@@ -201,6 +201,7 @@ public class MypageController {
 
 	    loginUser.setKakao_id(kakao_id);
 	    loginUser.setKakao_nickname(kakao_nickname);
+	    loginUser.setNickname(kakao_nickname);
 	    usersService.connectKakao(loginUser);
 	    session.setAttribute("loginUser", loginUser);
 	    return "ok";
@@ -231,6 +232,7 @@ public class MypageController {
 	    dto.setUser_id("kakao_" + kakao_id); // 내부용 ID
 	    dto.setKakao_id(kakao_id);
 	    dto.setKakao_nickname(kakao_nickname);
+	    dto.setNickname(kakao_nickname);
 	    usersService.insertKakaoUser(dto);
 
 	    session.setAttribute("loginUser", dto);
