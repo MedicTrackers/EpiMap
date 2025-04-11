@@ -329,7 +329,7 @@
             <!--병원 리스트 세로형-->
             <div class="medical-scroll-box">
                 <div id="medical-list" class="medical-box">
-                    <!--병원리스트 영역-->
+                    <!--병원리스트 영역--> ?
                 </div>
             </div>
         </div>
@@ -393,7 +393,7 @@
 
     /*지도 초기화*/
     navigator.geolocation.getCurrentPosition((position) => {
-        console.log(">>>>"+"getCurrentPosition");
+
         lat = position.coords.latitude;
         lon = position.coords.longitude;
 
@@ -594,7 +594,7 @@
             data: {
                 serviceKey: '17Ds6cxIqo9+znsM81nIgrGHeWGzUlZBHQ9s9GSWEFqc1McvZaH2ovzWYKxVdi8AopGjXaYCZWcLCX6VcqWd/Q==',  // API 키를 여기에 입력하세요.
                 pageNo: 1,
-                numOfRows: 100
+                numOfRows: 500
             },
             dataType: 'xml',  // XML 데이터 형식으로 반환받기
             success: function(response) {
