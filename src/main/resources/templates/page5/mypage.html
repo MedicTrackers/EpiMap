@@ -24,7 +24,9 @@
 	body {
 		font-family: 'GothicA1-Light', sans-serif;
 	}
-	
+	body::-webkit-scrollbar {
+  		display: none;
+	}
 	.nickname {
 		margin: 0 auto;
 		margin-top: 149px;
@@ -327,7 +329,14 @@
 							
 							const list = res.scrabs;
 							let s = "";
-							
+							if (list.length === 0 && page > 1) {
+								scrabsdata(page - 1);
+								currentScrabPage = page - 1;
+						        return;
+						      }
+
+							currentScrabPage = page; // 현재 페이지 기억
+
 							if(list.length == 0) {
 								$(".content").css("overflow-y", "hidden");
 								s += `<div class="innerbox1" style="color:gray; line-height:100px;font-size:25px;">스크랩된 뉴스가 없습니다.</div>
@@ -407,7 +416,15 @@
 						success:function(res) {
 							let s= "";
 							let list = res.list;
-							//console.log(list.length);
+							
+							if (list.length === 0 && page > 1) {
+						        diagdata(page - 1);
+						        currentDiagPage = page - 1;
+						        return;
+						      }
+
+						      currentDiagPage = page; // 현재 페이지 기억
+
 							if(list.length == 0) {
 								s += `
 								<div class="innerbox2" style="line-height:150px;">

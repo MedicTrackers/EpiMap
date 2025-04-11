@@ -25,6 +25,11 @@ body {
 	font-size: 25px;
 }
 
+/* 스크롤바 삭제 */
+body::-webkit-scrollbar {
+  display: none;
+}
+
 button, input {
 	font-family: 'GothicA1-Light';
 	font-size: 20px;
@@ -105,18 +110,35 @@ button, input {
 
 /* ================================= */
 
-#chat-container {
-	width: 100%;
-	max-width: 800px;
-	margin: auto;
-	padding: 10px;
-	height: 900px;
-	overflow-y: auto;
+.allContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 800px;
+    margin: auto;
 }
 
-/* 스크롤바 없애기 */
+/* 채팅 메시지 영역 */
+#chat-container {
+    width: 100%;
+    padding: 10px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
 #chat-container::-webkit-scrollbar {
-  display: none;
+	display: none;
+}
+
+/* 질문 입력창 Container */
+#input-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* 모든 버블 디폴트 설정 */
@@ -140,7 +162,7 @@ button, input {
 	text-align: left;
 	float: right;
 	white-space: pre-wrap;
-	max-width: 60%; /* 너무 길어지지 않게 제한 */
+	max-width: 60%; /* 너비 제한 */
 }
 
 /* 챗봇 대답 말풍선 ============================== */
@@ -148,6 +170,10 @@ button, input {
 	text-align: left;
 	border-radius: 25px 25px 25px 0;
 	max-width: 60%;
+}
+
+.bot-message.carousel-message {
+    max-width: 70%; /* 캐러셀만 너비 넓게 */
 }
 
 .image {
@@ -181,7 +207,6 @@ button, input {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding-top: 20px;
   width: 100%;
   max-width: 800px;
   margin: auto;
@@ -193,6 +218,7 @@ button, input {
 	flex: 1;
 	height: 45px;
 	padding: 12px 20px;
+	margin-bottom: 15px;
 	border: none;
 	border-radius: 30px;
 	box-shadow: 0 1px 20px #c4d0d566;
@@ -443,7 +469,7 @@ button, input {
 	  });
 
 	  const container = document.createElement("div");
-	  container.classList.add("bot-message");
+	  container.classList.add("bot-message", "carousel-message");
 	  container.appendChild(carouselWrapper);
 	  chatContainer.appendChild(container);
 	  chatContainer.scrollTop = chatContainer.scrollHeight;

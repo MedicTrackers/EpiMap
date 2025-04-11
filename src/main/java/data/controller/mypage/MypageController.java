@@ -109,7 +109,7 @@ public class MypageController {
 		UsersDto dto = (UsersDto) session.getAttribute("loginUser");
 		int users_id = dto.getUsers_id();
 		
-		int size = 3;
+		int size = 5;
 		int offset = (page - 1) * size;
 		
 		List<ResultsDto> list = resultsService.getPagedResult(users_id, offset, size);
