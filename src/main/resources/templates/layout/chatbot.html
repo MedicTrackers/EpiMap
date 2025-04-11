@@ -21,7 +21,7 @@
 }
 
 body {
-	font-family: 'GothicA1-Light';
+	font-family: 'GothicA1-Light', sans-serif;
 	font-size: 25px;
 }
 
@@ -38,7 +38,7 @@ button, input {
 /* Chatbot Header ==================== */
 .chatbotHeader {
 	height: 110px;
-	padding-bottom: 20px;
+	padding-bottom: 40px;
 	margin-top: 100px;
 	border-bottom: 2px solid #ECECEC;
 	margin-bottom: 50px;
@@ -59,22 +59,22 @@ button, input {
 /* ChatbotStand.png */
 .chatbotHeader img {
 	width: 40px;
-	margin-left: 50px;
+	margin-left: 35px;
 }
 
 /* Welcome EpiBot */
 .chatbotHeader span {
 	font-family: 'GothicA1-Bold', sans-serif;
 	font-weight: 700;
-	font-size: 40px;
+	font-size: 45px;
 	color: #0062FF;
 	margin-top: 3px;
-	margin-left: 20px;
+	margin-left: 15px;
 }
 
 /* ↻ 새로고침 */
 .bi-arrow-clockwise {
-	font-size: 33px;
+	font-size: 40px;
 	color: #96A7AF;
 	margin-top: 6px;
 	cursor: pointer;
@@ -91,7 +91,7 @@ button, input {
 	font-size: 45px;
 	color: #0062FF;
 	right: 0;
-	margin-right: 45px;
+	margin-right: 10px;
 	cursor: pointer;
 }
 
@@ -145,7 +145,7 @@ button, input {
 
 /* 모든 버블 디폴트 설정 */
 .bubble {
-	margin: 10px 0 15px 0;
+	margin: 10px 0;
 	padding: 10px;
 	border-radius: 8px;
 	background-color: #eeeeee;
@@ -170,6 +170,7 @@ button, input {
 
 /* 챗봇 대답 말풍선 ============================== */
 .bot-message {
+	font-family: 'GothicA1-Light', sans-serif;
 	display: block;
 	text-align: left;
 	font-size: 25px;
@@ -324,9 +325,6 @@ button, input {
 
     	  if (isUser) {
     	    chatContainer.appendChild(br1.cloneNode()); // 사용자 말풍선 하단 여백
-    	    chatContainer.appendChild(br1.cloneNode());
-    	    chatContainer.appendChild(br1.cloneNode());
-    	    chatContainer.appendChild(br1.cloneNode());
     	  } else {
     	    chatContainer.appendChild(div);
     	  }
