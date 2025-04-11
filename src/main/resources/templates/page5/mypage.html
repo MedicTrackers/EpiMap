@@ -213,7 +213,7 @@
 	
 	.noresult {
 		padding-bold: 65px;
-		font-size: 27px;
+		font-size: 6vw;
 		color: gray;
 	}
 	
@@ -339,7 +339,9 @@
 
 							if(list.length == 0) {
 								$(".content").css("overflow-y", "hidden");
-								s += `<div class="innerbox1" style="color:gray; line-height:100px;font-size:25px;">스크랩된 뉴스가 없습니다.</div>
+								s += `<div class="innerbox1" style="line-height:100px;">
+									<div class="noresult">스크랩된 뉴스가 없습니다.</div>
+								</div>
 								`;
 								  $(".scrab-list").html(s);
 								  $(".scrab-list").css("height", "200px","overflow-y", "hidden"); // 공간 확보
