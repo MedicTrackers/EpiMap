@@ -225,7 +225,7 @@ body::-webkit-scrollbar {
       		 data-bs-toggle="modal" data-bs-target="#listModal">목록</button>
 		</p>
 		<hr>
-		<span class="warn">증상을 하나는 선택해 주세요</span>
+		<span class="warn">최소 1개의 증상을 선택해주세요.</span>
 		<div class="checkbox">
 			<label class="labels" th:each="dto:${symptoms}">
 				<input type="checkbox" th:value="|${dto.idx}|" class="checks" />&nbsp;&nbsp;&nbsp;
