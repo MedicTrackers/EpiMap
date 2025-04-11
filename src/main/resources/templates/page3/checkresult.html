@@ -23,43 +23,70 @@
 body {
   	font-family: 'GothicA1-Light', sans-serif;
 	overflow: hidden;
-	position: fixed;
-	width: 100%;
+}
+@media (max-height: 700px) {
+  body {
+  	overflow: auto;
+  }
+  .resultbox {
+        max-height: 60vh; /* 작은 화면에서 더 낮은 높이 */
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .page3_title {
+        font-size: 28px;
+    }
+
+    .result {
+        font-size: 18px;
+    }
+
+    .checkbtn {
+        font-size: 16px;
+    }
 }
 .overview {
   	width: 90%;
-  	max-width: 500px;
-  	height: 107px;
-  	border: 1px solid gray;
-  	margin: 10px auto 0 auto;
-  	padding: 10px;
-  	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
+	max-width: 500px;
+	height: auto;
+	border: 1px solid gray;
+	margin: 0 auto;
+	margin-top: 10px;
+	padding: 10px;
+	box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px
+		#96a7af66;
 	background: linear-gradient(150deg, rgba(1, 57, 254, 0.4) 0%,
-      rgba(16, 241, 255, 0.4) 100%),
-      linear-gradient(0deg, rgba(0,98,255,1) 0%,
-      rgba(0,98,255,1) 100%);
-  	border-radius: 10px;
-  	color: white;
-  	font-weight: bold;
+		rgba(16, 241, 255, 0.4) 100%),
+		linear-gradient(0deg, rgba(0, 98, 255, 1) 0%, rgba(0, 98, 255, 1) 100%);
+	border-radius: 10px;
+	color: white;
+	font-weight: bold;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 .overview span {
-	font-size: 20px;
+	font-size: 22px;
+	margin-top: 5px;
 }
+
 .overview p {
-	font-size: 13px;
+	font-size: 16px;
 	margin-top: 10px;
+	margin-bottom: 5px;
 }
 
 .backbox {
 	background-color: #fdfdfd;
-	position: fixed;
+	position: relative;
 	bottom: 0;
 	margin: 0 auto;
 	width: 99vw;
-	top: 300px;
+	height: 100vh;
+	margin-top: 10px;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
-	margin-top: 10px;
 	padding: 20px;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 	font-weight: bold;
@@ -71,55 +98,34 @@ body {
 	font-weight: 900;
 }
 .resultbox {
-	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-	margin: 40px auto 0 auto;
-	width: 90%;
-	max-width: 500px;
-	border-radius: 15px;
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-	padding-top: 50px;
-	overflow-y: scroll; 
-}
-@media screen and (max-height: 800px) {
-	.resultbox {
-		height: 10vh;
-	}
-}
-@media (min-height: 801px) and (max-height: 950px) {
-	.resultbox {
-		height: 40vh;
-		gap: 0;
-		padding: 10px;
-	}
+	 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    margin: 40px auto 0 auto;
+    width: 90vw;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 세로 가운데 정렬 */
+    align-items: center; /* 수평 가운데 정렬 */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: auto;
+    max-height: 80vh; /* 화면 크기에 따라 최대 높이 설정 */
+    text-align: center;
 }
 
 .checkbtn {
 	background-color: #0062FF;
 	color: #ffffff;
-	margin-top: auto;
+	margin-top: 10px;
 	margin-bottom: 20px;
 	align-self: center;
 }
 
-@media screen and (min-height: 950px) {
-	.checkbtn {
-		margin-top: 30%;
-	}
-	.resultkbox {
-		margin-top: 30px;
-		height: 60vh;
-		padding: 5% 10px 5px;
-		gap: 5px;
-	}
-}
-
-
 .disease {
-	margin-top: 10px;
+	margin-top: 60px;
 	font-size: 24px;
 }
+
 .disease p {
 	color: red;
 	font-family: 'GothicA1-Bold', sans-serif;
