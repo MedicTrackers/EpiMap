@@ -21,7 +21,6 @@
 	    font-weight: 700;
 	    font-style: normal;
 	}
-	
 	body {
 		font-family: 'GothicA1-Light', sans-serif;
 	}
@@ -29,10 +28,9 @@
 	.nickname {
 		margin: 0 auto;
 		margin-top: 149px;
-		/* margin-left: 18px; */
 		width: 85%;
 		height: 90px;
-		line-height: 80px;
+		line-height: 70px;
 		border-radius: 10px;
 		box-shadow: 0 1px 20px #c4d0d566, 0 7px 10px #c5d0d640, 0 4 20px #96a7af66;
 		background: linear-gradient(
@@ -79,7 +77,6 @@
 		margin: 0 auto;
 		margin-top: 15px;
 		width: 100%;
-		height: 489px;
 		background-color: #ffffff;
 		border-radius: 10px;
 		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
@@ -99,6 +96,7 @@
 	}
 	.line1 {
 		margin-top: -10px;
+		color: #E2E0E1;
 	}
 	.scrab-list {
 		height: 350px;
@@ -114,7 +112,6 @@
 		margin-top: 15px;
 		width: 100%;
 		max-width: 100vw;
-		height: 500px;
 		background-color: #ffffff;
 		border-radius: 10px;
 		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
@@ -133,6 +130,7 @@
 	}
 	.line2 {
 		margin-top: -10px;
+		color: #E2E0E1;
 	}
 	.innerbox1 {
 		margin: 0 auto;
@@ -206,6 +204,7 @@
 	}
 	.result {
 		margin-left: -10px;
+		margin-top: 35px;
 		font-size: 27px;
 		font-weight: bold;
 	}
@@ -217,13 +216,14 @@
 	}
 	
 	.delete {
-		float: right;
-		margin-top: 30px;
-		background: none;
+	    float: right;
+	    margin-top: -85px;
+	    background: none;
 	    border: none;
 	    font-size: 25px;
 	    font-weight: bold;
 	    cursor: pointer;
+	    margin-right: 10px;
 	}
 	.diagpage {
 		font-size: 20px;
@@ -261,13 +261,12 @@
 </style>
 </head>
 <body>
-	<div layout:fragment="content">
+	<div layout:fragment="content" class="content">
 		<div class="nickname">
 		<!-- 카카오 로그인 유저 -->
 	    <span th:if="${session.loginUser.kakao_nickname != null}">
-	        [[${session.loginUser.kakao_nickname}]]님
+	        [[${session.loginUser.kakao_nickname}]]([[${session.loginUser.nickname}]])님
 	    </span>
-
 	    <!--  일반 로그인 유저 -->
 	    <span th:if="${session.loginUser.kakao_nickname == null}">
 	        [[${session.loginUser.nickname}]]님
@@ -280,35 +279,31 @@
 		<div class="box1">
 			<div class="scrabs">
 				<!-- 카카오 로그인 유저 -->
-				<span th:if="${session.loginUser.kakao_nickname != null}" style="margin-left: 70px;">
+				<span th:if="${session.loginUser.kakao_nickname != null}" style="margin-left: 30px;">
 		        [[${session.loginUser.kakao_nickname}]]님의 스크랩
 		   		 </span>
-	
 			    <!--  일반 로그인 유저 -->
-			    <span th:if="${session.loginUser.kakao_nickname == null}" style="margin-left: 70px;">
+			    <span th:if="${session.loginUser.kakao_nickname == null}" style="margin-left: 30px;">
 			        [[${session.loginUser.nickname}]]님의 스크랩
 			    </span>
 		    </div>
 			<hr class="line1">
-			<div class="scrab-list">
-				
+			<div class="scrab-list"></div>
+		</div>
+		<div class="box2">
+			<div class="self-diag">
+				<!-- 카카오 로그인 유저 -->
+				<span th:if="${session.loginUser.kakao_nickname != null}" style="margin-left: 30px;">
+				[[${session.loginUser.kakao_nickname}]]님의 자가진단 결과
+		   		 </span>
+			    <!--  일반 로그인 유저 -->
+			    <span th:if="${session.loginUser.kakao_nickname == null}" style="margin-left: 30px;">
+			        [[${session.loginUser.nickname}]]님의 자가진단 결과
+			    </span>
 			</div>
-			
-			<div class="box2">
-				<div class="self-diag">
-					<!-- 카카오 로그인 유저 -->
-					<span th:if="${session.loginUser.kakao_nickname != null}" style="margin-left: 70px;">
-					[[${session.loginUser.kakao_nickname}]]님의 자가진단 결과
-			   		 </span>
-		
-				    <!--  일반 로그인 유저 -->
-				    <span th:if="${session.loginUser.kakao_nickname == null}" style="margin-left: 70px;">
-				        [[${session.loginUser.nickname}]]님의 자가진단 결과
-				    </span>
-				</div>
-				<hr class="line2">
-				<div class="diag-list"></div>
-			</div>
+			<hr class="line2">
+			<div class="diag-list"></div>
+		</div>
 			<script type="text/javascript">
 				scrabsdata();
 				//스크랩 데이터 불러오기
@@ -329,7 +324,25 @@
 							let s = "";
 							
 							if(list.length == 0) {
-								s += `<div class="innerbox1" style="color:gray; line-height:100px;font-size:25px;">스크랩된 뉴스가 없습니다.</div>`;
+								$(".content").css("overflow-y", "hidden");
+								s += `<div class="innerbox1" style="color:gray; line-height:100px;font-size:25px;">스크랩된 뉴스가 없습니다.</div>
+								`;
+								  $(".scrab-list").html(s);
+								  $(".scrab-list").css("height", "200px","overflow-y", "hidden"); // 공간 확보
+							} else if(list.length == 1 ) {
+								$(".content").css("overflow-y", "hidden");
+								$.each(list, function(i,item){
+									s += `
+										<div class="innerbox1">
+										<div class="newstitle">
+											<a href="${item.url}" target="_blank">${item.title}</a>
+										</div>
+										<div class="badge">의료 분야</div>
+											<i class="bi bi-bookmark-heart-fill deleteScrab" data-id="${item.scrabs_id}"></i>
+									</div>`;
+								});
+								$(".scrab-list").html(s);
+								$(".scrab-list").css("height", "200px","overflow-y", "hidden"); // 공간 확보
 							} else {
 								$.each(list, function(i,item){
 									s += `
@@ -341,10 +354,10 @@
 											<i class="bi bi-bookmark-heart-fill deleteScrab" data-id="${item.scrabs_id}"></i>
 									</div>`;
 								});
+								
 							}
-								s += `<div class="scrabpage"></div><br>`;
+								s += `<br><div class="scrabpage"></div>`;
 							$(".scrab-list").html(s);
-							
 							let p = "";
 							for(let i = 1; i <= res.totalPage; i++) {
 								p += `<a href="" class="page-link1 ${i === page ? 'active' : ''}" data-page="${i}">${i}</a>`;
@@ -354,10 +367,11 @@
 					});	
 				}
 				//스크랩 페이지 이동
+				let currentScrabPage = 1;
 				$(document).on("click", ".page-link1", function(e) {
 				    e.preventDefault(); // 🔴 새로고침 막기
-				    const page = $(this).data("page");
-				    scrabsdata(page);
+				    currentScrabPage = $(this).data("page");
+				    scrabsdata(currentScrabPage);
 				});
 				//스크랩 데이터 삭제 이벤트
 				$(document).on("click", ".deleteScrab", function() {
@@ -369,7 +383,7 @@
 					        data: { scrabs_id: id },
 					        success: function(res) {
 					            if (res.status === "success") {
-					                scrabsdata();
+					                scrabsdata(currentScrabPage);
 					            } else {
 					                alert("삭제 실패. 다시 시도해주세요.");
 					            }
@@ -396,10 +410,22 @@
 								</div>
 								`;
 								$(".diag-list").html(s);
+								$(".diag-list").css("height","250px","overflow-y", "hidden");
 								return;
-							}
-							
-							
+							} else if(list.length == 1) {
+								$.each(list, function(idx, d) {
+									s+= `
+									<div class="innerbox2">
+										<div class="day">진단일자 : ${d.writeday}</div>
+										<div class="result">${d.disease}</div>
+											<i class="bi bi-x delete" myresult="${d.myresult_id}"></i>
+									</div>
+									`;
+								});
+									s += `<br><div class="diagpage"></div><br>`;
+								$(".diag-list").html(s);
+								$(".diag-list").css("height", "300px"); // 공간 확보
+							} else {
 							$.each(list, function(idx, d) {
 								s+= `
 								<div class="innerbox2">
@@ -409,8 +435,10 @@
 								</div>
 								`;
 							});
-								s += `<div class="diagpage"></div><br>`;
+								s += `<br><div class="diagpage"></div><br>`;
 							$(".diag-list").html(s);
+							$(".diag-list").css("height", "200px"); // 공간 확보
+							}
 							
 							let p = "";
 							for(let i = 1; i <= res.totalPages; i++) {
@@ -422,10 +450,11 @@
 					});
 				}
 				//자가진단 페이지 이동
+				let currentDiagPage = 1;
 				$(document).on("click", ".page-link2", function(e) {
 				    e.preventDefault(); // 🔴 새로고침 막기
-				    const page = $(this).data("page");
-				    diagdata(page);
+				    currentDiagPage = $(this).data("page");
+				    diagdata(currentDiagPage);
 				});
 				//자가진단 데이터 삭제 이벤트
 				$(document).on("click", ".delete", function() {
@@ -437,7 +466,7 @@
 						data:{"myresult_id" : myresult_id},
 						url:"/deleteMyResult",
 						success:function() {
-							diagdata();
+							diagdata(currentDiagPage);
 						}
 					});
 				});
@@ -469,7 +498,7 @@
 					                alert("카카오 계정 연결 완료!");
 					                location.href = "/mypage";
 					              } else if (result === "already_connected") {
-					                alert("다른 계정에 이미 연결된 카카오입니다.");
+					                alert("다른 계정에 이미 연결된 카카오계정입니다.");
 					              } else {
 					                alert("연결 실패");
 					              }
