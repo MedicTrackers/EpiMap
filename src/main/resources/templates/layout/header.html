@@ -37,6 +37,10 @@
 	margin-right: 5%;
 }
 
+.logo {
+	cursor: pointer;
+}
+
 .logo img {
 	height: 16px; 
 	width: auto;
@@ -143,6 +147,10 @@
 				'google_translate_element'
 			);
 		}
+		// 로고 누르면 메인화면으로
+		$(".logo").click(function() {
+			location.href = "/statistics";
+		});
 	</script>
 
 	<!-- Google 번역 스크립트 (콜백 연결됨) -->
