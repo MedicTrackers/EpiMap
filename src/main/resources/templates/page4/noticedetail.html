@@ -53,22 +53,25 @@
             border-top-right-radius: 15px;
         }
 
+        hr {
+            margin-left: -20px;
+        }
+
         .carousel-item img {
             height: 400px;           /* 원하는 높이로 고정 */
             width: 100%;             /* 캐러셀 너비에 맞춤 */
             object-fit: contain;       /* 비율 유지하면서 자르기 */
         }
         .notice-list-inner {
-            margin-left: -10px;
             height: calc(100vh - 120px); /* 부모 div의 높이를 100%로 설정 */
-            padding: 20px;
-            padding-right: 10px;
         }
 
         .notice-header {
             display: flex;
             justify-content: space-between; /* 제목과 버튼을 양쪽 정렬 */
             align-items: flex-end; /* 버튼을 아래쪽으로 배치 */
+            padding: 10px;
+            margin-left: 10px;
         }
 
         .page5_title {
@@ -77,9 +80,12 @@
             color: #0062FF;
         }
 
-        .carousel-slide {
-
+        .subject,
+        .content,
+        .profile-image {
+            margin-left: 10px; /* 원하는 값(px, rem 등으로 조절 가능) */
         }
+
         .fixed-nav-buttons {
             left: 50%;
             bottom: 20px;
@@ -134,7 +140,7 @@
     <div class="notice-detail">
         <div class="notice-list-inner">
             <!-- 상단부 -->
-            <div class="notice-header mb-2">
+            <div class="notice-header ">
                 <b class="page5_title">공지사항</b>
             </div>
             <hr>
@@ -146,7 +152,7 @@
                     th:text="${dto.subject}">제목입니다
                 </h4>
                 <!-- 작성일자 -->
-                <div class="text-muted small" th:text="${#dates.format(dto.writeday, 'yyyy-MM-dd HH:mm')}">2025-04-07 15:00</div>
+                <div class="text-muted small" th:text="${#dates.format(dto.writeday, 'yyyy-MM-dd HH:mm')}" style="margin-right: 10px ">2025-04-07 15:00</div>
             </div>
 
 
