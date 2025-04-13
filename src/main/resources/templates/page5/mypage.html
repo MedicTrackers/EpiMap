@@ -241,20 +241,6 @@
 		gap: 10px;
 		color: #96A7AF;
 	}
-	.page-link1 {
-	    text-decoration: none;  /* 기본 밑줄 제거 */
-	    color: black;  /* 기본 텍스트 색상 */
-	    padding: 5px 10px; /* 내부 여백 */
-	    border-radius: 5px; /* 모서리 둥글게 */
-	    transition: background-color 0.3s; /* 부드러운 효과 */
-	}
-	.page-link2 {
-	    text-decoration: none;  /* 기본 밑줄 제거 */
-	    color: black;  /* 기본 텍스트 색상 */
-	    padding: 5px 10px; /* 내부 여백 */
-	    border-radius: 5px; /* 모서리 둥글게 */
-	    transition: background-color 0.3s; /* 부드러운 효과 */
-	}
 	.active {
 		color: #0062ff;
 		font-weight: bold;
@@ -372,19 +358,57 @@
 								});
 								
 							}
-								s += `<br><div class="scrabpage"></div>`;
+								/* s += `<br><div class="pagination"></div>`;
 							$(".scrab-list").html(s);
 							let p = "";
 							for(let i = 1; i <= res.totalPage; i++) {
 								p += `<a href="" class="page-link1 ${i === page ? 'active' : ''}" data-page="${i}">${i}</a>`;
 							}
-							$(".scrabpage").html(p);
+							$(".pagination").html(p); */
+							s += `<br><nav><ul class="pagination scrab-pagination justify-content-center"></ul></nav>`;
+							$(".scrab-list").html(s);
+
+							let p = "";
+							if (page > 1) {
+								  p += `
+								    <li class="page-item">
+								      <a class="page-link" href="#" data-page="${page - 1}">이전</a>
+								    </li>`;
+								} else {
+								  p += `
+								    <li class="page-item disabled">
+								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
+								    </li>`;
+								}
+
+								// 페이지 번호들
+								for (let i = 1; i <= res.totalPage; i++) {
+								  p += `
+								    <li class="page-item ${i === page ? 'active' : ''}">
+								      <a class="page-link" href="#" data-page="${i}">${i}</a>
+								    </li>`;
+								}
+
+								// 다음 버튼
+								if (page < res.totalPage) {
+								  p += `
+								    <li class="page-item">
+								      <a class="page-link" href="#" data-page="${page + 1}">다음</a>
+								    </li>`;
+								} else {
+								  p += `
+								    <li class="page-item disabled">
+								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
+								    </li>`;
+								}
+
+								$(".scrab-pagination").html(p);
 						}
 					});	
 				}
 				//스크랩 페이지 이동
 				let currentScrabPage = 1;
-				$(document).on("click", ".page-link1", function(e) {
+				$(document).on("click", ".scrab-pagination .page-link", function(e) {
 				    e.preventDefault(); // 🔴 새로고침 막기
 				    currentScrabPage = $(this).data("page");
 				    scrabsdata(currentScrabPage);
@@ -446,7 +470,7 @@
 									</div>
 									`;
 								});
-									s += `<br><div class="diagpage"></div><br>`;
+								  s += `<br><nav><ul class="pagination diag-pagination justify-content-center"></ul></nav>`;
 								$(".diag-list").html(s);
 								$(".diag-list").css("height", "300px"); // 공간 확보
 							} else {
@@ -459,23 +483,53 @@
 								</div>
 								`;
 							});
-								s += `<br><div class="diagpage"></div><br>`;
+								s += `<br><nav><ul class="pagination diag-pagination justify-content-center"></ul></nav>`;
 							$(".diag-list").html(s);
 							$(".diag-list").css("height", "200px"); // 공간 확보
 							}
 							
 							let p = "";
-							for(let i = 1; i <= res.totalPages; i++) {
-								p += `<a href="" class="page-link2 ${i === page ? 'active' : ''}" data-page="${i}">${i}</a>`;
-							}
-							$(".diagpage").html(p);
+							if (page > 1) {
+								  p += `
+								    <li class="page-item">
+								      <a class="page-link" href="#" data-page="${page - 1}">이전</a>
+								    </li>`;
+								} else {
+								  p += `
+								    <li class="page-item disabled">
+								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
+								    </li>`;
+								}
+
+								// 페이지 번호들
+								for (let i = 1; i <= res.totalPages; i++) {
+								  p += `
+								    <li class="page-item ${i === page ? 'active' : ''}">
+								      <a class="page-link" href="#" data-page="${i}">${i}</a>
+								    </li>`;
+								}
+
+								// 다음 버튼
+								if (page < res.totalPages) {
+								  p += `
+								    <li class="page-item">
+								      <a class="page-link" href="#" data-page="${page + 1}">다음</a>
+								    </li>`;
+								} else {
+								  p += `
+								    <li class="page-item disabled">
+								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
+								    </li>`;
+								}
+
+								$(".diag-pagination").html(p);
 						}
 
 					});
 				}
 				//자가진단 페이지 이동
 				let currentDiagPage = 1;
-				$(document).on("click", ".page-link2", function(e) {
+				$(document).on("click", ".diag-pagination .page-link", function(e) {
 				    e.preventDefault(); // 🔴 새로고침 막기
 				    currentDiagPage = $(this).data("page");
 				    diagdata(currentDiagPage);
