@@ -246,6 +246,25 @@
 		font-weight: bold;
 		font-size: 1.1em;
 	}
+	.page-link {
+    border: none;
+}
+
+/* 페이징 버튼 텍스트 색상 (기본) */
+.pagination .page-item .page-link {
+    color: #0062FF;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+/* 페이징 버튼 텍스트 색상 (선택 상태) */
+.pagination .page-item.active .page-link {
+    background-color: #0062FF;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.2;
+}
 </style>
 </head>
 <body>
@@ -376,12 +395,12 @@
 							if (page > 1) {
 								  p += `
 								    <li class="page-item">
-								      <a class="page-link" href="#" data-page="${page - 1}">이전</a>
+								      <a class="page-link" href="#" data-page="${page - 1}">&laquo;이전</a>
 								    </li>`;
 								} else {
 								  p += `
 								    <li class="page-item disabled">
-								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
+								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;이전</a>
 								    </li>`;
 								}
 
@@ -397,12 +416,12 @@
 								if (page < res.totalPage) {
 								  p += `
 								    <li class="page-item">
-								      <a class="page-link" href="#" data-page="${page + 1}">다음</a>
+								      <a class="page-link" href="#" data-page="${page + 1}">다음&raquo;</a>
 								    </li>`;
 								} else {
 								  p += `
 								    <li class="page-item disabled">
-								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
+								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음&raquo;</a>
 								    </li>`;
 								}
 								$(".scrab-pagination").html(p);
@@ -495,12 +514,12 @@
 							if (page > 1) {
 								  p += `
 								    <li class="page-item">
-								      <a class="page-link" href="#" data-page="${page - 1}">이전</a>
+								      <a class="page-link" href="#" data-page="${page - 1}">&laquo;이전</a>
 								    </li>`;
 								} else {
 								  p += `
 								    <li class="page-item disabled">
-								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
+								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;이전</a>
 								    </li>`;
 								}
 
@@ -516,12 +535,12 @@
 								if (page < res.totalPages) {
 								  p += `
 								    <li class="page-item">
-								      <a class="page-link" href="#" data-page="${page + 1}">다음</a>
+								      <a class="page-link" href="#" data-page="${page + 1}">다음&raquo;</a>
 								    </li>`;
 								} else {
 								  p += `
 								    <li class="page-item disabled">
-								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
+								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음&raquo;</a>
 								    </li>`;
 								}
 
