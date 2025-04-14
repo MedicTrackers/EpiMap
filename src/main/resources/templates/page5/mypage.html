@@ -322,7 +322,6 @@
 						      }
 
 							currentScrabPage = page; // 현재 페이지 기억
-
 							if(list.length == 0) {
 								$(".content").css("overflow-y", "hidden");
 								s += `<div class="innerbox1" style="line-height:100px;">
@@ -367,7 +366,12 @@
 							$(".pagination").html(p); */
 							s += `<br><nav><ul class="pagination scrab-pagination justify-content-center"></ul></nav>`;
 							$(".scrab-list").html(s);
-
+							//1개 이하 일 때 페이징버튼 숨긱
+							if (res.totalPage == 0) {
+								  $(".scrab-pagination").parent("nav").hide();
+								} else {
+								  $(".scrab-pagination").parent("nav").show();
+								}
 							let p = "";
 							if (page > 1) {
 								  p += `
@@ -401,7 +405,6 @@
 								      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">다음</a>
 								    </li>`;
 								}
-
 								$(".scrab-pagination").html(p);
 						}
 					});	
