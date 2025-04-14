@@ -52,7 +52,7 @@ button, input {
 .bi-arrow-left {
 	color: #96A7AF;
 	font-size: 40px;
-	margin-left: 45px;
+	margin-left: 25px;
  	cursor: pointer;
 }
 
@@ -153,19 +153,28 @@ button, input {
 
 /* 사용자 질문 말풍선 */
 .user-message {
-	display: block;
-	justify-content: flex-end;
-	padding: 13px 26px;
-	margin-left: auto;
-	margin-right: 0;
-	background-color: #0062FF;
-	color: white;
-	border-radius: 25px 0 25px 25px;
-	word-break: break-word;
-	text-align: left;
-	float: right;
-	white-space: pre-wrap;
-	max-width: 60%; /* 너비 제한 */
+    display: block;
+    justify-content: flex-end;
+    padding: 13px 26px;
+    margin-left: auto;
+    margin-right: 0;
+    background-color: #0062FF;
+    color: white;
+    border-radius: 25px 0 25px 25px;
+    word-break: break-word;
+    text-align: left;
+    float: right;
+    white-space: pre-wrap;
+    max-width: 60%; /* 너비 제한 */
+    opacity: 0; /* 초기 투명도 0 */
+    transform: scale(0.8); /* 초기 스케일 약간 작게 */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* 애니메이션 활성화 클래스 */
+.user-message.show {
+    opacity: 1; /* 투명도 1로 변경 */
+    transform: scale(1); /* 스케일 원래대로 */
 }
 
 /* 챗봇 대답 말풍선 ============================== */
@@ -290,7 +299,6 @@ button, input {
 		</form>
 	</div>
 
-
 <script type="text/javascript">
     const chatContainer = document.getElementById("chat-container");
     const backButton = document.getElementById("back-button"); // ← 아이콘 가져오기
@@ -313,48 +321,60 @@ button, input {
 		}, 400);
 	});
 
-    // [사용자 말풍선 출력]
+	
+	// [사용자 말풍선 출력]
     function appendMessage(htmlContent, isUser = false) {
-    	  // 여백 조정을 위한 <br><br> 생성
-    	  const br1 = document.createElement("br");
-
-    	  const div = document.createElement("div");
-    	  div.classList.add("bubble", isUser ? "user-message" : "bot-message");
-    	  div.innerHTML = htmlContent;
-    	  chatContainer.appendChild(div); // 사용자 말풍선
-
-    	  if (isUser) {
-    	    chatContainer.appendChild(br1.cloneNode()); // 사용자 말풍선 하단 여백
-    	  } else {
-    	    chatContainer.appendChild(div);
-    	  }
-
-    	  chatContainer.scrollTop = chatContainer.scrollHeight;
-    	  
-    	  // 추가 ====================================================
-    	  if (!isUser && htmlContent.includes("피드백을 작성해주세요")) {
-    			isFeedbackMode = true;
-    			inputMessage.placeholder = "피드백을 입력해주세요."; // 피드백 모드 시 placeholder 변경
-    		}
-    	  // =========================================================
-    	}
+		 // 여백 조정을 위한 <br><br> 생성
+		 const br1 = document.createElement("br");
+		 const div = document.createElement("div");
+		 div.classList.add("bubble", isUser ? "user-message" : "bot-message");
+		 div.innerHTML = htmlContent;
+		 chatContainer.appendChild(div); // 말풍선 추가
+		
+		 // 애니메이션 활성화 (사용자 또는 챗봇 메시지 모두)
+		 setTimeout(() => {
+		   div.classList.add("show");
+		 }, 10); // 10ms 정도의 지연
+		
+		 if (isUser) {
+		   chatContainer.appendChild(br1.cloneNode()); // 사용자 말풍선 하단 여백
+		 }
+		
+		 chatContainer.scrollTop = chatContainer.scrollHeight;
+		 
+		 // 추가 ====================================================
+		 if (!isUser && htmlContent.includes("피드백을 작성해주세요")) {
+			isFeedbackMode = true;
+			inputMessage.placeholder = "피드백을 입력해주세요."; // 피드백 모드 시 placeholder 변경
+		}
+		 // =========================================================
+	}
 
 
     function renderResponse(data) {
-    	  const bubbles = data.bubbles || [];
+        const bubbles = data.bubbles || [];
 
-    	  bubbles.forEach(bubble => {
-    	    if (bubble.type === "template") {
-    	      renderTemplateBubble(bubble);
-    	    } else if (bubble.type === "carousel") {
-    	      const cards = bubble.data.cards || [];
-    	      renderCarousel(cards); // 캐러셀 카드 형식 (함수 만들어 놓고 여기서 호출을 안 했었음.)
-    	    } else if (bubble.type === "text") {
-    	        const message = bubble.data.description || "";
-    	        appendMessage(message);  // 일반 텍스트 메시지 출력
-    	    }
-    	  });
-    	}
+        bubbles.forEach(bubble => {
+          if (bubble.type === "template") {
+            // 템플릿 버블도 1초 지연 후 렌더링
+            setTimeout(() => {
+              renderTemplateBubble(bubble);
+            }, 100);
+          } else if (bubble.type === "carousel") {
+            const cards = bubble.data.cards || [];
+            // 캐러셀도 1초 지연 후 렌더링
+            setTimeout(() => {
+              renderCarousel(cards);
+            }, 100);
+          } else if (bubble.type === "text") {
+              const message = bubble.data.description || "";
+              // 일반 텍스트 메시지도 1초 지연 후 렌더링
+              setTimeout(() => {
+                appendMessage(message);
+              }, 100);
+          }
+        });
+      }
 
 
     	// [버블 출력 설정]
