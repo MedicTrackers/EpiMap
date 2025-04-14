@@ -35,7 +35,7 @@
 
         .notice-toolbar {
             background-color: #f0f0f0; /* 조금 진한 회색 */
-            padding: 10px 10px;        /* 위아래 여백 추가 */
+            padding: 10px 10px; /* 위아래 여백 추가 */
             margin-bottom: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 살짝 튀어나온 느낌 */
         }
@@ -55,7 +55,7 @@
 
         .notice-list-inner {
             height: calc(100vh - 240px); /* 공지 배너 및 여백 고려한 높이 */
-            overflow-y: hidden;  /* 스크롤 적용 */
+            overflow-y: hidden; /* 스크롤 적용 */
             padding-right: 10px;
         }
 
@@ -80,27 +80,28 @@
 
             bottom: 20px; /* 원래 높이 유지 */
         }
+
         .pagination a {
-            border: none !important;
-            background: none !important;
-            box-shadow: none !important;
             text-decoration: none;
-            color: black; /* 기본 검은색 */
-            font-weight: bold;
+            color: #0062FF;
             padding: 5px 10px;
             border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.2;
+            border: none;
         }
 
-        .pagination .active {
-            color: black;
-            font-weight: bold;
+        .pagination .page-link.active {
+            background-color: #007bff; /* 원하는 배경색 */
+            color: white;
         }
 
-        .pagination .active {
-            color: #0062FF !important; /* 현재 페이지 파란색 */
-            font-weight: bold;
+        /* 비활성화된 버튼 */
+        .pagination .page-link.disabled {
+            background-color: #f0f0f0; /* 비활성화된 버튼 배경색 */
+            color: #6c757d;
+            pointer-events: none; /* 클릭 방지 */
         }
-
 
     </style>
 </head>
@@ -149,12 +150,12 @@
                                     <img th:if="${dto.nphoto != null}"
                                          th:src="@{${imagePath} + ${dto.thumbnail}}"
                                          alt="공지 이미지"
-                                         style="width: 100px; height: 70px; object-fit: contain; border-radius: 8px;" />
+                                         style="width: 100px; height: 70px; object-fit: contain; border-radius: 8px;"/>
 
                                     <img th:if="${dto.nphoto == null}"
                                          src="/default_image.png"
                                          alt="기본 이미지"
-                                         style="width: 100px; height: 70px; object-fit: contain; border-radius: 8px;" />
+                                         style="width: 100px; height: 70px; object-fit: contain; border-radius: 8px;"/>
                                 </div>
 
                                 <!-- 오른쪽: 텍스트 -->
@@ -178,15 +179,22 @@
                     </tbody>
                 </table>
 
-        </div>
-                <!-- 페이징 처리 -->
+            </div>
+            <!-- 페이징 처리 -->
             <div class="pagination">
-                <a th:if="${pageNum > 1}" th:href="@{/notice(pageNum=${pageNum - 1})}" class="page-link">&laquo; 이전</a>
-                    <span th:each="page : ${#numbers.sequence(startPage, endPage)}">
-                         <a th:href="@{/notice(pageNum=${page})}" th:text="${page}"
-                            th:classappend="${page == pageNum} ? 'active' : ''" class="page-link"></a>
-                    </span>
-                <a th:if="${pageNum < totalPage}" th:href="@{/notice(pageNum=${pageNum + 1})}" class="page-link">다음 &raquo;</a>
+                <!-- '이전' 버튼 -->
+                <a th:if="${pageNum > 1}" th:href="@{/notice(pageNum=${pageNum - 1})}"
+                   class="page-link" th:classappend="${pageNum == 1} ? 'disabled' : ''">&laquo; 이전</a>
+
+                <!-- 페이지 번호들 -->
+                <span th:each="page : ${#numbers.sequence(startPage, endPage)}">
+                    <a th:href="@{/notice(pageNum=${page})}" th:text="${page}"
+                    th:classappend="${page == pageNum} ? 'active' : ''" class="page-link"></a>
+                </span>
+
+                <!-- '다음' 버튼 -->
+                <a th:if="${pageNum < totalPage}" th:href="@{/notice(pageNum=${pageNum + 1})}"
+                   class="page-link" th:classappend="${pageNum == totalPage} ? 'disabled' : ''">다음 &raquo;</a>
             </div>
         </div>
     </div>
