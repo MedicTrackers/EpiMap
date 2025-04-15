@@ -48,7 +48,7 @@
 | **CI/CD**       | DooD 방식 - Jenkins & Docker                 |
 
 ### Environment
-<img src="https://img.shields.io/badge/Spring Boot-#6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white">
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=Spring%20Boot&logoColor=white)
 
 ---
 
