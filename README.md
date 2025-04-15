@@ -62,6 +62,7 @@
 
 ### Communication
 [![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)](https://ceyemong.notion.site/epimap?pvs=4)&nbsp;
+[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/design/Fmuj7dXLIpYdzIlDtoVmSj/%EC%8B%A4%EC%8B%9C%EA%B0%84-%EA%B0%90%EC%97%BC%EB%B3%91-%EA%B0%80%EC%9A%A9%EB%B3%91%EC%83%81-%ED%99%95%EC%9D%B8-%EC%95%B1?node-id=33-780&t=ECBtiR99xoWwbGFS-1)&nbsp;
 [![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=googlesheets&logoColor=white)](https://docs.google.com/spreadsheets/d/1van1JKRC4Uk2Ln3flgZEPAa-xEQgy1IcU6o82DOehLU/edit)
 <p>&nbsp;</p>
 
