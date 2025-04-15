@@ -202,7 +202,7 @@
 		height: 13.28px;
 		margin-top: -0.83px;
 		font-weight: 600;
-		color: black;
+		color: white;
 		font-size: 10px;
 		letter-spacing: 0;
 		line-height: 10.0px;
@@ -214,7 +214,7 @@
 		height: 13.28px;
 		margin-top: -0.83px;
 		font-weight: 600;
-		color: black;
+		color: white;
 		font-size: 10px;
 		letter-spacing: 0;
 		line-height: 10.0px;
@@ -226,7 +226,7 @@
 		height: 13.28px;
 		margin-top: -0.83px;
 		font-weight: 600;
-		color: black;
+		color: white;
 		font-size: 10px;
 		letter-spacing: 0;
 		line-height: 10.0px;
@@ -238,7 +238,7 @@
 		height: 13.28px;
 		margin-top: -0.83px;
 		font-weight: 600;
-		color: black;
+		color: white;
 		font-size: 10px;
 		letter-spacing: 0;
 		line-height: 10.0px;
@@ -250,7 +250,7 @@
 		height: 13.28px;
 		margin-top: -0.83px;
 		font-weight: 600;
-		color: black;
+		color: white;
 		font-size: 10px;
 		letter-spacing: 0;
 		line-height: 10.0px;
@@ -262,7 +262,7 @@
 		height: 20px;
 		margin-top: -0.83px;
 		font-weight: 600;
-		color: black;
+		color: white;
 		font-size: 10px;
 		font-family: "Inter-SemiBold", Helvetica;
 		letter-spacing: 0;
@@ -464,6 +464,18 @@
 		left: 50%;
 		transform: translateX(-50%); /* 중앙 정렬 */
 		background-color: white;
+	}
+	
+	.searchbox .line1 {
+		position: absolute;
+    	top: 45px; /* text-wrapper-2의 top+height+여백에 맞게 조정 */
+    	left: 0;
+   		width: 100%; /* view-2와 맞추기 */
+    	box-sizing: border-box;
+    	border: none;
+    	border-top: 1px solid #E2E0E1;
+    	opacity: 1;
+    	margin: 0;
 	}
 	
 	.searchbox .text-wrapper-2 {
@@ -846,6 +858,7 @@
 			<div class="overlap-group">
 				<div class="div"></div>
 				<div class="text-wrapper-2">독감 분야 최신 블로그</div>
+				<hr class="line1">
 				<div class="view-2">
 					<div class="row" th:each="post, iter: ${blogPosts}">
 						<div class="cell">
