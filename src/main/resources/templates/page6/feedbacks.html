@@ -130,30 +130,32 @@ body::-webkit-scrollbar {
 	font-family: 'GothicA1-Light', sans-serif;
 }
 
+/* 페이징 요소 */
+.pagingButton {
+	margin-top: 30px;
+	margin-bottom: 60px;
+}
 
-/* paging */
-.paging {
-	font-size: 20px;
-	font-weight: bold;
-	display: flex;
-	justify-content: center;
-	gap: 10px;
-	color: #96A7AF;
-	margin-top: auto;
-	padding: 10px 0;
-}
 .page-link {
-	text-decoration: none;
-    color: black;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+	border: none;
 }
-.page-link.active {
-	color: #0062ff;
-	font-weight: bold;
-	font-size: 1.1em;
+
+/* 페이징 버튼 텍스트 색상 (기본) */
+.pagination .page-item .page-link {
+	color: #0062FF;
+	font-size: 14px;
+	line-height: 1.2;
 }
+
+/* 페이징 버튼 텍스트 색상 (선택 상태) */
+.pagination .page-item.active .page-link {
+	background-color: #0062FF;
+	color: white;
+	border-radius: 5px;
+	font-size: 14px;
+	line-height: 1.2;
+}
+
 </style>
 </head>
 <body layout:fragment="content">
@@ -166,21 +168,35 @@ body::-webkit-scrollbar {
 				<p class="write_day">[[${dto.writeday}]]</p>
 			</div>
 		</div>
-		
-		
-		<div class="paging">
-			<a class="page-link" th:if="${pageNum > 1}"
-			 th:href="@{/feedbacks(pageNum=${pageNum - 1})}">&laquo; 이전</a>
-			
-			<span th:each="page : ${#numbers.sequence(startPage, endPage)}">
-				<a class="page-link" th:text="${page}"
-				 th:href="@{/feedbacks(pageNum=${page})}"
-				 th:classappend="${page == pageNum} ? 'active' : ''"></a>
-            </span>
-            
-			<a class="page-link" th:if="${pageNum < totalPage}"
-			 th:href="@{/feedbacks(pageNum=${pageNum + 1})}">다음 &raquo;</a>
+
+		<!-- 페이징 버튼 -->
+		<div class="pagingButton">
+			<nav aria-label="Page navigation">
+				<ul class="pagination justify-content-center">
+					<!-- 이전 페이지 버튼 -->
+					<li class="page-item" th:classappend="${pageNum == 1} ? 'disabled'"> <!-- 1P일 시 이전 버튼 작동 X -->
+						<a class="page-link" th:href="@{/feedbacks(pageNum=${pageNum - 1})}" aria-label="Previous">
+							<span aria-hidden="true">&laquo; 이전</span>
+						</a>
+					</li>
+
+					<!-- 페이지 번호 버튼 -->
+					<th:block th:each="i : ${#numbers.sequence(1, totalPage)}">
+						<li class="page-item" th:classappend="${pageNum == i} ? 'active'">
+							<a class="page-link" th:href="@{/feedbacks(pageNum=${i})}" th:text="${i}"></a>
+						</li>
+					</th:block>
+
+					<!-- 다음 페이지 버튼 -->
+					<li class="page-item" th:classappend="${pageNum == totalPage} ? 'disabled'"> <!-- 5P일 시 다음 버튼 작동 X -->
+						<a class="page-link" th:href="@{/feedbacks(pageNum=${pageNum + 1})}" aria-label="Next">
+							<span aria-hidden="true">다음 &raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
 		</div>
+	</div>
 	</div>
 	
 	<!-- The Modal -->

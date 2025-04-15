@@ -131,8 +131,8 @@ public class MypageController {
 	@PostMapping("/scrabInsert")
 	@ResponseBody
 	public String scrabInsert(@RequestParam("url") String url,
-	                        @RequestParam("title") String title,
-	                        HttpSession session) {
+	                          @RequestParam("title") String title,
+	                          HttpSession session) {
 
 	    UsersDto udto = (UsersDto) session.getAttribute("loginUser");
 	    if (udto == null) {
@@ -140,8 +140,15 @@ public class MypageController {
 	        return "fail";
 	    }
 
-	    int usersId = udto.getUsers_id(); // NullPointer 방지됨
+	    int usersId = udto.getUsers_id();
 
+	    // 🔍 중복 체크
+	    boolean alreadyScrapped = scrabService.isTitleScrapped(usersId, title);
+	    if (alreadyScrapped) {
+	        return "duplicate"; // 이미 스크랩한 뉴스 제목
+	    }
+
+	    // ✅ 중복 아니면 저장
 	    ScrabDto dto = new ScrabDto();
 	    dto.setUsers_id(usersId);
 	    dto.setUrl(url);

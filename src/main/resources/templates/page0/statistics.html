@@ -69,13 +69,13 @@
 	
 	.chartbox {
 		max-width: 100vw;
+		min-width: 412px;
 		height: 320px;
 		margin-top: 10px;
 		text-align: center;
 		position: relative;
 		border-radius: 10px;
-		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640, 0px 4px 20px
-			#96a7af66;
+		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
 		background: linear-gradient(
 			150deg,
 			rgba(1, 57, 254, 0.4) 0%,
@@ -90,6 +90,10 @@
 		overflow: visible !important;
 	}
 	
+	.chartbox .title-modal-wrapper {
+		vertical-align: top;
+	}
+	
 	.chartbox .title {
 		width: 360px;
 		height: 90px;
@@ -101,6 +105,7 @@
 	
 	.chartbox .title-wrapper {
 		color: white;
+		margin-right: 43px;
 	}
 	
 	.modal-body {
@@ -132,7 +137,6 @@
 		flex-direction: column;
 		width: 20px;
 		height: 240px;
-		align-items: flex-start;
 		gap: 40px;
 		padding: 0px 0px 13.28px;
 		position: relative;
@@ -319,7 +323,7 @@
 		margin-top: -0.83px;
 		font-weight: 700;
 		font-size: 8.3px;
-		color: #66CB9F;
+		color: #037644;
 		letter-spacing: 0;
 		line-height: 13.3px;
 		white-space: nowrap;
@@ -420,8 +424,7 @@
 		margin-top: 15px;
 		position: relative;
 		border-radius: 10px;
-		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640, 0px 4px 20px
-			#96a7af66;
+		box-shadow: 0px 1px 20px #c4d0d566;
 		left: 50%;
 		transform: translateX(-50%); /* 중앙 정렬 */
 		
@@ -456,7 +459,7 @@
 		height: 120px;
 		position: absolute;
 		top: 60px;
-		left: 13px;
+		left: 25px;
 		background-color: #ffffff;
 		border-radius: 4px;
 		overflow: hidden;
@@ -574,8 +577,7 @@
 		text-align: center;
 		position: relative;
 		border-radius: 10px;
-		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640, 0px 4px 20px
-			#96a7af66;
+		box-shadow: 0px 1px 20px #c4d0d566;
 		left: 50%;
 		font-size: 30px;
 		font-weight: bold;
@@ -592,7 +594,7 @@
 	</div>
 	<div class="chartbox">
 		<div class="title">
-			<span>
+			<span class="title-modal-wrapper">
 				<span class="title-wrapper">인플루엔자 통계&nbsp;&nbsp;</span>
 				<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
           			의사환자분율?
