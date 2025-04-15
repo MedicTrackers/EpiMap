@@ -24,9 +24,6 @@
 	body {
 		font-family: 'GothicA1-Light', sans-serif;
 	}
-	body::-webkit-scrollbar {
-  		display: none;
-	}
 	.nickname {
 		margin: 0 auto;
 		margin-top: 149px;
@@ -102,14 +99,13 @@
 		margin-top: -15px;
 		height: 350px;
 		overflow-y: auto;
-		
 	}
 	.diag-list {
 		margin-top: -15px;
 		/* height: 350px;
 		overflow-y: auto; */
 		height: auto !important;
-		overflow-y: visible;
+		overflow-y: auto;
 	    padding-bottom: 80px;
 	    box-shadow:  0px 2px 10px white;
 	}
@@ -370,7 +366,7 @@
 								$(".scrab-list").html(s);
 								$(".box1").css("height","300px");
 								/* $(".scrab-list").css("height", "300px;"); */
-								$(".scrab-list").attr("style", "height: 200px !important; overflow-y: hidden;");
+								$(".scrab-list").attr("style", "height: 300px !important; overflow-y: hidden;");
 							} else {
 								$.each(list, function(i,item){
 									s += `
@@ -482,7 +478,7 @@
 
 							if(list.length == 0) {
 								s += `
-								<div class="innerbox2" style="line-height:150px;">
+								<div class="innerbox2" style="line-height:100px;">
 									<div class="noresult">자가진단 이력이 없습니다.</div>
 								</div>
 								`;
@@ -577,7 +573,7 @@
 						}
 					});
 				});
-				function adjustBoxHeights() {
+			/* 	function adjustBoxHeights() {
 					  const vh = window.innerHeight;
 					  const nicknameHeight = $(".nickname").outerHeight(true);
 					  const footerHeight = $("footer").outerHeight(true) || 60;
@@ -592,7 +588,7 @@
 
 					// 실행 시점
 					$(document).ready(adjustBoxHeights);
-					$(window).on("resize", adjustBoxHeights);
+					$(window).on("resize", adjustBoxHeights); */
 			</script>
 			<script>
 				Kakao.init('55844f9373522ab837bcc9a12eaff759');
