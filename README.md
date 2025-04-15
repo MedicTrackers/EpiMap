@@ -52,12 +52,10 @@
 ### Database
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)&nbsp;
 
-### Server
-Naver Cloud Platform Server <br>
+### Server (Naver Cloud Platform)
 ![Ubuntu Server](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)&nbsp;
 
-### CI/CD
-DooD 방식 <br>
+### CI/CD (DooD)
 ![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white)&nbsp;
 ![Docker](https://img.shields.io/badge/MySQL-2496ED?style=for-the-badge&logo=docker&logoColor=white)&nbsp;
 
