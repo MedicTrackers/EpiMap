@@ -24,4 +24,8 @@ public class ScrabService {
 	public int getScrabsCount(int users_id) {
 		return scrabMapper.getScrabsCount(users_id);
 	}
+	
+	public boolean isTitleScrapped(int users_Id, String title) {
+		return scrabMapper.isTitleScrapped(users_Id, title);
+	}
 }
