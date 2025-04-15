@@ -1,6 +1,8 @@
-![Logo](https://blog.kakaocdn.net/dn/3V3c1/btsNmexbMaL/9heJqHL4FigHZNI5swAJok/img.png)
-# ${\textsf{\color{#0062ff}EpiMap}}$
+![Logo](https://blog.kakaocdn.net/dn/bDmSBg/btsNmu7mC2m/7CzKvN3mM1QuQUUl7lWlwk/img.png)
+<!--# ${\textsf{\color{#0062ff}EpiMap}}$-->
+
 > ## EpiMap 프로젝트 설명
+> 개발 기간: 2025.03.27 ~ 2025.04.16
 > 사용자에게 다음과 같은 서비스들을 제공하는 감염병 의료 정보 모바일 사이트<br>
 >> 1. 감염병 현황을 시각화
 >> 2. 감염병 관련 트렌드를 분석해 뉴스 정보 제공
@@ -12,7 +14,7 @@
 
 
 > ## 👥 MediTrackers Member
-> ### **네이버 비트캠프 17기 Semi Project**
+> ### **네이버 클라우드 네이티브 부트캠프 17기 Semi Project**
 > | 역할     | 이름      |
 > |----------|-----------|
 > | 팀장     | **최은영** |
