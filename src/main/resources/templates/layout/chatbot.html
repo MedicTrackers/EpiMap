@@ -21,21 +21,27 @@
 }
 
 body {
-	font-family: 'GothicA1-Light';
+	font-family: 'GothicA1-Light', sans-serif;
 	font-size: 25px;
+}
+
+/* 스크롤바 삭제 */
+body::-webkit-scrollbar {
+  display: none;
 }
 
 button, input {
 	font-family: 'GothicA1-Light';
-	font-size: 20px;
+	font-size: 25px;
 }
 
 /* Chatbot Header ==================== */
 .chatbotHeader {
 	height: 110px;
-	padding: 20px;
-	margin-top: 40px;
+	padding-bottom: 40px;
+	margin-top: 100px;
 	border-bottom: 2px solid #ECECEC;
+	margin-bottom: 50px;
 	display: flex;
 	align-items: center;
 	gap: 15px;
@@ -46,29 +52,29 @@ button, input {
 .bi-arrow-left {
 	color: #96A7AF;
 	font-size: 40px;
-	margin-left: 45px;
+	margin-left: 25px;
  	cursor: pointer;
 }
 
 /* ChatbotStand.png */
 .chatbotHeader img {
 	width: 40px;
-	margin-left: 50px;
+	margin-left: 35px;
 }
 
 /* Welcome EpiBot */
 .chatbotHeader span {
 	font-family: 'GothicA1-Bold', sans-serif;
 	font-weight: 700;
-	font-size: 40px;
+	font-size: 45px;
 	color: #0062FF;
 	margin-top: 3px;
-	margin-left: 20px;
+	margin-left: 15px;
 }
 
 /* ↻ 새로고침 */
 .bi-arrow-clockwise {
-	font-size: 33px;
+	font-size: 40px;
 	color: #96A7AF;
 	margin-top: 6px;
 	cursor: pointer;
@@ -82,10 +88,10 @@ button, input {
 /* 번역 아이콘 */
 .bi-translate {
 	position: absolute;
-	font-size: 37px;
+	font-size: 45px;
 	color: #0062FF;
 	right: 0;
-	margin-right: 45px;
+	margin-right: 10px;
 	cursor: pointer;
 }
 
@@ -105,18 +111,36 @@ button, input {
 
 /* ================================= */
 
-#chat-container {
-	width: 100%;
-	max-width: 800px;
-	margin: auto;
-	padding: 10px;
-	height: 900px;
-	overflow-y: auto;
+.allContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 800px;
+    margin: auto;
 }
 
-/* 스크롤바 없애기 */
+/* 채팅 메시지 영역 */
+#chat-container {
+    display: flex;
+    flex-direction: column; /* 말풍선 세로 쌓기 */
+    padding: 15px;
+    overflow: auto;
+    flex-grow: 1;
+}
+
 #chat-container::-webkit-scrollbar {
-  display: none;
+	display: none;
+}
+
+/* 질문 입력창 Container */
+#input-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* 모든 버블 디폴트 설정 */
@@ -129,25 +153,43 @@ button, input {
 
 /* 사용자 질문 말풍선 */
 .user-message {
-	display: inline-block;
-	padding: 13px 26px;
-	margin-left: auto;
-	margin-right: 0;
-	background-color: #0062FF;
-	color: white;
-	border-radius: 25px 0 25px 25px;
-	word-break: break-word;
-	text-align: left;
-	float: right;
-	white-space: pre-wrap;
-	max-width: 60%; /* 너무 길어지지 않게 제한 */
+    display: block;
+    justify-content: flex-end;
+    padding: 13px 26px;
+    margin-left: auto;
+    margin-right: 0;
+    background-color: #0062FF;
+    color: white;
+    border-radius: 25px 0 25px 25px;
+    word-break: break-word;
+    text-align: left;
+    float: right;
+    white-space: pre-wrap;
+    max-width: 60%; /* 너비 제한 */
+    opacity: 0; /* 초기 투명도 0 */
+    transform: scale(0.8); /* 초기 스케일 약간 작게 */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* 애니메이션 활성화 클래스 */
+.user-message.show {
+    opacity: 1; /* 투명도 1로 변경 */
+    transform: scale(1); /* 스케일 원래대로 */
 }
 
 /* 챗봇 대답 말풍선 ============================== */
 .bot-message {
+	font-family: 'GothicA1-Light', sans-serif;
+	display: block;
 	text-align: left;
+	font-size: 25px;
 	border-radius: 25px 25px 25px 0;
 	max-width: 60%;
+	align-self: flex-start;
+}
+
+.bot-message.carousel-message {
+    max-width: 70%; /* 캐러셀만 너비 넓게 */
 }
 
 .image {
@@ -158,7 +200,6 @@ button, input {
 /* 챗봇 대화 선택 버튼 */
 .chat-button {
 	font-family: 'GothicA1-Light', sans-serif;
-	font-size: 21px;
 	font-weight: bold;
 	background-color: white;
 	color: #0062FF;
@@ -181,7 +222,6 @@ button, input {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  padding-top: 20px;
   width: 100%;
   max-width: 800px;
   margin: auto;
@@ -193,10 +233,10 @@ button, input {
 	flex: 1;
 	height: 45px;
 	padding: 12px 20px;
+	margin-bottom: 100px;
 	border: none;
 	border-radius: 30px;
 	box-shadow: 0 1px 20px #c4d0d566;
-	font-size: 22px;
 	font-weight: bold;
 	color: #0062FF; 
 	outline: none;
@@ -255,10 +295,9 @@ button, input {
 		<form id="input-form">
 			<input type="text" id="input-message"
 				placeholder="EpiBot에게 보낼 메세지를 입력하세요."/>
-			<img src="/ChatbotSend.png" alt="EpiMapSend Button" id="send-img" style="cursor: pointer; width:45px;">
+			<img src="/ChatbotSend.png" alt="EpiMapSend Button" id="send-img" style="cursor: pointer; width:45px; margin-bottom:100px;">
 		</form>
 	</div>
-
 
 <script type="text/javascript">
     const chatContainer = document.getElementById("chat-container");
@@ -282,50 +321,60 @@ button, input {
 		}, 400);
 	});
 
-    // [사용자 말풍선 출력]
+	
+	// [사용자 말풍선 출력]
     function appendMessage(htmlContent, isUser = false) {
-    	  // 여백 조정을 위한 <br><br> 생성
-    	  const br1 = document.createElement("br");
-
-    	  const div = document.createElement("div");
-    	  div.classList.add("bubble", isUser ? "user-message" : "bot-message");
-    	  div.innerHTML = htmlContent;
-    	  chatContainer.appendChild(div); // 사용자 말풍선
-
-    	  if (isUser) {
-    	    chatContainer.appendChild(br1.cloneNode()); // 사용자 말풍선 하단 여백
-    	    chatContainer.appendChild(br1.cloneNode());
-    	    chatContainer.appendChild(br1.cloneNode());
-    	  } else {
-    	    chatContainer.appendChild(div);
-    	  }
-
-    	  chatContainer.scrollTop = chatContainer.scrollHeight;
-    	  
-    	  // 추가 ====================================================
-    	  if (!isUser && htmlContent.includes("피드백을 작성해주세요")) {
-    			isFeedbackMode = true;
-    			inputMessage.placeholder = "피드백을 입력해주세요."; // 피드백 모드 시 placeholder 변경
-    		}
-    	  // ========================================================= (477라인)
-    	}
+		 // 여백 조정을 위한 <br><br> 생성
+		 const br1 = document.createElement("br");
+		 const div = document.createElement("div");
+		 div.classList.add("bubble", isUser ? "user-message" : "bot-message");
+		 div.innerHTML = htmlContent;
+		 chatContainer.appendChild(div); // 말풍선 추가
+		
+		 // 애니메이션 활성화 (사용자 또는 챗봇 메시지 모두)
+		 setTimeout(() => {
+		   div.classList.add("show");
+		 }, 10); // 10ms 정도의 지연
+		
+		 if (isUser) {
+		   chatContainer.appendChild(br1.cloneNode()); // 사용자 말풍선 하단 여백
+		 }
+		
+		 chatContainer.scrollTop = chatContainer.scrollHeight;
+		 
+		 // 추가 ====================================================
+		 if (!isUser && htmlContent.includes("피드백을 작성해주세요")) {
+			isFeedbackMode = true;
+			inputMessage.placeholder = "피드백을 입력해주세요."; // 피드백 모드 시 placeholder 변경
+		}
+		 // =========================================================
+	}
 
 
     function renderResponse(data) {
-    	  const bubbles = data.bubbles || [];
+        const bubbles = data.bubbles || [];
 
-    	  bubbles.forEach(bubble => {
-    	    if (bubble.type === "template") {
-    	      renderTemplateBubble(bubble);
-    	    } else if (bubble.type === "carousel") {
-    	      const cards = bubble.data.cards || [];
-    	      renderCarousel(cards); // 캐러셀 카드 형식 (함수 만들어 놓고 여기서 호출을 안 했었음.)
-    	    } else if (bubble.type === "text") {
-    	        const message = bubble.data.description || "";
-    	        appendMessage(message);  // 일반 텍스트 메시지 출력
-    	    }
-    	  });
-    	}
+        bubbles.forEach(bubble => {
+          if (bubble.type === "template") {
+            // 템플릿 버블도 1초 지연 후 렌더링
+            setTimeout(() => {
+              renderTemplateBubble(bubble);
+            }, 100);
+          } else if (bubble.type === "carousel") {
+            const cards = bubble.data.cards || [];
+            // 캐러셀도 1초 지연 후 렌더링
+            setTimeout(() => {
+              renderCarousel(cards);
+            }, 100);
+          } else if (bubble.type === "text") {
+              const message = bubble.data.description || "";
+              // 일반 텍스트 메시지도 1초 지연 후 렌더링
+              setTimeout(() => {
+                appendMessage(message);
+              }, 100);
+          }
+        });
+      }
 
 
     	// [버블 출력 설정]
@@ -443,7 +492,7 @@ button, input {
 	  });
 
 	  const container = document.createElement("div");
-	  container.classList.add("bot-message");
+	  container.classList.add("bot-message", "carousel-message");
 	  container.appendChild(carouselWrapper);
 	  chatContainer.appendChild(container);
 	  chatContainer.scrollTop = chatContainer.scrollHeight;
