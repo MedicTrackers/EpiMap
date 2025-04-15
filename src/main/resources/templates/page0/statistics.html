@@ -10,6 +10,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <style type="text/css">
+	@font-face {
+	    font-family: 'GothicA1-Light';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+	    font-weight: 300;
+	    font-style: normal;
+	}
+	
+	@font-face {
+	    font-family: 'GothicA1-Bold';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Bold.woff2') format('woff2');
+	    font-weight: 700;
+	    font-style: normal;
+	}
+
 	body::-webkit-scrollbar {
   		display: none;
 	}
@@ -17,6 +31,10 @@
 	body {
 		width: 100%;
 		height: 100vh;
+		margin: 0; /* 기본 여백 제거 */
+		background-image: url('gradient.png');
+		background-repeat: no-repeat;
+		background-position: bottom center;
 	}
 	
 	/* 종 방향 한 줄 공지 */	
@@ -74,9 +92,9 @@
 		margin-top: 10px;
 		text-align: center;
 		position: relative;
-		border-radius: 10px;
 		box-shadow: 0px 1px 20px #c4d0d566, 0px 7px 10px #c5d0d640;
-		background: linear-gradient(
+		background: url('/dots50.png') no-repeat,
+		linear-gradient(
 			150deg,
 			rgba(1, 57, 254, 0.4) 0%,
 			rgba(16, 241, 255, 0.4) 100%
@@ -86,12 +104,18 @@
 			rgba(0, 98, 255, 1) 0%, 
 			rgba(0, 98, 255, 1) 100%
 		);
+		background-size: 100% auto, cover, cover; /* dot.png 가로는 박스에 딱 맞게 */
+		background-position: bottom, center, center; /* dot.png는 바닥에 붙이기 */
+		background-repeat: no-repeat, no-repeat, no-repeat;
+	
 		z-index: auto;
 		overflow: visible !important;
 	}
 	
 	.chartbox .title-modal-wrapper {
 		vertical-align: top;
+		display: flex;
+		align-items: center;
 	}
 	
 	.chartbox .title {
@@ -106,6 +130,18 @@
 	.chartbox .title-wrapper {
 		color: white;
 		margin-right: 43px;
+		font-family: 'GothicA1-Bold', sans-serif;
+	}
+	
+	/* 의사환자분율 모달 버튼 */
+	.chartbox button {
+		background-color: white;
+		color: #0062FF;
+		border: none;
+		width: 120px;
+		height: 30px;
+		line-height: 20px;
+		text-align: center;
 	}
 	
 	.modal-body {
@@ -427,8 +463,7 @@
 		box-shadow: 0px 1px 20px #c4d0d566;
 		left: 50%;
 		transform: translateX(-50%); /* 중앙 정렬 */
-		
-		
+		background-color: white;
 	}
 	
 	.searchbox .text-wrapper-2 {
@@ -438,11 +473,12 @@
 		top: 17px;
 		left: 20px;
 		font-weight: 700;
-		color: #324f5d;
+		color: #0062FF;
 		font-size: 24px;
 		text-align: center;
 		letter-spacing: 0;
 		line-height: normal;
+		font-family: 'GothicA1-Bold', sans-serif;
 	}
 	
 	.searchbox .overlap-group {
@@ -530,16 +566,17 @@
 	
 	.searchbox .text-wrapper {
 		font-weight: 600;
-		color: #000000;
+		color: #324F5D;
 		font-size: 15px;
 		line-height: 19.5px;
 		position: relative;
 		flex: 1;
 		margin-top: -1.00px;
+		margin-bottom: 5px;
 		width: 100%;
 		letter-spacing: 0;
 		display: flex;
-		font-family: "Assistant-Bold", Helvetica;
+		font-family: 'GothicA1-Light', sans-serif;
     	overflow: visible;    /* 넘치는 텍스트 드러내기 */
     	text-overflow: clip; /* ... 제거 */
 	}
@@ -572,17 +609,25 @@
 	.newslink {
 		min-width: 375px;
 		width: 90vw;
-		height: 50px;
+		height: 80px;
+		padding: 12px 20px;
 		margin-top: 10px;
-		text-align: center;
+		text-align: left;
 		position: relative;
 		border-radius: 10px;
 		box-shadow: 0px 1px 20px #c4d0d566;
 		left: 50%;
-		font-size: 30px;
+		font-size: 20px;
 		font-weight: bold;
+		font-family: 'GothicA1-Bold', sans-serif;
 		color: #324f5d;
+		background-color: white;
 		transform: translateX(-50%); /* 중앙 정렬 */
+		
+		background-image: url('/hexagon.jpg'), url('/EpiNews.png');
+		background-repeat: no-repeat, no-repeat;
+		background-position: left bottom, calc(100% - 15px) bottom;
+		background-size: 100px 60px, 60px 60px;
 	}
 </style>
 </head>
@@ -833,7 +878,8 @@
 	
 	<div class="newslink">
 		<a style="text-decoration-line: none; color: inherit;" href="/dashboard">
-			매일 만나는 건강 뉴스
+			건강 뉴스,<br>
+			EpiMap에서 매일 만나보세요
 		</a>
 	</div>
 </div>
