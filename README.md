@@ -2,7 +2,8 @@
 <!--# ${\textsf{\color{#0062ff}EpiMap}}$-->
 
 > ## EpiMap 프로젝트 설명
-> 개발 기간: 2025.03.27 ~ 2025.04.16
+> 개발 기간: 2025.03.27 ~ 2025.04.16 <br>
+> 배포 주소: https://epimap.kro.kr/ <br>
 > 사용자에게 다음과 같은 서비스들을 제공하는 감염병 의료 정보 모바일 사이트<br>
 >> 1. 감염병 현황을 시각화
 >> 2. 감염병 관련 트렌드를 분석해 뉴스 정보 제공
@@ -34,7 +35,7 @@
 
 
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stacks
 
 | Category        | Technology                                   |
 |----------------|----------------------------------------------|
@@ -45,6 +46,9 @@
 | **Database**    | MySQL                                        |
 | **Server**      | Naver Cloud Platform (Ubuntu Server)         |
 | **CI/CD**       | DooD 방식 - Jenkins & Docker                 |
+
+### Environment
+<img src="https://img.shields.io/badge/Spring Boot-#6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white">
 
 ---
 
