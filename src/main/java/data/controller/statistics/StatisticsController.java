@@ -45,7 +45,7 @@ public class StatisticsController {
 	public String getBlogSearch(Model model) {
 	    try {
 	    	String encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8);
-	    	String apiURL = "https://openapi.naver.com/v1/search/blog?query="+encodedQuery+"&display=3&sort=date";
+	    	String apiURL = "https://openapi.naver.com/v1/search/blog?query="+encodedQuery+"&display=3&sort=sim";
 	    	Map<String, String> headers = new HashMap<>();
 	    	headers.put("X-Naver-Client-Id", clientId);
 	    	headers.put("X-Naver-Client-Secret", clientSecret);
