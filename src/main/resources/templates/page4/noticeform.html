@@ -79,7 +79,7 @@
         }
 
         /* 업로드 버튼 스타일 */
-        .notice-form button {
+        .notice-form .submit-btn {
             width: 100%;
             padding: 12px;
             font-size: 18px;
@@ -94,6 +94,24 @@
 
         .notice-form button:hover {
             background-color: #0056b3;
+        }
+
+        .custom-back-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid #007bff;
+            background-color: white;
+            color: #007bff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-back-btn:hover {
+            background-color: #003366;
+            color: white;
         }
 
     </style>
@@ -123,7 +141,10 @@
             <input type="file" id="fileUpload" name="fileUpload" class="form-control">
 
             <!-- 제출 버튼 -->
-            <button type="submit">작성하기</button>
+            <button type="submit" class="submit-btn">작성하기</button>
+
+            <!-- 뒤로가기 버튼 -->
+            <button type="button" class="custom-back-btn mt-2" onclick="history.back()">목록으로</button>
         </form>
     </main>
 </div>
