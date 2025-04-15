@@ -42,15 +42,17 @@
         }
 
         .notice-detail {
-            position: relative;
-            margin-top: 195px; /* overview의 하단을 살짝 덮도록 음수 margin */
+            left: 10px;
+            right: 10px;
+            position: fixed;
+            top: 170px;
             bottom: 20px;
-            width: 99vw;
             max-height: calc(100vh - 180px);
             background-color: #fdfdfd;
             z-index: 3; /* 공지 배너보다 위에 배치 */
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
 
         hr {
