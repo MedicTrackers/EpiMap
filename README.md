@@ -12,7 +12,7 @@
 >> 5. Chatbot을 이용해 사용자에게 가이드 및 관리자 피드백 가능
 >> 6. 카카오 로그인으로 간편 로그인
 >> 7. 보기 좋은 공지사항
-
+<br><br>
 
 > ## 👥 MediTrackers Member
 > ### **네이버 클라우드 네이티브 부트캠프 17기 Semi Project**
@@ -62,9 +62,9 @@
 ### Communication
 [![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)](https://ceyemong.notion.site/epimap?pvs=4)&nbsp;
 [![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=googlesheets&logoColor=white)](https://docs.google.com/spreadsheets/d/1van1JKRC4Uk2Ln3flgZEPAa-xEQgy1IcU6o82DOehLU/edit)
-<br>
+<br><br>
 
-## 🔗 사용한 외부 API 및 서비스
+### 🔗 사용한 외부 API 및 서비스
 
 | API / 서비스                          | 활용 목적 및 기능                                       |
 |--------------------------------------|--------------------------------------------------------|
@@ -90,4 +90,4 @@
 
 ---
 
-### 📱 화면 구성
+## 📱 화면 구성
