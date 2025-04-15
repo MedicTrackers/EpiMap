@@ -2,8 +2,8 @@
 <!--# ${\textsf{\color{#0062ff}EpiMap}}$-->
 
 > ## EpiMap 프로젝트 설명
-> 개발 기간: 2025.03.27 ~ 2025.04.16 <br>
-> 배포 주소: https://epimap.kro.kr/ <br>
+> <b>개발 기간: 2025.03.27 ~ 2025.04.16</b> <br>
+> <b>배포 주소: https://epimap.kro.kr/ </b> <br>
 > 사용자에게 다음과 같은 서비스들을 제공하는 감염병 의료 정보 모바일 사이트<br>
 >> 1. 감염병 현황을 시각화
 >> 2. 감염병 관련 트렌드를 분석해 뉴스 정보 제공
@@ -20,20 +20,6 @@
 > |----------|-----------|
 > | 팀장     | **최은영** |
 > | 팀원     | 서지훈 <br> 이재호 <br> 전세호 <br> 조진용 <br> 채원석 |
-
-## 🔗 사용한 외부 API 및 서비스
-
-| API / 서비스                          | 활용 목적 및 기능                                       |
-|--------------------------------------|--------------------------------------------------------|
-| **NCP Clova Chatbot**                | 챗봇 구현 – 사용자와의 자연어 대화 처리                    |
-| **Geolocation API**                  | 사용자 위치 정보 수집 – 응급실 정보와 지도 기반 서비스 제공 |
-| **네이버 Map API**                   | 지도 표시 및 위치 기반 마커 출력                          |
-| **공공 데이터 포털 응급의료정보 API** | 응급실/병원 실시간 정보 제공 (위치, 대기시간 등)            |
-| **Google Translation API**           | 긴급 메시지의 영문 번역 기능 제공                         |
-| **Kakao 로그인 API**                 | 간편한 소셜 로그인 기능 구현                              |
-| **네이버 인기 검색어 API**           | 메인 페이지 및 대시보드에 실시간 트렌드 반영               |
-
-<br>
 
 ## 🛠️ Tech Stacks
 <!--
@@ -78,6 +64,20 @@ DooD 방식 <br>
 ### Communication
 [![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)](https://ceyemong.notion.site/epimap?pvs=4)&nbsp;
 [![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=googlesheets&logoColor=white)](https://docs.google.com/spreadsheets/d/1van1JKRC4Uk2Ln3flgZEPAa-xEQgy1IcU6o82DOehLU/edit)
+<br>
+
+## 🔗 사용한 외부 API 및 서비스
+
+| API / 서비스                          | 활용 목적 및 기능                                       |
+|--------------------------------------|--------------------------------------------------------|
+| **NCP Clova Chatbot**                | 챗봇 구현 – 사용자와의 자연어 대화 처리                    |
+| **Geolocation API**                  | 사용자 위치 정보 수집 – 응급실 정보와 지도 기반 서비스 제공 |
+| **네이버 Map API**                   | 지도 표시 및 위치 기반 마커 출력                          |
+| **공공 데이터 포털 응급의료정보 API** | 응급실/병원 실시간 정보 제공 (위치, 대기시간 등)            |
+| **Google Translation API**           | 긴급 메시지의 영문 번역 기능 제공                         |
+| **Kakao 로그인 API**                 | 간편한 소셜 로그인 기능 구현                              |
+| **네이버 인기 검색어 API**           | 메인 페이지 및 대시보드에 실시간 트렌드 반영               |
+
 ---
 
 ### 🔍 Description
