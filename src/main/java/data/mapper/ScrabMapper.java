@@ -17,6 +17,8 @@ public interface ScrabMapper {
 			@Param("start") int start,
 			@Param("perPage") int perPage);
 	public int getScrabsCount(@Param("users_id") int users_id);
-	public boolean isTitleScrapped(@Param("users_id") int users_Id,
+	public boolean isTitleScrapped(@Param("users_id") int users_id,
              @Param("title") String title);
+	public List<String> getScrabUrlsByUser(@Param("users_id") int users_id);
+
 }

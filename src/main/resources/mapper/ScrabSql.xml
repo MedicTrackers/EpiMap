@@ -23,4 +23,8 @@
 		  WHERE users_id = #{users_id}
 		  AND title = #{title}
 	</select>
+	
+	<select id="getScrabUrlsByUser" resultType="string">
+    	SELECT url FROM scrabs WHERE users_id = #{users_id}
+	</select>	
 </mapper>

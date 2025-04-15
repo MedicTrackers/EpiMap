@@ -1,5 +1,6 @@
 package data.controller.mypage;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,6 +128,17 @@ public class MypageController {
 	public void deleteMyResult(@RequestParam("myresult_id") int myresult_id) {
 		usersService.deleteMyResult(myresult_id);
 	}	
+	@GetMapping("/myScrabs")
+	@ResponseBody
+	public List<String> getMyScrabUrls(HttpSession session) {
+	    UsersDto user = (UsersDto) session.getAttribute("loginUser");
+
+	    if (user == null) {
+	        return Collections.emptyList(); // 로그인 안 되어 있으면 빈 리스트 반환
+	    }
+
+	    return scrabService.getScrabUrlsByUser(user.getUsers_id());
+	}
 	//뉴스페이지에서 뉴스 스크랩 기능
 	@PostMapping("/scrabInsert")
 	@ResponseBody
