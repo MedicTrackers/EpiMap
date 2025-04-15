@@ -350,6 +350,21 @@ a {
     </div>
     
     <script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "GET",
+            url: "/myScrabs",
+            success: function (scrabUrlList) {
+                $(".bi-bookmark-heart-fill").each(function () {
+                    let url = $(this).attr("data-url");
+
+                    if (scrabUrlList.includes(url)) {
+                        $(this).addClass("active").css("color", "#0062ff");
+                    }
+                });
+            }
+        });
+    });
     $(document).ready(function() {
         $(".bi-bookmark-heart-fill").click(function() {
             let icon = $(this);
@@ -369,8 +384,9 @@ a {
                 	    alert("이미 스크랩한 뉴스입니다.");
                 	  } else if (res === "success") {
                 	    alert("스크랩 완료!");
+                        icon.toggleClass("active");
                 	  } else {
-                	    alert("스크랩 실패");
+                	    alert("로그인이 필요합니다");
                 	  }
                 },
                 error: function() {
