@@ -60,12 +60,13 @@
         }
 
         .carousel-item img {
-            height: 400px;           /* 원하는 높이로 고정 */
+            max-height: 400px;           /* 원하는 높이로 고정 */
             width: 100%;             /* 캐러셀 너비에 맞춤 */
             object-fit: contain;       /* 비율 유지하면서 자르기 */
         }
         .notice-list-inner {
             height: calc(100vh - 120px); /* 부모 div의 높이를 100%로 설정 */
+            overflow-y: auto;
         }
 
         .notice-header {
@@ -83,7 +84,7 @@
         }
 
         .subject,
-        .content,
+        .ncontent,
         .profile-image {
             margin-left: 10px; /* 원하는 값(px, rem 등으로 조절 가능) */
         }
@@ -166,9 +167,6 @@
                 </div>
             </div>
 
-            <div th:if="${dto.nphotoList == null or #lists.isEmpty(dto.nphotoList)}"
-                 style="height: 200px; background-color: white; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
-            </div>
 
             <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel"
                  th:if="${dto.nphotoList != null and #lists.size(dto.nphotoList) > 0}">
@@ -208,11 +206,9 @@
                     <span class="visually-hidden">Next</span>
                 </button>
 
-                <!-- 내용 -->
-                <p class="content" th:text="${dto.content}"></p>
-                <hr>
             </div>
-
+            <!-- 내용 -->
+            <div class="ncontent" th:utext="${dto.content}"></div>
 
             <!-- 이전/목록/다음 버튼 (고정) -->
             <div class="fixed-nav-buttons">
