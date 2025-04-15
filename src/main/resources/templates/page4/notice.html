@@ -55,8 +55,12 @@
 
         .notice-list-inner {
             height: calc(100vh - 240px); /* 공지 배너 및 여백 고려한 높이 */
-            overflow-y: hidden; /* 스크롤 적용 */
+            overflow-y: auto; /* 스크롤 적용 */
             padding-right: 10px;
+        }
+
+        .notice-list-inner::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
         }
 
         .notice-header {
