@@ -33,7 +33,7 @@
 | **Kakao 로그인 API**                 | 간편한 소셜 로그인 기능 구현                              |
 | **네이버 인기 검색어 API**           | 메인 페이지 및 대시보드에 실시간 트렌드 반영               |
 
-
+<br>
 
 ## 🛠️ Tech Stacks
 <!--
@@ -67,7 +67,8 @@
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)&nbsp;
 
 ### Server
-![Ubuntu Server](https://img.shields.io/badge/Ubuntu(Naver%20Cloud%20Platform)-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)&nbsp;
+Naver Cloud Platform Server <br>
+![Ubuntu Server](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)&nbsp;
 
 ### CI/CD
 DooD 방식 <br>
@@ -88,3 +89,7 @@ DooD 방식 <br>
 - **MySQL**: 사용자 및 게시글 등 주요 데이터 저장
 - **NCP 서버**: Ubuntu 환경의 클라우드 서버를 통해 배포 및 운영
 - **CI/CD**: Docker 이미지를 통한 DooD 방식으로 Jenkins를 통해 자동 배포
+
+---
+
+### 📱 화면 구성
