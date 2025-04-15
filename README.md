@@ -36,7 +36,7 @@
 
 
 ## 🛠️ Tech Stacks
-
+<!--
 | Category        | Technology                                   |
 |----------------|----------------------------------------------|
 | **Language**    | Java                                          |
@@ -45,10 +45,11 @@
 | **Frontend**    | HTML, CSS, JavaScript, jQuery, Bootstrap 5   |
 | **Database**    | MySQL                                        |
 | **Server**      | Naver Cloud Platform (Ubuntu Server)         |
-| **CI/CD**       | DooD 방식 - Jenkins & Docker                 |
+| **CI/CD**       | DooD 방식 - Jenkins & Docker                 |-->
 
 ### Environment
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=Spring%20Boot&logoColor=white)&nbsp;
+![Thymeleaf](https://img.shields.io/badge/thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white)&nbsp;
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=Git&logoColor=white)&nbsp;
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white)&nbsp;
 
@@ -56,14 +57,26 @@
 ![HTML5](https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white)&nbsp;
 ![CSS3](https://img.shields.io/badge/css3-1572B6?style=for-the-badge&logo=css3&logoColor=white)&nbsp;
 ![JavaScript](https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white)&nbsp;
-![Thymeleaf](https://img.shields.io/badge/thymeleaf-005F0F?style=for-the-badge&logo=thymeleaf&logoColor=white)&nbsp;
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)&nbsp;
+![jQuery](https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white)&nbsp;
 ![Bootstrap](https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)&nbsp;
-![Naver API](https://img.shields.io/badge/naver-03C75A?style=for-the-badge&logo=naver&logoColor=white)&nbsp;
-![Kakao API](https://img.shields.io/badge/kakao-FFCD00?style=for-the-badge&logo=kakao&logoColor=white)&nbsp;
+![Naver API](https://img.shields.io/badge/Naver%20API-03C75A?style=for-the-badge&logo=naver&logoColor=white)&nbsp;
+![Kakao API](https://img.shields.io/badge/kakao%20API-FFCD00?style=for-the-badge&logo=kakao&logoColor=white)&nbsp;
+
+### Database
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)&nbsp;
+
+### Server
+![Ubuntu Server](https://img.shields.io/badge/Ubuntu(Naver%20Cloud%20Platform)-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)&nbsp;
+
+### CI/CD
+DooD 방식 <br>
+![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white)&nbsp;
+![Docker](https://img.shields.io/badge/MySQL-2496ED?style=for-the-badge&logo=docker&logoColor=white)&nbsp;
 
 ### Communication
-[![Notion](https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white)](https://ceyemong.notion.site/epimap?pvs=4)&nbsp;
-[![Google Sheets](https://img.shields.io/badge/googlesheets-34A853?style=for-the-badge&logo=googlesheets&logoColor=white)](https://ceyemong.notion.site/epimap?pvs=4)
+[![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)](https://ceyemong.notion.site/epimap?pvs=4)&nbsp;
+[![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=googlesheets&logoColor=white)](https://docs.google.com/spreadsheets/d/1van1JKRC4Uk2Ln3flgZEPAa-xEQgy1IcU6o82DOehLU/edit)
 ---
 
 ### 🔍 Description
