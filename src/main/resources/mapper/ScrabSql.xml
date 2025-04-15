@@ -16,4 +16,11 @@
 	<select id="getScrabsCount" resultType="int">
    		 SELECT COUNT(*) FROM scrabs WHERE users_id = #{users_id}
 	</select>
+	
+	<select id="isTitleScrapped" resultType="boolean" parameterType="map">
+		  SELECT COUNT(*) > 0
+		  FROM scrabs
+		  WHERE users_id = #{users_id}
+		  AND title = #{title}
+	</select>
 </mapper>

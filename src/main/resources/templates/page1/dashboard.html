@@ -355,13 +355,14 @@ a {
                     url: url,
                     title: title
                 },
-                success: function(response) {
-                    if (response === "success") {
-                        alert("스크랩 완료!");
-                        icon.toggleClass("active");
-                    } else {
-                        alert("로그인이 필요합니다.");
-                    }
+                success: function(res) {
+                	if (res === "duplicate") {
+                	    alert("이미 스크랩한 뉴스입니다.");
+                	  } else if (res === "success") {
+                	    alert("스크랩 완료!");
+                	  } else {
+                	    alert("스크랩 실패");
+                	  }
                 },
                 error: function() {
                     alert("스크랩 중 오류가 발생했습니다.");
