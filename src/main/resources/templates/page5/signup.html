@@ -55,11 +55,13 @@
 	
 	.line1 {
 		margin-top: -10px;
+		color: #E2E0E1;
+		opacity: 100;
 	}
 	.id {
 		margin-left: 30px;
 		margin-top:25px;
-		width: 350px;
+		width: 85vw;
 		height: 50px;
 		background-color: #ffffff;
 		border-radius: 10px;
@@ -72,7 +74,7 @@
 	.nickname {
 		margin-left: 30px;
 		margin-top:15px;
-		width: 350px;
+		width: 85vw;
 		height: 50px;
 		background-color: #ffffff;
 		border-radius: 10px;
@@ -85,7 +87,7 @@
 	.password {
 		margin-left: 30px;
 		margin-top:15px;
-		width: 350px;
+		width: 85vw;
 		height: 50px;
 		background-color: #ffffff;
 		border-radius: 10px;
@@ -98,7 +100,7 @@
 	.passwordcfm {
 		margin-left: 30px;
 		margin-top:15px;
-		width: 350px;
+		width: 85vw;
 		height: 50px;
 		background-color: #ffffff;
 		border-radius: 10px;
@@ -128,7 +130,7 @@
 		float: right;
 		margin-top: 20px;
 	}
-	.chk1 {
+	/* .chk1 {
 		position: fixed;
 		top: 285px;
 		left: 350px;
@@ -143,10 +145,8 @@
 		z-index: 9999;
 		color: red;
 		display: none;
-	}
-	.success {
-		color: green;
-	}
+	} */
+	
 	.loginbtn {
 	    width: 100px;
 	    height: 30px;
@@ -162,20 +162,70 @@
 	    margin-left: -10px;
 	    float: left;
 	}
+	.input-wrap {
+		width: 85vw;
+	}
+	
+	.input-box {
+		position: relative;
+		width: 100%;
+	}
+	
+	.input-box input {
+		width: 100%;
+		padding-right: 35px; /* 아이콘 공간 확보 */
+		height: 50px;
+		font-size: 14px;
+		box-sizing: border-box;
+	}
+	
+	.chk1 {
+		position: absolute;
+		top: 68%;
+		right: -15px;
+		transform: translateY(-50%);
+		color: red;
+		display: none; /* 오류 있을 때만 보여줌 */
+		font-size: 18px;
+		pointer-events: none; /* 클릭 방지 (필요에 따라 제거) */
+	}
+	.chk2 {
+		position: absolute;
+		top: 64%;
+		right: -15px;
+		transform: translateY(-50%);
+		color: red;
+		display: none; /* 오류 있을 때만 보여줌 */
+		font-size: 18px;
+		pointer-events: none; /* 클릭 방지 (필요에 따라 제거) */
+	}
+	.success {
+		color: green;
+	}
 </style>
 </head>
 <body>
 <div layout:fragment="content">
 	<div class="box">	
-		<div class="signup">회원 가입</div>
-		<i class="bi bi-x-circle chk1"></i>
-		<i class="bi bi-x-circle chk2"></i>
+		<div class="signup">회원가입</div>
+		
+		
 		<hr class="line1">
-				<form th:action="@{/signup}" th:object="${users}" method="post">
-					<input class="id" type="text" th:field="*{user_id}" id="userId" placeholder="&nbsp;&nbsp;아이디" required="required"><br>
+				<form th:action="@{/signup}" th:object="${users}" method="post" class="signupform">
+				<div class="input-wrap">
+					<div class="input-box">
+						<input class="id" type="text" th:field="*{user_id}" id="userId" placeholder="&nbsp;&nbsp;아이디" required="required">
+						<i class="bi bi-x-circle chk1"></i>
+					</div>
+				</div>
 					<input class="nickname" type="text" th:field="*{nickname}" placeholder="&nbsp;&nbsp;닉네임" required="required"><br>
 					<input class="password" type="password" th:field="*{password}" placeholder="&nbsp;&nbsp;비밀번호" required="required"><br>
-					<input class="passwordcfm" type="password" placeholder="&nbsp;&nbsp;비밀번호확인" required="required"><br>
+				<div class="input-wrap">
+					<div class="input-box">
+						<input class="passwordcfm" type="password" placeholder="&nbsp;&nbsp;비밀번호 확인" required="required">
+						<i class="bi bi-x-circle chk2"></i>
+					</div>
+				</div>
 					<button class="signupbtn" id="signupbtn"type="submit">회원가입</button>
 					<button class="loginbtn" type="button" onclick="location.href='/login'">로그인</button>
 				</form>
