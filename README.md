@@ -21,6 +21,7 @@
 > | 팀원     | 서지훈 <br> 이재호 <br> 전세호 <br> 조진용 <br> 채원석 |
 <p>&nbsp;</p>
 
+
 ## 🛠️ Tech Stacks
 <!--
 | Category        | Technology                                   |
@@ -64,6 +65,7 @@
 [![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?style=for-the-badge&logo=googlesheets&logoColor=white)](https://docs.google.com/spreadsheets/d/1van1JKRC4Uk2Ln3flgZEPAa-xEQgy1IcU6o82DOehLU/edit)
 <p>&nbsp;</p>
 
+
 ### 🔗 사용한 외부 API 및 서비스
 
 | API / 서비스                          | 활용 목적 및 기능                                       |
@@ -75,8 +77,8 @@
 | **Google Translation API**           | 긴급 메시지의 영문 번역 기능 제공                         |
 | **Kakao 로그인 API**                 | 간편한 소셜 로그인 기능 구현                              |
 | **네이버 인기 검색어 API**           | 메인 페이지 및 대시보드에 실시간 트렌드 반영               |
+<p>&nbsp;</p>
 
----
 
 ### 🔍 Description
 
