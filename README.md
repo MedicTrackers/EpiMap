@@ -101,7 +101,7 @@ Page 0. 메인 통계 대시보드
 <img src =https://github.com/user-attachments/assets/c93c257c-081a-4818-b97d-be5ecd5e6fe0 height="300">
 
 Page 1. 건강뉴스 트렌드
-- 설명필요
+- 코로나, 독감, 유행 등 감염병과 관련된 키워드가 포함된 뉴스 기사만을 선별하여 건강 정보를 한눈에 파악할 수 있는 서비스 구현
 <img src = https://github.com/user-attachments/assets/67f1a7b8-b91f-4aab-80c1-571663218ff8 height="300">
 
 Page 2. 응급실 찾기
@@ -138,7 +138,7 @@ Page 5. 마이페이지
 <img src = https://github.com/user-attachments/assets/277601ce-3392-4fd5-91af-f37cc7725e69 height="300">
 
 ETC. 챗봇
-- 설명 필요
+- 네이버 클로바 챗봇 API를 활용하여, EpiMap 서비스를 자연스럽게 안내하고 사용자 피드백을 DB에 저장해 관리자에게 자동 전달하는 기능 중심의 챗봇 시스템 구현
 <img src = https://github.com/user-attachments/assets/01e6a1ce-4dce-4027-8034-ed4ace89ae43 height="300">
 <img src= https://github.com/user-attachments/assets/cbe15fad-84fb-45d5-b06a-82a7bff5aecd height="300">
 
