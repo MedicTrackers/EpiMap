@@ -97,5 +97,5 @@
 
 Page 2. 응급실 찾기
 - 사용자의 위치를 기반으로 실시간 가용병상 및 응급실 정보를 제공하는 서비스
-
+<img src = https://github.com/user-attachments/assets/1353f580-859a-49be-926f-2dec0ea4ba4c height="300">
 
