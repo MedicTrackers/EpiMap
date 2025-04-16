@@ -98,7 +98,7 @@
 Page 0. 메인 통계 대시보드
 - 질병관리청 감염병포털, 네이버 검색 api 기반 대시보드 서비스
 - 현재 유행 중인 인플루엔자에 대한 유행지표를 시각화하고 이용자들의 독감 정보를 확인할 수 있도록 대시보드로 구성하는 페이지 구현
-<img src = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbzSFhK%2FbtsNmI5hihq%2FkI3R6DeQ4Ny3ctwbAJICe1%2Fimg.png" width="175" height="300">
+<img src = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbzSFhK%2FbtsNmI5hihq%2FkI3R6DeQ4Ny3ctwbAJICe1%2Fimg.png" height="300">
 
 Page 2. 응급실 찾기
 - 사용자의 위치를 기반으로 실시간 가용병상 및 응급실 정보를 제공하는 서비스
@@ -109,6 +109,13 @@ Page 2. 응급실 찾기
 <img src = https://github.com/user-attachments/assets/d6fc76b8-e3fb-448f-be1b-a0fb033946d8 height="300">
 <img src = https://github.com/user-attachments/assets/64c276b7-d5d5-4163-ba72-f3506e6d4ee9 height="300">
 <img src = https://github.com/user-attachments/assets/fb7667fe-dee4-4118-bee0-76d52ad6d93b height="300">
+
+Page 3. 자가진단 페이지
+- 증상을 선택해 자가 진단을 진행해 사용자에게 빠른 진단과 조언을 제공하는 서비스
+![image](https://github.com/user-attachments/assets/3a130b5d-2e73-4464-8606-56f74452ca77)
+![image](https://github.com/user-attachments/assets/1ec7d4ea-1a33-487b-b6df-194456fe2791)
+![image](https://github.com/user-attachments/assets/3247fbf8-9978-450c-8625-d077d25d18a0)
+
 
 Page 5. 마이페이지
 - 사용자에게 회원가입, 카카오 회원가입 / 로그인 및 마이페이지 전반적인 기능을 제공하는 서비스
