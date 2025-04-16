@@ -109,3 +109,5 @@ Page 2. 응급실 찾기
 <img src = https://github.com/user-attachments/assets/64c276b7-d5d5-4163-ba72-f3506e6d4ee9 height="300">
 <img src = https://github.com/user-attachments/assets/fb7667fe-dee4-4118-bee0-76d52ad6d93b height="300">
 
+Page 5. 마이페이지
+- 사용자에게 회원가입, 카카오 회원가입 / 로그인 및 마이페이지 전반적인 기능을 제공하는 서비스
