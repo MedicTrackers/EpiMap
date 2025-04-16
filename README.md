@@ -98,7 +98,7 @@
 Page 0. 메인 통계 대시보드
 - 질병관리청 감염병포털, 네이버 검색 api 기반 대시보드 서비스
 - 현재 유행 중인 인플루엔자에 대한 유행지표를 시각화하고 이용자들의 독감 정보를 확인할 수 있도록 대시보드로 구성하는 페이지 구현
-![image](https://github.com/user-attachments/assets/b3773813-4aee-4dc3-8a5d-a60018f2eb38)
+![image](https://github.com/user-attachments/assets/c93c257c-081a-4818-b97d-be5ecd5e6fe0)
 
 Page 2. 응급실 찾기
 - 사용자의 위치를 기반으로 실시간 가용병상 및 응급실 정보를 제공하는 서비스
