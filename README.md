@@ -95,6 +95,10 @@
 
 ## 📱 화면 구성
 
+Page 0. 메인 통계 대시보드
+- 질병관리청 감염병포털, 네이버 검색 api를 사용해서 현재 유행 중인 인플루엔자에 대한 유행지표를 시각화하고 이용자들의 독감 정보를 확인할 수 있도록 대시보드로 구성하는 페이지 구현
+<img src = https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbzSFhK%2FbtsNmI5hihq%2FkI3R6DeQ4Ny3ctwbAJICe1%2Fimg.png height="300">
+
 Page 2. 응급실 찾기
 - 사용자의 위치를 기반으로 실시간 가용병상 및 응급실 정보를 제공하는 서비스
 <img src = https://github.com/user-attachments/assets/1353f580-859a-49be-926f-2dec0ea4ba4c height="300">
