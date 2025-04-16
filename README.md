@@ -116,6 +116,21 @@ Page 3. 자가진단 페이지
 <img src = https://github.com/user-attachments/assets/1ec7d4ea-1a33-487b-b6df-194456fe2791 height="300">
 <img src = https://github.com/user-attachments/assets/3247fbf8-9978-450c-8625-d077d25d18a0 height="300">
 
+page 4. 공지사항
+- 사용자에게 공지사항을 전달함을 동시에 관리자가 효율적으로 관리할수 있게 해주는 서비스
+<img src = https://github.com/user-attachments/assets/8ecc4af8-9a2b-4e84-84c9-8d36a163b2a7 height="300">
+<img src = https://github.com/user-attachments/assets/783968e4-85f1-4a4c-b91b-1120dc743220 height="300">
+<img src = https://github.com/user-attachments/assets/2e7a66e2-5341-4424-9f9a-66e6a367c314 height="300">
+<img src = https://github.com/user-attachments/assets/412e10a4-491f-4a67-a7e4-3768101afffd height="300">
+<br>
+<img src = https://github.com/user-attachments/assets/8f485d42-0453-4a93-ad42-f8221eebbe93 height="300">
+<img src = https://github.com/user-attachments/assets/0a3ad8dd-1150-4667-a533-e18be23edcc9 height="300">
+<img src = https://github.com/user-attachments/assets/0562c5d9-09e5-4125-a5af-96383ea8bd2f height="300">
+<img src = https://github.com/user-attachments/assets/1ab3a6e3-fa52-4c2e-800e-062df1ceca60 height="300">
+<br>
+<img src = https://github.com/user-attachments/assets/da2c53cc-ed15-4b62-ae81-442042946a98 height="300">
+<img src = https://github.com/user-attachments/assets/ce2b713b-071c-44c8-af3e-c168f4eecf20 height="300">
+
 
 Page 5. 마이페이지
 - 사용자에게 회원가입, 카카오 회원가입 / 로그인 및 마이페이지 뉴스 기사 스크랩 / 자가진단 결과 저장 기능을 제공하는 서비스
