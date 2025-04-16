@@ -112,9 +112,9 @@ Page 2. 응급실 찾기
 
 Page 3. 자가진단 페이지
 - 증상을 선택해 자가 진단을 진행해 사용자에게 빠른 진단과 조언을 제공하는 서비스
-![image](https://github.com/user-attachments/assets/3a130b5d-2e73-4464-8606-56f74452ca77)
-![image](https://github.com/user-attachments/assets/1ec7d4ea-1a33-487b-b6df-194456fe2791)
-![image](https://github.com/user-attachments/assets/3247fbf8-9978-450c-8625-d077d25d18a0)
+<img src =https://github.com/user-attachments/assets/3a130b5d-2e73-4464-8606-56f74452ca77 height="300">
+<img src = https://github.com/user-attachments/assets/1ec7d4ea-1a33-487b-b6df-194456fe2791 height="300">
+<img src = https://github.com/user-attachments/assets/3247fbf8-9978-450c-8625-d077d25d18a0 height="300">
 
 
 Page 5. 마이페이지
