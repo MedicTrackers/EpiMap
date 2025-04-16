@@ -98,7 +98,10 @@
 Page 0. 메인 통계 대시보드
 - 질병관리청 감염병포털, 네이버 검색 api 기반 대시보드 서비스
 - 현재 유행 중인 인플루엔자에 대한 유행지표를 시각화하고 이용자들의 독감 정보를 확인할 수 있도록 대시보드로 구성하는 페이지 구현
-![image](https://github.com/user-attachments/assets/c93c257c-081a-4818-b97d-be5ecd5e6fe0)
+<img src =https://github.com/user-attachments/assets/c93c257c-081a-4818-b97d-be5ecd5e6fe0 height="300">
+
+Page 1. 건강뉴스 트렌드
+<img src = https://github.com/user-attachments/assets/67f1a7b8-b91f-4aab-80c1-571663218ff8 height="300">
 
 Page 2. 응급실 찾기
 - 사용자의 위치를 기반으로 실시간 가용병상 및 응급실 정보를 제공하는 서비스
@@ -120,14 +123,9 @@ page 4. 공지사항
 - 사용자에게 공지사항을 전달함을 동시에 관리자가 효율적으로 관리할수 있게 해주는 서비스
 <img src = https://github.com/user-attachments/assets/8ecc4af8-9a2b-4e84-84c9-8d36a163b2a7 height="300">
 <img src = https://github.com/user-attachments/assets/783968e4-85f1-4a4c-b91b-1120dc743220 height="300">
-<img src = https://github.com/user-attachments/assets/2e7a66e2-5341-4424-9f9a-66e6a367c314 height="300">
-<img src = https://github.com/user-attachments/assets/412e10a4-491f-4a67-a7e4-3768101afffd height="300">
-<br>
 <img src = https://github.com/user-attachments/assets/8f485d42-0453-4a93-ad42-f8221eebbe93 height="300">
-<img src = https://github.com/user-attachments/assets/0a3ad8dd-1150-4667-a533-e18be23edcc9 height="300">
-<img src = https://github.com/user-attachments/assets/0562c5d9-09e5-4125-a5af-96383ea8bd2f height="300">
-<img src = https://github.com/user-attachments/assets/1ab3a6e3-fa52-4c2e-800e-062df1ceca60 height="300">
 <br>
+<img src = https://github.com/user-attachments/assets/0562c5d9-09e5-4125-a5af-96383ea8bd2f height="300">
 <img src = https://github.com/user-attachments/assets/da2c53cc-ed15-4b62-ae81-442042946a98 height="300">
 <img src = https://github.com/user-attachments/assets/ce2b713b-071c-44c8-af3e-c168f4eecf20 height="300">
 
@@ -137,5 +135,12 @@ Page 5. 마이페이지
 <img src = https://github.com/user-attachments/assets/ba16eeb2-d5b3-4bb5-a800-cd7ff4d52c6b height="300">
 <img src = https://github.com/user-attachments/assets/e8dbea6d-2e40-44c2-bb94-50eedb0597ec height="300">
 <img src = https://github.com/user-attachments/assets/277601ce-3392-4fd5-91af-f37cc7725e69 height="300">
+
+ETC. 챗봇
+<img src = https://github.com/user-attachments/assets/01e6a1ce-4dce-4027-8034-ed4ace89ae43 height="300">
+<img src= https://github.com/user-attachments/assets/c01975b8-58fe-4229-87e2-0bf2d97e3198 height="300">
+<img src = https://github.com/user-attachments/assets/c2a89ff6-14bb-4283-a340-8115fb3ab60a height="300">
+
+
 
 
