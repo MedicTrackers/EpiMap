@@ -101,6 +101,7 @@ Page 0. 메인 통계 대시보드
 <img src =https://github.com/user-attachments/assets/c93c257c-081a-4818-b97d-be5ecd5e6fe0 height="300">
 
 Page 1. 건강뉴스 트렌드
+- 설명필요
 <img src = https://github.com/user-attachments/assets/67f1a7b8-b91f-4aab-80c1-571663218ff8 height="300">
 
 Page 2. 응급실 찾기
@@ -119,7 +120,7 @@ Page 3. 자가진단 페이지
 <img src = https://github.com/user-attachments/assets/1ec7d4ea-1a33-487b-b6df-194456fe2791 height="300">
 <img src = https://github.com/user-attachments/assets/3247fbf8-9978-450c-8625-d077d25d18a0 height="300">
 
-page 4. 공지사항
+Page 4. 공지사항
 - 사용자에게 공지사항을 전달함을 동시에 관리자가 효율적으로 관리할수 있게 해주는 서비스
 <img src = https://github.com/user-attachments/assets/8ecc4af8-9a2b-4e84-84c9-8d36a163b2a7 height="300">
 <img src = https://github.com/user-attachments/assets/783968e4-85f1-4a4c-b91b-1120dc743220 height="300">
@@ -137,6 +138,7 @@ Page 5. 마이페이지
 <img src = https://github.com/user-attachments/assets/277601ce-3392-4fd5-91af-f37cc7725e69 height="300">
 
 ETC. 챗봇
+- 설명 필요
 <img src = https://github.com/user-attachments/assets/01e6a1ce-4dce-4027-8034-ed4ace89ae43 height="300">
 <img src= https://github.com/user-attachments/assets/c01975b8-58fe-4229-87e2-0bf2d97e3198 height="300">
 <img src = https://github.com/user-attachments/assets/c2a89ff6-14bb-4283-a340-8115fb3ab60a height="300">
