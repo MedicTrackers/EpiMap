@@ -113,4 +113,6 @@ Page 2. 응급실 찾기
 Page 5. 마이페이지
 - 사용자에게 회원가입, 카카오 회원가입 / 로그인 및 마이페이지 전반적인 기능을 제공하는 서비스
 <img src = https://github.com/user-attachments/assets/f6bf57df-7a0c-40d1-a3c1-418606b1dfd4 height="300">
+<img src = https://github.com/user-attachments/assets/277601ce-3392-4fd5-91af-f37cc7725e69 height="300">
+
 
