@@ -142,8 +142,6 @@ Page 6. 관리자피드백
 <img src = https://github.com/user-attachments/assets/c62bdc3f-b04d-4376-8928-aae108507e14 height="300">
 <img src = https://github.com/user-attachments/assets/87254dba-ff2b-4d22-b7a0-5564645d7d02 height="300">
 
-
-
 ETC. 챗봇
 - 네이버 클로바 챗봇 API를 활용하여, EpiMap 서비스를 자연스럽게 안내하고 사용자 피드백을 DB에 저장해 관리자에게 자동 전달하는 기능 중심의 챗봇 시스템 구현
 <img src = https://github.com/user-attachments/assets/01e6a1ce-4dce-4027-8034-ed4ace89ae43 height="300">
