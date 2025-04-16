@@ -1,4 +1,4 @@
-![Logo](https://blog.kakaocdn.net/dn/bDmSBg/btsNmu7mC2m/7CzKvN3mM1QuQUUl7lWlwk/img.png)
+![image](https://github.com/user-attachments/assets/8ee4aa47-ea17-4635-8dfd-eed95ad2a95b)![image](https://github.com/user-attachments/assets/f9377c62-5562-43bc-ae72-92270a0f5fb2)![Logo](https://blog.kakaocdn.net/dn/bDmSBg/btsNmu7mC2m/7CzKvN3mM1QuQUUl7lWlwk/img.png)
 <!--# ${\textsf{\color{#0062ff}EpiMap}}$-->
 
 > ## EpiMap 프로젝트 설명
@@ -136,6 +136,13 @@ Page 5. 마이페이지
 <img src = https://github.com/user-attachments/assets/ba16eeb2-d5b3-4bb5-a800-cd7ff4d52c6b height="300">
 <img src = https://github.com/user-attachments/assets/e8dbea6d-2e40-44c2-bb94-50eedb0597ec height="300">
 <img src = https://github.com/user-attachments/assets/277601ce-3392-4fd5-91af-f37cc7725e69 height="300">
+
+Page 6. 관리자피드백
+- 사용자가 챗봇을 통해 사이트에 관한 피드백을 관리자가 보기 쉽게 리스트 형식으로 보여주는 관리자 전용 페이지
+<img src = https://github.com/user-attachments/assets/c62bdc3f-b04d-4376-8928-aae108507e14 height="300">
+<img src = https://github.com/user-attachments/assets/87254dba-ff2b-4d22-b7a0-5564645d7d02 height="300">
+
+
 
 ETC. 챗봇
 - 네이버 클로바 챗봇 API를 활용하여, EpiMap 서비스를 자연스럽게 안내하고 사용자 피드백을 DB에 저장해 관리자에게 자동 전달하는 기능 중심의 챗봇 시스템 구현
