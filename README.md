@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/8ee4aa47-ea17-4635-8dfd-eed95ad2a95b)![image](https://github.com/user-attachments/assets/f9377c62-5562-43bc-ae72-92270a0f5fb2)![Logo](https://blog.kakaocdn.net/dn/bDmSBg/btsNmu7mC2m/7CzKvN3mM1QuQUUl7lWlwk/img.png)
+![Logo](https://blog.kakaocdn.net/dn/bDmSBg/btsNmu7mC2m/7CzKvN3mM1QuQUUl7lWlwk/img.png)
 <!--# ${\textsf{\color{#0062ff}EpiMap}}$-->
 
 > ## EpiMap 프로젝트 설명
