@@ -35,11 +35,12 @@
       text-align: center;
     }
     .notice-form {
-      position: fixed;
-      top: 170px; /* 공지 배너 일부를 덮게 조정 */
-      left: 50%; /* 수평 기준 가운데 위치 */
-      transform: translateX(-50%); /* 자기 너비만큼 왼쪽으로 이동 */
-      width: 99vw;
+      position: relative;
+      margin-top: 170px; /* overview와 여백 확보 */
+      width: 90%;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
       padding: 20px;
       background: #f8f9fa;
       border-radius: 12px;
