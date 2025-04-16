@@ -140,6 +140,8 @@ Page 5. 마이페이지
 ETC. 챗봇
 - 설명 필요
 <img src = https://github.com/user-attachments/assets/01e6a1ce-4dce-4027-8034-ed4ace89ae43 height="300">
+<img src= https://github.com/user-attachments/assets/cbe15fad-84fb-45d5-b06a-82a7bff5aecd height="300">
+
 <img src= https://github.com/user-attachments/assets/c01975b8-58fe-4229-87e2-0bf2d97e3198 height="300">
 <img src = https://github.com/user-attachments/assets/c2a89ff6-14bb-4283-a340-8115fb3ab60a height="300">
 
