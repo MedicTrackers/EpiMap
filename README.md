@@ -133,7 +133,7 @@ Page 4. 공지사항
 
 Page 5. 마이페이지
 - 사용자에게 회원가입, 카카오 회원가입 / 로그인 및 마이페이지 뉴스 기사 스크랩 / 자가진단 결과 저장 기능을 제공하는 서비스
-<img src="https://github.com/user-attachments/assets/62c4378d-e28c-4ed4-acc0-84ebf67e48c7" height="300">
+<img src="https://github.com/user-attachments/assets/300311a0-94ab-418b-87c5-47b36bdcea79" height="300">
 <img src="https://github.com/user-attachments/assets/ccb0c4a6-8131-41e4-88d8-7e544239ee25" height="300">
 <img src="https://github.com/user-attachments/assets/13a7f576-061a-4f58-967e-295edb5f8c90" height="300">
 
