@@ -112,7 +112,6 @@ Page 2. 응급실 찾기
 
 Page 3. 자가진단 페이지
 - 증상을 선택해 자가 진단을 진행해 사용자에게 빠른 진단과 조언을 제공하는 서비스
-<img src =https://github.com/user-attachments/assets/3a130b5d-2e73-4464-8606-56f74452ca77 height="300">
 <img src = https://github.com/user-attachments/assets/1ec7d4ea-1a33-487b-b6df-194456fe2791 height="300">
 <img src = https://github.com/user-attachments/assets/3247fbf8-9978-450c-8625-d077d25d18a0 height="300">
 
@@ -121,10 +120,7 @@ Page 4. 공지사항
 <img src = https://github.com/user-attachments/assets/8ecc4af8-9a2b-4e84-84c9-8d36a163b2a7 height="300">
 <img src = https://github.com/user-attachments/assets/783968e4-85f1-4a4c-b91b-1120dc743220 height="300">
 <img src = https://github.com/user-attachments/assets/8f485d42-0453-4a93-ad42-f8221eebbe93 height="300">
-<br>
 <img src = https://github.com/user-attachments/assets/0562c5d9-09e5-4125-a5af-96383ea8bd2f height="300">
-<img src = https://github.com/user-attachments/assets/da2c53cc-ed15-4b62-ae81-442042946a98 height="300">
-<img src = https://github.com/user-attachments/assets/ce2b713b-071c-44c8-af3e-c168f4eecf20 height="300">
 
 
 Page 5. 마이페이지
