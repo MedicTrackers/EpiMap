@@ -106,13 +106,9 @@ Page 1. 건강뉴스 트렌드
 
 Page 2. 응급실 찾기
 - 사용자의 위치를 기반으로 실시간 가용병상 및 응급실 정보를 제공하는 서비스
-<img src = https://github.com/user-attachments/assets/b59143e3-bbae-488e-98a0-bff3002e8970 height="300">
+<img src = https://github.com/user-attachments/assets/fb7667fe-dee4-4118-bee0-76d52ad6d93b height="300">
 <img src = https://github.com/user-attachments/assets/30617ac1-939e-471d-9234-0f284a7bda80 height="300">
 <img src = https://github.com/user-attachments/assets/e47a63dd-690f-4002-a63e-bf62e9ab949a height="300">
-<br>
-<img src = https://github.com/user-attachments/assets/d6fc76b8-e3fb-448f-be1b-a0fb033946d8 height="300">
-<img src = https://github.com/user-attachments/assets/64c276b7-d5d5-4163-ba72-f3506e6d4ee9 height="300">
-<img src = https://github.com/user-attachments/assets/fb7667fe-dee4-4118-bee0-76d52ad6d93b height="300">
 
 Page 3. 자가진단 페이지
 - 증상을 선택해 자가 진단을 진행해 사용자에게 빠른 진단과 조언을 제공하는 서비스
