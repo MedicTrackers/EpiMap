@@ -99,21 +99,29 @@
 - 질병관리청 감염병포털, 네이버 검색 api 기반 대시보드 서비스
 - 현재 유행 중인 인플루엔자에 대한 유행지표를 시각화하고 이용자들의 독감 정보를 확인할 수 있도록 대시보드로 구성하는 페이지 구현
 <img src =https://github.com/user-attachments/assets/c93c257c-081a-4818-b97d-be5ecd5e6fe0 height="300">
+<p>&nbsp;</p>
+
 
 <b>Page 1. 건강뉴스 트렌드</b>
 - 코로나, 독감, 유행 등 감염병과 관련된 키워드가 포함된 뉴스 기사만을 선별하여 건강 정보를 한눈에 파악할 수 있는 서비스 구현
 <img src = https://github.com/user-attachments/assets/67f1a7b8-b91f-4aab-80c1-571663218ff8 height="300">
+<p>&nbsp;</p>
+
 
 <b>Page 2. 응급실 찾기</b>
 - 사용자의 위치를 기반으로 실시간 가용병상 및 응급실 정보를 제공하는 서비스
 <img src = https://github.com/user-attachments/assets/fb7667fe-dee4-4118-bee0-76d52ad6d93b height="300">
 <img src = https://github.com/user-attachments/assets/30617ac1-939e-471d-9234-0f284a7bda80 height="300">
 <img src = https://github.com/user-attachments/assets/e47a63dd-690f-4002-a63e-bf62e9ab949a height="300">
+<p>&nbsp;</p>
+
 
 <b>Page 3. 자가진단 페이지</b>
 - 증상을 선택해 자가 진단을 진행해 사용자에게 빠른 진단과 조언을 제공하는 서비스
 <img src = https://github.com/user-attachments/assets/1ec7d4ea-1a33-487b-b6df-194456fe2791 height="300">
 <img src = https://github.com/user-attachments/assets/3247fbf8-9978-450c-8625-d077d25d18a0 height="300">
+<p>&nbsp;</p>
+
 
 <b>Page 4. 공지사항</b>
 - 사용자에게 공지사항을 전달함을 동시에 관리자가 효율적으로 관리할수 있게 해주는 서비스
@@ -121,14 +129,14 @@
 <img src = https://github.com/user-attachments/assets/783968e4-85f1-4a4c-b91b-1120dc743220 height="300">
 <img src = https://github.com/user-attachments/assets/8f485d42-0453-4a93-ad42-f8221eebbe93 height="300">
 <img src = https://github.com/user-attachments/assets/0562c5d9-09e5-4125-a5af-96383ea8bd2f height="300">
-
+<p>&nbsp;</p>
 
 <b>Page 5. 마이페이지</b>
 - 사용자에게 회원가입, 카카오 회원가입 / 로그인 및 마이페이지 뉴스 기사 스크랩 / 자가진단 결과 저장 기능을 제공하는 서비스
 <img src="https://github.com/user-attachments/assets/5590a364-2001-4602-b7e9-2d0a74fe025a" height="300">
 <img src="https://github.com/user-attachments/assets/ccb0c4a6-8131-41e4-88d8-7e544239ee25" height="300">
 <img src="https://github.com/user-attachments/assets/13a7f576-061a-4f58-967e-295edb5f8c90" height="300">
-
+<p>&nbsp;</p>
 
 <b>Page 6. 관리자피드백</b>
 - 사용자가 챗봇을 통해 사이트에 관한 피드백을 관리자가 보기 쉽게 리스트 형식으로 보여주는 관리자 전용 페이지
