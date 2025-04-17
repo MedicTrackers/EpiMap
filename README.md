@@ -92,7 +92,7 @@
 - **CI/CD**: Docker 이미지를 통한 DooD 방식으로 Jenkins를 통해 자동 배포
 
 ---
-
+<p>&nbsp;</p>
 ## 📱 화면 구성
 
 <b>Page 0. 메인 통계 대시보드</b>
